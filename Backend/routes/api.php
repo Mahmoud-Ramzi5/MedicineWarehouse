@@ -27,9 +27,11 @@ Route::prefix('/users')->group(function () {
         Route::post('/login', 'login')->name('login');
         Route::middleware('auth:sanctum')->post('/logout', 'logout')->name('logout');
     });
-    Route::controller(AdminController::class)->group(function () {
+    Route::controller(MedicinesController::class)->group(function () {
         Route::middleware('auth:sanctum')->get('/medicines', 'ShowNotExpired')->name('ShowNotExpired');
         Route::get('/categoryFilter', 'Selected_Category')->name('Selected_Category');
+        Route::get('/medicineinfo', 'Display_Medicine_info')->name('Display_Medicine_info');
+
     });
 });
 
@@ -42,8 +44,9 @@ Route::prefix('/admin')->group(function () {
         Route::delete('/delete_medicine', 'Delete_Medicine');
         Route::post('/categories', 'Add_Categories');
     });
-    Route::controller(AdminController::class)->group(function () {
+    Route::controller(MedicinesController::class)->group(function () {
         Route::middleware('auth:sanctum')->get('/medicines', 'ShowAll')->name('ShowAll');
         Route::get('/categoryFilter', 'Selected_Category')->name('Selected_Category');
+        Route::get('/medicineinfo', 'Display_Medicine_info')->name('Display_Medicine_info');
     });
 });
