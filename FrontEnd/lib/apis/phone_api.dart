@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:test1/classes/medicine.dart';
 
 class Api {
   static final registerUri =
@@ -10,7 +11,7 @@ class Api {
   static final logoutUri = Uri.parse('http://10.0.2.2:8000/api/users/logout');
   Api();
 
-  Future<Map<String, dynamic>> register(
+  Future<dynamic> register(
     int phoneNumber,
     String email,
     String pharmacyName,
@@ -38,11 +39,10 @@ class Api {
         },
       ),
     );
-    final body = json.decode(response.body);
-    return body;
+    return response;
   }
 
-  Future<Map<String, dynamic>> login(
+  Future<dynamic> login(
     int phoneNumber,
     String password,
     bool rememberMe,
@@ -69,15 +69,15 @@ class Api {
         },
       ),
     );
-    final storage = new FlutterSecureStorage();
+    const storage = FlutterSecureStorage();
     final body = json.decode(response.body);
     final token = body['access_token'];
     await storage.write(key: 'Bearer Token', value: token);
-    return body;
+    return response;
   }
 
-  Future<Map<String, dynamic>> logout() async {
-    final storage = new FlutterSecureStorage();
+  Future<dynamic> logout() async {
+    const storage = FlutterSecureStorage();
     var token = await storage.read(key: 'Bearer Token');
     final response = await http.post(
       logoutUri,
@@ -94,7 +94,27 @@ class Api {
       ),
     );
     await storage.delete(key: "Bearer Token");
-    final body = json.decode(response.body);
-    return body;
+    return response;
+  }
+
+  Future<Medicine> fetchMedicine() async {
+    const storage = FlutterSecureStorage();
+    var token = await storage.read(key: 'Bearer Token');
+    final response = await http.get(
+      Uri.parse('http://10.0.2.2:8000/api/users/medicines'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Accept': "/",
+        'connection': 'keep-alive',
+        'Accept-Encoding': 'gzip, deflate, br',
+        'Authorization': 'Bearer $token'
+      },
+    );
+    if (response.statusCode == 200) {
+      return Medicine.fromJson(
+          jsonDecode(response.body) as Map<String, dynamic>);
+    } else {
+      throw Exception('Failed to load Medicines');
+    }
   }
 }

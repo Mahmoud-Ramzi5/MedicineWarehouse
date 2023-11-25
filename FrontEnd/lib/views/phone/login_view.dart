@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:test1/apis/phone_api.dart';
 import 'package:test1/constants/routes.dart';
@@ -118,8 +119,9 @@ class _LoginViewState extends State<LoginView> {
                         _password.text,
                         rememberMe,
                       )
-                          .then((Map<String, dynamic> response) {
-                        if (response["success"]) {
+                          .then((dynamic response) {
+                        final body = json.decode(response.body);
+                        if (response.statusCode == 200) {
                           Navigator.of(context).pushNamedAndRemoveUntil(
                               mainRoute, (route) => false);
                         } else {
@@ -129,7 +131,7 @@ class _LoginViewState extends State<LoginView> {
                               return AlertDialog(
                                 alignment: Alignment.center,
                                 title: const Text('Result'),
-                                content: Text(response['message']),
+                                content: Text(body['message']),
                               );
                             },
                           );

@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:test1/apis/phone_api.dart';
 import 'package:test1/constants/routes.dart';
@@ -226,14 +227,15 @@ class _RegisterViewState extends State<RegisterView> {
                         _password.text,
                         _confirmPassword.text,
                       )
-                          .then((Map<String, dynamic> response) {
+                          .then((dynamic response) {
+                        final body = json.decode(response.body);
                         showDialog(
                           context: context,
                           builder: (context) {
                             return AlertDialog(
                               alignment: Alignment.center,
                               title: const Text('Result'),
-                              content: Text(response['message']),
+                              content: Text(body["message"]),
                             );
                           },
                         );

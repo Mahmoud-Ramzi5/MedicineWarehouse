@@ -1,8 +1,8 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:test1/apis/phone_api.dart';
 import 'package:test1/classes/medicine.dart';
 import 'package:test1/constants/routes.dart';
-import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 Future<Medicine> fetchMedicine() async {
@@ -78,9 +78,7 @@ class _MainViewState extends State<MainView> {
                         ),
                         TextButton(
                           onPressed: () {
-                            Api()
-                                .logout()
-                                .then((Map<String, dynamic> response) {
+                            Api().logout().then((dynamic response) {
                               Navigator.of(context).pushNamedAndRemoveUntil(
                                   loginRoute, (route) => false);
                             });
