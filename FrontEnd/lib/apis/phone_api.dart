@@ -24,7 +24,7 @@ class Api {
       encoding: const Utf8Codec(),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
-        'Accept': "/",
+        'Accept': "application/json",
         'connection': 'keep-alive',
         'Accept-Encoding': 'gzip, deflate, br',
       },
@@ -57,7 +57,7 @@ class Api {
       loginUri,
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
-        'Accept': "/",
+        'Accept': "application/json",
         'connection': 'keep-alive',
         'Accept-Encoding': 'gzip, deflate, br',
       },
@@ -84,7 +84,7 @@ class Api {
       encoding: const Utf8Codec(),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
-        'Accept': "/",
+        'Accept': "application/json",
         'connection': 'keep-alive',
         'Accept-Encoding': 'gzip, deflate, br',
         'Authorization': 'Bearer $token'
@@ -104,7 +104,7 @@ class Api {
       Uri.parse('http://10.0.2.2:8000/api/users/medicines'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
-        'Accept': "/",
+        'Accept': "application/json",
         'connection': 'keep-alive',
         'Accept-Encoding': 'gzip, deflate, br',
         'Authorization': 'Bearer $token'

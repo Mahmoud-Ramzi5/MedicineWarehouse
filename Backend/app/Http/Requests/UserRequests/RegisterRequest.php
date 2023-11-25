@@ -46,7 +46,6 @@ class RegisterRequest extends FormRequest
         $exception = $validator->getException();
 
         $response = response()->json([
-                'success' => false,
                 'message' => 'Invalid credentials',
                 'errors' => $validator->errors()
         ], 400);

@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:test1/apis/phone_api.dart';
 import 'package:test1/constants/routes.dart';
@@ -61,8 +62,24 @@ class _MainViewState extends State<MainView> {
                         TextButton(
                           onPressed: () {
                             Api().logout().then((dynamic response) {
-                              Navigator.of(context).pushNamedAndRemoveUntil(
-                                  loginRoute, (route) => false);
+                              final body = json.decode(response.body);
+                              if (response.statusCode == 200) {
+                                Navigator.of(context).pushNamedAndRemoveUntil(
+                                    loginRoute, (route) => false);
+                              } else {
+                                showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return AlertDialog(
+                                        title: Text(body["message"]),
+                                        content: Image.asset(
+                                          "assets/Failed.gif",
+                                          height: 90,
+                                          width: 90,
+                                        ));
+                                  },
+                                );
+                              }
                             });
                           },
                           child: const Text(

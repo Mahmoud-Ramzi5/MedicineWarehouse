@@ -82,8 +82,5 @@ class MedicinesController extends Controller
         $medicine->MedicineTranslations;
         $medicine->Categories;
         return response()->json(["message"=> $medicine], 200);
-
     }
-
-
 }

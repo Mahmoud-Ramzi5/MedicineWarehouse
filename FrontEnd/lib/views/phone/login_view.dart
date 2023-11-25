@@ -46,7 +46,7 @@ class _LoginViewState extends State<LoginView> {
             child: Column(
               children: [
                 Image.asset(
-                  "assets/logo.png",
+                  "assets/Logo.png",
                   height: 200,
                 ),
                 const SizedBox(
@@ -122,17 +122,41 @@ class _LoginViewState extends State<LoginView> {
                           .then((dynamic response) {
                         final body = json.decode(response.body);
                         if (response.statusCode == 200) {
-                          Navigator.of(context).pushNamedAndRemoveUntil(
-                              mainRoute, (route) => false);
+                          showDialog(
+                              context: context,
+                              builder: (context) {
+                                Future.delayed(Duration(seconds: 1), () {
+                                  Navigator.of(context).pushNamedAndRemoveUntil(
+                                      mainRoute, (route) => false);
+                                });
+                                return AlertDialog(
+                                    title: Text(body["message"]),
+                                    content: Image.asset(
+                                      "assets/Success.png",
+                                      height: 90,
+                                      width: 90,
+                                    ));
+                              });
                         } else {
                           showDialog(
                             context: context,
                             builder: (context) {
                               return AlertDialog(
-                                alignment: Alignment.center,
-                                title: const Text('Result'),
-                                content: Text(body['message']),
-                              );
+                                  alignment: Alignment.center,
+                                  title: Text(body["message"]),
+                                  content: SingleChildScrollView(
+                                      child: ListBody(children: <Widget>[
+                                    for (var value in body["errors"].values)
+                                      for (var error in value) Text(error),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    Image.asset(
+                                      "assets/Failed.gif",
+                                      height: 90,
+                                      width: 90,
+                                    )
+                                  ])));
                             },
                           );
                         }

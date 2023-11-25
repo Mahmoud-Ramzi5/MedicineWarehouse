@@ -18,15 +18,11 @@ class UserController extends Controller
         $credentials = $request->validated();
         if ($credentials['password'] != $credentials['confirmPassword']) {
             return response()->json([
-                'success' => false,
                 'message' => 'Invalid credentials',
                 'errors' => [
-                    'password' => [
+                    'password & confirmPassword' => [
                         'Passwords does not match.'
                     ],
-                    'confirmPassword' => [
-                        'Passwords does not match.'
-                    ]
                 ]
             ], 400);
         }
@@ -40,7 +36,6 @@ class UserController extends Controller
         ]);
 
         return response()->json([
-            'success' => true,
             'message' => 'Successfully registered',
         ], 200);
     }
@@ -52,15 +47,11 @@ class UserController extends Controller
         $user = User::where('phoneNumber', $credentials['phoneNumber'])->first();
         if (! $user || ! Hash::check($credentials['password'], $user->password)) {
             return response()->json([
-                'success' => false,
                 'message' => 'Invalid credentials',
                 'errors' => [
-                    'phoneNumber' => [
+                    'phoneNumber & password' => [
                         'Invalid phone-number or password.'
                     ],
-                    'password' => [
-                        'Invalid phone-number or password.'
-                    ]
                 ]
             ], 400);
         }
@@ -73,7 +64,6 @@ class UserController extends Controller
         }
         // Login User
         return response()->json([
-            'success' => true,
             'message' => 'Successfully logged in',
             'access_token' => $authToken,
         ], 200);
@@ -84,7 +74,6 @@ class UserController extends Controller
         // Logout User
         $request->user()->currentAccessToken()->delete();
         return response()->json([
-            'success' => true,
             'message' => 'Successfully logged out',
         ], 200);
     }

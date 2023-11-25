@@ -229,16 +229,45 @@ class _RegisterViewState extends State<RegisterView> {
                       )
                           .then((dynamic response) {
                         final body = json.decode(response.body);
-                        showDialog(
-                          context: context,
-                          builder: (context) {
-                            return AlertDialog(
-                              alignment: Alignment.center,
-                              title: const Text('Result'),
-                              content: Text(body["message"]),
-                            );
-                          },
-                        );
+                        if (response.statusCode == 200) {
+                          showDialog(
+                              context: context,
+                              builder: (context) {
+                                Future.delayed(Duration(seconds: 3), () {
+                                  Navigator.of(context).pushNamed(loginRoute);
+                                });
+                                return AlertDialog(
+                                  title: Text(body["message"]),
+                                  content: Image.asset(
+                                    "assets/Success.png",
+                                    height: 90,
+                                    width: 90,
+                                  ),
+                                );
+                              });
+                        } else {
+                          showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                  alignment: Alignment.center,
+                                  title: Text(body["message"]),
+                                  content: SingleChildScrollView(
+                                      child: ListBody(children: <Widget>[
+                                    for (var value in body["errors"].values)
+                                      for (var error in value) Text(error),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    Image.asset(
+                                      "assets/Failed.gif",
+                                      height: 90,
+                                      width: 90,
+                                    )
+                                  ])));
+                            },
+                          );
+                        }
                       });
                     }
                   },
