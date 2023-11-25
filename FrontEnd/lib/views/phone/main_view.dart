@@ -1,21 +1,6 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:test1/apis/phone_api.dart';
-import 'package:test1/classes/medicine.dart';
 import 'package:test1/constants/routes.dart';
-import 'package:http/http.dart' as http;
-
-Future<Medicine> fetchMedicine() async {
-  final response = await http.get(
-    Uri.parse('http://10.0.2.2:8000/api/users/medicines'),
-  );
-
-  if (response.statusCode == 200) {
-    return Medicine.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
-  } else {
-    throw Exception('Failed to load Medicines');
-  }
-}
 
 class MainView extends StatefulWidget {
   const MainView({super.key});
@@ -26,13 +11,10 @@ class MainView extends StatefulWidget {
 
 class _MainViewState extends State<MainView> {
   late final TextEditingController _search;
-  late Future<Medicine> futureMedicine;
-  final items = List.generate(20, (index) => index);
   @override
   void initState() {
     _search = TextEditingController();
     super.initState();
-    futureMedicine = fetchMedicine();
   }
 
   @override
@@ -135,11 +117,11 @@ class _MainViewState extends State<MainView> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
+                        const Padding(
+                          padding: EdgeInsets.all(8.0),
                           child: Text(
-                            'Commercial name:$futureMedicine',
-                            style: const TextStyle(
+                            'Commercial name:',
+                            style: TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.bold),
                           ),
                         ),
@@ -147,18 +129,21 @@ class _MainViewState extends State<MainView> {
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             IconButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.of(context)
+                                      .pushNamed(medicineDetailsRoute);
+                                },
                                 icon: const Icon(
                                   Icons.arrow_forward,
                                   color: Colors.green,
                                 )),
                           ],
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
+                        const Padding(
+                          padding: EdgeInsets.all(8.0),
                           child: Text(
-                            'Price: $index',
-                            style: const TextStyle(
+                            'Price: ',
+                            style: TextStyle(
                               fontSize: 18,
                             ),
                           ),
@@ -167,7 +152,7 @@ class _MainViewState extends State<MainView> {
                     ),
                   );
                 },
-                itemCount: items.length,
+                itemCount: 10,
               ),
             ],
           ),
