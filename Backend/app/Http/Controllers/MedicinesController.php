@@ -79,10 +79,9 @@ class MedicinesController extends Controller
     public function Display_Medicine_info(Request $request){
         $id = $request->input('id');
         $medicine = Medicine::find($id);
-        $medicinetranslation = MedicineTranslation::where('medicine_id', $medicine->id)->get();
-        $category = $medicine->Categories;
-        $data = [$medicine,$medicinetranslation];
-        return response()->json(["message"=> $data], 200);
+        $medicine->MedicineTranslations;
+        $medicine->Categories;
+        return response()->json(["message"=> $medicine], 200);
 
     }
 
