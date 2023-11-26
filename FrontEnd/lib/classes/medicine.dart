@@ -1,6 +1,6 @@
 class Medicine {
   final int id;
-  final int expiryDate;
+  final String expiryDate;
   final int quantityAvailable;
   final int price;
   final String enCommercialName;
@@ -24,35 +24,16 @@ class Medicine {
     required this.arManufactureCompany,
     required this.catgoriesId,
   });
-  factory Medicine.fromJson(Map<String, dynamic> json) {
-    return switch (json) {
-      {
-        "id": int id,
-        "Expiry_date": int expiryDate,
-        "Quantity_available": int quantityAvailable,
-        "Price": int price,
-        "En_Commercial_name": String enCommercialName,
-        "Ar_Commercial_name": String arCommercialName,
-        "En_Scientific_name": String enScientificName,
-        "Ar_Scientific_name": String arSciesntificName,
-        "En_Manufacture_company": String enManufactureCompany,
-        "Ar_Manufacture_company": String arManufactureCompany,
-        "Categories_id": int catgoriesId,
-      } =>
-        Medicine(
-          id: id,
-          expiryDate: expiryDate,
-          quantityAvailable: quantityAvailable,
-          price: price,
-          enCommercialName: enCommercialName,
-          arCommercialName: arCommercialName,
-          enScientificName: enScientificName,
-          arScientificName: arSciesntificName,
-          enManufactureCompany: enManufactureCompany,
-          arManufactureCompany: arManufactureCompany,
-          catgoriesId: catgoriesId,
-        ),
-      _ => throw const FormatException('format exception'),
-    };
-  }
+  Medicine.fromJson(Map<String, dynamic> json)
+      : id = json['id'] as int,
+        expiryDate = json['Expiry_date'] as String,
+        quantityAvailable = json['Quantity_available'] as int,
+        price = json['Price'] as int,
+        enCommercialName = json['En_Commercial_name'] as String,
+        arCommercialName = json['Ar_Commercial_name'] as String,
+        enScientificName = json['En_Scientific_name'] as String,
+        arScientificName = json['Ar_Scientific_name'] as String,
+        enManufactureCompany = json['En_Manfacture_company'] as String,
+        arManufactureCompany = json['Ar_Manfacture_company'] as String,
+        catgoriesId = json['Categories_id'] as int;
 }

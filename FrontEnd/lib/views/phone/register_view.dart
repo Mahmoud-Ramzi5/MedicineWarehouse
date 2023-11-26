@@ -227,48 +227,52 @@ class _RegisterViewState extends State<RegisterView> {
                         _password.text,
                         _confirmPassword.text,
                       )
-                          .then((dynamic response) {
-                        final body = json.decode(response.body);
-                        if (response.statusCode == 200) {
-                          showDialog(
+                          .then(
+                        (dynamic response) {
+                          final body = json.decode(response.body);
+                          if (response.statusCode == 200) {
+                            showDialog(
                               context: context,
                               builder: (context) {
-                                Future.delayed(Duration(seconds: 3), () {
+                                Future.delayed(const Duration(seconds: 3), () {
                                   Navigator.of(context).pushNamed(loginRoute);
                                 });
                                 return AlertDialog(
-                                  title: Text(body["message"]),
-                                  content: Image.asset(
-                                    "assets/Success.png",
-                                    height: 90,
-                                    width: 90,
-                                  ),
-                                );
-                              });
-                        } else {
-                          showDialog(
-                            context: context,
-                            builder: (context) {
-                              return AlertDialog(
+                                    title: Text(body["message"]),
+                                    content: const Icon(
+                                      Icons.check_circle_outline,
+                                      color: Colors.green,
+                                    ));
+                              },
+                            );
+                          } else {
+                            showDialog(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
                                   alignment: Alignment.center,
                                   title: Text(body["message"]),
                                   content: SingleChildScrollView(
-                                      child: ListBody(children: <Widget>[
-                                    for (var value in body["errors"].values)
-                                      for (var error in value) Text(error),
-                                    const SizedBox(
-                                      height: 10,
+                                    child: ListBody(
+                                      children: <Widget>[
+                                        for (var value in body["errors"].values)
+                                          for (var error in value) Text(error),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        const Icon(
+                                          Icons.cancel_outlined,
+                                          color: Colors.red,
+                                        )
+                                      ],
                                     ),
-                                    Image.asset(
-                                      "assets/Failed.gif",
-                                      height: 90,
-                                      width: 90,
-                                    )
-                                  ])));
-                            },
-                          );
-                        }
-                      });
+                                  ),
+                                );
+                              },
+                            );
+                          }
+                        },
+                      );
                     }
                   },
                   child: const Icon(Icons.app_registration),
