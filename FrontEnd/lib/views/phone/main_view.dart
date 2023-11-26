@@ -6,30 +6,6 @@ import 'package:test1/classes/medicine.dart';
 import 'package:test1/constants/routes.dart';
 import 'package:http/http.dart' as http;
 
-Future<Medicine> fetchMedicine() async {
-  const storage = FlutterSecureStorage();
-  var token = await storage.read(key: 'Bearer Token');
-  final response = await http.get(
-    Uri.parse('http://10.0.2.2:8000/api/users/medicines'),
-    headers: <String, String>{
-      'Content-Type': 'application/json; charset=UTF-8',
-      'Accept': "/",
-      'connection': 'keep-alive',
-      'Accept-Encoding': 'gzip, deflate, br',
-      'Authorization': 'Bearer $token'
-    },
-  );
-  print('response ${response.body}');
-  if (response.statusCode == 200) {
-    final medicineMap =
-        Medicine.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
-    print('map $medicineMap');
-    return medicineMap;
-  } else {
-    throw Exception('Failed to load Medicines');
-  }
-}
-
 class MainView extends StatefulWidget {
   const MainView({super.key});
 
@@ -152,9 +128,10 @@ class _MainViewState extends State<MainView> {
                 ),
               ),
               FutureBuilder(
-                future: fetchMedicine(),
+                future: Api().fetchMedicine(),
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
+                    var medicineList = snapshot.data;
                     return ListView.builder(
                       physics: const PageScrollPhysics(),
                       padding: const EdgeInsets.all(10),
@@ -168,7 +145,7 @@ class _MainViewState extends State<MainView> {
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Text(
-                                  'Commercial name: ${snapshot.data?.enCommercialName}',
+                                  'Commercial name: ${medicineList[index].medicineTranslations[0]["Commercial_name"]}',
                                   style: const TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold),
@@ -191,7 +168,7 @@ class _MainViewState extends State<MainView> {
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Text(
-                                  'Price: ${snapshot.data?.price}',
+                                  'Price: ${medicineList[index].price}',
                                   style: const TextStyle(
                                     fontSize: 18,
                                   ),
@@ -201,7 +178,7 @@ class _MainViewState extends State<MainView> {
                           ),
                         );
                       },
-                      itemCount: 10,
+                      itemCount: medicineList!.length,
                     );
                   }
                   return const Center(
