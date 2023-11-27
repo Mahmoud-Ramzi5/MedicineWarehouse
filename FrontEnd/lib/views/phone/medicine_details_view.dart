@@ -14,7 +14,7 @@ class _MedicineDetailsViewState extends State<MedicineDetailsView> {
       appBar: AppBar(),
       body: const Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: [Center(child: CircularProgressIndicator())],
+        children: [],
       ),
     );
   }

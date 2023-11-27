@@ -1,10 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:test1/apis/phone_api.dart';
-import 'package:test1/classes/medicine.dart';
 import 'package:test1/constants/routes.dart';
-import 'package:http/http.dart' as http;
 
 class MainView extends StatefulWidget {
   const MainView({super.key});
@@ -181,7 +178,8 @@ class _MainViewState extends State<MainView> {
                       itemCount: medicineList!.length,
                     );
                   }
-                  return const Center(
+                  return const Padding(
+                    padding: EdgeInsets.all(170.0),
                     child: CircularProgressIndicator(),
                   );
                 },

@@ -5,6 +5,7 @@ import 'package:test1/views/phone/main_view.dart';
 import 'package:test1/views/phone/medicine_details_view.dart';
 import 'package:test1/views/phone/register_view.dart';
 import 'package:test1/views/web/web_login_view.dart';
+import 'package:test1/views/web/web_main_view.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -16,6 +17,6 @@ void main() {
       mainRoute: (context) => const MainView(),
       medicineDetailsRoute: (context) => const MedicineDetailsView(),
     },
-    home: const LoginView(),
+    home: const WebMainView(),
   ));
 }
