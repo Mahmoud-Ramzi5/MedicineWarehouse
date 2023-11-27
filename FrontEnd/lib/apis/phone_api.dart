@@ -117,6 +117,7 @@ class Api {
         final medicineMap = Medicine.fromJson(medicine as Map<String, dynamic>);
         medicineList.add(medicineMap);
       }
+
       return medicineList;
     } else {
       throw Exception('Failed to load Medicines');

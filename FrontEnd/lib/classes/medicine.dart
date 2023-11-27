@@ -3,8 +3,8 @@ class Medicine {
   final String expiryDate;
   final int quantityAvailable;
   final int price;
-  final List<dynamic> medicineTranslations;
-  final List<dynamic> categories;
+  final Map<String, dynamic> medicineTranslations;
+  final Map<int, dynamic> categories;
 
   Medicine({
     required this.id,
@@ -19,6 +19,11 @@ class Medicine {
         expiryDate = json['Expiry_date'] as String,
         quantityAvailable = json['Quantity_available'] as int,
         price = json['Price'] as int,
-        medicineTranslations = json['medicine_translations'],
-        categories = json['categories'];
+        medicineTranslations = {
+          for (var translation in json['medicine_translations'])
+            translation["lang"]: translation
+        },
+        categories = {
+          for (var category in json['categories']) category["id"]: category
+        };
 }

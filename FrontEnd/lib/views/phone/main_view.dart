@@ -128,7 +128,7 @@ class _MainViewState extends State<MainView> {
                 future: Api().fetchMedicine(),
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
-                    var medicineList = snapshot.data;
+                    final medicineList = snapshot.data;
                     return ListView.builder(
                       physics: const PageScrollPhysics(),
                       padding: const EdgeInsets.all(10),
@@ -142,7 +142,7 @@ class _MainViewState extends State<MainView> {
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Text(
-                                  'Commercial name: ${medicineList[index].medicineTranslations[0]["Commercial_name"]}',
+                                  'Commercial name: ${medicineList[index].medicineTranslations["en"]["Commercial_name"]}',
                                   style: const TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold),
@@ -153,8 +153,9 @@ class _MainViewState extends State<MainView> {
                                 children: [
                                   IconButton(
                                       onPressed: () {
-                                        Navigator.of(context)
-                                            .pushNamed(medicineDetailsRoute);
+                                        Navigator.of(context).pushNamed(
+                                            medicineDetailsRoute,
+                                            arguments: medicineList[index]);
                                       },
                                       icon: const Icon(
                                         Icons.arrow_forward,
