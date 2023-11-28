@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Str;
 use App\Models\Category;
 use App\Models\MedicineTranslation;
 use Illuminate\Http\Request;
@@ -86,21 +87,25 @@ class MedicinesController extends Controller
 
 
     function Search_All(Request $request){
-        $name = $request->input('name');
+        $input = $request->input('name');
+        $name = Str::upper($input);
         $medicines = Medicine::with('MedicineTranslations')->with('Categories')->get();
         foreach ($medicines as $medicine) {
-            $commercial_name = $medicine->commercial_name;
-            $scientific_name = $medicine->scientific_name;
-            if($name == $commercial_name||$name == $scientific_name){
-                return response()->json(["message"=> $medicine], 200);
+            $medicinetranslation = $medicine['MedicineTranslations'];
+            foreach($medicinetranslation as $m){
+                $commercial_name = $m['commercial_name'];
+                $scientific_name = $m['$scientific_name'];
+                if($name == $commercial_name||$name == $scientific_name){
+                    return response()->json(["message"=> $medicine], 200);
+                }
             }
-
         }
-        return response()->json(["message"=> 'sorry item requested not found it may be out of stock or expired'], 200);
+        return response()->json(["message"=> 'sorry item requested not found please check the name correctly'], 400);
     }
 
     function Search_Not_Expired(Request $request){
-        $name = $request->input('name');
+        $input = $request->input('name');
+        $name = Str::upper($input);
         $medicines = Medicine::with('MedicineTranslations')->with('Categories')->get();
         $valids = [];
         $Date = today();
@@ -132,15 +137,16 @@ class MedicinesController extends Controller
             }
         }
         foreach($valids as $valid){
-            $commercial_name = $valid->commercial_name;
-            $scientific_name = $valid->scientific_name;
-
-            if($name == $commercial_name||$name == $scientific_name){
-                return response()->json(["message"=> $medicine], 200);
+            $medicinetranslation = $valid['MedicineTranslations'];
+            foreach($medicinetranslation as $m){
+                $commercial_name = $m['commercial_name'];
+                $scientific_name = $m['$scientific_name'];
+                if($name == $commercial_name||$name == $scientific_name){
+                    return response()->json(["message"=> $medicine], 200);
+                }
             }
-
         }
-        return response()->json(["message"=> 'sorry item requested not found it may be out of stock or expired'], 200);
+        return response()->json(["message"=> 'sorry item requested not found it may be out of stock or expired'], 400);
 }
 }
 

@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\Medicine;
 use App\Models\MedicineTranslation;
 use App\Http\Requests\AdminRequests\LoginAdminRequest;
+use Illuminate\Support\Str;
 
 class AdminController extends Controller
 {
@@ -52,9 +53,9 @@ class AdminController extends Controller
         $En = MedicineTranslation::create([
             'medicine_id'=> $medicine->id,
             'lang'=> 'en',
-            'commercial_name' => $credentials['en_commercial_name'],
-            'scientific_name' => $credentials['en_scientific_name'],
-            'manufacture_company' => $credentials['en_manufacture_company'],
+            'commercial_name' => Str::upper($credentials['en_commercial_name']),
+            'scientific_name' =>  Str::upper($credentials['en_scientific_name']),
+            'manufacture_company' =>  Str::upper($credentials['en_manufacture_company']),
         ]);
         // Create Arabic Translation
         $Ar = MedicineTranslation::create([
