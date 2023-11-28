@@ -27,6 +27,6 @@ void main() {
         );
       }
     },
-    home: const MainView(),
+    home: const WebMainView(),
   ));
 }

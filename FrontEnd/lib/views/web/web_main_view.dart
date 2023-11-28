@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -11,16 +14,21 @@ class WebMainView extends StatefulWidget {
 
 class _WebMainViewState extends State<WebMainView> {
   Uint8List webImage = Uint8List(8);
-  Future pickImage() async {
+  File? pickedImage;
+
+  Future<void> pickImage() async {
     if (kIsWeb) {
       final ImagePicker picker = ImagePicker();
       XFile? image = await picker.pickImage(source: ImageSource.gallery);
       if (image != null) {
-        var selected = await image.readAsBytes;
+        Uint8List imageBytes = await image.readAsBytes();
         setState(() {
-          webImage = selected as Uint8List;
+          webImage = imageBytes;
+          pickedImage = File('a');
         });
       }
+    } else {
+      return;
     }
   }
 
@@ -29,18 +37,59 @@ class _WebMainViewState extends State<WebMainView> {
     return Scaffold(
       appBar: AppBar(),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            IconButton(
-                onPressed: () {
-                  pickImage();
-                },
-                icon: const Icon(
-                  Icons.camera_alt_outlined,
-                  color: Colors.green,
-                ))
-          ],
+        child: Padding(
+          padding: const EdgeInsets.all(18.0),
+          child: Column(
+            children: [
+              Container(
+                  height: 200,
+                  width: 200,
+                  child: pickedImage == null
+                      ? DottedBorder(
+                          stackFit: StackFit.expand,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Icon(
+                                Icons.image,
+                                color: Colors.grey,
+                                size: 50,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(18.0),
+                                child: TextButton(
+                                  onPressed: () {
+                                    pickImage();
+                                  },
+                                  child: const Text(
+                                    'Choose an image',
+                                    style: TextStyle(
+                                        color: Colors.green,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                        )
+                      : kIsWeb
+                          ? Image.memory(
+                              webImage,
+                              fit: BoxFit.fill,
+                            )
+                          : Image.file(
+                              pickedImage!,
+                              fit: BoxFit.fill,
+                            )),
+              ElevatedButton(
+                onPressed: () {},
+                child: const Text(
+                  'Upload',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
