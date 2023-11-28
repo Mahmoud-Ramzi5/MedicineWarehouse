@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger("medicine_id")->unsigned();
             $table->string("lang");
-            $table->string("Commercial_name");
-            $table->string("Scientific_name");
-            $table->string("Manufacture_company");
-            $table->string("Description")->nullable();
+            $table->string("commercial_name");
+            $table->string("scientific_name");
+            $table->string("manufacture_company");
+            $table->string("description")->nullable();
             $table->timestamps();
 
             $table->foreign('medicine_id')->references('id')->on('medicines')->onDelete('cascade');

@@ -1,242 +1,242 @@
 [
     {
-        "En_Category_name": "Analgesics",
-        "Ar_Category_name": "المسكنات",
-        "En_Description": "Drugs that relieve pain. There are two main types: non-narcotic analgesics for mild pain, and narcotic analgesics for severe pain",
-        "Ar_Description": "الأدوية التي تخفف الألم. هناك نوعان رئيسيان: المسكنات غير المخدرة للألم الخفيف، والمسكنات المخدرة للألم الشديد"
+        "en_category_name": "Analgesics",
+        "ar_category_name": "المسكنات",
+        "en_description": "Drugs that relieve pain. There are two main types: non-narcotic analgesics for mild pain, and narcotic analgesics for severe pain",
+        "ar_description": "الأدوية التي تخفف الألم. هناك نوعان رئيسيان: المسكنات غير المخدرة للألم الخفيف، والمسكنات المخدرة للألم الشديد"
     },
     {
-        "En_Category_name": "Antacids",
-        "Ar_Category_name": "مضادات الحموضة",
-        "En_Description": "Drugs that relieve indigestion and heartburn by neutralizing stomach acid",
-        "Ar_Description": "الأدوية التي تخفف من عسر الهضم وحرقة المعدة عن طريق تحييد حمض المعدة"
+        "en_category_name": "Antacids",
+        "ar_category_name": "مضادات الحموضة",
+        "en_description": "Drugs that relieve indigestion and heartburn by neutralizing stomach acid",
+        "ar_description": "الأدوية التي تخفف من عسر الهضم وحرقة المعدة عن طريق تحييد حمض المعدة"
     },
     {
-        "En_Category_name": "Antianxiety Drugs",
-        "Ar_Category_name": "الأدوية المضادة للقلق",
-        "En_Description": "Drugs that suppress anxiety and relax muscles (sometimes called anxiolytics, sedatives, or minor tranquilizers)",
-        "Ar_Description": "الأدوية التي تثبط القلق وترخي العضلات (تسمى أحيانًا مزيلات القلق أو المهدئات أو المهدئات البسيطة)"
+        "en_category_name": "Antianxiety Drugs",
+        "ar_category_name": "الأدوية المضادة للقلق",
+        "en_description": "Drugs that suppress anxiety and relax muscles (sometimes called anxiolytics, sedatives, or minor tranquilizers)",
+        "ar_description": "الأدوية التي تثبط القلق وترخي العضلات (تسمى أحيانًا مزيلات القلق أو المهدئات أو المهدئات البسيطة)"
     },
     {
-        "En_Category_name": "Antiarrhythmics",
-        "Ar_Category_name": "مضادات اضطراب النظم",
-        "En_Description": "Drugs used to control irregularities of heartbeat",
-        "Ar_Description": "الأدوية المستخدمة للسيطرة على عدم انتظام ضربات القلب"
+        "en_category_name": "Antiarrhythmics",
+        "ar_category_name": "مضادات اضطراب النظم",
+        "en_description": "Drugs used to control irregularities of heartbeat",
+        "ar_description": "الأدوية المستخدمة للسيطرة على عدم انتظام ضربات القلب"
     },
     {
-        "En_Category_name": "Antibacterials",
-        "Ar_Category_name": "مضادات البكتيريا",
-        "En_Description": "Drugs used to treat infections",
-        "Ar_Description": "الأدوية المستخدمة لعلاج الالتهابات"
+        "en_category_name": "Antibacterials",
+        "ar_category_name": "مضادات البكتيريا",
+        "en_description": "Drugs used to treat infections",
+        "ar_description": "الأدوية المستخدمة لعلاج الالتهابات"
     },
     {
-        "En_Category_name": "Antibiotics",
-        "Ar_Category_name": "مضادات حيوية",
-        "En_Description": "Drugs made from naturally occurring and synthetic substances that combat bacterial infection. Some antibiotics are effective only against limited types of bacteria. Others, known as broad spectrum antibiotics, are effective against a wide range of bacteria",
-        "Ar_Description": "الأدوية المصنوعة من مواد طبيعية وصناعية تعمل على مكافحة العدوى البكتيرية. بعض المضادات الحيوية فعالة فقط ضد أنواع محدودة من البكتيريا. البعض الآخر، المعروف بالمضادات الحيوية واسعة الطيف، فعال ضد مجموعة واسعة من البكتيريا"
+        "en_category_name": "Antibiotics",
+        "ar_category_name": "مضادات حيوية",
+        "en_description": "Drugs made from naturally occurring and synthetic substances that combat bacterial infection. Some antibiotics are effective only against limited types of bacteria. Others, known as broad spectrum antibiotics, are effective against a wide range of bacteria",
+        "ar_description": "الأدوية المصنوعة من مواد طبيعية وصناعية تعمل على مكافحة العدوى البكتيرية. بعض المضادات الحيوية فعالة فقط ضد أنواع محدودة من البكتيريا. البعض الآخر، المعروف بالمضادات الحيوية واسعة الطيف، فعال ضد مجموعة واسعة من البكتيريا"
     },
     {
-        "En_Category_name": "Anticoagulants and Thrombolytics",
-        "Ar_Category_name": "مضادات التخثر",
-        "En_Description": "Anticoagulants prevent blood from clotting. Thrombolytics help dissolve and disperse blood clots and may be prescribed for patients with recent arterial or venous thrombosis",
-        "Ar_Description": "مضادات التخثر تمنع الدم من التجلط. تساعد أدوية التخثر على إذابة وتشتيت جلطات الدم ويمكن وصفها للمرضى الذين يعانون من تجلط الدم الشرياني أو الوريدي مؤخرًا"
+        "en_category_name": "Anticoagulants and Thrombolytics",
+        "ar_category_name": "مضادات التخثر",
+        "en_description": "Anticoagulants prevent blood from clotting. Thrombolytics help dissolve and disperse blood clots and may be prescribed for patients with recent arterial or venous thrombosis",
+        "ar_description": "مضادات التخثر تمنع الدم من التجلط. تساعد أدوية التخثر على إذابة وتشتيت جلطات الدم ويمكن وصفها للمرضى الذين يعانون من تجلط الدم الشرياني أو الوريدي مؤخرًا"
     },
     {
-        "En_Category_name": "Anticonvulsants",
-        "Ar_Category_name": "مضادات الاختلاج",
-        "En_Description": "Drugs that prevent epileptic seizures",
-        "Ar_Description": "الأدوية التي تمنع نوبات الصرع"
+        "en_category_name": "Anticonvulsants",
+        "ar_category_name": "مضادات الاختلاج",
+        "en_description": "Drugs that prevent epileptic seizures",
+        "ar_description": "الأدوية التي تمنع نوبات الصرع"
     },
     {
-        "En_Category_name": "Antidepressants",
-        "Ar_Category_name": "مضادات الاكتئاب",
-        "En_Description": "There are three main groups of mood-lifting antidepressants: tricyclics, monoamine oxidase inhibitors, and selective serotonin reuptake inhibitors (SSRIs)",
-        "Ar_Description": "هناك ثلاث مجموعات رئيسية من مضادات الاكتئاب التي تعمل على تحسين الحالة المزاجية: مضادات الاكتئاب ثلاثية الحلقات، ومثبطات أوكسيديز أحادي الأمين، ومثبطات امتصاص السيروتونين الانتقائية (SSRIs)"
+        "en_category_name": "Antidepressants",
+        "ar_category_name": "مضادات الاكتئاب",
+        "en_description": "There are three main groups of mood-lifting antidepressants: tricyclics, monoamine oxidase inhibitors, and selective serotonin reuptake inhibitors (SSRIs)",
+        "ar_description": "هناك ثلاث مجموعات رئيسية من مضادات الاكتئاب التي تعمل على تحسين الحالة المزاجية: مضادات الاكتئاب ثلاثية الحلقات، ومثبطات أوكسيديز أحادي الأمين، ومثبطات امتصاص السيروتونين الانتقائية (SSRIs)"
     },
     {
-        "En_Category_name": "Antidiarrheals",
-        "Ar_Category_name": "مضادات الإسهال",
-        "En_Description": "Drugs used for the relief of diarrhea. Two main types of antidiarrheal preparations are simple adsorbent substances and drugs that slow down the contractions of the bowel muscles so that the contents are propelled more slowly",
-        "Ar_Description": "الأدوية المستخدمة في تخفيف الإسهال. هناك نوعان رئيسيان من المستحضرات المضادة للإسهال هما المواد الممتزة البسيطة والأدوية التي تعمل على إبطاء تقلصات عضلات الأمعاء بحيث يتم دفع المحتويات بشكل أبطأ"
+        "en_category_name": "Antidiarrheals",
+        "ar_category_name": "مضادات الإسهال",
+        "en_description": "Drugs used for the relief of diarrhea. Two main types of antidiarrheal preparations are simple adsorbent substances and drugs that slow down the contractions of the bowel muscles so that the contents are propelled more slowly",
+        "ar_description": "الأدوية المستخدمة في تخفيف الإسهال. هناك نوعان رئيسيان من المستحضرات المضادة للإسهال هما المواد الممتزة البسيطة والأدوية التي تعمل على إبطاء تقلصات عضلات الأمعاء بحيث يتم دفع المحتويات بشكل أبطأ"
     },
     {
-        "En_Category_name": "Antiemetics",
-        "Ar_Category_name": "مضادات القيء",
-        "En_Description": "Drugs used to treat nausea and vomiting",
-        "Ar_Description": "الأدوية المستخدمة لعلاج الغثيان والقيء"
+        "en_category_name": "Antiemetics",
+        "ar_category_name": "مضادات القيء",
+        "en_description": "Drugs used to treat nausea and vomiting",
+        "ar_description": "الأدوية المستخدمة لعلاج الغثيان والقيء"
     },
     {
-        "En_Category_name": "Antifungals",
-        "Ar_Category_name": "مضادات الفطريات",
-        "En_Description": "Drugs used to treat fungal infections, the most common of which affect the hair, skin, nails, or mucous membranes",
-        "Ar_Description": "الأدوية المستخدمة لعلاج الالتهابات الفطرية، والتي تؤثر أكثرها شيوعًا على الشعر، أو الجلد، أو الأظافر، أو الأغشية المخاطية"
+        "en_category_name": "Antifungals",
+        "ar_category_name": "مضادات الفطريات",
+        "en_description": "Drugs used to treat fungal infections, the most common of which affect the hair, skin, nails, or mucous membranes",
+        "ar_description": "الأدوية المستخدمة لعلاج الالتهابات الفطرية، والتي تؤثر أكثرها شيوعًا على الشعر، أو الجلد، أو الأظافر، أو الأغشية المخاطية"
     },
     {
-        "En_Category_name": "Antihistamines",
-        "Ar_Category_name": "مضادات الهيستامين",
-        "En_Description": "Drugs used primarily to counteract the effects of histamine, one of the chemicals involved in allergic reactions",
-        "Ar_Description": "الأدوية المستخدمة في المقام الأول لمواجهة تأثيرات الهيستامين، وهي إحدى المواد الكيميائية المشاركة في تفاعلات الحساسية"
+        "en_category_name": "Antihistamines",
+        "ar_category_name": "مضادات الهيستامين",
+        "en_description": "Drugs used primarily to counteract the effects of histamine, one of the chemicals involved in allergic reactions",
+        "ar_description": "الأدوية المستخدمة في المقام الأول لمواجهة تأثيرات الهيستامين، وهي إحدى المواد الكيميائية المشاركة في تفاعلات الحساسية"
     },
     {
-        "En_Category_name": "Antihypertensives",
-        "Ar_Category_name": "خافضات ضغط الدم",
-        "En_Description": "Drugs that lower blood pressure. The types of antihypertensives currently marketed include diuretics, beta-blockers, calcium channel blocker, ACE (angiotensin- converting enzyme) inhibitors, centrally acting antihypertensives and sympatholytics",
-        "Ar_Description": "الأدوية التي تخفض ضغط الدم. تشمل أنواع مضادات ارتفاع ضغط الدم التي يتم تسويقها حاليًا مدرات البول، وحاصرات بيتا، وحاصرات قنوات الكالسيوم، ومثبطات الإنزيم المحول للأنجيوتنسين (ACE)، وخافضات ضغط الدم ذات التأثير المركزي، ومثبطات الودي"
+        "en_category_name": "Antihypertensives",
+        "ar_category_name": "خافضات ضغط الدم",
+        "en_description": "Drugs that lower blood pressure. The types of antihypertensives currently marketed include diuretics, beta-blockers, calcium channel blocker, ACE (angiotensin- converting enzyme) inhibitors, centrally acting antihypertensives and sympatholytics",
+        "ar_description": "الأدوية التي تخفض ضغط الدم. تشمل أنواع مضادات ارتفاع ضغط الدم التي يتم تسويقها حاليًا مدرات البول، وحاصرات بيتا، وحاصرات قنوات الكالسيوم، ومثبطات الإنزيم المحول للأنجيوتنسين (ACE)، وخافضات ضغط الدم ذات التأثير المركزي، ومثبطات الودي"
     },
     {
-        "En_Category_name": "Anti-Inflammatories",
-        "Ar_Category_name": "مضادات الالتهاب",
-        "En_Description": "Drugs used to reduce inflammation - the redness, heat, swelling, and increased blood flow found in infections and in many chronic noninfective diseases such as rheumatoid arthritis and gout",
-        "Ar_Description": "الأدوية المستخدمة لتقليل الالتهاب - الاحمرار والحرارة والتورم وزيادة تدفق الدم الموجودة في الالتهابات وفي العديد من الأمراض المزمنة غير المعدية مثل التهاب المفاصل الروماتويدي والنقرس"
+        "en_category_name": "Anti-Inflammatories",
+        "ar_category_name": "مضادات الالتهاب",
+        "en_description": "Drugs used to reduce inflammation - the redness, heat, swelling, and increased blood flow found in infections and in many chronic noninfective diseases such as rheumatoid arthritis and gout",
+        "ar_description": "الأدوية المستخدمة لتقليل الالتهاب - الاحمرار والحرارة والتورم وزيادة تدفق الدم الموجودة في الالتهابات وفي العديد من الأمراض المزمنة غير المعدية مثل التهاب المفاصل الروماتويدي والنقرس"
     },
     {
-        "En_Category_name": "Antineoplastics",
-        "Ar_Category_name": "مضادات الأورام",
-        "En_Description": "Drugs used to treat cancer",
-        "Ar_Description": "الأدوية المستخدمة لعلاج السرطان"
+        "en_category_name": "Antineoplastics",
+        "ar_category_name": "مضادات الأورام",
+        "en_description": "Drugs used to treat cancer",
+        "ar_description": "الأدوية المستخدمة لعلاج السرطان"
     },
     {
-        "En_Category_name": "Antipsychotics",
-        "Ar_Category_name": "مضادات الذهان",
-        "En_Description": "Drugs used to treat symptoms of severe psychiatric disorders. These drugs are sometimes called major tranquilizers",
-        "Ar_Description": "الأدوية المستخدمة لعلاج أعراض الاضطرابات النفسية الشديدة. تسمى هذه الأدوية أحيانًا المهدئات الرئيسية"
+        "en_category_name": "Antipsychotics",
+        "ar_category_name": "مضادات الذهان",
+        "en_description": "Drugs used to treat symptoms of severe psychiatric disorders. These drugs are sometimes called major tranquilizers",
+        "ar_description": "الأدوية المستخدمة لعلاج أعراض الاضطرابات النفسية الشديدة. تسمى هذه الأدوية أحيانًا المهدئات الرئيسية"
     },
     {
-        "En_Category_name": "Antipyretics",
-        "Ar_Category_name": "خافضات الحرارة",
-        "En_Description": "Drugs that reduce fever",
-        "Ar_Description": "الأدوية التي تقلل من الحمى"
+        "en_category_name": "Antipyretics",
+        "ar_category_name": "خافضات الحرارة",
+        "en_description": "Drugs that reduce fever",
+        "ar_description": "الأدوية التي تقلل من الحمى"
     },
     {
-        "En_Category_name": "Antivirals",
-        "Ar_Category_name": "مضادات الفيروسات",
-        "En_Description": "Drugs used to treat viral infections or to provide temporary protection against infections such as influenza",
-        "Ar_Description": "الأدوية المستخدمة لعلاج الالتهابات الفيروسية أو لتوفير حماية مؤقتة ضد العدوى مثل الأنفلونزا"
+        "en_category_name": "Antivirals",
+        "ar_category_name": "مضادات الفيروسات",
+        "en_description": "Drugs used to treat viral infections or to provide temporary protection against infections such as influenza",
+        "ar_description": "الأدوية المستخدمة لعلاج الالتهابات الفيروسية أو لتوفير حماية مؤقتة ضد العدوى مثل الأنفلونزا"
     },
     {
-        "En_Category_name": "Barbiturates",
-        "Ar_Category_name": "الباربيتورات",
-        "En_Description": "Sleeping drugs",
-        "Ar_Description": "مخدرات منومة"
+        "en_category_name": "Barbiturates",
+        "ar_category_name": "الباربيتورات",
+        "en_description": "Sleeping drugs",
+        "ar_description": "مخدرات منومة"
     },
     {
-        "En_Category_name": "Beta-Blockers",
-        "Ar_Category_name": "حاصرات بيتا",
-        "En_Description": "Beta-adrenergic blocking agents, or beta-blockers for short, reduce the oxygen needs of the heart by reducing heartbeat rate",
-        "Ar_Description": "تعمل عوامل حاصرات بيتا الأدرينالية، أو حاصرات بيتا باختصار، على تقليل احتياجات القلب من الأكسجين عن طريق تقليل معدل ضربات القلب"
+        "en_category_name": "Beta-Blockers",
+        "ar_category_name": "حاصرات بيتا",
+        "en_description": "Beta-adrenergic blocking agents, or beta-blockers for short, reduce the oxygen needs of the heart by reducing heartbeat rate",
+        "ar_description": "تعمل عوامل حاصرات بيتا الأدرينالية، أو حاصرات بيتا باختصار، على تقليل احتياجات القلب من الأكسجين عن طريق تقليل معدل ضربات القلب"
     },
     {
-        "En_Category_name": "Bronchodilators",
-        "Ar_Category_name": "موسعات الشعب الهوائية",
-        "En_Description": "Drugs that open up the bronchial tubes within the lungs when the tubes have become narrowed by muscle spasm. Bronchodilators ease breathing in diseases such as asthma",
-        "Ar_Description": "الأدوية التي تفتح القصبات الهوائية داخل الرئتين عندما تضيق الأنابيب بسبب تشنج العضلات. موسعات الشعب الهوائية تسهل التنفس في أمراض مثل الربو"
+        "en_category_name": "Bronchodilators",
+        "ar_category_name": "موسعات الشعب الهوائية",
+        "en_description": "Drugs that open up the bronchial tubes within the lungs when the tubes have become narrowed by muscle spasm. Bronchodilators ease breathing in diseases such as asthma",
+        "ar_description": "الأدوية التي تفتح القصبات الهوائية داخل الرئتين عندما تضيق الأنابيب بسبب تشنج العضلات. موسعات الشعب الهوائية تسهل التنفس في أمراض مثل الربو"
     },
     {
-        "En_Category_name": "Cold Cures",
-        "Ar_Category_name": "علاجات البرد",
-        "En_Description": "Although there is no drug that can cure a cold, the aches, pains, and fever that accompany a cold can be relieved by aspirin or acetaminophen often accompanied by a decongestant, antihistamine, and sometimes caffeine",
-        "Ar_Description": "على الرغم من عدم وجود دواء يمكنه علاج نزلات البرد، إلا أنه يمكن تخفيف الآلام والأوجاع والحمى المصاحبة لنزلات البرد عن طريق الأسبرين أو الأسيتامينوفين، وغالبًا ما يكون مصحوبًا بمزيلات الاحتقان ومضادات الهيستامين وأحيانًا الكافيين"
+        "en_category_name": "Cold Cures",
+        "ar_category_name": "علاجات البرد",
+        "en_description": "Although there is no drug that can cure a cold, the aches, pains, and fever that accompany a cold can be relieved by aspirin or acetaminophen often accompanied by a decongestant, antihistamine, and sometimes caffeine",
+        "ar_description": "على الرغم من عدم وجود دواء يمكنه علاج نزلات البرد، إلا أنه يمكن تخفيف الآلام والأوجاع والحمى المصاحبة لنزلات البرد عن طريق الأسبرين أو الأسيتامينوفين، وغالبًا ما يكون مصحوبًا بمزيلات الاحتقان ومضادات الهيستامين وأحيانًا الكافيين"
     },
     {
-        "En_Category_name": "Corticosteroids",
-        "Ar_Category_name": "الكورتيكوستيرويدات",
-        "En_Description": "These hormonal preparations are used primarily as anti-inflammatories in arthritis or asthma or as immunosuppressives, but they are also useful for treating some malignancies or compensating for a deficiency of natural hormones in disorders such as Addison's disease",
-        "Ar_Description": "تستخدم هذه المستحضرات الهرمونية في المقام الأول كمضادات للالتهابات في التهاب المفاصل أو الربو أو كمثبطات للمناعة، ولكنها مفيدة أيضًا في علاج بعض الأورام الخبيثة أو تعويض نقص الهرمونات الطبيعية في اضطرابات مثل مرض أديسون"
+        "en_category_name": "Corticosteroids",
+        "ar_category_name": "الكورتيكوستيرويدات",
+        "en_description": "These hormonal preparations are used primarily as anti-inflammatories in arthritis or asthma or as immunosuppressives, but they are also useful for treating some malignancies or compensating for a deficiency of natural hormones in disorders such as Addison's disease",
+        "ar_description": "تستخدم هذه المستحضرات الهرمونية في المقام الأول كمضادات للالتهابات في التهاب المفاصل أو الربو أو كمثبطات للمناعة، ولكنها مفيدة أيضًا في علاج بعض الأورام الخبيثة أو تعويض نقص الهرمونات الطبيعية في اضطرابات مثل مرض أديسون"
     },
     {
-        "En_Category_name": "Cough Suppressants",
-        "Ar_Category_name": "مثبطات السعال",
-        "En_Description": "Simple cough medicines, which contain substances such as honey, glycerine, or menthol, soothe throat irritation but do not actually suppress coughing. They are most soothing when taken as lozenges and dissolved in the mouth. As liquids they are probably swallowed too quickly to be effective. A few drugs are actually cough suppressants. There are two groups of cough suppressants: those that alter the consistency or production of phlegm such as mucolytics and expectorants; and those that suppress the coughing reflex such as codeine (narcotic cough suppressants), antihistamines, dextromethorphan and isoproterenol (non-narcotic cough suppressants)",
-        "Ar_Description": "أدوية السعال البسيطة، التي تحتوي على مواد مثل العسل أو الجليسرين أو المنثول، تعمل على تهدئة تهيج الحلق ولكنها لا تمنع السعال فعليًا. فهي أكثر مهدئة عندما تؤخذ على شكل أقراص للمص وتذوب في الفم. باعتبارها سوائل، فمن المحتمل أن يتم ابتلاعها بسرعة كبيرة جدًا بحيث لا تكون فعالة. بعض الأدوية هي في الواقع مثبطات للسعال. هناك مجموعتان من مثبطات السعال: تلك التي تغير قوام البلغم أو إنتاجه مثل حال للبلغم وطارد للبلغم. وتلك التي تثبط منعكس السعال مثل الكودايين (مثبطات السعال المخدرة)، ومضادات الهيستامين، والدكستروميتورفان، والأيزوبروتيرينول (مثبطات السعال غير المخدرة)"
+        "en_category_name": "Cough Suppressants",
+        "ar_category_name": "مثبطات السعال",
+        "en_description": "Simple cough medicines, which contain substances such as honey, glycerine, or menthol, soothe throat irritation but do not actually suppress coughing. They are most soothing when taken as lozenges and dissolved in the mouth. As liquids they are probably swallowed too quickly to be effective. A few drugs are actually cough suppressants. There are two groups of cough suppressants: those that alter the consistency or production of phlegm such as mucolytics and expectorants; and those that suppress the coughing reflex such as codeine (narcotic cough suppressants), antihistamines, dextromethorphan and isoproterenol (non-narcotic cough suppressants)",
+        "ar_description": "أدوية السعال البسيطة، التي تحتوي على مواد مثل العسل أو الجليسرين أو المنثول، تعمل على تهدئة تهيج الحلق ولكنها لا تمنع السعال فعليًا. فهي أكثر مهدئة عندما تؤخذ على شكل أقراص للمص وتذوب في الفم. باعتبارها سوائل، فمن المحتمل أن يتم ابتلاعها بسرعة كبيرة جدًا بحيث لا تكون فعالة. بعض الأدوية هي في الواقع مثبطات للسعال. هناك مجموعتان من مثبطات السعال: تلك التي تغير قوام البلغم أو إنتاجه مثل حال للبلغم وطارد للبلغم. وتلك التي تثبط منعكس السعال مثل الكودايين (مثبطات السعال المخدرة)، ومضادات الهيستامين، والدكستروميتورفان، والأيزوبروتيرينول (مثبطات السعال غير المخدرة)"
     },
     {
-        "En_Category_name": "Cytotoxics",
-        "Ar_Category_name": "السموم الخلوية",
-        "En_Description": "Drugs that kill or damage cells. Cytotoxics are used as antineoplastics (drugs used to treat cancer) and also as immunosuppressives",
-        "Ar_Description": "الأدوية التي تقتل الخلايا أو تتلفها. تُستخدم المواد السامة للخلايا كمضادات للأورام (أدوية تستخدم لعلاج السرطان) وأيضًا كمثبطات للمناعة"
+        "en_category_name": "Cytotoxics",
+        "ar_category_name": "السموم الخلوية",
+        "en_description": "Drugs that kill or damage cells. Cytotoxics are used as antineoplastics (drugs used to treat cancer) and also as immunosuppressives",
+        "ar_description": "الأدوية التي تقتل الخلايا أو تتلفها. تُستخدم المواد السامة للخلايا كمضادات للأورام (أدوية تستخدم لعلاج السرطان) وأيضًا كمثبطات للمناعة"
     },
     {
-        "En_Category_name": "Decongestants",
-        "Ar_Category_name": "مزيلات الاحتقان",
-        "En_Description": "Drugs that reduce swelling of the mucous membranes that line the nose by constricting blood vessels, thus relieving nasal stuffiness",
-        "Ar_Description": "الأدوية التي تقلل من تورم الأغشية المخاطية التي تبطن الأنف عن طريق تضييق الأوعية الدموية، وبالتالي تخفيف احتقان الأنف"
+        "en_category_name": "Decongestants",
+        "ar_category_name": "مزيلات الاحتقان",
+        "en_description": "Drugs that reduce swelling of the mucous membranes that line the nose by constricting blood vessels, thus relieving nasal stuffiness",
+        "ar_description": "الأدوية التي تقلل من تورم الأغشية المخاطية التي تبطن الأنف عن طريق تضييق الأوعية الدموية، وبالتالي تخفيف احتقان الأنف"
     },
     {
-        "En_Category_name": "Diuretics",
-        "Ar_Category_name": "مدرات البول",
-        "En_Description": "Drugs that increase the quantity of urine produced by the kidneys and passed out of the body, thus ridding the body of excess fluid. Diuretics reduce water logging of the tissues caused by fluid retention in disorders of the heart, kidneys, and liver. They are useful in treating mild cases of high blood pressure",
-        "Ar_Description": "الأدوية التي تعمل على زيادة كمية البول الذي تنتجه الكلى ويخرج إلى خارج الجسم، وبالتالي تخليص الجسم من السوائل الزائدة. تعمل مدرات البول على تقليل تشبع الأنسجة بالمياه الناتج عن احتباس السوائل في اضطرابات القلب والكليتين والكبد. تفيد في علاج الحالات الخفيفة من ارتفاع ضغط الدم"
+        "en_category_name": "Diuretics",
+        "ar_category_name": "مدرات البول",
+        "en_description": "Drugs that increase the quantity of urine produced by the kidneys and passed out of the body, thus ridding the body of excess fluid. Diuretics reduce water logging of the tissues caused by fluid retention in disorders of the heart, kidneys, and liver. They are useful in treating mild cases of high blood pressure",
+        "ar_description": "الأدوية التي تعمل على زيادة كمية البول الذي تنتجه الكلى ويخرج إلى خارج الجسم، وبالتالي تخليص الجسم من السوائل الزائدة. تعمل مدرات البول على تقليل تشبع الأنسجة بالمياه الناتج عن احتباس السوائل في اضطرابات القلب والكليتين والكبد. تفيد في علاج الحالات الخفيفة من ارتفاع ضغط الدم"
     },
     {
-        "En_Category_name": "Expectorant",
-        "Ar_Category_name": "طارد للبلغم",
-        "En_Description": "A drug that stimulates the flow of saliva and promotes coughing to eliminate phlegm from the respiratory tract",
-        "Ar_Description": "دواء يحفز تدفق اللعاب ويعزز السعال ويطرد البلغم من الجهاز التنفسي"
+        "en_category_name": "Expectorant",
+        "ar_category_name": "طارد للبلغم",
+        "en_description": "A drug that stimulates the flow of saliva and promotes coughing to eliminate phlegm from the respiratory tract",
+        "ar_description": "دواء يحفز تدفق اللعاب ويعزز السعال ويطرد البلغم من الجهاز التنفسي"
     },
     {
-        "En_Category_name": "Hormones",
-        "Ar_Category_name": "الهرمونات",
-        "En_Description": "Chemicals produced naturally by the endocrine glands (thyroid, adrenal, ovary, testis, pancreas, parathyroid). In some disorders, for example, diabetes mellitus, in which too little of a particular hormone is produced, synthetic equivalents or natural hormone extracts are prescribed to restore the deficiency. Such treatment is known as hormone replacement therapy",
-        "Ar_Description": "المواد الكيميائية التي تنتجها الغدد الصماء بشكل طبيعي (الغدة الدرقية، الكظرية، المبيض، الخصية، البنكرياس، الغدة الدرقية). في بعض الاضطرابات، على سبيل المثال، داء السكري، الذي يتم فيه إنتاج كمية قليلة جدًا من هرمون معين، توصف معادلات اصطناعية أو مستخلصات هرمونية طبيعية لاستعادة النقص. يُعرف هذا العلاج باسم العلاج بالهرمونات البديلة"
+        "en_category_name": "Hormones",
+        "ar_category_name": "الهرمونات",
+        "en_description": "Chemicals produced naturally by the endocrine glands (thyroid, adrenal, ovary, testis, pancreas, parathyroid). In some disorders, for example, diabetes mellitus, in which too little of a particular hormone is produced, synthetic equivalents or natural hormone extracts are prescribed to restore the deficiency. Such treatment is known as hormone replacement therapy",
+        "ar_description": "المواد الكيميائية التي تنتجها الغدد الصماء بشكل طبيعي (الغدة الدرقية، الكظرية، المبيض، الخصية، البنكرياس، الغدة الدرقية). في بعض الاضطرابات، على سبيل المثال، داء السكري، الذي يتم فيه إنتاج كمية قليلة جدًا من هرمون معين، توصف معادلات اصطناعية أو مستخلصات هرمونية طبيعية لاستعادة النقص. يُعرف هذا العلاج باسم العلاج بالهرمونات البديلة"
     },
     {
-        "En_Category_name": "Hypoglycemics (Oral)",
-        "Ar_Category_name": "أدوية سكر الدم (عن طريق الفم)",
-        "En_Description": "Drugs that lower the level of glucose in the blood. Oral hypoglycemic drugs are used in diabetes mellitus if it cannot be controlled by diet alone, but does require treatment with injections of insulin",
-        "Ar_Description": "الأدوية التي تخفض مستوى الجلوكوز في الدم. تُستخدم أدوية خفض سكر الدم عن طريق الفم لعلاج داء السكري إذا لم يكن من الممكن السيطرة عليه عن طريق النظام الغذائي وحده، ولكنها تتطلب العلاج بحقن الأنسولين"
+        "en_category_name": "Hypoglycemics (Oral)",
+        "ar_category_name": "أدوية سكر الدم (عن طريق الفم)",
+        "en_description": "Drugs that lower the level of glucose in the blood. Oral hypoglycemic drugs are used in diabetes mellitus if it cannot be controlled by diet alone, but does require treatment with injections of insulin",
+        "ar_description": "الأدوية التي تخفض مستوى الجلوكوز في الدم. تُستخدم أدوية خفض سكر الدم عن طريق الفم لعلاج داء السكري إذا لم يكن من الممكن السيطرة عليه عن طريق النظام الغذائي وحده، ولكنها تتطلب العلاج بحقن الأنسولين"
     },
     {
-        "En_Category_name": "Immunosuppressives",
-        "Ar_Category_name": "مثبطات المناعة",
-        "En_Description": "Drugs that prevent or reduce the body's normal reaction to invasion by disease or by foreign tissues. Immunosuppressives are used to treat autoimmune diseases (in which the body's defenses work abnormally and attack its own tissues) and to help prevent rejection of organ transplants",
-        "Ar_Description": "الأدوية التي تمنع أو تقلل من رد فعل الجسم الطبيعي تجاه غزو المرض أو الأنسجة الغريبة. تُستخدم مثبطات المناعة لعلاج أمراض المناعة الذاتية (حيث تعمل دفاعات الجسم بشكل غير طبيعي وتهاجم أنسجتها) وللمساعدة في منع رفض عمليات زرع الأعضاء"
+        "en_category_name": "Immunosuppressives",
+        "ar_category_name": "مثبطات المناعة",
+        "en_description": "Drugs that prevent or reduce the body's normal reaction to invasion by disease or by foreign tissues. Immunosuppressives are used to treat autoimmune diseases (in which the body's defenses work abnormally and attack its own tissues) and to help prevent rejection of organ transplants",
+        "ar_description": "الأدوية التي تمنع أو تقلل من رد فعل الجسم الطبيعي تجاه غزو المرض أو الأنسجة الغريبة. تُستخدم مثبطات المناعة لعلاج أمراض المناعة الذاتية (حيث تعمل دفاعات الجسم بشكل غير طبيعي وتهاجم أنسجتها) وللمساعدة في منع رفض عمليات زرع الأعضاء"
     },
     {
-        "En_Category_name": "Laxatives",
-        "Ar_Category_name": "مرخيات العضلات",
-        "En_Description": "Drugs that increase the frequency and ease of bowel movements, either by stimulating the bowel wall (stimulant laxative), by increasing the bulk of bowel contents (bulk laxative), or by lubricating them (stool-softeners, or bowel movement-softeners). Laxatives may be taken by mouth or directly into the lower bowel as suppositories or enemas. If laxatives are taken regularly, the bowels may ultimately become unable to work properly without them",
-        "Ar_Description": "الأدوية التي تزيد من تواتر وسهولة حركات الأمعاء، إما عن طريق تحفيز جدار الأمعاء (ملين منشط)، أو عن طريق زيادة حجم محتويات الأمعاء (ملين بالجملة)، أو عن طريق تشحيمها (ملينات البراز، أو ملينات حركة الأمعاء). يمكن تناول الملينات عن طريق الفم أو مباشرة إلى الأمعاء السفلية على شكل تحاميل أو حقن شرجية. إذا تم تناول المسهلات بانتظام، فقد تصبح الأمعاء غير قادرة في النهاية على العمل بشكل صحيح بدونها"
+        "en_category_name": "Laxatives",
+        "ar_category_name": "مرخيات العضلات",
+        "en_description": "Drugs that increase the frequency and ease of bowel movements, either by stimulating the bowel wall (stimulant laxative), by increasing the bulk of bowel contents (bulk laxative), or by lubricating them (stool-softeners, or bowel movement-softeners). Laxatives may be taken by mouth or directly into the lower bowel as suppositories or enemas. If laxatives are taken regularly, the bowels may ultimately become unable to work properly without them",
+        "ar_description": "الأدوية التي تزيد من تواتر وسهولة حركات الأمعاء، إما عن طريق تحفيز جدار الأمعاء (ملين منشط)، أو عن طريق زيادة حجم محتويات الأمعاء (ملين بالجملة)، أو عن طريق تشحيمها (ملينات البراز، أو ملينات حركة الأمعاء). يمكن تناول الملينات عن طريق الفم أو مباشرة إلى الأمعاء السفلية على شكل تحاميل أو حقن شرجية. إذا تم تناول المسهلات بانتظام، فقد تصبح الأمعاء غير قادرة في النهاية على العمل بشكل صحيح بدونها"
     },
     {
-        "En_Category_name": "Muscle Relaxants",
-        "Ar_Category_name": "مرخيات العضلات",
-        "En_Description": "Drugs that relieve muscle spasm in disorders such as backache. Antianxiety drugs (minor tranquilizers) that also have a muscle-relaxant action are used most commonly",
-        "Ar_Description": "الأدوية التي تخفف من تشنج العضلات في اضطرابات مثل آلام الظهر. الأدوية المضادة للقلق (المهدئات البسيطة) التي لها أيضًا تأثير مرخي للعضلات هي الأكثر شيوعًا"
+        "en_category_name": "Muscle Relaxants",
+        "ar_category_name": "مرخيات العضلات",
+        "en_description": "Drugs that relieve muscle spasm in disorders such as backache. Antianxiety drugs (minor tranquilizers) that also have a muscle-relaxant action are used most commonly",
+        "ar_description": "الأدوية التي تخفف من تشنج العضلات في اضطرابات مثل آلام الظهر. الأدوية المضادة للقلق (المهدئات البسيطة) التي لها أيضًا تأثير مرخي للعضلات هي الأكثر شيوعًا"
     },
     {
-        "En_Category_name": "Sedatives",
-        "Ar_Category_name": "المهدئات",
-        "En_Description": "Same as Antianxiety drugs",
-        "Ar_Description": "مثل الأدوية المضادة للقلق"
+        "en_category_name": "Sedatives",
+        "ar_category_name": "المهدئات",
+        "en_description": "Same as Antianxiety drugs",
+        "ar_description": "مثل الأدوية المضادة للقلق"
     },
     {
-        "En_Category_name": "Sex Hormones (Female)",
-        "Ar_Category_name": "الهرمونات الجنسية (أنثى)",
-        "En_Description": "There are two groups of these hormones (estrogens and progesterone), which are responsible for development of female secondary sexual characteristics. Small quantities are also produced in males. As drugs, female sex hormones are used to treat menstrual and menopausal disorders and are also used as oral contraceptives. Estrogens may be used to treat cancer of the breast or prostate, progestins (synthetic progesterone to treat endometriosis)",
-        "Ar_Description": "هناك مجموعتان من هذه الهرمونات (الاستروجين والبروجستيرون)، المسؤولة عن تطوير الخصائص الجنسية الثانوية الأنثوية. كما يتم إنتاج كميات صغيرة عند الذكور. تُستخدم الهرمونات الجنسية الأنثوية كأدوية لعلاج اضطرابات الدورة الشهرية وانقطاع الطمث، كما تُستخدم أيضًا كوسيلة لمنع الحمل عن طريق الفم. يمكن استخدام هرمون الاستروجين لعلاج سرطان الثدي أو البروستاتا، والبروجستينات (البروجستيرون الاصطناعي لعلاج بطانة الرحم)"
+        "en_category_name": "Sex Hormones (Female)",
+        "ar_category_name": "الهرمونات الجنسية (أنثى)",
+        "en_description": "There are two groups of these hormones (estrogens and progesterone), which are responsible for development of female secondary sexual characteristics. Small quantities are also produced in males. As drugs, female sex hormones are used to treat menstrual and menopausal disorders and are also used as oral contraceptives. Estrogens may be used to treat cancer of the breast or prostate, progestins (synthetic progesterone to treat endometriosis)",
+        "ar_description": "هناك مجموعتان من هذه الهرمونات (الاستروجين والبروجستيرون)، المسؤولة عن تطوير الخصائص الجنسية الثانوية الأنثوية. كما يتم إنتاج كميات صغيرة عند الذكور. تُستخدم الهرمونات الجنسية الأنثوية كأدوية لعلاج اضطرابات الدورة الشهرية وانقطاع الطمث، كما تُستخدم أيضًا كوسيلة لمنع الحمل عن طريق الفم. يمكن استخدام هرمون الاستروجين لعلاج سرطان الثدي أو البروستاتا، والبروجستينات (البروجستيرون الاصطناعي لعلاج بطانة الرحم)"
     },
     {
-        "En_Category_name": "Sex Hormones (Male)",
-        "Ar_Category_name": "الهرمونات الجنسية (ذكر)",
-        "En_Description": "Androgenic hormones, of which the most powerful is testosterone, are responsible for development of male secondary sexual characteristics. Small quantities are also produced in females. As drugs, male sex hormones are given to compensate for hormonal deficiency in hypopituitarism or disorders of the testes. They may be used to treat breast cancer in women, but either synthetic derivatives called anabolic steroids, which have less marked side- effects, or specific anti-estrogens are often preferred. Anabolic steroids also have a {body building} effect that has led to their (usually nonsanctioned) use in competitive sports, for both men and women",
-        "Ar_Description": "الهرمونات الأندروجينية، وأقواها هرمون التستوستيرون، هي المسؤولة عن تطور الخصائص الجنسية الثانوية لدى الذكور. كما يتم إنتاج كميات صغيرة عند الإناث. كأدوية، يتم إعطاء الهرمونات الجنسية الذكرية للتعويض عن النقص الهرموني في قصور الغدة النخامية أو اضطرابات الخصيتين. يمكن استخدامها لعلاج سرطان الثدي لدى النساء، ولكن غالبًا ما يفضل استخدام مشتقات اصطناعية تسمى الستيرويدات الابتنائية، والتي لها آثار جانبية أقل وضوحًا، أو مضادات هرمون الاستروجين المحددة. تتمتع الستيرويدات الابتنائية أيضًا بتأثير {بناء الأجسام} الذي أدى إلى استخدامها (غير المصرح به عادةً) في الرياضات التنافسية لكل من الرجال والنساء"
+        "en_category_name": "Sex Hormones (Male)",
+        "ar_category_name": "الهرمونات الجنسية (ذكر)",
+        "en_description": "Androgenic hormones, of which the most powerful is testosterone, are responsible for development of male secondary sexual characteristics. Small quantities are also produced in females. As drugs, male sex hormones are given to compensate for hormonal deficiency in hypopituitarism or disorders of the testes. They may be used to treat breast cancer in women, but either synthetic derivatives called anabolic steroids, which have less marked side- effects, or specific anti-estrogens are often preferred. Anabolic steroids also have a {body building} effect that has led to their (usually nonsanctioned) use in competitive sports, for both men and women",
+        "ar_description": "الهرمونات الأندروجينية، وأقواها هرمون التستوستيرون، هي المسؤولة عن تطور الخصائص الجنسية الثانوية لدى الذكور. كما يتم إنتاج كميات صغيرة عند الإناث. كأدوية، يتم إعطاء الهرمونات الجنسية الذكرية للتعويض عن النقص الهرموني في قصور الغدة النخامية أو اضطرابات الخصيتين. يمكن استخدامها لعلاج سرطان الثدي لدى النساء، ولكن غالبًا ما يفضل استخدام مشتقات اصطناعية تسمى الستيرويدات الابتنائية، والتي لها آثار جانبية أقل وضوحًا، أو مضادات هرمون الاستروجين المحددة. تتمتع الستيرويدات الابتنائية أيضًا بتأثير {بناء الأجسام} الذي أدى إلى استخدامها (غير المصرح به عادةً) في الرياضات التنافسية لكل من الرجال والنساء"
     },
     {
-        "En_Category_name": "Sleeping Drugs",
-        "Ar_Category_name": "أدوية النوم",
-        "En_Description": "The two main groups of drugs that are used to induce sleep are benzodiazepines and barbiturates. All such drugs have a sedative effect in low doses and are effective sleeping medications in higher doses. Benzodiazepines drugs are used more widely than barbiturates because they are safer, the side-effects are less marked, and there is less risk of eventual physical dependence",
-        "Ar_Description": "المجموعتان الرئيسيتان من الأدوية المستخدمة للحث على النوم هما البنزوديازيبينات والباربيتورات. جميع هذه الأدوية لها تأثير مهدئ بجرعات منخفضة وتكون أدوية منومة فعالة بجرعات أعلى. تُستخدم أدوية البنزوديازيبينات على نطاق أوسع من الباربيتورات لأنها أكثر أمانًا، وآثارها الجانبية أقل وضوحًا، كما أن خطر الاعتماد الجسدي في نهاية المطاف أقل"
+        "en_category_name": "Sleeping Drugs",
+        "ar_category_name": "أدوية النوم",
+        "en_description": "The two main groups of drugs that are used to induce sleep are benzodiazepines and barbiturates. All such drugs have a sedative effect in low doses and are effective sleeping medications in higher doses. Benzodiazepines drugs are used more widely than barbiturates because they are safer, the side-effects are less marked, and there is less risk of eventual physical dependence",
+        "ar_description": "المجموعتان الرئيسيتان من الأدوية المستخدمة للحث على النوم هما البنزوديازيبينات والباربيتورات. جميع هذه الأدوية لها تأثير مهدئ بجرعات منخفضة وتكون أدوية منومة فعالة بجرعات أعلى. تُستخدم أدوية البنزوديازيبينات على نطاق أوسع من الباربيتورات لأنها أكثر أمانًا، وآثارها الجانبية أقل وضوحًا، كما أن خطر الاعتماد الجسدي في نهاية المطاف أقل"
     },
     {
-        "En_Category_name": "Tranquilizer",
-        "Ar_Category_name": "مهدئ",
-        "En_Description": "This is a term commonly used to describe any drug that has a calming or sedative effect. However, the drugs that are sometimes called minor tranquilizers should be called antianxiety drugs, and the drugs that are sometimes called major tranquilizers should be called antipsychotics",
-        "Ar_Description": "يستخدم هذا المصطلح عادة لوصف أي دواء له تأثير مهدئ أو مهدئ. ومع ذلك، فإن الأدوية التي تسمى أحيانًا المهدئات الثانوية يجب أن تسمى أدوية مضادة للقلق، والأدوية التي تسمى أحيانًا المهدئات الكبرى يجب أن تسمى مضادات الذهان"
+        "en_category_name": "Tranquilizer",
+        "ar_category_name": "مهدئ",
+        "en_description": "This is a term commonly used to describe any drug that has a calming or sedative effect. However, the drugs that are sometimes called minor tranquilizers should be called antianxiety drugs, and the drugs that are sometimes called major tranquilizers should be called antipsychotics",
+        "ar_description": "يستخدم هذا المصطلح عادة لوصف أي دواء له تأثير مهدئ أو مهدئ. ومع ذلك، فإن الأدوية التي تسمى أحيانًا المهدئات الثانوية يجب أن تسمى أدوية مضادة للقلق، والأدوية التي تسمى أحيانًا المهدئات الكبرى يجب أن تسمى مضادات الذهان"
     },
     {
-        "En_Category_name": "Vitamins",
-        "Ar_Category_name": "الفيتامينات",
-        "En_Description": "Chemicals essential in small quantities for good health. Some vitamins are not manufactured by the body, but adequate quantities are present in a normal diet. People whose diets are inadequate or who have digestive tract or liver disorders may need to take supplementary vitamins",
-        "Ar_Description": "المواد الكيميائية ضرورية بكميات صغيرة لصحة جيدة. بعض الفيتامينات لا يصنعها الجسم، ولكن تتوفر كميات كافية منها في النظام الغذائي العادي. قد يحتاج الأشخاص الذين تكون حميتهم الغذائية غير كافية أو الذين يعانون من اضطرابات في الجهاز الهضمي أو الكبد إلى تناول الفيتامينات التكميلية"
+        "en_category_name": "Vitamins",
+        "ar_category_name": "الفيتامينات",
+        "en_description": "Chemicals essential in small quantities for good health. Some vitamins are not manufactured by the body, but adequate quantities are present in a normal diet. People whose diets are inadequate or who have digestive tract or liver disorders may need to take supplementary vitamins",
+        "ar_description": "المواد الكيميائية ضرورية بكميات صغيرة لصحة جيدة. بعض الفيتامينات لا يصنعها الجسم، ولكن تتوفر كميات كافية منها في النظام الغذائي العادي. قد يحتاج الأشخاص الذين تكون حميتهم الغذائية غير كافية أو الذين يعانون من اضطرابات في الجهاز الهضمي أو الكبد إلى تناول الفيتامينات التكميلية"
     }
 ]

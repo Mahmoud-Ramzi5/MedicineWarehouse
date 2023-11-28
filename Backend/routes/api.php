@@ -31,6 +31,7 @@ Route::prefix('/users')->group(function () {
         Route::middleware('auth:sanctum')->get('/medicines', 'ShowNotExpired')->name('ShowNotExpired');
         Route::get('/categoryFilter', 'Selected_Category')->name('Selected_Category');
         Route::get('/medicineinfo', 'Display_Medicine_info')->name('Display_Medicine_info');
+        Route::post('/search', 'Search_Not_Expired')->name('Search_Not_Expired');
 
     });
 });
@@ -48,5 +49,7 @@ Route::prefix('/admin')->group(function () {
         Route::middleware('auth:sanctum')->get('/medicines', 'ShowAll')->name('ShowAll');
         Route::get('/categoryFilter', 'Selected_Category')->name('Selected_Category');
         Route::get('/medicineinfo', 'Display_Medicine_info')->name('Display_Medicine_info');
+        Route::post('/search', 'Search_All')->name('Search_All');
     });
 });
+

@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 
 use App\Http\Requests\UserRequests\LoginRequest;
 use App\Http\Requests\UserRequests\RegisterRequest;
+use App\Models\Medicine;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -68,7 +69,6 @@ class UserController extends Controller
             'access_token' => $authToken,
         ], 200);
     }
-
     function Logout(Request $request)
     {
         // Logout User

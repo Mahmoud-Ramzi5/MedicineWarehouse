@@ -8,35 +8,61 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Medicine;
 use App\Models\MedicineTranslation;
+use App\Http\Requests\AdminRequests\LoginAdminRequest;
 
 class AdminController extends Controller
 {
+    /*function login(LoginAdminRequest $request)
+    {
+        $credentials = $request->validated();
+        $admin_name = 'Ghassan@gmail.com';
+        $admin_passwowrd = 5554321;
+        $email = $credentials['email'];
+        $password = $credentials['password'];
+        if ($email != $admin_name || $password != $admin_passwowrd) {
+            return response()->json([
+                'message' => 'Invalid credentials',
+                'errors' => [
+                    'Email & Password' => [
+                        'Passwords does not match.'
+                    ],
+                ]
+            ], 400);
+        }
+        // Login User
+        return response()->json([
+            'message' => 'Successfully logged in',
+            'access_token' => '',
+        ], 200);
+    }*/
+
+
     public function Add_Medicine(MedicineRequest $request)
     {
         // Validate Input
         $credentials = $request->validated();
         // Create Medicine
         $medicine = Medicine::create([
-            'Expiry_date' => $credentials['Expiry_date'],
-            'Quantity_available' => $credentials['Quantity_available'],
-            'Price' => $credentials['Price'],
+            'expiry_date' => $credentials['expiry_date'],
+            'quantity_available' => $credentials['quantity_available'],
+            'price' => $credentials['price'],
         ]);
-        $medicine->Categories()->attach($credentials['Category_id']);
+        $medicine->Categories()->attach($credentials['category_id']);
         // Create English Translation
         $En = MedicineTranslation::create([
             'medicine_id'=> $medicine->id,
             'lang'=> 'en',
-            'Commercial_name' => $credentials['En_Commercial_name'],
-            'Scientific_name' => $credentials['En_Scientific_name'],
-            'Manufacture_company' => $credentials['En_Manufacture_company'],
+            'commercial_name' => $credentials['en_commercial_name'],
+            'scientific_name' => $credentials['en_scientific_name'],
+            'manufacture_company' => $credentials['en_manufacture_company'],
         ]);
         // Create Arabic Translation
         $Ar = MedicineTranslation::create([
             'medicine_id'=> $medicine->id,
             'lang'=> 'ar',
-            'Commercial_name' => $credentials['Ar_Commercial_name'],
-            'Scientific_name' => $credentials['Ar_Scientific_name'],
-            'Manufacture_company' => $credentials['Ar_Manufacture_company'],
+            'commercial_name' => $credentials['ar_commercial_name'],
+            'scientific_name' => $credentials['ar_scientific_name'],
+            'manufacture_company' => $credentials['ar_manufacture_company'],
         ]);
         // Response
         return response()->json([
@@ -63,10 +89,10 @@ class AdminController extends Controller
         foreach($jsonContent as $category)
         {
             $category = Category::create([
-                "En_Category_name" => $category["En_Category_name"],
-                "Ar_Category_name" => $category["Ar_Category_name"],
-                "En_Description" => $category["En_Description"],
-                "Ar_Description" => $category["Ar_Description"]
+                "en_category_name" => $category["en_category_name"],
+                "ar_category_name" => $category["ar_category_name"],
+                "en_description" => $category["en_description"],
+                "ar_description" => $category["ar_description"]
             ]);
         }
     }

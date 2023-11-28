@@ -18,9 +18,9 @@ class MedicinesController extends Controller
         $dateMonth = $Date->format('m');
         $dateDay = $Date->format('d');
         foreach ($medicines as $medicine) {
-            $medicineYear = $medicine->Expiry_date->format('Y');
-            $medicineMonth = $medicine->Expiry_date->format('m');
-            $medicineDay = $medicine->Expiry_date->format('d');
+            $medicineYear = $medicine->expiry_date->format('Y');
+            $medicineMonth = $medicine->expiry_date->format('m');
+            $medicineDay = $medicine->expiry_date->format('d');
 
             if ($medicineYear > $dateYear)
             {
@@ -83,4 +83,64 @@ class MedicinesController extends Controller
         $medicine->Categories;
         return response()->json(["message"=> $medicine], 200);
     }
+
+
+    function Search_All(Request $request){
+        $name = $request->input('name');
+        $medicines = Medicine::with('MedicineTranslations')->with('Categories')->get();
+        foreach ($medicines as $medicine) {
+            $commercial_name = $medicine->commercial_name;
+            $scientific_name = $medicine->scientific_name;
+            if($name == $commercial_name||$name == $scientific_name){
+                return response()->json(["message"=> $medicine], 200);
+            }
+
+        }
+        return response()->json(["message"=> 'sorry item requested not found it may be out of stock or expired'], 200);
+    }
+
+    function Search_Not_Expired(Request $request){
+        $name = $request->input('name');
+        $medicines = Medicine::with('MedicineTranslations')->with('Categories')->get();
+        $valids = [];
+        $Date = today();
+        $dateYear = $Date->format('Y');
+        $dateMonth = $Date->format('m');
+        $dateDay = $Date->format('d');
+        foreach ($medicines as $medicine) {
+            $medicineYear = $medicine->expiry_date->format('Y');
+            $medicineMonth = $medicine->expiry_date->format('m');
+            $medicineDay = $medicine->expiry_date->format('d');
+
+            if ($medicineYear > $dateYear)
+            {
+                array_push($valids, $medicine);
+            }
+            else
+            {
+                if ($medicineMonth > $dateMonth)
+                {
+                    array_push($valids, $medicine);
+                }
+                else
+                {
+                    if ($medicineDay > $dateDay)
+                    {
+                        array_push($valids, $medicine);
+                    }
+                }
+            }
+        }
+        foreach($valids as $valid){
+            $commercial_name = $valid->commercial_name;
+            $scientific_name = $valid->scientific_name;
+
+            if($name == $commercial_name||$name == $scientific_name){
+                return response()->json(["message"=> $medicine], 200);
+            }
+
+        }
+        return response()->json(["message"=> 'sorry item requested not found it may be out of stock or expired'], 200);
 }
+}
+
