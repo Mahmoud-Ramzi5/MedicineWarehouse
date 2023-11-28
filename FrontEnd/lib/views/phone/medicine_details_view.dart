@@ -18,7 +18,7 @@ class _MedicineDetailsViewState extends State<MedicineDetailsView> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Center(child: CircularProgressIndicator()),
-          Text(widget.medicine.medicineTranslations["ar"]["Commercial_name"]),
+          Text(widget.medicine.medicineTranslations["ar"]["commercial_name"]),
         ],
       ),
     );

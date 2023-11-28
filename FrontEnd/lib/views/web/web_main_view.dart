@@ -87,7 +87,7 @@ class _WebMainViewState extends State<WebMainView> {
                   WebApi().addMedicine(
                       "5/9/2027",
                       1,
-                      1,
+                      1.0,
                       "enCommercialName",
                       "arCommercialName",
                       "enScientificName",

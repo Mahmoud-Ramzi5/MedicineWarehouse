@@ -36,7 +36,7 @@ class WebApi {
   Future<dynamic> addMedicine(
       String expiryDate,
       int quantityAvailable,
-      int price,
+      double price,
       String enCommercialName,
       String arCommercialName,
       String enScientificName,
@@ -66,11 +66,10 @@ class WebApi {
           "en_manufacture_company": enManufactureCompany,
           "ar_manufacture_company": arManufactureCompany,
           "category_id": categoryIds,
-          //"image": image
+          "image": image
         },
       ),
     );
-    print(image.toList());
-    print(response.body);
+    return response;
   }
 }

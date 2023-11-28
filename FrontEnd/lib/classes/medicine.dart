@@ -16,9 +16,9 @@ class Medicine {
   });
   Medicine.fromJson(Map<String, dynamic> json)
       : id = json['id'] as int,
-        expiryDate = json['Expiry_date'] as String,
-        quantityAvailable = json['Quantity_available'] as int,
-        price = json['Price'] as int,
+        expiryDate = json['expiry_date'] as String,
+        quantityAvailable = json['quantity_available'] as int,
+        price = json['price'] as int,
         medicineTranslations = {
           for (var translation in json['medicine_translations'])
             translation["lang"]: translation

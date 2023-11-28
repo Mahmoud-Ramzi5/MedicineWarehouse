@@ -47,8 +47,9 @@ class AdminController extends Controller
             'expiry_date' => $credentials['expiry_date'],
             'quantity_available' => $credentials['quantity_available'],
             'price' => $credentials['price'],
+            'image' => $credentials['image'],
         ]);
-        $medicine->Categories()->attach($credentials['category_id']);
+        $medicine->Categories()->attach($credentials['category_ids']);
         // Create English Translation
         $En = MedicineTranslation::create([
             'medicine_id'=> $medicine->id,

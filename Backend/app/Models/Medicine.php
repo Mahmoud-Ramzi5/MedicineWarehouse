@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use DateTime;
+use Dotenv\Parser\Value;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
@@ -20,6 +21,7 @@ class Medicine extends Model
         "expiry_date",
         "quantity_available",
         "price",
+        "image",
     ];
 
     /**
@@ -28,11 +30,11 @@ class Medicine extends Model
      * @var array<string, string>
      */
     protected $casts = [
-        'expiry_date' => 'date:Y-m-d',
+        'expiry_date' => 'date:d/m/Y',
     ];
 
     /**
-     * Interact with the medicine's Expiry_date.
+     * Interact with the medicine's ExpiryDate.
      */
     protected function ExpiryDate(): Attribute
     {
@@ -40,6 +42,18 @@ class Medicine extends Model
             set: fn (string $value) => DateTime::createFromFormat('d/m/Y', $value)->format('Y-m-d'),
         );
     }
+
+    /**
+     * Interact with the medicine's Image.
+     */
+    protected function Image(): Attribute
+    {
+        return Attribute::make(
+            set: fn ($array) => implode(',', $array),
+            get: fn ($string) => array_map('intval', explode(',', $string)),
+        );
+    }
+
     // OneToMany Relation
     public function  MedicineTranslations()
     {

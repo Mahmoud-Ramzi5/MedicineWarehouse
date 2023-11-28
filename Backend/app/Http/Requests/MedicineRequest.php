@@ -31,7 +31,8 @@ class MedicineRequest extends FormRequest
             'ar_scientific_name' => 'required|max:255',
             'en_manufacture_company' => 'required',
             'ar_manufacture_company' => 'required',
-            'category_id' => 'required'
+            'category_ids' => 'required',
+            'image' => 'nullable'
         ];
     }
 

@@ -142,7 +142,7 @@ class _MainViewState extends State<MainView> {
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Text(
-                                  'Commercial name: ${medicineList[index].medicineTranslations["en"]["Commercial_name"]}',
+                                  'Commercial name: ${medicineList[index].medicineTranslations["en"]["commercial_name"]}',
                                   style: const TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold),
