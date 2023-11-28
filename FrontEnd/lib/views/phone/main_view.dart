@@ -124,52 +124,66 @@ class _MainViewState extends State<MainView> {
                   ),
                 ),
               ),
-              ListView.builder(
-                physics: const PageScrollPhysics(),
-                padding: const EdgeInsets.all(10),
-                shrinkWrap: true,
-                itemBuilder: (context, index) {
-                  return Card(
-                    elevation: 5,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Text(
-                            'Commercial name:',
-                            style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.bold),
+              FutureBuilder(
+                future: Api().fetchMedicine(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    final medicineList = snapshot.data;
+                    return ListView.builder(
+                      physics: const PageScrollPhysics(),
+                      padding: const EdgeInsets.all(10),
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) {
+                        return Card(
+                          elevation: 5,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  'Commercial name: ${medicineList[index].medicineTranslations["en"]["Commercial_name"]}',
+                                  style: const TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  IconButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pushNamed(
+                                            medicineDetailsRoute,
+                                            arguments: medicineList[index]);
+                                      },
+                                      icon: const Icon(
+                                        Icons.arrow_forward,
+                                        color: Colors.green,
+                                      )),
+                                ],
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  'Price: ${medicineList[index].price}',
+                                  style: const TextStyle(
+                                    fontSize: 18,
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            IconButton(
-                                onPressed: () {
-                                  Navigator.of(context)
-                                      .pushNamed(medicineDetailsRoute);
-                                },
-                                icon: const Icon(
-                                  Icons.arrow_forward,
-                                  color: Colors.green,
-                                )),
-                          ],
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Text(
-                            'Price: ',
-                            style: TextStyle(
-                              fontSize: 18,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                        );
+                      },
+                      itemCount: medicineList!.length,
+                    );
+                  }
+                  return const Padding(
+                    padding: EdgeInsets.all(170.0),
+                    child: CircularProgressIndicator(),
                   );
                 },
-                itemCount: 10,
               ),
             ],
           ),

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:test1/classes/medicine.dart';
 
 class MedicineDetailsView extends StatefulWidget {
-  const MedicineDetailsView({super.key});
+  final Medicine medicine;
+  const MedicineDetailsView({super.key, required this.medicine});
 
   @override
   State<MedicineDetailsView> createState() => _MedicineDetailsViewState();
@@ -12,9 +14,12 @@ class _MedicineDetailsViewState extends State<MedicineDetailsView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: const Column(
+      body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: [Center(child: CircularProgressIndicator())],
+        children: [
+          Center(child: CircularProgressIndicator()),
+          Text(widget.medicine.medicineTranslations["ar"]["Commercial_name"]),
+        ],
       ),
     );
   }
