@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\AdminRequests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
-class MedicineRequest extends FormRequest
+use Illuminate\Validation\ValidationException;
+
+class LoginAdminRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,16 +24,8 @@ class MedicineRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'expiry_date' => 'required',
-            'quantity_available' => 'required',
-            'price' => 'required|min:0',
-            'en_commercial_name' => 'required|max:255',
-            'ar_commercial_name' => 'required|max:255',
-            'en_scientific_name' => 'required|max:255',
-            'ar_scientific_name' => 'required|max:255',
-            'en_manufacture_company' => 'required',
-            'ar_manufacture_company' => 'required',
-            'category_id' => 'required'
+            'email' => 'required',
+            'password' => 'required',
         ];
     }
 
@@ -56,5 +50,3 @@ class MedicineRequest extends FormRequest
                     ->errorBag($this->errorBag);
     }
 }
-
-

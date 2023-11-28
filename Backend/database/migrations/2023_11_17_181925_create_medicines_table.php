@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('medicines', function (Blueprint $table) {
             $table->id();
-            $table->date("Expiry_date");
-            $table->integer("Quantity_available");
-            $table->float("Price");
+            $table->date("expiry_date");
+            $table->integer("quantity_available");
+            $table->float("price");
             $table->timestamps();
         });
     }

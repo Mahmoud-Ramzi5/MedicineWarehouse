@@ -17,9 +17,9 @@ class Medicine extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        "Expiry_date",
-        "Quantity_available",
-        "Price",
+        "expiry_date",
+        "quantity_available",
+        "price",
     ];
 
     /**
@@ -28,7 +28,7 @@ class Medicine extends Model
      * @var array<string, string>
      */
     protected $casts = [
-        'Expiry_date' => 'date:Y-m-d',
+        'expiry_date' => 'date:Y-m-d',
     ];
 
     /**

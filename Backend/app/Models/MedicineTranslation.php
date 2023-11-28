@@ -17,9 +17,9 @@ class MedicineTranslation extends Model
     protected $fillable = [
         "medicine_id",
         "lang",
-        "Commercial_name",
-        "Scientific_name",
-        "Manufacture_company",
+        "commercial_name",
+        "scientific_name",
+        "manufacture_company",
     ];
 
     // OneToMany Relation

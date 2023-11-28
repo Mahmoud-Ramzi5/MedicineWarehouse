@@ -8,11 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     use HasFactory;
-    protected $guarded = [
-        "En_Category_name",
-        "Ar_Category_name",
-        "En_Description",
-        "Ar_Description"
+    protected $fillable = [
+        "en_category_name",
+        "ar_category_name",
+        "en_description",
+        "ar_description"
     ];
     // ManyToMany Relation
     public function Medicines()
