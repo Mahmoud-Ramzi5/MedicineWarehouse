@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -42,46 +41,49 @@ class _WebMainViewState extends State<WebMainView> {
           padding: const EdgeInsets.all(18.0),
           child: Column(
             children: [
-              Container(
-                  height: 200,
-                  width: 200,
-                  child: pickedImage == null
-                      ? DottedBorder(
-                          stackFit: StackFit.expand,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const Icon(
-                                Icons.image,
-                                color: Colors.grey,
-                                size: 50,
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(18.0),
-                                child: TextButton(
-                                  onPressed: () {
-                                    pickImage();
-                                  },
-                                  child: const Text(
-                                    'Choose an image',
-                                    style: TextStyle(
-                                        color: Colors.green,
-                                        fontWeight: FontWeight.bold),
-                                  ),
+              Padding(
+                padding: const EdgeInsets.all(18.0),
+                child: Container(
+                    height: 200,
+                    width: 200,
+                    margin: const EdgeInsets.all(18),
+                    child: pickedImage == null
+                        ? DottedBorder(
+                            stackFit: StackFit.expand,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const Icon(
+                                  Icons.image,
+                                  color: Colors.grey,
+                                  size: 50,
                                 ),
+                                Padding(
+                                  padding: const EdgeInsets.all(18.0),
+                                  child: TextButton(
+                                    onPressed: () {
+                                      pickImage();
+                                    },
+                                    child: const Text(
+                                      'Choose an image',
+                                      style: TextStyle(
+                                          color: Colors.green,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                          )
+                        : kIsWeb
+                            ? Image.memory(
+                                webImage,
+                                fit: BoxFit.fill,
                               )
-                            ],
-                          ),
-                        )
-                      : kIsWeb
-                          ? Image.memory(
-                              webImage,
-                              fit: BoxFit.fill,
-                            )
-                          : Image.file(
-                              pickedImage!,
-                              fit: BoxFit.fill,
-                            )),
+                            : Image.file(
+                                pickedImage!,
+                              )),
+              ),
               ElevatedButton(
                 onPressed: () {
                   WebApi().addMedicine(

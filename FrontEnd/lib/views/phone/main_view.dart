@@ -30,6 +30,22 @@ class _MainViewState extends State<MainView> {
       drawer: Drawer(
         child: ListView(
           children: [
+            Container(
+              height: 120,
+              width: 120,
+              decoration: const ShapeDecoration(
+                shape: CircleBorder(
+                  side: BorderSide(
+                    color: Colors.green,
+                  ),
+                ),
+              ),
+              child: const Icon(
+                Icons.person,
+                size: 50,
+                color: Colors.green,
+              ),
+            ),
             ListTile(
               title: const Text(
                 'Log out',
@@ -71,12 +87,12 @@ class _MainViewState extends State<MainView> {
                                   context: context,
                                   builder: (context) {
                                     return AlertDialog(
-                                        title: Text(body["message"]),
-                                        content: Image.asset(
-                                          "assets/Failed.gif",
-                                          height: 90,
-                                          width: 90,
-                                        ));
+                                      title: Text(body["message"]),
+                                      content: const Icon(
+                                        Icons.cancel_outlined,
+                                        color: Colors.red,
+                                      ),
+                                    );
                                   },
                                 );
                               }
@@ -136,40 +152,75 @@ class _MainViewState extends State<MainView> {
                       itemBuilder: (context, index) {
                         return Card(
                           elevation: 5,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                          child: Row(
                             children: [
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  'Commercial name: ${medicineList[index].medicineTranslations["en"]["commercial_name"]}',
-                                  style: const TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold),
+                              Container(
+                                margin: const EdgeInsets.only(
+                                  top: 18,
+                                  bottom: 18,
+                                  left: 18,
+                                ),
+                                height: 100,
+                                width: 100,
+                                decoration: const ShapeDecoration(
+                                    shape: ContinuousRectangleBorder(),
+                                    color: Colors.green),
+                                child: const Icon(
+                                  Icons.medication,
+                                  color: Colors.white,
+                                  size: 80,
                                 ),
                               ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  IconButton(
-                                      onPressed: () {
-                                        Navigator.of(context).pushNamed(
-                                            medicineDetailsRoute,
-                                            arguments: medicineList[index]);
-                                      },
-                                      icon: const Icon(
-                                        Icons.arrow_forward,
-                                        color: Colors.green,
-                                      )),
-                                ],
-                              ),
                               Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  'Price: ${medicineList[index].price}',
-                                  style: const TextStyle(
-                                    fontSize: 18,
-                                  ),
+                                padding: const EdgeInsets.all(18.0),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Column(
+                                      children: [
+                                        Text(
+                                          '${medicineList[index].medicineTranslations["en"]["commercial_name"]}',
+                                          style: const TextStyle(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(16.0),
+                                          child: Text(
+                                            'Price: ${medicineList[index].price}',
+                                            style: const TextStyle(
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                        Text(
+                                          'Quantity: ${medicineList[index].quantityAvailable}',
+                                          style: const TextStyle(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ],
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 18),
+                                      child: Column(
+                                        children: [
+                                          IconButton(
+                                            onPressed: () {
+                                              Navigator.of(context).pushNamed(
+                                                  medicineDetailsRoute,
+                                                  arguments:
+                                                      medicineList[index]);
+                                            },
+                                            icon: const Icon(
+                                              Icons.arrow_forward_ios,
+                                              color: Colors.green,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ],
