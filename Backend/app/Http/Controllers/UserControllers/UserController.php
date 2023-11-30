@@ -5,7 +5,6 @@ use App\Http\Controllers\Controller;
 
 use App\Http\Requests\UserRequests\LoginRequest;
 use App\Http\Requests\UserRequests\RegisterRequest;
-use App\Models\Medicine;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -58,7 +57,7 @@ class UserController extends Controller
         }
         // Handle Remember Me functionality
         if ($request->input("rememberMe")) {
-            $authToken = $user->createToken(name:'auth-token', expiresAt:null)->plainTextToken;
+            $authToken = $user->createToken(name:'auth-token', expiresAt:now()->addMonths(3))->plainTextToken;
         }
         else {
             $authToken = $user->createToken(name:'auth-token', expiresAt:now()->addHours(3))->plainTextToken;

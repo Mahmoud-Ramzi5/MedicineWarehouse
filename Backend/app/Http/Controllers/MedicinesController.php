@@ -63,8 +63,7 @@ class MedicinesController extends Controller
         //find the medicines with the selected category
         $medicines = $category->Medicines;
         $data = [];
-        foreach($medicines as $medicine){
-
+        foreach($medicines as $medicine) {
             $medicinesData =[
                 $medicine,
                 MedicineTranslation::where('medicine_id', $medicine->id)->get()
@@ -77,14 +76,15 @@ class MedicinesController extends Controller
         ], 200);
     }
 
-    public function Display_Medicine_info(Request $request){
+    public function DisplayMedicineInfo(Request $request){
         $id = $request->input('id');
         $medicine = Medicine::find($id);
         $medicine->MedicineTranslations;
         $medicine->Categories;
-        return response()->json(["message"=> $medicine], 200);
+        return response()->json([
+            "message" => $medicine
+        ], 200);
     }
-
 
     function Search_All(Request $request){
         $input = $request->input('name');

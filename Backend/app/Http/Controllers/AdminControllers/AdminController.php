@@ -5,38 +5,56 @@ use App\Http\Controllers\Controller;
 
 use App\Http\Requests\MedicineRequest;
 use Illuminate\Http\Request;
+use App\Models\Admin;
 use App\Models\Category;
 use App\Models\Medicine;
 use App\Models\MedicineTranslation;
-use App\Http\Requests\AdminRequests\LoginAdminRequest;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 class AdminController extends Controller
 {
-    /*function login(LoginAdminRequest $request)
+    function login(Request $request)
     {
-        $credentials = $request->validated();
-        $admin_name = 'Ghassan@gmail.com';
-        $admin_passwowrd = 5554321;
-        $email = $credentials['email'];
-        $password = $credentials['password'];
-        if ($email != $admin_name || $password != $admin_passwowrd) {
+        // Validate Input
+        $credentials = $request->validate([
+            'userName' => 'required',
+            'password' => 'required',
+        ]);
+        $admin = Admin::where('warehouseName', $credentials['userName'])->first();
+        if (! $admin || ! Hash::check($credentials['password'], $admin->password)) {
             return response()->json([
                 'message' => 'Invalid credentials',
                 'errors' => [
-                    'Email & Password' => [
-                        'Passwords does not match.'
+                    'phoneNumber & password' => [
+                        'Invalid phone-number or password.'
                     ],
                 ]
             ], 400);
         }
-        // Login User
+        // Handle Remember Me functionality
+        if ($request->input("rememberMe")) {
+            $authToken = $admin->createToken(name:'auth-token', expiresAt:now()->addMonths(3))->plainTextToken;
+        }
+        else {
+            $authToken = $admin->createToken(name:'auth-token', expiresAt:now()->addHours(3))->plainTextToken;
+        }
+        // Login Admin
         return response()->json([
             'message' => 'Successfully logged in',
-            'access_token' => '',
+            'access_token' => $authToken,
         ], 200);
-    }*/
+    }
 
+    function Logout(Request $request)
+    {
+        // Logout Admin
+        $request->user()->currentAccessToken()->delete();
+        return response()->json([
+            'message' => 'Successfully logged out',
+        ], 200);
+    }
 
     public function Add_Medicine(MedicineRequest $request)
     {
@@ -52,16 +70,16 @@ class AdminController extends Controller
         $medicine->Categories()->attach($credentials['category_ids']);
         // Create English Translation
         $En = MedicineTranslation::create([
-            'medicine_id'=> $medicine->id,
-            'lang'=> 'en',
+            'medicine_id' => $medicine->id,
+            'lang' => 'en',
             'commercial_name' => Str::upper($credentials['en_commercial_name']),
             'scientific_name' =>  Str::upper($credentials['en_scientific_name']),
             'manufacture_company' =>  Str::upper($credentials['en_manufacture_company']),
         ]);
         // Create Arabic Translation
         $Ar = MedicineTranslation::create([
-            'medicine_id'=> $medicine->id,
-            'lang'=> 'ar',
+            'medicine_id' => $medicine->id,
+            'lang' => 'ar',
             'commercial_name' => $credentials['ar_commercial_name'],
             'scientific_name' => $credentials['ar_scientific_name'],
             'manufacture_company' => $credentials['ar_manufacture_company'],
@@ -98,5 +116,4 @@ class AdminController extends Controller
             ]);
         }
     }
-
 }
