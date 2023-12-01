@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// User Routes
 Route::prefix('/users')->group(function () {
     Route::controller(UserController::class)->group(function () {
         Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -30,17 +31,19 @@ Route::prefix('/users')->group(function () {
     Route::controller(MedicinesController::class)->group(function () {
         Route::middleware('auth:sanctum')->get('/medicines', 'ShowNotExpired')->name('ShowNotExpired');
         Route::get('/categoryFilter', 'Selected_Category')->name('Selected_Category');
-        Route::get('/medicineInfo', 'Display_Medicine_info')->name('Display_Medicine_info');
-        Route::post('/search', 'Search_Not_Expired')->name('Search_Not_Expired');
+        Route::get('/medicineInfo', 'DisplayMedicineInfo')->name('DisplayMedicineInfo');
 
+        Route::post('/search', 'Search_Not_Expired')->name('Search_Not_Expired');
     });
 });
 
 
-
+// Admin Routes
 Route::prefix('/admin')->group(function () {
     Route::controller(AdminController::class)->group(function () {
-        Route::post('/login', 'login')->name('login');
+        Route::post('/login', 'login')->name('AdminLogin');
+        Route::middleware('auth:sanctum')->post('/logout', 'logout')->name('AdminLogout');
+
         Route::post('/new_medicine', 'Add_Medicine');
         Route::delete('/delete_medicine', 'Delete_Medicine');
         Route::post('/categories', 'Add_Categories');
@@ -48,8 +51,8 @@ Route::prefix('/admin')->group(function () {
     Route::controller(MedicinesController::class)->group(function () {
         Route::middleware('auth:sanctum')->get('/medicines', 'ShowAll')->name('ShowAll');
         Route::get('/categoryFilter', 'Selected_Category')->name('Selected_Category');
-        Route::get('/medicineInfo', 'Display_Medicine_info')->name('Display_Medicine_info');
+        Route::get('/medicineInfo', 'DisplayMedicineInfo')->name('DisplayMedicineInfo');
+
         Route::post('/search', 'Search_All')->name('Search_All');
     });
 });
-
