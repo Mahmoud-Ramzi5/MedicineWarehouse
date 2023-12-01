@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:test1/classes/medicine.dart';
 import 'package:test1/constants/routes.dart';
+import 'package:test1/views/phone/cart_view.dart';
 import 'package:test1/views/phone/login_view.dart';
 import 'package:test1/views/phone/main_view.dart';
 import 'package:test1/views/phone/medicine_details_view.dart';
@@ -27,6 +28,6 @@ void main() {
         );
       }
     },
-    home: const LoginView(),
+    home: const CartView(),
   ));
 }

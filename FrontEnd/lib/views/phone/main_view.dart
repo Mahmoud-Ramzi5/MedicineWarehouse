@@ -215,9 +215,9 @@ class _MainViewState extends State<MainView> {
                                           IconButton(
                                             onPressed: () {
                                               Navigator.of(context).pushNamed(
-                                                  medicineDetailsRoute,
-                                                  arguments:
-                                                      medicineList[index]);
+                                                medicineDetailsRoute,
+                                                arguments: medicineList[index],
+                                              );
                                             },
                                             icon: const Icon(
                                               Icons.arrow_forward_ios,

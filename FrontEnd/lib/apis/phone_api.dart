@@ -9,6 +9,9 @@ class Api {
       Uri.parse('http://10.0.2.2:8000/api/users/register');
   static final loginUri = Uri.parse('http://10.0.2.2:8000/api/users/login');
   static final logoutUri = Uri.parse('http://10.0.2.2:8000/api/users/logout');
+  static final fetchMedicineUri =
+      Uri.parse('http://10.0.2.2:8000/api/users/medicines');
+
   Api();
 
   Future<dynamic> register(
@@ -101,7 +104,7 @@ class Api {
     const storage = FlutterSecureStorage();
     var token = await storage.read(key: 'Bearer Token');
     final response = await http.get(
-      Uri.parse('http://10.0.2.2:8000/api/users/medicines'),
+      fetchMedicineUri,
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Accept': "application/json",
