@@ -243,10 +243,11 @@ class _MedicineDetailsViewState extends State<MedicineDetailsView> {
               ),
               ElevatedButton(
                 onPressed: () {},
-                child: const Icon(
-                  Icons.shopping_cart,
-                  color: Colors.white,
-                  size: 40,
+                child: const Text(
+                  'Add to Cart',
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
                 ),
               ),
             ],

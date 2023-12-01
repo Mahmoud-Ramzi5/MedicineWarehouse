@@ -27,6 +27,13 @@ class _MainViewState extends State<MainView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: ElevatedButton(
+        onPressed: () {},
+        child: const Icon(
+          Icons.shopping_cart,
+          color: Colors.white,
+        ),
+      ),
       drawer: Drawer(
         child: ListView(
           children: [

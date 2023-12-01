@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:test1/apis/phone_api.dart';
 import 'package:test1/constants/routes.dart';
+import 'package:test1/customWidgets/text_forn_widget.dart';
 
 class RegisterView extends StatefulWidget {
   const RegisterView({super.key});
@@ -48,7 +49,6 @@ class _RegisterViewState extends State<RegisterView> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Register'),
-        centerTitle: true,
       ),
       body: Form(
         key: _formField,
@@ -57,159 +57,129 @@ class _RegisterViewState extends State<RegisterView> {
             padding: const EdgeInsets.all(18.0),
             child: Column(
               children: [
-                TextFormField(
+                CustomTextWidget(
                   controller: _phoneNumber,
-                  autocorrect: false,
-                  enableSuggestions: false,
-                  keyboardType: TextInputType.phone,
+                  hintText: 'Phone Number',
+                  labelText: '+963',
+                  icon: const Icon(Icons.phone_android),
+                  obsecureText: false,
+                  inputType: TextInputType.phone,
                   validator: (value) {
                     if (value!.isEmpty) {
                       return "Required field";
-                    }
-                    if (value.characters.length != 9) {
+                    } else if (value.characters.length != 9) {
                       return "Invalid number";
+                    } else if (!value.startsWith('9')) {
+                      return 'Phone Number must start with 9';
                     }
                     return null;
                   },
-                  decoration: const InputDecoration(
-                    hintText: '+963',
-                    hintStyle: TextStyle(fontSize: 20),
-                    labelText: 'Phone Number',
-                    labelStyle: TextStyle(fontSize: 20),
-                    border: OutlineInputBorder(),
-                    prefixIcon: Icon(Icons.phone_android),
-                    iconColor: Colors.green,
-                  ),
                 ),
                 const SizedBox(
                   height: 10,
                 ),
-                TextFormField(
+                CustomTextWidget(
                   controller: _email,
-                  autocorrect: false,
-                  enableSuggestions: false,
-                  keyboardType: TextInputType.emailAddress,
-                  decoration: const InputDecoration(
-                    labelText: 'email',
-                    hintText: '(optional)',
-                    hintStyle: TextStyle(fontSize: 20),
-                    labelStyle: TextStyle(fontSize: 20),
-                    border: OutlineInputBorder(),
-                    prefixIcon: Icon(Icons.email),
-                    iconColor: Colors.green,
-                  ),
+                  hintText: 'Email',
+                  labelText: '(Optional)',
+                  icon: const Icon(Icons.email),
+                  obsecureText: false,
+                  inputType: TextInputType.emailAddress,
+                  validator: (value) {
+                    if (value!.isNotEmpty) {
+                      if (!value.contains('@')) {
+                        return "Invalid Email";
+                      }
+                    }
+                    return null;
+                  },
                 ),
                 const SizedBox(
                   height: 10,
                 ),
-                TextFormField(
+                CustomTextWidget(
                   controller: _pharmacyName,
-                  autocorrect: false,
-                  enableSuggestions: false,
+                  labelText: 'Pharmacy Name',
+                  icon: const Icon(Icons.local_pharmacy),
+                  obsecureText: false,
                   validator: (value) {
                     if (value!.isEmpty) {
                       return "Required field";
                     }
                     return null;
                   },
-                  decoration: const InputDecoration(
-                    labelText: 'Pharmacy Name',
-                    labelStyle: TextStyle(fontSize: 20),
-                    prefixIcon: Icon(Icons.local_pharmacy),
-                    border: OutlineInputBorder(),
-                    iconColor: Colors.green,
-                  ),
                 ),
                 const SizedBox(
                   height: 10,
                 ),
-                TextFormField(
+                CustomTextWidget(
                   controller: _pharmacyAddress,
-                  autocorrect: false,
-                  enableSuggestions: false,
+                  labelText: 'Pharmacy address',
+                  icon: const Icon(Icons.location_on),
+                  obsecureText: false,
                   validator: (value) {
                     if (value!.isEmpty) {
                       return "Required field";
                     }
                     return null;
                   },
-                  decoration: const InputDecoration(
-                    labelText: 'Pharmacy address',
-                    labelStyle: TextStyle(fontSize: 20),
-                    prefixIcon: Icon(Icons.location_on),
-                    border: OutlineInputBorder(),
-                    iconColor: Colors.green,
-                  ),
                 ),
                 const SizedBox(
                   height: 10,
                 ),
-                TextFormField(
+                CustomTextWidget(
                   controller: _password,
-                  autocorrect: false,
-                  enableSuggestions: false,
-                  obscureText: passwordToggle,
-                  keyboardType: TextInputType.visiblePassword,
+                  labelText: 'Password',
+                  icon: const Icon(Icons.lock),
+                  obsecureText: passwordToggle,
+                  inputType: TextInputType.visiblePassword,
                   validator: (value) {
                     if (value!.isEmpty) {
                       return "Required field";
-                    }
-                    if (value.characters.length < 4) {
+                    } else if (value.characters.length < 4) {
                       return "Password too short";
                     }
                     return null;
                   },
-                  decoration: InputDecoration(
-                    labelText: 'Password',
-                    labelStyle: const TextStyle(fontSize: 20),
-                    border: const OutlineInputBorder(),
-                    prefixIcon: const Icon(Icons.lock),
-                    iconColor: Colors.green,
-                    suffixIcon: InkWell(
-                      onTap: () {
-                        setState(() {
-                          passwordToggle = !passwordToggle;
-                        });
-                      },
-                      child: Icon(passwordToggle
-                          ? Icons.visibility
-                          : Icons.visibility_off),
-                    ),
+                  inkWell: InkWell(
+                    onTap: () {
+                      setState(() {
+                        passwordToggle = !passwordToggle;
+                      });
+                    },
+                    child: Icon(passwordToggle
+                        ? Icons.visibility
+                        : Icons.visibility_off),
                   ),
                 ),
                 const SizedBox(
                   height: 10,
                 ),
-                TextFormField(
+                CustomTextWidget(
                   controller: _confirmPassword,
-                  autocorrect: false,
-                  enableSuggestions: false,
-                  obscureText: passwordToggle,
-                  keyboardType: TextInputType.visiblePassword,
+                  labelText: 'Confirm Password',
+                  icon: const Icon(Icons.lock),
+                  obsecureText: passwordToggle2,
+                  inputType: TextInputType.visiblePassword,
                   validator: (value) {
                     if (value!.isEmpty) {
                       return "Required field";
+                    } else if (value.characters.length < 4) {
+                      return "Password too short";
                     } else if (value != _password.text) {
-                      return "Password does not match required password";
+                      return "Password does not match confirm password";
                     }
                     return null;
                   },
-                  decoration: InputDecoration(
-                    labelText: 'Confirm Password',
-                    labelStyle: const TextStyle(fontSize: 20),
-                    border: const OutlineInputBorder(),
-                    prefixIcon: const Icon(Icons.lock),
-                    iconColor: Colors.green,
-                    suffixIcon: InkWell(
-                      onTap: () {
-                        setState(() {
-                          passwordToggle2 = !passwordToggle2;
-                        });
-                      },
-                      child: Icon(passwordToggle2
-                          ? Icons.visibility
-                          : Icons.visibility_off),
-                    ),
+                  inkWell: InkWell(
+                    onTap: () {
+                      setState(() {
+                        passwordToggle2 = !passwordToggle2;
+                      });
+                    },
+                    child: Icon(passwordToggle2
+                        ? Icons.visibility
+                        : Icons.visibility_off),
                   ),
                 ),
                 const SizedBox(
