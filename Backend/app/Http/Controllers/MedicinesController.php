@@ -113,21 +113,15 @@ class MedicinesController extends Controller
 
             if ($medicineYear > $dateYear)
             {
-                array_push($valids, $medicine);
+                array_push($valid, $medicine);
             }
-            else
+            elseif($medicineYear == $dateYear && $medicineMonth > $dateMonth)
             {
-                if ($medicineMonth > $dateMonth)
-                {
-                    array_push($valids, $medicine);
-                }
-                else
-                {
-                    if ($medicineDay > $dateDay)
-                    {
-                        array_push($valids, $medicine);
-                    }
-                }
+                array_push($valid, $medicine);
+            }
+            elseif($medicineYear == $dateYear && $medicineMonth == $dateMonth && $medicineDay > $dateDay)
+            {
+                array_push($valid, $medicine);
             }
         }
         foreach($valids as $valid){
