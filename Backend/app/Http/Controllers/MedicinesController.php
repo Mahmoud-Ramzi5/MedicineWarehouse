@@ -27,19 +27,13 @@ class MedicinesController extends Controller
             {
                 array_push($valid, $medicine);
             }
-            else
+            elseif($medicineYear == $dateYear && $medicineMonth > $dateMonth)
             {
-                if ($medicineMonth > $dateMonth)
-                {
-                    array_push($valid, $medicine);
-                }
-                else
-                {
-                    if ($medicineDay > $dateDay)
-                    {
-                        array_push($valid, $medicine);
-                    }
-                }
+                array_push($valid, $medicine);
+            }
+            elseif($medicineYear == $dateYear && $medicineMonth == $dateMonth && $medicineDay > $dateDay)
+            {
+                array_push($valid, $medicine);
             }
         }
         return response()->json([

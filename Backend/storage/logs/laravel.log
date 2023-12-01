@@ -9557,3 +9557,7 @@ Stack trace:
 #45 D:\\University Projects\\MedicineWarehouse\\Backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\resources\\server.php(16): require_once('...')
 #46 {main}
 "} 
+[2023-12-01 15:22:04] local.ERROR: Cannot use empty array elements in arrays {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot use empty array elements in arrays at D:\\projects\\The project\\MedicineWarehouse\\Backend\\app\\Models\\Medicine.php:23)
+[stacktrace]
+#0 {main}
+"} 

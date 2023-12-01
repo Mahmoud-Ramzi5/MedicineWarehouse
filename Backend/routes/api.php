@@ -29,7 +29,7 @@ Route::prefix('/users')->group(function () {
         Route::middleware('auth:sanctum')->post('/logout', 'logout')->name('logout');
     });
     Route::controller(MedicinesController::class)->group(function () {
-        Route::middleware('auth:sanctum')->get('/medicines', 'ShowNotExpired')->name('ShowNotExpired');
+        Route::get('/medicines', 'ShowNotExpired')->name('ShowNotExpired');
         Route::get('/categoryFilter', 'Selected_Category')->name('Selected_Category');
         Route::get('/medicineInfo', 'DisplayMedicineInfo')->name('DisplayMedicineInfo');
 

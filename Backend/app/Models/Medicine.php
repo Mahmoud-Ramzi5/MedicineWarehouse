@@ -21,7 +21,9 @@ class Medicine extends Model
         "expiry_date",
         "quantity_available",
         "price",
-        "image",
+    ];
+    protected $hidden =[
+        "image"
     ];
 
     /**
