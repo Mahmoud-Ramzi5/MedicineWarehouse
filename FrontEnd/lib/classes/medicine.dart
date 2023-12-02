@@ -1,10 +1,16 @@
+import 'dart:io';
+import 'dart:convert';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+
 class Medicine {
   final int id;
   final String expiryDate;
   final int quantityAvailable;
   final int price;
   final Map<String, dynamic> medicineTranslations;
-  final Map<int, dynamic> categories;
+  final List<Map<String, dynamic>> categories;
+  final Image image;
 
   Medicine({
     required this.id,
@@ -13,6 +19,7 @@ class Medicine {
     required this.price,
     required this.medicineTranslations,
     required this.categories,
+    required this.image,
   });
   Medicine.fromJson(Map<String, dynamic> json)
       : id = json['id'] as int,
@@ -23,7 +30,6 @@ class Medicine {
           for (var translation in json['medicine_translations'])
             translation["lang"]: translation
         },
-        categories = {
-          for (var category in json['categories']) category["id"]: category
-        };
+        categories = json['categories'],
+        image = Image.asset(json['image']);
 }

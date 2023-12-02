@@ -60,12 +60,18 @@ class AdminController extends Controller
     {
         // Validate Input
         $credentials = $request->validated();
+        // Store Image
+        /**$path = null;
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $path = $image->store('public');
+        };**/
         // Create Medicine
         $medicine = Medicine::create([
             'expiry_date' => $credentials['expiry_date'],
             'quantity_available' => $credentials['quantity_available'],
             'price' => $credentials['price'],
-            'image' => $credentials['image'],
+            'image_path' => $credentials['image_path'],
         ]);
         $medicine->Categories()->attach($credentials['category_ids']);
         // Create English Translation

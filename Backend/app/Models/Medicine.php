@@ -7,6 +7,7 @@ use Dotenv\Parser\Value;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Medicine extends Model
 {
@@ -21,7 +22,7 @@ class Medicine extends Model
         "expiry_date",
         "quantity_available",
         "price",
-        "image",
+        "image_path",
     ];
 
     /**
@@ -34,25 +35,44 @@ class Medicine extends Model
     ];
 
     /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array<int, string>
+     */
+    protected $hidden = [
+        "image_path",
+    ];
+
+    /**
      * Interact with the medicine's ExpiryDate.
      */
     protected function ExpiryDate(): Attribute
     {
         return Attribute::make(
-            set: fn (string $value) => DateTime::createFromFormat('d/m/Y', $value)->format('Y-m-d'),
+            set: fn (string $date) => DateTime::createFromFormat('d/m/Y', $date)->format('Y-m-d'),
         );
     }
 
     /**
      * Interact with the medicine's Image.
      */
-    protected function Image(): Attribute
+    /*protected function Image(): Attribute
     {
         return Attribute::make(
-            set: fn ($array) => implode(',', $array),
-            get: fn ($string) => array_map('intval', explode(',', $string)),
+            get: function ($path) {
+                if ($path == null) {
+                    return "";
+                }
+                else {
+                    $localFileName  = storage_path('app/' . $path);
+                    $fileData = file_get_contents($localFileName);
+                    $ImgFileEncode = base64_encode($fileData);
+                    return $ImgFileEncode;
+                    return base64_encode($ImgFileEncode);
+                }
+            }
         );
-    }
+    }*/
 
     // OneToMany Relation
     public function  MedicineTranslations()

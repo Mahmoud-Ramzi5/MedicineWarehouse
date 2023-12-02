@@ -16,7 +16,7 @@ return new class extends Migration
             $table->date("expiry_date");
             $table->integer("quantity_available");
             $table->double("price");
-            $table->string("image")->nullable();
+            $table->string("image_path");
             $table->timestamps();
         });
     }

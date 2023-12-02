@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:test1/apis/web_api.dart';
 
@@ -14,6 +15,7 @@ class WebMainView extends StatefulWidget {
 
 class _WebMainViewState extends State<WebMainView> {
   Uint8List webImage = Uint8List(8);
+  String webImageName = "assets/medicines/default.png";
   File? pickedImage;
 
   Future<void> pickImage() async {
@@ -21,10 +23,11 @@ class _WebMainViewState extends State<WebMainView> {
       final ImagePicker picker = ImagePicker();
       XFile? image = await picker.pickImage(source: ImageSource.gallery);
       if (image != null) {
+        webImageName = 'assets/medicines/${image.name}';
         Uint8List imageBytes = await image.readAsBytes();
         setState(() {
           webImage = imageBytes;
-          pickedImage = File('a');
+          pickedImage = File(image.path);
         });
       }
     } else {
@@ -97,7 +100,8 @@ class _WebMainViewState extends State<WebMainView> {
                       "enManufactureCompany",
                       "arManufactureCompany",
                       [1, 18],
-                      webImage);
+                      webImage,
+                      webImageName);
                 },
                 child: const Text(
                   'Upload',
