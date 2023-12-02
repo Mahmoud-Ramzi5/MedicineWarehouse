@@ -1,21 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:test1/classes/medicine.dart';
+import 'package:test1/controller/medicine_controller.dart';
 
-class MedicineDetailsView extends StatefulWidget {
+class MedicineDetailsView extends StatelessWidget {
   final Medicine medicine;
-  const MedicineDetailsView({super.key, required this.medicine});
+  final MedicineController medicineController = Get.put(
+    MedicineController(),
+    permanent: true,
+  );
 
-  @override
-  State<MedicineDetailsView> createState() => _MedicineDetailsViewState();
-}
-
-class _MedicineDetailsViewState extends State<MedicineDetailsView> {
-  late int medicineQuantity;
-  @override
-  void initState() {
-    medicineQuantity = 0;
-    super.initState();
-  }
+  MedicineDetailsView({super.key, required this.medicine});
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +44,7 @@ class _MedicineDetailsViewState extends State<MedicineDetailsView> {
                   ),
                 ),
                 child: Text(
-                  'Commercial Name: ${widget.medicine.medicineTranslations["en"]["commercial_name"]}',
+                  'Commercial Name: ${medicine.medicineTranslations["en"]["commercial_name"]}',
                   style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -67,7 +62,7 @@ class _MedicineDetailsViewState extends State<MedicineDetailsView> {
                   ),
                 ),
                 child: Text(
-                  'Scientific Name: ${widget.medicine.medicineTranslations["en"]["scientific_name"]}',
+                  'Scientific Name: ${medicine.medicineTranslations["en"]["scientific_name"]}',
                   style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -85,7 +80,7 @@ class _MedicineDetailsViewState extends State<MedicineDetailsView> {
                   ),
                 ),
                 child: Text(
-                  'Manufacture: ${widget.medicine.medicineTranslations["en"]["manufacture_company"]}',
+                  'Manufacture: ${medicine.medicineTranslations["en"]["manufacture_company"]}',
                   style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -103,7 +98,7 @@ class _MedicineDetailsViewState extends State<MedicineDetailsView> {
                   ),
                 ),
                 child: Text(
-                  'Categories: ${widget.medicine.categories["en_Category_name"]}',
+                  'Categories: ${medicine.categories["en_Category_name"]}',
                   style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -121,7 +116,7 @@ class _MedicineDetailsViewState extends State<MedicineDetailsView> {
                   ),
                 ),
                 child: Text(
-                  'Description: ${widget.medicine.categories["en_Description"]}',
+                  'Description: ${medicine.categories["en_Description"]}',
                   style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -139,7 +134,7 @@ class _MedicineDetailsViewState extends State<MedicineDetailsView> {
                   ),
                 ),
                 child: Text(
-                  'Quantity: ${widget.medicine.quantityAvailable}',
+                  'Quantity: ${medicine.quantityAvailable}',
                   style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -157,7 +152,7 @@ class _MedicineDetailsViewState extends State<MedicineDetailsView> {
                   ),
                 ),
                 child: Text(
-                  'Expiry Date: ${widget.medicine.expiryDate}',
+                  'Expiry Date: ${medicine.expiryDate}',
                   style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -175,7 +170,7 @@ class _MedicineDetailsViewState extends State<MedicineDetailsView> {
                   ),
                 ),
                 child: Text(
-                  'Price: ${widget.medicine.price}',
+                  'Price: ${medicine.price}',
                   style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -193,11 +188,9 @@ class _MedicineDetailsViewState extends State<MedicineDetailsView> {
                   children: [
                     IconButton(
                       onPressed: () {
-                        setState(() {
-                          if (medicineQuantity > 0) {
-                            medicineQuantity--;
-                          }
-                        });
+                        if (medicineController.counter > 0) {
+                          medicineController.decrement();
+                        }
                       },
                       icon: const Icon(
                         Icons.remove,
@@ -215,22 +208,22 @@ class _MedicineDetailsViewState extends State<MedicineDetailsView> {
                           side: BorderSide(color: Colors.green, width: 2),
                         ),
                       ),
-                      child: Text(
-                        '$medicineQuantity',
-                        style: const TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
+                      child: GetBuilder<MedicineController>(
+                        builder: (controller) => Text(
+                          '${medicineController.counter}',
+                          style: const TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ),
                     IconButton(
                       onPressed: () {
-                        setState(() {
-                          if (medicineQuantity <
-                              widget.medicine.quantityAvailable) {
-                            medicineQuantity++;
-                          }
-                        });
+                        if (medicineController.counter <
+                            medicine.quantityAvailable) {
+                          medicineController.increment();
+                        }
                       },
                       icon: const Icon(
                         Icons.add,

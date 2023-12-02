@@ -204,15 +204,19 @@ class _RegisterViewState extends State<RegisterView> {
                             showDialog(
                               context: context,
                               builder: (context) {
-                                Future.delayed(const Duration(seconds: 3), () {
-                                  Navigator.of(context).pushNamed(loginRoute);
-                                });
+                                Future.delayed(
+                                  const Duration(seconds: 3),
+                                  () {
+                                    Navigator.of(context).pushNamed(loginRoute);
+                                  },
+                                );
                                 return AlertDialog(
-                                    title: Text(body["message"]),
-                                    content: const Icon(
-                                      Icons.check_circle_outline,
-                                      color: Colors.green,
-                                    ));
+                                  title: Text(body["message"]),
+                                  content: const Icon(
+                                    Icons.check_circle_outline,
+                                    color: Colors.green,
+                                  ),
+                                );
                               },
                             );
                           } else {

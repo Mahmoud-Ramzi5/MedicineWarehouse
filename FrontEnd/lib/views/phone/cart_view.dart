@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:test1/controller/medicine_controller.dart';
 
-class CartView extends StatefulWidget {
+class CartView extends StatelessWidget {
   const CartView({super.key});
 
-  @override
-  State<CartView> createState() => _CartViewState();
-}
-
-class _CartViewState extends State<CartView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,11 +30,14 @@ class _CartViewState extends State<CartView> {
                   padding: EdgeInsets.only(left: 8.0),
                   child: Column(
                     children: [
-                      Text(
-                        'Medicine name',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
+                      Padding(
+                        padding: EdgeInsets.all(20),
+                        child: Text(
+                          'Medicine name',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                       Padding(
@@ -53,41 +53,47 @@ class _CartViewState extends State<CartView> {
                     ],
                   ),
                 ),
-                Column(
-                  children: [
-                    IconButton(
-                      onPressed: () {},
-                      icon: const Icon(
-                        Icons.add,
-                        color: Colors.green,
-                      ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.all(10),
-                      alignment: Alignment.center,
-                      height: 30,
-                      width: 30,
-                      decoration: const ShapeDecoration(
-                        shape: RoundedRectangleBorder(
-                          side: BorderSide(color: Colors.green, width: 2),
+                GetBuilder<MedicineController>(
+                  builder: (controller) => Column(
+                    children: [
+                      IconButton(
+                        onPressed: () {
+                          controller.increment();
+                        },
+                        icon: const Icon(
+                          Icons.add,
+                          color: Colors.green,
                         ),
                       ),
-                      child: const Text(
-                        '0',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
+                      Container(
+                        margin: const EdgeInsets.all(10),
+                        alignment: Alignment.center,
+                        height: 30,
+                        width: 30,
+                        decoration: const ShapeDecoration(
+                          shape: RoundedRectangleBorder(
+                            side: BorderSide(color: Colors.green, width: 2),
+                          ),
+                        ),
+                        child: Text(
+                          '${controller.counter}',
+                          style: const TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
-                    ),
-                    IconButton(
-                      onPressed: () {},
-                      icon: const Icon(
-                        Icons.remove,
-                        color: Colors.red,
+                      IconButton(
+                        onPressed: () {
+                          controller.decrement();
+                        },
+                        icon: const Icon(
+                          Icons.remove,
+                          color: Colors.red,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ],
             ),

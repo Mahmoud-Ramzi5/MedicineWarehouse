@@ -17,6 +17,7 @@ void main() {
       loginRoute: (context) => const LoginView(),
       registerRoute: (context) => const RegisterView(),
       mainRoute: (context) => const MainView(),
+      cartRoute: (context) => const CartView(),
     },
     onGenerateRoute: (settings) {
       if (settings.name == medicineDetailsRoute) {
@@ -28,6 +29,6 @@ void main() {
         );
       }
     },
-    home: const CartView(),
+    home: const LoginView(),
   ));
 }

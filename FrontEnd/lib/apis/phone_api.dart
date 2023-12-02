@@ -100,7 +100,7 @@ class Api {
     return response;
   }
 
-  Future<List<dynamic>> fetchMedicine() async {
+  Future<List<Medicine>> fetchMedicine() async {
     const storage = FlutterSecureStorage();
     var token = await storage.read(key: 'Bearer Token');
     final response = await http.get(
@@ -115,7 +115,7 @@ class Api {
     );
     if (response.statusCode == 200) {
       var body = jsonDecode(response.body);
-      List<dynamic> medicineList = [];
+      List<Medicine> medicineList = [];
       for (var medicine in body['data']) {
         final medicineMap = Medicine.fromJson(medicine as Map<String, dynamic>);
         medicineList.add(medicineMap);
