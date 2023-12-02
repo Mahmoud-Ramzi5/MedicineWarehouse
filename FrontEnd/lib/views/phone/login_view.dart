@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:test1/apis/phone_api.dart';
 import 'package:test1/constants/routes.dart';
+import 'package:test1/customWidgets/text_forn_widget.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -36,7 +37,6 @@ class _LoginViewState extends State<LoginView> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Login'),
-        centerTitle: true,
       ),
       body: Form(
         key: _formField,
@@ -52,59 +52,47 @@ class _LoginViewState extends State<LoginView> {
                 const SizedBox(
                   height: 20,
                 ),
-                TextFormField(
+                CustomTextWidget(
                   controller: _phoneNumber,
-                  keyboardType: TextInputType.phone,
-                  autocorrect: false,
-                  enableSuggestions: false,
+                  labelText: 'Phone Number',
+                  icon: const Icon(Icons.phone_android),
+                  obsecureText: false,
+                  hintText: '+963',
+                  inputType: TextInputType.phone,
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return "Enter Phone Number";
-                    }
-                    if (value.characters.length != 9) {
+                      return "Required field";
+                    } else if (value.characters.length != 9) {
                       return "Invalid number";
+                    } else if (!value.startsWith('9')) {
+                      return 'Phone Number must start with 9';
                     }
                     return null;
                   },
-                  decoration: const InputDecoration(
-                    labelText: 'Phone Number',
-                    labelStyle: TextStyle(fontSize: 20),
-                    hintText: '+963',
-                    hintStyle: TextStyle(fontSize: 20),
-                    border: OutlineInputBorder(),
-                    prefixIcon: Icon(Icons.phone_android),
-                    iconColor: Colors.green,
-                  ),
                 ),
                 const SizedBox(height: 10),
-                TextFormField(
+                CustomTextWidget(
                   controller: _password,
-                  keyboardType: TextInputType.visiblePassword,
-                  autocorrect: false,
-                  obscureText: passwordToggle,
-                  enableSuggestions: false,
+                  labelText: 'Password',
+                  icon: const Icon(Icons.lock),
+                  obsecureText: passwordToggle,
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return "Enter Password";
+                      return "Required field";
+                    } else if (value.characters.length < 4) {
+                      return "Password too short";
                     }
                     return null;
                   },
-                  decoration: InputDecoration(
-                    labelText: 'Password',
-                    labelStyle: const TextStyle(fontSize: 20),
-                    border: const OutlineInputBorder(),
-                    prefixIcon: const Icon(Icons.lock),
-                    iconColor: Colors.green,
-                    suffixIcon: InkWell(
-                      onTap: () {
-                        setState(() {
-                          passwordToggle = !passwordToggle;
-                        });
-                      },
-                      child: Icon(passwordToggle
-                          ? Icons.visibility
-                          : Icons.visibility_off),
-                    ),
+                  inkWell: InkWell(
+                    onTap: () {
+                      setState(() {
+                        passwordToggle = !passwordToggle;
+                      });
+                    },
+                    child: Icon(passwordToggle
+                        ? Icons.visibility
+                        : Icons.visibility_off),
                   ),
                 ),
                 const SizedBox(

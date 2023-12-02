@@ -90,15 +90,15 @@ class _WebMainViewState extends State<WebMainView> {
               ElevatedButton(
                 onPressed: () {
                   WebApi().addMedicine(
-                      "5/9/2027",
-                      1,
-                      1.0,
-                      "enCommercialName",
-                      "arCommercialName",
-                      "enScientificName",
-                      "arScientificName",
-                      "enManufactureCompany",
-                      "arManufactureCompany",
+                      "5/11/2023",
+                      6,
+                      3400,
+                      "paradrin",
+                      "بارادين",
+                      "PARACETAMOL",
+                      "باراسيتامول",
+                      "AVENZOR",
+                      "ابن-زهر",
                       [1, 18],
                       webImage,
                       webImageName);

@@ -27,19 +27,13 @@ class MedicinesController extends Controller
             {
                 array_push($valid, $medicine);
             }
-            else
+            elseif($medicineYear == $dateYear && $medicineMonth > $dateMonth)
             {
-                if ($medicineMonth > $dateMonth)
-                {
-                    array_push($valid, $medicine);
-                }
-                else
-                {
-                    if ($medicineDay > $dateDay)
-                    {
-                        array_push($valid, $medicine);
-                    }
-                }
+                array_push($valid, $medicine);
+            }
+            elseif($medicineYear == $dateYear && $medicineMonth == $dateMonth && $medicineDay > $dateDay)
+            {
+                array_push($valid, $medicine);
             }
         }
         return response()->json([
@@ -119,21 +113,15 @@ class MedicinesController extends Controller
 
             if ($medicineYear > $dateYear)
             {
-                array_push($valids, $medicine);
+                array_push($valid, $medicine);
             }
-            else
+            elseif($medicineYear == $dateYear && $medicineMonth > $dateMonth)
             {
-                if ($medicineMonth > $dateMonth)
-                {
-                    array_push($valids, $medicine);
-                }
-                else
-                {
-                    if ($medicineDay > $dateDay)
-                    {
-                        array_push($valids, $medicine);
-                    }
-                }
+                array_push($valid, $medicine);
+            }
+            elseif($medicineYear == $dateYear && $medicineMonth == $dateMonth && $medicineDay > $dateDay)
+            {
+                array_push($valid, $medicine);
             }
         }
         foreach($valids as $valid){
@@ -148,5 +136,10 @@ class MedicinesController extends Controller
         }
         return response()->json(["message"=> 'sorry item requested not found it may be out of stock or expired'], 400);
 }
+public function category(Request $request){
+    $categories = category::all();
+    return response()->json(["message"=>$categories], 200);
+} 
+
 }
 

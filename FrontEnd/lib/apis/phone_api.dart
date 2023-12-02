@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:test1/classes/categories.dart';
 import 'package:test1/classes/medicine.dart';
 
 class Api {
@@ -9,6 +11,11 @@ class Api {
       Uri.parse('http://10.0.2.2:8000/api/users/register');
   static final loginUri = Uri.parse('http://10.0.2.2:8000/api/users/login');
   static final logoutUri = Uri.parse('http://10.0.2.2:8000/api/users/logout');
+  static final fetchMedicineUri =
+      Uri.parse('http://10.0.2.2:8000/api/users/medicines');
+  static final fetchCategoriesUri =
+      Uri.parse('http://10.0.2.2:8000/api/users/category');
+
   Api();
 
   Future<dynamic> register(
@@ -97,27 +104,30 @@ class Api {
     return response;
   }
 
-  Future<List<dynamic>> fetchMedicine() async {
+  final dio = Dio();
+
+  Future<List<Medicine>> fetchMedicine() async {
     const storage = FlutterSecureStorage();
     var token = await storage.read(key: 'Bearer Token');
-    final response = await http.get(
+    final response = await dio.getUri(
       Uri.parse('http://10.0.2.2:8000/api/users/medicines'),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-        'Accept': "application/json",
-        'connection': 'keep-alive',
-        'Accept-Encoding': 'gzip, deflate, br',
-        'Authorization': 'Bearer $token'
-      },
+      options: Options(
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Accept': "application/json",
+          'connection': 'keep-alive',
+          'Accept-Encoding': 'gzip, deflate, br',
+          'Authorization': 'Bearer $token'
+        },
+      ),
     );
+
     if (response.statusCode == 200) {
-      var body = jsonDecode(response.body);
-      List<dynamic> medicineList = [];
-      for (var medicine in body['data']) {
+      List<Medicine> medicineList = [];
+      for (var medicine in response.data['data']) {
         final medicineMap = Medicine.fromJson(medicine as Map<String, dynamic>);
         medicineList.add(medicineMap);
       }
-
       return medicineList;
     } else {
       throw Exception('Failed to load Medicines');

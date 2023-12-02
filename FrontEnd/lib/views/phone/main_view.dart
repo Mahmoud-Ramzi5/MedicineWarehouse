@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:test1/apis/phone_api.dart';
+import 'package:test1/classes/medicine.dart';
 import 'package:test1/constants/routes.dart';
 
 class MainView extends StatefulWidget {
@@ -12,6 +13,7 @@ class MainView extends StatefulWidget {
 
 class _MainViewState extends State<MainView> {
   late final TextEditingController _search;
+  String searchQuery = '';
   @override
   void initState() {
     _search = TextEditingController();
@@ -26,7 +28,30 @@ class _MainViewState extends State<MainView> {
 
   @override
   Widget build(BuildContext context) {
+    List<Medicine> filterMedicines(List<Medicine> medicines) {
+      if (searchQuery.isEmpty) {
+        return medicines;
+      } else {
+        return medicines
+            .where((medicine) => medicine.medicineTranslations["en"]
+                    ["commercial_name"]
+                .toString()
+                .toLowerCase()
+                .contains(searchQuery))
+            .toList();
+      }
+    }
+
     return Scaffold(
+      floatingActionButton: ElevatedButton(
+        onPressed: () {
+          Navigator.of(context).pushNamed(cartRoute);
+        },
+        child: const Icon(
+          Icons.shopping_cart,
+          color: Colors.white,
+        ),
+      ),
       drawer: Drawer(
         child: ListView(
           children: [
@@ -48,8 +73,27 @@ class _MainViewState extends State<MainView> {
             ),
             ListTile(
               title: const Text(
+                'Medicine Categories',
+                style: TextStyle(
+                  fontSize: 20,
+                  color: Colors.green,
+                ),
+              ),
+              leading: const Icon(
+                Icons.category,
+                color: Colors.green,
+              ),
+              onTap: () {
+                Navigator.of(context).pushNamed(selectCategoriesRoute);
+              },
+            ),
+            ListTile(
+              title: const Text(
                 'Log out',
-                style: TextStyle(fontSize: 20),
+                style: TextStyle(
+                  fontSize: 20,
+                  color: Colors.green,
+                ),
               ),
               leading: const Icon(
                 Icons.logout,
@@ -115,37 +159,47 @@ class _MainViewState extends State<MainView> {
         ),
       ),
       appBar: AppBar(),
-      body: Padding(
-        padding: const EdgeInsets.all(15.0),
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const SizedBox(height: 5),
-              SearchBar(
-                controller: _search,
-                hintText: 'Search',
-                leading: const Icon(Icons.search),
-                shape: const MaterialStatePropertyAll(
-                  StadiumBorder(),
-                ),
-                textStyle: const MaterialStatePropertyAll(
-                  TextStyle(
-                    fontSize: 20,
-                  ),
-                ),
-                side: const MaterialStatePropertyAll(
-                  BorderSide(
-                    color: Colors.green,
-                  ),
-                ),
-              ),
-              FutureBuilder(
-                future: Api().fetchMedicine(),
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    final medicineList = snapshot.data;
-                    return ListView.builder(
+      body: FutureBuilder(
+        future: Api().fetchMedicine(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else {
+            final medicines = snapshot.data;
+            final filteredMedicines = filterMedicines(medicines!);
+            return Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const SizedBox(height: 5),
+                    SearchBar(
+                      controller: _search,
+                      hintText: 'Search',
+                      leading: const Icon(Icons.search),
+                      shape: const MaterialStatePropertyAll(
+                        StadiumBorder(),
+                      ),
+                      textStyle: const MaterialStatePropertyAll(
+                        TextStyle(
+                          fontSize: 20,
+                        ),
+                      ),
+                      side: const MaterialStatePropertyAll(
+                        BorderSide(
+                          color: Colors.green,
+                        ),
+                      ),
+                      onSubmitted: (value) {
+                        setState(() {
+                          searchQuery = value;
+                        });
+                      },
+                    ),
+                    ListView.builder(
                       physics: const PageScrollPhysics(),
                       padding: const EdgeInsets.all(10),
                       shrinkWrap: true,
@@ -179,7 +233,7 @@ class _MainViewState extends State<MainView> {
                                     Column(
                                       children: [
                                         Text(
-                                          '${medicineList[index].medicineTranslations["en"]["commercial_name"]}',
+                                          '${filteredMedicines[index].medicineTranslations["en"]["commercial_name"]}',
                                           style: const TextStyle(
                                               fontSize: 18,
                                               fontWeight: FontWeight.bold),
@@ -187,14 +241,14 @@ class _MainViewState extends State<MainView> {
                                         Padding(
                                           padding: const EdgeInsets.all(16.0),
                                           child: Text(
-                                            'Price: ${medicineList[index].price}',
+                                            'Price: ${filteredMedicines[index].price}',
                                             style: const TextStyle(
                                                 fontSize: 18,
                                                 fontWeight: FontWeight.bold),
                                           ),
                                         ),
                                         Text(
-                                          'Quantity: ${medicineList[index].quantityAvailable}',
+                                          'Quantity: ${filteredMedicines[index].quantityAvailable}',
                                           style: const TextStyle(
                                               fontSize: 18,
                                               fontWeight: FontWeight.bold),
@@ -208,9 +262,10 @@ class _MainViewState extends State<MainView> {
                                           IconButton(
                                             onPressed: () {
                                               Navigator.of(context).pushNamed(
-                                                  medicineDetailsRoute,
-                                                  arguments:
-                                                      medicineList[index]);
+                                                medicineDetailsRoute,
+                                                arguments:
+                                                    filteredMedicines[index],
+                                              );
                                             },
                                             icon: const Icon(
                                               Icons.arrow_forward_ios,
@@ -227,18 +282,14 @@ class _MainViewState extends State<MainView> {
                           ),
                         );
                       },
-                      itemCount: medicineList!.length,
-                    );
-                  }
-                  return const Padding(
-                    padding: EdgeInsets.all(170.0),
-                    child: CircularProgressIndicator(),
-                  );
-                },
+                      itemCount: filteredMedicines.length,
+                    ),
+                  ],
+                ),
               ),
-            ],
-          ),
-        ),
+            );
+          }
+        },
       ),
     );
   }
