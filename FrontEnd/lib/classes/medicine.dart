@@ -4,7 +4,7 @@ class Medicine {
   final int quantityAvailable;
   final int price;
   final Map<String, dynamic> medicineTranslations;
-  final Map<int, dynamic> categories;
+  final List<dynamic> categories;
 
   Medicine({
     required this.id,
@@ -23,7 +23,5 @@ class Medicine {
           for (var translation in json['medicine_translations'])
             translation["lang"]: translation
         },
-        categories = {
-          for (var category in json['categories']) category["id"]: category
-        };
+        categories = json["categories"];
 }

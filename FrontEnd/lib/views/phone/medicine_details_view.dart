@@ -87,39 +87,35 @@ class MedicineDetailsView extends StatelessWidget {
                   ),
                 ),
               ),
-              Container(
-                margin: const EdgeInsets.all(10),
-                alignment: Alignment.center,
-                height: 30,
-                width: 300,
-                decoration: const ShapeDecoration(
-                  shape: RoundedRectangleBorder(
-                    side: BorderSide(color: Colors.green, width: 2),
+              Expanded(
+                child: Container(
+                  margin: const EdgeInsets.all(10),
+                  alignment: Alignment.center,
+                  height: 30,
+                  width: 300,
+                  decoration: const ShapeDecoration(
+                    shape: RoundedRectangleBorder(
+                      side: BorderSide(color: Colors.green, width: 2),
+                    ),
                   ),
-                ),
-                child: Text(
-                  'Categories: ${medicine.categories["en_Category_name"]}',
-                  style: const TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              Container(
-                margin: const EdgeInsets.all(10),
-                alignment: Alignment.center,
-                height: 30,
-                width: 300,
-                decoration: const ShapeDecoration(
-                  shape: RoundedRectangleBorder(
-                    side: BorderSide(color: Colors.green, width: 2),
-                  ),
-                ),
-                child: Text(
-                  'Description: ${medicine.categories["en_Description"]}',
-                  style: const TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
+                  child: Column(
+                    children: <Widget>[
+                      const Text(
+                        'Categories: ',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      for (var category in medicine.categories)
+                        Text(
+                          '${category["en_Category_name"]} ',
+                          style: const TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                    ],
                   ),
                 ),
               ),

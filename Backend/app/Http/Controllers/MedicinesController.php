@@ -136,5 +136,10 @@ class MedicinesController extends Controller
         }
         return response()->json(["message"=> 'sorry item requested not found it may be out of stock or expired'], 400);
 }
+public function category(Request $request){
+    $categories = category::all();
+    return response()->json(["message"=>$categories], 200);
+} 
+
 }
 

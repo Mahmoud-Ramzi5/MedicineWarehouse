@@ -84,7 +84,7 @@ class _MainViewState extends State<MainView> {
                 color: Colors.green,
               ),
               onTap: () {
-                Navigator.of(context).pushNamed(categoriesRoute);
+                Navigator.of(context).pushNamed(selectCategoriesRoute);
               },
             ),
             ListTile(
