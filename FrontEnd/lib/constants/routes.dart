@@ -3,3 +3,4 @@ const registerRoute = '/register/';
 const mainRoute = '/main/';
 const medicineDetailsRoute = '/medicineDetails/';
 const cartRoute = '/cart/';
+const categoriesRoute = '/categories/';

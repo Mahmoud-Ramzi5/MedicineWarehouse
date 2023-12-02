@@ -8,7 +8,20 @@ class CartView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: Container(
+        alignment: Alignment.centerLeft,
+        height: 80,
+        color: Colors.green,
+        child: const Text(
+          'Total Price:100000',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 30,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
       floatingActionButton: ElevatedButton(
         onPressed: () {},
         child: const Text('Confirm Order'),
@@ -43,7 +56,7 @@ class CartView extends StatelessWidget {
                       Padding(
                         padding: EdgeInsets.all(20),
                         child: Text(
-                          'Total Price:',
+                          'Price:',
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,

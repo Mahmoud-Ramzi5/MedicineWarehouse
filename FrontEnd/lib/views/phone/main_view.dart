@@ -73,8 +73,27 @@ class _MainViewState extends State<MainView> {
             ),
             ListTile(
               title: const Text(
+                'Medicine Categories',
+                style: TextStyle(
+                  fontSize: 20,
+                  color: Colors.green,
+                ),
+              ),
+              leading: const Icon(
+                Icons.category,
+                color: Colors.green,
+              ),
+              onTap: () {
+                Navigator.of(context).pushNamed(categoriesRoute);
+              },
+            ),
+            ListTile(
+              title: const Text(
                 'Log out',
-                style: TextStyle(fontSize: 20),
+                style: TextStyle(
+                  fontSize: 20,
+                  color: Colors.green,
+                ),
               ),
               leading: const Icon(
                 Icons.logout,
@@ -139,9 +158,7 @@ class _MainViewState extends State<MainView> {
           ],
         ),
       ),
-      appBar: AppBar(
-        actions: [],
-      ),
+      appBar: AppBar(),
       body: FutureBuilder(
         future: Api().fetchMedicine(),
         builder: (context, snapshot) {

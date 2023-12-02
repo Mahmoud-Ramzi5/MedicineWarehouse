@@ -201,8 +201,8 @@ class MedicineDetailsView extends StatelessWidget {
                     Container(
                       margin: const EdgeInsets.all(10),
                       alignment: Alignment.center,
-                      height: 150,
-                      width: 100,
+                      height: 50,
+                      width: 50,
                       decoration: const ShapeDecoration(
                         shape: RoundedRectangleBorder(
                           side: BorderSide(color: Colors.green, width: 2),
@@ -236,11 +236,8 @@ class MedicineDetailsView extends StatelessWidget {
               ),
               ElevatedButton(
                 onPressed: () {},
-                child: const Text(
-                  'Add to Cart',
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
+                child: const Icon(
+                  Icons.add_shopping_cart_outlined,
                 ),
               ),
             ],
