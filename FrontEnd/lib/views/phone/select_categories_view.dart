@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:test1/apis/phone_api.dart';
 
 class SelectCategoriesView extends StatefulWidget {
   const SelectCategoriesView({super.key});
@@ -8,31 +9,35 @@ class SelectCategoriesView extends StatefulWidget {
 }
 
 class _SelectCategoriesViewState extends State<SelectCategoriesView> {
-  final List<String> buttonLabels = [
-    'Button 1',
-    'Button 2',
-    'Button 3',
-    'Button 4',
-  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Select Category')),
-      body: ListView.builder(
-        physics: const PageScrollPhysics(),
-        shrinkWrap: true,
-        itemCount: buttonLabels.length,
-        itemBuilder: (context, index) {
-          final label = buttonLabels[index];
-          return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ElevatedButton(
-              onPressed: () {},
-              child: Text(label),
-            ),
-          );
-        },
-      ),
+      body: FutureBuilder(
+          future: Api().fetchCategories(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(child: CircularProgressIndicator());
+            } else if (snapshot.hasError) {
+              return Center(child: Text('Error: ${snapshot.error}'));
+            } else {
+              final categories = snapshot.data;
+              return ListView.builder(
+                itemCount: categories?.length,
+                physics: const PageScrollPhysics(),
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.all(8),
+                    child: ElevatedButton(
+                      onPressed: () {},
+                      child: Text(categories![index].enCategoryName),
+                    ),
+                  );
+                },
+              );
+            }
+          }),
     );
   }
 }

@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 class Categories {
   final int id;
   final String enCategoryName;

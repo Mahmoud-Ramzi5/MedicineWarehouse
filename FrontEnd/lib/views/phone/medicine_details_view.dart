@@ -23,15 +23,10 @@ class MedicineDetailsView extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Container(
+              SizedBox(
                 height: 200,
                 width: 300,
-                color: Colors.green,
-                child: const Icon(
-                  Icons.medication,
-                  color: Colors.white,
-                  size: 150,
-                ),
+                child: medicine.image,
               ),
               Container(
                 margin: const EdgeInsets.all(10),

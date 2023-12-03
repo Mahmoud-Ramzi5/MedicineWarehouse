@@ -40,7 +40,7 @@ class Medicine extends Model
      * @var array<int, string>
      */
     protected $hidden = [
-        "image_path",
+    
     ];
 
     /**

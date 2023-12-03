@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:test1/customWidgets/text_forn_widget.dart';
 
 class WebLoginView extends StatefulWidget {
   const WebLoginView({super.key});
@@ -50,23 +51,17 @@ class _WebLoginViewState extends State<WebLoginView> {
                 ),
                 SizedBox(
                   width: 500,
-                  child: TextFormField(
+                  child: CustomTextWidget(
                     controller: _userName,
-                    autocorrect: false,
-                    enableSuggestions: false,
+                    labelText: 'Username',
+                    icon: const Icon(Icons.person),
+                    obsecureText: false,
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return "Enter user name";
+                        return "Required field";
                       }
                       return null;
                     },
-                    decoration: const InputDecoration(
-                      labelStyle: TextStyle(fontSize: 20),
-                      labelText: 'User Name',
-                      border: OutlineInputBorder(),
-                      prefixIcon: Icon(Icons.person),
-                      iconColor: Colors.green,
-                    ),
                   ),
                 ),
                 const SizedBox(
@@ -74,42 +69,38 @@ class _WebLoginViewState extends State<WebLoginView> {
                 ),
                 SizedBox(
                   width: 500,
-                  child: TextFormField(
+                  child: CustomTextWidget(
                     controller: _password,
-                    keyboardType: TextInputType.visiblePassword,
-                    autocorrect: false,
-                    enableSuggestions: false,
-                    obscureText: passwordToggle,
+                    icon: const Icon(Icons.lock),
+                    labelText: 'Password',
+                    obsecureText: passwordToggle,
+                    inkWell: InkWell(
+                      onTap: () {
+                        setState(() {
+                          passwordToggle = !passwordToggle;
+                        });
+                      },
+                      child: Icon(passwordToggle
+                          ? Icons.visibility
+                          : Icons.visibility_off),
+                    ),
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return "Enter password";
+                        return "Required field";
+                      } else if (value.characters.length < 4) {
+                        return "Password too short";
                       }
                       return null;
                     },
-                    decoration: InputDecoration(
-                      labelText: 'Password',
-                      labelStyle: const TextStyle(fontSize: 20),
-                      border: const OutlineInputBorder(),
-                      prefixIcon: const Icon(Icons.lock),
-                      iconColor: Colors.green,
-                      suffixIcon: InkWell(
-                        onTap: () {
-                          setState(() {
-                            passwordToggle = !passwordToggle;
-                          });
-                        },
-                        child: Icon(passwordToggle
-                            ? Icons.visibility
-                            : Icons.visibility_off),
-                      ),
-                    ),
                   ),
                 ),
-                ElevatedButton(
-                  onPressed: () {},
-                  child: const Icon(
-                    Icons.login,
-                    color: Colors.green,
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    child: const Icon(
+                      Icons.login,
+                    ),
                   ),
                 ),
               ],

@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:test1/apis/phone_api.dart';
 import 'package:test1/classes/medicine.dart';
 import 'package:test1/constants/routes.dart';
@@ -217,13 +218,9 @@ class _MainViewState extends State<MainView> {
                                 height: 100,
                                 width: 100,
                                 decoration: const ShapeDecoration(
-                                    shape: ContinuousRectangleBorder(),
-                                    color: Colors.green),
-                                child: const Icon(
-                                  Icons.medication,
-                                  color: Colors.white,
-                                  size: 80,
+                                  shape: ContinuousRectangleBorder(),
                                 ),
+                                child: filteredMedicines[index].image,
                               ),
                               Padding(
                                 padding: const EdgeInsets.all(18.0),
