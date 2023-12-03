@@ -9,7 +9,7 @@ class Categories {
     required this.arCategoryName,
   });
   Categories.fromJson(Map<String, dynamic> json)
-      : id = json['id'] as int,
-        enCategoryName = json['en_category_name'] as String,
-        arCategoryName = json['ar_Category_name'] as String;
+      : id = json["id"] as int,
+        enCategoryName = json["en_Category_name"] as String,
+        arCategoryName = json["ar_Category_name"] as String;
 }

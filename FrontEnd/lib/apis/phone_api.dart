@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -151,7 +150,6 @@ class Api {
       for (var category in response.data['message']) {
         final categorytMap =
             Categories.fromJson(category as Map<String, dynamic>);
-        print(categorytMap);
         categoryList.add(categorytMap);
       }
       return categoryList;
