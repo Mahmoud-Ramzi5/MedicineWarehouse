@@ -62,9 +62,9 @@ class WebApi {
       "ar_scientific_name": arScientificName,
       "en_manufacture_company": enManufactureCompany,
       "ar_manufacture_company": arManufactureCompany,
-      "category_ids": categoryIds,
+      "category_ids": categoryIds.join(','),
       'image_path': imageName,
-      //MultipartFile.fromBytes(image, filename: imageName),
+      'image': MultipartFile.fromBytes(image, filename: imageName),
     });
     var response = await dio.postUri(addMedicineUri,
         data: formData,

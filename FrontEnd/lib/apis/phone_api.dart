@@ -110,7 +110,7 @@ class Api {
     const storage = FlutterSecureStorage();
     var token = await storage.read(key: 'Bearer Token');
     final response = await dio.getUri(
-      Uri.parse('http://10.0.2.2:8000/api/users/medicines'),
+      fetchMedicineUri,
       options: Options(
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
@@ -121,7 +121,6 @@ class Api {
         },
       ),
     );
-
     if (response.statusCode == 200) {
       List<Medicine> medicineList = [];
       for (var medicine in response.data['data']) {

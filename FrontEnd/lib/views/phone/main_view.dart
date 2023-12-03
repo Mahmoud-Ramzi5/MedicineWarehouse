@@ -209,24 +209,19 @@ class _MainViewState extends State<MainView> {
                           child: Row(
                             children: [
                               Container(
-                                margin: const EdgeInsets.only(
-                                  top: 18,
-                                  bottom: 18,
-                                  left: 18,
-                                ),
-                                height: 100,
-                                width: 100,
-                                decoration: const ShapeDecoration(
-                                    shape: ContinuousRectangleBorder(),
-                                    color: Colors.green),
-                                child: const Icon(
-                                  Icons.medication,
-                                  color: Colors.white,
-                                  size: 80,
-                                ),
-                              ),
+                                  margin: const EdgeInsets.only(
+                                    top: 9,
+                                    bottom: 9,
+                                    left: 9,
+                                  ),
+                                  height: 99,
+                                  width: 108,
+                                  decoration: const ShapeDecoration(
+                                      shape: ContinuousRectangleBorder(),
+                                      color: Colors.green),
+                                  child: filteredMedicines[index].image),
                               Padding(
-                                padding: const EdgeInsets.all(18.0),
+                                padding: const EdgeInsets.all(9.0),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
@@ -239,7 +234,12 @@ class _MainViewState extends State<MainView> {
                                               fontWeight: FontWeight.bold),
                                         ),
                                         Padding(
-                                          padding: const EdgeInsets.all(16.0),
+                                          padding: const EdgeInsets.only(
+                                            top: 18,
+                                            bottom: 18,
+                                            left: 9,
+                                            right: 18,
+                                          ),
                                           child: Text(
                                             'Price: ${filteredMedicines[index].price}',
                                             style: const TextStyle(

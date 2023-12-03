@@ -31,6 +31,6 @@ void main() {
         );
       }
     },
-    home: const LoginView(),
+    home: const MainView(),
   ));
 }

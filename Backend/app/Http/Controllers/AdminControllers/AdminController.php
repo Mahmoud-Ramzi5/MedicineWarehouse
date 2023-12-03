@@ -11,6 +11,7 @@ use App\Models\Medicine;
 use App\Models\MedicineTranslation;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class AdminController extends Controller
@@ -61,19 +62,33 @@ class AdminController extends Controller
         // Validate Input
         $credentials = $request->validated();
         // Store Image
-        /**$path = null;
         if ($request->hasFile('image')) {
             $image = $request->file('image');
-            $path = $image->store('public');
-        };**/
+            $path = 'public/'.$credentials['image_path'];
+            if (!Storage::exists($path)) {
+                Storage::put($path, file_get_contents($image));
+            }
+        } else {
+            $path = 'public/'.$credentials['image_path'];
+        }
+
+        /*if ($credentials['image']) {
+            $path = 'public/'.$credentials['image_path'];
+            $image = base64_decode($credentials['image']);
+            Storage::put($path, $image);
+        }
+        else {
+            $path = 'public/default.png';
+        }*/
+
         // Create Medicine
         $medicine = Medicine::create([
             'expiry_date' => $credentials['expiry_date'],
             'quantity_available' => $credentials['quantity_available'],
             'price' => $credentials['price'],
-            'image_path' => $credentials['image_path'],
+            'image_path' => $path,
         ]);
-        $medicine->Categories()->attach($credentials['category_ids']);
+        $medicine->Categories()->attach(explode(",", $credentials['category_ids']));
         // Create English Translation
         $En = MedicineTranslation::create([
             'medicine_id' => $medicine->id,

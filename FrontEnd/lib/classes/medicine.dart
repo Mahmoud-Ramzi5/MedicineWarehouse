@@ -9,7 +9,7 @@ class Medicine {
   final int quantityAvailable;
   final int price;
   final Map<String, dynamic> medicineTranslations;
-  final List<Map<String, dynamic>> categories;
+  final List<dynamic> categories;
   final Image image;
 
   Medicine({
@@ -31,5 +31,8 @@ class Medicine {
             translation["lang"]: translation
         },
         categories = json['categories'],
-        image = Image.asset(json['image']);
+        image = Image.memory(
+            base64Decode(
+                json['image_path'].replaceAll('\n', '') /*.split('\n).join*/),
+            fit: BoxFit.cover);
 }

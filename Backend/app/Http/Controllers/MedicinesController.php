@@ -38,7 +38,7 @@ class MedicinesController extends Controller
         }
         return response()->json([
             'data' => $valid
-        ], 200);
+            ], 200)->header('Content-Type', 'application/json; charset=UTF-8');
     }
 
     public function ShowAll(Request $request)
@@ -139,7 +139,7 @@ class MedicinesController extends Controller
 public function category(Request $request){
     $categories = category::all();
     return response()->json(["message"=>$categories], 200);
-} 
+}
 
 }
 

@@ -32,7 +32,8 @@ class MedicineRequest extends FormRequest
             'en_manufacture_company' => 'required',
             'ar_manufacture_company' => 'required',
             'category_ids' => 'required',
-            'image_path' => 'required'
+            'image_path' => 'required',
+            'image' => 'nullable'
         ];
     }
 

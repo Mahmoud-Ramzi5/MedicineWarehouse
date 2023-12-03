@@ -35,15 +35,6 @@ class Medicine extends Model
     ];
 
     /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
-    protected $hidden = [
-        "image_path",
-    ];
-
-    /**
      * Interact with the medicine's ExpiryDate.
      */
     protected function ExpiryDate(): Attribute
@@ -55,24 +46,21 @@ class Medicine extends Model
 
     /**
      * Interact with the medicine's Image.
+     * Returns image_path as Image
      */
-    /*protected function Image(): Attribute
+    protected function ImagePath(): Attribute
     {
         return Attribute::make(
             get: function ($path) {
-                if ($path == null) {
-                    return "";
-                }
-                else {
-                    $localFileName  = storage_path('app/' . $path);
-                    $fileData = file_get_contents($localFileName);
-                    $ImgFileEncode = base64_encode($fileData);
-                    return $ImgFileEncode;
-                    return base64_encode($ImgFileEncode);
-                }
+                //$localFileName  = storage_path('app/' . $path);
+                //$type = explode('.', implode(explode('/', $path)))[1];
+                //$fileData = file_get_contents($localFileName);
+                //$ImgFileEncode = 'data:image/'.$type.';base64,'.base64_encode($fileData);
+                $data = base64_encode(Storage::get($path));
+                return $data;
             }
         );
-    }*/
+    }
 
     // OneToMany Relation
     public function  MedicineTranslations()

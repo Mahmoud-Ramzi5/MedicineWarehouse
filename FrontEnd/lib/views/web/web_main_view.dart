@@ -15,15 +15,19 @@ class WebMainView extends StatefulWidget {
 
 class _WebMainViewState extends State<WebMainView> {
   Uint8List webImage = Uint8List(8);
-  String webImageName = "assets/medicines/default.png";
+  String webImageName = "default.png";
   File? pickedImage;
 
   Future<void> pickImage() async {
     if (kIsWeb) {
       final ImagePicker picker = ImagePicker();
-      XFile? image = await picker.pickImage(source: ImageSource.gallery);
+      XFile? image = await picker.pickImage(
+          source: ImageSource.gallery,
+          maxHeight: 243,
+          maxWidth: 324,
+          imageQuality: 81);
       if (image != null) {
-        webImageName = 'assets/medicines/${image.name}';
+        webImageName = image.name;
         Uint8List imageBytes = await image.readAsBytes();
         setState(() {
           webImage = imageBytes;
