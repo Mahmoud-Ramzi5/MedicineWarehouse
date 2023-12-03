@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -128,6 +129,32 @@ class Api {
         medicineList.add(medicineMap);
       }
       return medicineList;
+    } else {
+      throw Exception('Failed to load Medicines');
+    }
+  }
+
+  Future<List<Categories>> fetchCategories() async {
+    final response = await dio.getUri(
+      fetchCategoriesUri,
+      options: Options(
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Accept': "application/json",
+          'connection': 'keep-alive',
+          'Accept-Encoding': 'gzip, deflate, br',
+        },
+      ),
+    );
+    if (response.statusCode == 200) {
+      List<Categories> categoryList = [];
+      for (var category in response.data['message']) {
+        final categorytMap =
+            Categories.fromJson(category as Map<String, dynamic>);
+        print(categorytMap);
+        categoryList.add(categorytMap);
+      }
+      return categoryList;
     } else {
       throw Exception('Failed to load Medicines');
     }

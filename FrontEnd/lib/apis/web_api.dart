@@ -1,9 +1,7 @@
-import 'dart:io';
+import 'dart:async';
 import 'dart:convert';
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
-import 'package:http_parser/http_parser.dart';
 import 'package:http/http.dart' as http;
 
 class WebApi {
@@ -40,15 +38,15 @@ class WebApi {
   final dio = Dio();
 
   Future<dynamic> addMedicine(
-      String expiryDate,
-      int quantityAvailable,
-      double price,
       String enCommercialName,
       String arCommercialName,
       String enScientificName,
       String arScientificName,
       String enManufactureCompany,
       String arManufactureCompany,
+      String expiryDate,
+      double price,
+      int quantityAvailable,
       List<int> categoryIds,
       Uint8List image,
       String imageName) async {

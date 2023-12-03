@@ -2,9 +2,10 @@ import 'dart:io';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:file_picker/file_picker.dart';
+import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:test1/apis/web_api.dart';
+import 'package:test1/customWidgets/text_forn_widget.dart';
 
 class WebMainView extends StatefulWidget {
   const WebMainView({super.key});
@@ -17,6 +18,39 @@ class _WebMainViewState extends State<WebMainView> {
   Uint8List webImage = Uint8List(8);
   String webImageName = "default.png";
   File? pickedImage;
+  late final TextEditingController _enCommercialName;
+  late final TextEditingController _arCommercialName;
+  late final TextEditingController _enScientificName;
+  late final TextEditingController _arScientificName;
+  late final TextEditingController _enManufactureCompany;
+  late final TextEditingController _arManufactureCompany;
+  late final TextEditingController _priceController;
+  late DateTime selectedDate = DateTime(2023, 11, 1);
+  int quantity = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _enCommercialName = TextEditingController();
+    _arCommercialName = TextEditingController();
+    _enScientificName = TextEditingController();
+    _arScientificName = TextEditingController();
+    _enManufactureCompany = TextEditingController();
+    _arManufactureCompany = TextEditingController();
+    _priceController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    _enCommercialName.dispose();
+    _arCommercialName.dispose();
+    _enScientificName.dispose();
+    _arScientificName.dispose();
+    _enManufactureCompany.dispose();
+    _arManufactureCompany.dispose();
+    _priceController.dispose();
+    super.dispose();
+  }
 
   Future<void> pickImage() async {
     if (kIsWeb) {
@@ -39,18 +73,34 @@ class _WebMainViewState extends State<WebMainView> {
     }
   }
 
+  Future<void> _selectDate(BuildContext context) async {
+    DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: selectedDate,
+      firstDate: DateTime(2023),
+      lastDate: DateTime(2027),
+    );
+
+    if (picked != null && picked != selectedDate) {
+      setState(() {
+        selectedDate = picked;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(18.0),
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(18.0),
-                child: Container(
+      body: SingleChildScrollView(
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(18.0),
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(18.0),
+                  child: Container(
                     height: 200,
                     width: 200,
                     margin: const EdgeInsets.all(18),
@@ -89,30 +139,190 @@ class _WebMainViewState extends State<WebMainView> {
                               )
                             : Image.file(
                                 pickedImage!,
-                              )),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  WebApi().addMedicine(
-                      "5/11/2023",
-                      6,
-                      3400,
-                      "paradrin",
-                      "بارادين",
-                      "PARACETAMOL",
-                      "باراسيتامول",
-                      "AVENZOR",
-                      "ابن-زهر",
+                              ),
+                  ),
+                ),
+                CustomTextWidget(
+                  controller: _enCommercialName,
+                  labelText: 'English Commercial Name',
+                  icon: const Icon(Icons.text_fields),
+                  obsecureText: false,
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return "Required field";
+                    }
+                    return null;
+                  },
+                ),
+                CustomTextWidget(
+                  controller: _arCommercialName,
+                  labelText: 'Arabic Commercial Name',
+                  icon: const Icon(Icons.text_fields),
+                  obsecureText: false,
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return "Required field";
+                    }
+                    return null;
+                  },
+                ),
+                CustomTextWidget(
+                  controller: _enScientificName,
+                  labelText: 'English Scientific Name',
+                  icon: const Icon(Icons.text_fields),
+                  obsecureText: false,
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return "Required field";
+                    }
+                    return null;
+                  },
+                ),
+                CustomTextWidget(
+                  controller: _arScientificName,
+                  labelText: 'Arabic Scientific Name',
+                  icon: const Icon(Icons.text_fields),
+                  obsecureText: false,
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return "Required field";
+                    }
+                    return null;
+                  },
+                ),
+                CustomTextWidget(
+                  controller: _enManufactureCompany,
+                  labelText: 'English Manufacture Company',
+                  icon: const Icon(Icons.business),
+                  obsecureText: false,
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return "Required field";
+                    }
+                    return null;
+                  },
+                ),
+                CustomTextWidget(
+                  controller: _arManufactureCompany,
+                  labelText: 'Arabic Manufacture Company',
+                  icon: const Icon(Icons.business),
+                  obsecureText: false,
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return "Required field";
+                    }
+                    return null;
+                  },
+                ),
+                SizedBox(
+                  height: 50,
+                  child: GestureDetector(
+                    onTap: () {
+                      _selectDate(context);
+                    },
+                    child: AbsorbPointer(
+                      child: TextFormField(
+                        controller: TextEditingController(
+                            text: "${selectedDate.toLocal()}".split(' ')[0]),
+                        decoration: const InputDecoration(
+                          labelText: 'Expiry Date',
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                CustomTextWidget(
+                  controller: _priceController,
+                  labelText: 'Price',
+                  icon: const Icon(Icons.attach_money),
+                  obsecureText: false,
+                  inputType: TextInputType.number,
+                  validator: (value) {
+                    // Custom validation to allow only non-negative integers
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter a valid number';
+                    }
+                    try {
+                      int price = int.parse(value);
+                      if (price < 0) {
+                        return 'Please enter a non-negative number';
+                      }
+                    } catch (e) {
+                      return 'Please enter a valid number';
+                    }
+                    return null;
+                  },
+                ),
+                Container(
+                  height: 100,
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.grey),
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text(
+                        'Quantity',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          IconButton(
+                            icon: const Icon(Icons.remove),
+                            onPressed: () {
+                              setState(() {
+                                if (quantity > 0) {
+                                  quantity--;
+                                }
+                              });
+                            },
+                          ),
+                          Text(
+                            '$quantity',
+                            style: const TextStyle(fontSize: 20),
+                          ),
+                          IconButton(
+                            icon: const Icon(Icons.add),
+                            onPressed: () {
+                              setState(() {
+                                quantity++;
+                              });
+                            },
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    WebApi().addMedicine(
+                      _enCommercialName.text,
+                      _arCommercialName.text,
+                      _enScientificName.text,
+                      _arScientificName.text,
+                      _enManufactureCompany.text,
+                      _arManufactureCompany.text,
+                      "${selectedDate.toLocal().toString()}".split(' ')[0],
+                      double.parse(_priceController.text),
+                      quantity,
                       [1, 18],
                       webImage,
-                      webImageName);
-                },
-                child: const Text(
-                  'Upload',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-              )
-            ],
+                      webImageName,
+                    );
+                  },
+                  child: const Text(
+                    'Add Medicine',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),
