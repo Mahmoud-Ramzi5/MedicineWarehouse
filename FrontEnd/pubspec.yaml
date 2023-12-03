@@ -30,6 +30,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  numberpicker: ^2.0.0
+
+
+
 
 
   # The following adds the Cupertino Icons font to your application.

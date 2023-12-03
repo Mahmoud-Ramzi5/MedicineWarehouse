@@ -6,7 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:test1/apis/web_api.dart';
 import 'package:test1/customWidgets/text_forn_widget.dart';
-
+import 'package:numberpicker/numberpicker.dart';
 class WebMainView extends StatefulWidget {
   const WebMainView({super.key});
 
@@ -32,6 +32,9 @@ class _WebMainViewState extends State<WebMainView> {
   final englishRegex = RegExp(patternEnglish);
   static const patternArabic = r'^[\u0600-\u06FF\s]+$';
   final arabicRegex = RegExp(patternArabic);
+String dropdownValue = 'Option 1';
+    int selectedNumber = 1; 
+
 
   @override
   void initState() {
@@ -308,60 +311,84 @@ class _WebMainViewState extends State<WebMainView> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      height: 100,
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey),
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Text(
-                            'Quantity',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              IconButton(
-                                icon: const Icon(
-                                  Icons.remove,
-                                  color: Colors.red,
-                                ),
-                                onPressed: () {
-                                  setState(() {
-                                    if (quantity > 0) {
-                                      quantity--;
-                                    }
-                                  });
-                                },
-                              ),
-                              Text(
-                                '$quantity',
-                                style: const TextStyle(fontSize: 20),
-                              ),
-                              IconButton(
-                                icon: const Icon(
-                                  Icons.add,
-                                  color: Colors.green,
-                                ),
-                                onPressed: () {
-                                  setState(() {
-                                    quantity++;
-                                  });
-                                },
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
+  padding: const EdgeInsets.all(8.0),
+  child: Container(
+    decoration: BoxDecoration(
+      border: Border.all(color: Colors.grey),
+      borderRadius: BorderRadius.circular(10.0),
+    ),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            'Choose Quantity',
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        NumberPicker(
+          value: selectedNumber,
+          minValue: 1,
+          maxValue: 100,
+          step: 1,
+          onChanged: (value) {
+            setState(() {
+              selectedNumber = value;
+            });
+          },
+        ),
+      ],
+    ),
+  ),
+),
+
+                  SingleChildScrollView(
+  child: Padding(
+    padding: const EdgeInsets.all(8.0),
+    child: Container(
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.grey),
+        borderRadius: BorderRadius.circular(10.0),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              'Choose the category',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          DropdownButton<String>(
+            value: dropdownValue,
+            onChanged: (String? newValue) {
+              setState(() {
+                dropdownValue = newValue!;
+              });
+            },
+            items: <String>['Option 1', 'Option 2', 'Option 3', 'Option 4']
+                .map<DropdownMenuItem<String>>((String value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Text(value),
+              );
+            }).toList(),
+            hint: const Text('Select an option'),
+          ),
+        ],
+      ),
+    ),
+  ),
+),
+
                   ElevatedButton(
                     onPressed: () {
                       if (_formField.currentState!.validate() == true) {
@@ -395,3 +422,4 @@ class _WebMainViewState extends State<WebMainView> {
     );
   }
 }
+//
