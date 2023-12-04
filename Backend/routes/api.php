@@ -55,6 +55,7 @@ Route::prefix('/admin')->group(function () {
         Route::get('/categories', 'Categories')->name('Categories');
         Route::get('/categoryFilter', 'Selected_Category')->name('Selected_Category');
         Route::get('/medicineInfo', 'DisplayMedicineInfo')->name('DisplayMedicineInfo');
+        Route::get('/category', 'category')->name('category');
 
         Route::post('/search', 'Search_All')->name('Search_All');
     });

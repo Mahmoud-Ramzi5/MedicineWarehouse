@@ -50,7 +50,7 @@ class MedicinesController extends Controller
         $medicines = Medicine::with('MedicineTranslations')->with('Categories')->get();
         return response()->json([
             'data' => $medicines
-        ], 200);
+        ], 200)->header('Content-Type', 'application/json; charset=UTF-8');
     }
 
     public function Categories(Request $request)
@@ -59,7 +59,7 @@ class MedicinesController extends Controller
         $categories = category::all();
         return response()->json([
             "message"=>$categories
-        ], 200);
+        ], 200)->header('Content-Type', 'application/json; charset=UTF-8');
     }
 
     public function Selected_Category(Request $request)
@@ -76,7 +76,7 @@ class MedicinesController extends Controller
         // Response
         return response()->json([
             'message' => $medicines,
-        ], 200);
+        ], 200)->header('Content-Type', 'application/json; charset=UTF-8');
     }
 
     public function DisplayMedicineInfo(Request $request)
@@ -90,8 +90,11 @@ class MedicinesController extends Controller
         // Response
         return response()->json([
             "message" => $medicine
-        ], 200);
+        ], 200)->header('Content-Type', 'application/json; charset=UTF-8');
     }
+
+
+
 
     function Search_All(Request $request){
         $input = $request->input('name');

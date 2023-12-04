@@ -4,9 +4,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:test1/apis/phone_api.dart';
 import 'package:test1/apis/web_api.dart';
+import 'package:test1/classes/categories.dart';
 import 'package:test1/customWidgets/text_forn_widget.dart';
 import 'package:numberpicker/numberpicker.dart';
+
 class WebMainView extends StatefulWidget {
   const WebMainView({super.key});
 
@@ -32,9 +35,9 @@ class _WebMainViewState extends State<WebMainView> {
   final englishRegex = RegExp(patternEnglish);
   static const patternArabic = r'^[\u0600-\u06FF\s]+$';
   final arabicRegex = RegExp(patternArabic);
-String dropdownValue = 'Option 1';
-    int selectedNumber = 1; 
-
+  Categories dropdownValue =
+      Categories(id: 0, enCategoryName: 'Option', arCategoryName: 'خيار');
+  int selectedNumber = 1;
 
   @override
   void initState() {
@@ -311,84 +314,99 @@ String dropdownValue = 'Option 1';
                     ),
                   ),
                   Padding(
-  padding: const EdgeInsets.all(8.0),
-  child: Container(
-    decoration: BoxDecoration(
-      border: Border.all(color: Colors.grey),
-      borderRadius: BorderRadius.circular(10.0),
-    ),
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text(
-            'Choose Quantity',
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        NumberPicker(
-          value: selectedNumber,
-          minValue: 1,
-          maxValue: 100,
-          step: 1,
-          onChanged: (value) {
-            setState(() {
-              selectedNumber = value;
-            });
-          },
-        ),
-      ],
-    ),
-  ),
-),
-
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.grey),
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Text(
+                              'Choose Quantity',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                          NumberPicker(
+                            value: selectedNumber,
+                            minValue: 1,
+                            maxValue: 100,
+                            step: 1,
+                            onChanged: (value) {
+                              setState(() {
+                                selectedNumber = value;
+                              });
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                   SingleChildScrollView(
-  child: Padding(
-    padding: const EdgeInsets.all(8.0),
-    child: Container(
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.grey),
-        borderRadius: BorderRadius.circular(10.0),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              'Choose the category',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          DropdownButton<String>(
-            value: dropdownValue,
-            onChanged: (String? newValue) {
-              setState(() {
-                dropdownValue = newValue!;
-              });
-            },
-            items: <String>['Option 1', 'Option 2', 'Option 3', 'Option 4']
-                .map<DropdownMenuItem<String>>((String value) {
-              return DropdownMenuItem<String>(
-                value: value,
-                child: Text(value),
-              );
-            }).toList(),
-            hint: const Text('Select an option'),
-          ),
-        ],
-      ),
-    ),
-  ),
-),
-
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.grey),
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Text(
+                                'Choose the category',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            FutureBuilder(
+                                future: WebApi().fetchCategories(),
+                                builder: (context, snapshot) {
+                                  if (snapshot.connectionState ==
+                                      ConnectionState.waiting) {
+                                    return const Center(
+                                        child: CircularProgressIndicator());
+                                  } else if (snapshot.hasError) {
+                                    return Center(
+                                        child:
+                                            Text('Error: ${snapshot.error}'));
+                                  } else {
+                                    final categories = snapshot.data;
+                                    categories!.add(dropdownValue);
+                                    return DropdownButtonFormField(
+                                      value: dropdownValue.id,
+                                      onChanged: (newValue) {
+                                        setState(() {
+                                          dropdownValue =
+                                              newValue as Categories;
+                                        });
+                                      },
+                                      items:
+                                          categories.map((Categories category) {
+                                        return DropdownMenuItem(
+                                          value: category.id,
+                                          child: Text(category.enCategoryName),
+                                        );
+                                      }).toList(),
+                                      hint: const Text('Select an option'),
+                                    );
+                                  }
+                                }),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
                   ElevatedButton(
                     onPressed: () {
                       if (_formField.currentState!.validate() == true) {

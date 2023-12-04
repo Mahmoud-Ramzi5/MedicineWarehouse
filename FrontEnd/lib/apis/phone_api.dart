@@ -15,6 +15,8 @@ class Api {
       Uri.parse('http://10.0.2.2:8000/api/users/medicines');
   static final fetchCategoriesUri =
       Uri.parse('http://10.0.2.2:8000/api/users/category');
+  static final medicineByCategoryUri =
+      Uri.parse('http://10.0.2.2:8000/api/users/categoryFilter');
 
   Api();
 
@@ -154,6 +156,35 @@ class Api {
       }
       return categoryList;
     } else {
+      throw Exception('Failed to load Medicines');
+    }
+  }
+
+  Future<List<Medicine>> fetchMedicineByCategory(int id) async {
+    final response = await dio.post(
+      'http://10.0.2.2:8000/api/users/categoryFilter',
+      data: ({"id": id}),
+      options: Options(
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Accept': "application/json",
+          'connection': 'keep-alive',
+          'Accept-Encoding': 'gzip, deflate, br',
+        },
+      ),
+    );
+    if (response.statusCode == 200) {
+      List<Medicine> medicineList = [];
+      print(response.data);
+      for (var medicine in response.data['meesage']) {
+        print(medicine);
+        final medicineMap = Medicine.fromJson(medicine as Map<String, dynamic>);
+        print("yes");
+        medicineList.add(medicineMap);
+      }
+      return medicineList;
+    } else {
+      print("yes");
       throw Exception('Failed to load Medicines');
     }
   }

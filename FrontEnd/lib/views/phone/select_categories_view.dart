@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:test1/apis/phone_api.dart';
+import 'package:test1/constants/routes.dart';
 
 class SelectCategoriesView extends StatefulWidget {
   const SelectCategoriesView({super.key});
@@ -30,7 +31,10 @@ class _SelectCategoriesViewState extends State<SelectCategoriesView> {
                   return Padding(
                     padding: const EdgeInsets.all(8),
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).pushNamed(viewCategoriesRoute,
+                            arguments: categories[index].id);
+                      },
                       child: Text(categories![index].enCategoryName),
                     ),
                   );
