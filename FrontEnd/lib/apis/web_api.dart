@@ -3,11 +3,15 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
+import 'package:test1/classes/categories.dart';
 
 class WebApi {
   static final loginUri = Uri.parse('');
   static final addMedicineUri =
       Uri.parse('http://127.0.0.1:8000/api/admin/new_medicine');
+      static final fetchCategoriesUri =
+      Uri.parse('http://127.0.0.1:8000/api/users/category');
+
 
   WebApi();
 
@@ -74,4 +78,29 @@ class WebApi {
         }));
     return response;
   }
+   Future<List<Categories>> fetchCategories() async {
+    final response = await dio.getUri(
+      fetchCategoriesUri,
+      options: Options(
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Accept': "application/json",
+          'connection': 'keep-alive',
+          'Accept-Encoding': 'gzip, deflate, br',
+        },
+      ),
+    );
+    if (response.statusCode == 200) {
+      List<Categories> categoryList = [];
+      for (var category in response.data['message']) {
+        final categorytMap =
+            Categories.fromJson(category as Map<String, dynamic>);
+        categoryList.add(categorytMap);
+      }
+      return categoryList;
+    } else {
+      throw Exception('Failed to load Medicines');
+    }
+  }
 }
+

@@ -53,6 +53,7 @@ Route::prefix('/admin')->group(function () {
         Route::middleware('auth:sanctum')->get('/medicines', 'ShowAll')->name('ShowAll');
         Route::get('/categoryFilter', 'Selected_Category')->name('Selected_Category');
         Route::get('/medicineInfo', 'DisplayMedicineInfo')->name('DisplayMedicineInfo');
+        Route::get('/category', 'category')->name('category');
 
         Route::post('/search', 'Search_All')->name('Search_All');
     });
