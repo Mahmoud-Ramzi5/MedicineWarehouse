@@ -12,12 +12,14 @@ class MedicinesController extends Controller
 {
     public function ShowNotExpired(Request $request)
     {
+        // Fetch medicines from database
         $medicines = Medicine::with('MedicineTranslations')->with('Categories')->get();
         $valid = [];
         $Date = today();
         $dateYear = $Date->format('Y');
         $dateMonth = $Date->format('m');
         $dateDay = $Date->format('d');
+        // Fetch (Only Not Expired) medicines
         foreach ($medicines as $medicine) {
             $medicineYear = $medicine->expiry_date->format('Y');
             $medicineMonth = $medicine->expiry_date->format('m');
@@ -36,16 +38,27 @@ class MedicinesController extends Controller
                 array_push($valid, $medicine);
             }
         }
+        // Not Expired Medicines
         return response()->json([
             'data' => $valid
-            ], 200)->header('Content-Type', 'application/json; charset=UTF-8');
+        ], 200)->header('Content-Type', 'application/json; charset=UTF-8');
     }
 
     public function ShowAll(Request $request)
     {
+        // All Medicines
         $medicines = Medicine::with('MedicineTranslations')->with('Categories')->get();
         return response()->json([
             'data' => $medicines
+        ], 200);
+    }
+
+    public function Categories(Request $request)
+    {
+        // Retrieve all categories
+        $categories = category::all();
+        return response()->json([
+            "message"=>$categories
         ], 200);
     }
 
@@ -56,25 +69,25 @@ class MedicinesController extends Controller
         $category = Category::find($id);
         //find the medicines with the selected category
         $medicines = $category->Medicines;
-        $data = [];
         foreach($medicines as $medicine) {
-            $medicinesData =[
-                $medicine,
-                MedicineTranslation::where('medicine_id', $medicine->id)->get()
-            ];
-            array_push($data, $medicinesData);
+            $medicine->MedicineTranslations;
+            $medicine->Categories;
         }
         // Response
         return response()->json([
-            'message' => $data,
+            'message' => $medicines,
         ], 200);
     }
 
-    public function DisplayMedicineInfo(Request $request){
+    public function DisplayMedicineInfo(Request $request)
+    {   
+        // Get medicine id
         $id = $request->input('id');
+        // Find medicine
         $medicine = Medicine::find($id);
         $medicine->MedicineTranslations;
         $medicine->Categories;
+        // Response
         return response()->json([
             "message" => $medicine
         ], 200);
@@ -135,10 +148,11 @@ class MedicinesController extends Controller
             }
         }
         return response()->json(["message"=> 'sorry item requested not found it may be out of stock or expired'], 400);
-}
-public function category(Request $request){
-    $categories = category::all();
-    return response()->json(["message"=>$categories], 200);
+    }
+
+public function GG(Request $request){
+
+    return response()->json(["message"=>$request->Input("medicines")], 200);
 }
 
 }

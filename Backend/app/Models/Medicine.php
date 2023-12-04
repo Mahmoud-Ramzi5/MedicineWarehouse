@@ -20,9 +20,21 @@ class Medicine extends Model
      */
     protected $fillable = [
         "expiry_date",
+        "quantity_total",
+        "quantity_allocated",
         "quantity_available",
         "price",
         "image_path",
+    ];
+
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array<int, string>
+     */
+    protected $hidden = [
+        'created_at',
+        'updated_at',
     ];
 
     /**
@@ -71,5 +83,11 @@ class Medicine extends Model
     public function Categories()
     {
         return $this->belongsToMany(Category::class, 'medicine_category', 'medicine_id', 'category_id');
+    }
+
+    // ManyToMany Relation
+    public function Orders()
+    {
+        return $this->belongsToMany(Order::class, 'order_medicine', 'medicine_id', 'order_id');
     }
 }

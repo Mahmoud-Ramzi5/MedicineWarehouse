@@ -27,12 +27,14 @@ Route::prefix('/users')->group(function () {
         Route::post('/register', 'register')->name('register');
         Route::post('/login', 'login')->name('login');
         Route::middleware('auth:sanctum')->post('/logout', 'logout')->name('logout');
+
+        Route::post('/new_order', 'Add_Order');
     });
     Route::controller(MedicinesController::class)->group(function () {
         Route::get('/medicines', 'ShowNotExpired')->name('ShowNotExpired');
+        Route::get('/categories', 'Categories')->name('Categories');
         Route::get('/categoryFilter', 'Selected_Category')->name('Selected_Category');
         Route::get('/medicineInfo', 'DisplayMedicineInfo')->name('DisplayMedicineInfo');
-        Route::get('/category', 'category')->name('category');
 
         Route::post('/search', 'Search_Not_Expired')->name('Search_Not_Expired');
     });
@@ -47,13 +49,16 @@ Route::prefix('/admin')->group(function () {
 
         Route::post('/new_medicine', 'Add_Medicine');
         Route::delete('/delete_medicine', 'Delete_Medicine');
-        Route::post('/categories', 'Add_Categories');
     });
     Route::controller(MedicinesController::class)->group(function () {
-        Route::middleware('auth:sanctum')->get('/medicines', 'ShowAll')->name('ShowAll');
+        Route::get('/medicines', 'ShowAll')->name('ShowAll');
+        Route::get('/categories', 'Categories')->name('Categories');
         Route::get('/categoryFilter', 'Selected_Category')->name('Selected_Category');
         Route::get('/medicineInfo', 'DisplayMedicineInfo')->name('DisplayMedicineInfo');
 
         Route::post('/search', 'Search_All')->name('Search_All');
     });
 });
+
+// Test Route
+Route::post('/GG', [MedicinesController::class, 'GG'])->name('GG');

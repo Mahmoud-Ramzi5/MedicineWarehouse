@@ -13,10 +13,12 @@ return new class extends Migration
     {
         Schema::create('medicines', function (Blueprint $table) {
             $table->id();
-            $table->date("expiry_date");
-            $table->integer("quantity_available");
-            $table->double("price");
-            $table->string("image_path");
+            $table->date('expiry_date');
+            $table->integer('quantity_total');
+            $table->integer('quantity_allocated');
+            $table->integer('quantity_available');
+            $table->double('price');
+            $table->string('image_path');
             $table->timestamps();
         });
     }

@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('medicine_category', function (Blueprint $table) {
+        Schema::create('order_medicine', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('medicine_id')->unsigned();
-            $table->unsignedBigInteger('category_id')->unsigned();
+            $table->unsignedBigInteger("order_id")->unsigned();
+            $table->unsignedBigInteger("medicine_id")->unsigned();
             $table->timestamps();
 
+            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
             $table->foreign('medicine_id')->references('id')->on('medicines')->onDelete('cascade');
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
         });
     }
 
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('medicine_category');
+        Schema::dropIfExists('order_medicine');
     }
 };

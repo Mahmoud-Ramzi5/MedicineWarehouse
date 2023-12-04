@@ -5,20 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Category extends Model
+class Order extends Model
 {
     use HasFactory;
 
     /**
-     * The attributes that are not mass assignable.
+     * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
-    protected $guarded = [
-        "en_category_name",
-        "ar_category_name",
-        "en_description",
-        "ar_description"
+    protected $fillable = [
+        'user_id',
+        'status',
+        'is_paid'
     ];
 
     /**
@@ -27,15 +26,18 @@ class Category extends Model
      * @var array<int, string>
      */
     protected $hidden = [
-        "en_description",
-        "ar_description",
         'created_at',
         'updated_at',
     ];
 
+    // OneToMany Relation
+    public function User()
+    {
+        return $this->belongsTo(User::class, "user_id");
+    }
     // ManyToMany Relation
     public function Medicines()
     {
-        return $this->belongsToMany(Medicine::class, 'medicine_category', 'category_id', 'medicine_id');
+        return $this->belongsToMany(Medicine::class, 'order_medicine', 'order_id', 'medicine_id');
     }
 }

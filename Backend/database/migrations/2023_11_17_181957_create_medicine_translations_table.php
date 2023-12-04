@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('medicine_translations', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("medicine_id")->unsigned();
-            $table->string("lang");
-            $table->string("commercial_name");
-            $table->string("scientific_name");
-            $table->string("manufacture_company");
-            $table->string("description")->nullable();
+            $table->unsignedBigInteger('medicine_id')->unsigned();
+            $table->string('lang');
+            $table->string('commercial_name');
+            $table->string('scientific_name');
+            $table->string('manufacture_company');
+            $table->string('description')->nullable();
             $table->timestamps();
 
             $table->foreign('medicine_id')->references('id')->on('medicines')->onDelete('cascade');

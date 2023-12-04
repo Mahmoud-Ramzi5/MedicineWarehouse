@@ -84,6 +84,8 @@ class AdminController extends Controller
         // Create Medicine
         $medicine = Medicine::create([
             'expiry_date' => $credentials['expiry_date'],
+            'quantity_total' => $credentials['quantity_available'],
+            'quantity_allocated' => 0,
             'quantity_available' => $credentials['quantity_available'],
             'price' => $credentials['price'],
             'image_path' => $path,
@@ -123,7 +125,7 @@ class AdminController extends Controller
         ], 200);
     }
 
-    public function Add_Categories(Request $request)
+    /*public function Add_Categories(Request $request)
     {
         $fileContent = file_get_contents(storage_path("Categories.json"));
         $jsonContent = json_decode($fileContent, true);
@@ -136,5 +138,37 @@ class AdminController extends Controller
                 "ar_description" => $category["ar_description"]
             ]);
         }
-    }
+    }*/
+
+    /*public function Add_Medicines(Request $request)
+    {
+        $fileContent = file_get_contents(storage_path("Medicines.json"));
+        $jsonContent = json_decode($fileContent, true);
+        foreach($jsonContent as $medicine)
+        {
+            $M =  Medicine::create([
+                "expiry_date" => $medicine["expiry_date"],
+                "quantity_total"=> $medicine["quantity_available"],
+                "quantity_allocated"=> 0,
+                "quantity_available"=> $medicine["quantity_available"],
+                "price"=> $medicine["price"],
+                "image_path"=> $medicine["image_path"],
+            ]);
+            $M->Categories()->attach($medicine["category_ids"]);
+            $En = MedicineTranslation::create([
+                'medicine_id' => $M->id,
+                'lang' => 'en',
+                'commercial_name' => Str::upper($medicine["en_commercial_name"]),
+                'scientific_name' =>  Str::upper($medicine["en_scientific_name"]),
+                'manufacture_company' =>  Str::upper($medicine["en_manufacture_company"]),
+            ]);
+            $Ar = MedicineTranslation::create([
+                'medicine_id' => $M->id,
+                'lang' => 'ar',
+                'commercial_name' => $medicine["ar_commercial_name"],
+                'scientific_name' => $medicine["ar_scientific_name"],
+                'manufacture_company' => $medicine["ar_manufacture_company"],
+            ]);
+        }
+    }*/
 }

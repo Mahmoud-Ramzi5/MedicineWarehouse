@@ -20,6 +20,17 @@ class MedicineTranslation extends Model
         "commercial_name",
         "scientific_name",
         "manufacture_company",
+        "description"
+    ];
+
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array<int, string>
+     */
+    protected $hidden = [
+        'created_at',
+        'updated_at',
     ];
 
     // OneToMany Relation
