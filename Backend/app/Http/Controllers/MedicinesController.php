@@ -56,18 +56,14 @@ class MedicinesController extends Controller
         $category = Category::find($id);
         //find the medicines with the selected category
         $medicines = $category->Medicines;
-        $data = [];
         foreach($medicines as $medicine) {
-            $medicinesData =[
-                $medicine,
-                MedicineTranslation::where('medicine_id', $medicine->id)->get()
-            ];
-            array_push($data, $medicinesData);
+            $medicine->MedicineTranslations;
+            $medicine->Categories;
         }
         // Response
         return response()->json([
-            'message' => $data,
-        ], 200);
+            'message' => $medicines,
+        ], 200)->header('Content-Type', 'application/json; charset=UTF-8');
     }
 
     public function DisplayMedicineInfo(Request $request){

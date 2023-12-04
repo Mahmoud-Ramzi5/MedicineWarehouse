@@ -9,10 +9,17 @@ class Category extends Model
 {
     use HasFactory;
     protected $guarded = [
-        "en_category_name",
-        "ar_category_name",
-        "en_description",
-        "ar_description"
+        "en_Category_name",
+        "ar_Category_name",
+        "en_Description",
+        "ar_Description"
+    ];
+
+    protected $hidden = [
+        "created_at",
+        "updated_at",
+        "en_Description",
+        "ar_Description",
     ];
     // ManyToMany Relation
     public function Medicines()
