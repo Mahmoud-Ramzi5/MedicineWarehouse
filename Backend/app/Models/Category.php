@@ -21,13 +21,6 @@ class Category extends Model
         "ar_Description"
     ];
 
-    protected $hidden = [
-        "created_at",
-        "updated_at",
-        "en_Description",
-        "ar_Description",
-    ];
-
     /**
      * The attributes that should be hidden for serialization.
      *
