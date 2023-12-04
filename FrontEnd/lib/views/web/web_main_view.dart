@@ -1,14 +1,14 @@
 import 'dart:io';
-import 'package:dotted_border/dotted_border.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/foundation.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:numberpicker/numberpicker.dart';
+import 'package:dotted_border/dotted_border.dart';
 import 'package:test1/apis/phone_api.dart';
 import 'package:test1/apis/web_api.dart';
-import 'package:test1/classes/categories.dart';
+import 'package:test1/classes/category.dart' as CC;
 import 'package:test1/customWidgets/text_forn_widget.dart';
-import 'package:numberpicker/numberpicker.dart';
 
 class WebMainView extends StatefulWidget {
   const WebMainView({super.key});
@@ -35,8 +35,8 @@ class _WebMainViewState extends State<WebMainView> {
   final englishRegex = RegExp(patternEnglish);
   static const patternArabic = r'^[\u0600-\u06FF\s]+$';
   final arabicRegex = RegExp(patternArabic);
-  Categories dropdownValue =
-      Categories(id: 0, enCategoryName: 'Option', arCategoryName: 'خيار');
+  CC.Category dropdownValue =
+      CC.Category(id: 0, enCategoryName: 'Option', arCategoryName: 'خيار');
   int selectedNumber = 1;
 
   @override
@@ -388,11 +388,11 @@ class _WebMainViewState extends State<WebMainView> {
                                       onChanged: (newValue) {
                                         setState(() {
                                           dropdownValue =
-                                              newValue as Categories;
+                                              newValue as CC.Category;
                                         });
                                       },
-                                      items:
-                                          categories.map((Categories category) {
+                                      items: categories
+                                          .map((CC.Category category) {
                                         return DropdownMenuItem(
                                           value: category.id,
                                           child: Text(category.enCategoryName),

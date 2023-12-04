@@ -1,15 +1,15 @@
-class Categories {
+class Category {
   final int id;
   final String enCategoryName;
   final String arCategoryName;
 
-  Categories({
+  Category({
     required this.id,
     required this.enCategoryName,
     required this.arCategoryName,
   });
-  Categories.fromJson(Map<String, dynamic> json)
+  Category.fromJson(Map<String, dynamic> json)
       : id = json["id"] as int,
-        enCategoryName = json["en_Category_name"] as String,
-        arCategoryName = json["ar_Category_name"] as String;
+        enCategoryName = json["en_category_name"] as String,
+        arCategoryName = json["ar_category_name"] as String;
 }

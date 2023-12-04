@@ -1,17 +1,16 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
-import 'package:test1/classes/categories.dart';
+import 'package:flutter/foundation.dart';
+import 'package:test1/classes/category.dart' as CC;
 
 class WebApi {
   static final loginUri = Uri.parse('');
   static final addMedicineUri =
       Uri.parse('http://127.0.0.1:8000/api/admin/new_medicine');
-      static final fetchCategoriesUri =
-      Uri.parse('http://127.0.0.1:8000/api/users/category');
-
+  static final fetchCategoriesUri =
+      Uri.parse('http://127.0.0.1:8000/api/admin/categories');
 
   WebApi();
 
@@ -78,7 +77,8 @@ class WebApi {
         }));
     return response;
   }
-   Future<List<Categories>> fetchCategories() async {
+
+  Future<List<CC.Category>> fetchCategories() async {
     final response = await dio.getUri(
       fetchCategoriesUri,
       options: Options(
@@ -91,16 +91,29 @@ class WebApi {
       ),
     );
     if (response.statusCode == 200) {
-      List<Categories> categoryList = [];
+      List<CC.Category> categoryList = [];
       for (var category in response.data['message']) {
-        final categorytMap =
-            Categories.fromJson(category as Map<String, dynamic>);
-        categoryList.add(categorytMap);
+        final categoryMap =
+            CC.Category.fromJson(category as Map<String, dynamic>);
+        categoryList.add(categoryMap);
       }
       return categoryList;
     } else {
       throw Exception('Failed to load Medicines');
     }
   }
-}
 
+  Future<void> GG(int userId, List<int> medicines) async {
+    final formData =
+        FormData.fromMap({"user_id": userId, "medicines": medicines});
+    var response = await dio.postUri(Uri.parse('http://127.0.0.1:8000/api/GG'),
+        data: formData,
+        options: Options(headers: {
+          'Content-Type': 'multipart/form-data',
+          'Accept': "application/json",
+          'connection': 'keep-alive',
+          'Accept-Encoding': 'gzip, deflate, br',
+        }));
+    print(response.data);
+  }
+}

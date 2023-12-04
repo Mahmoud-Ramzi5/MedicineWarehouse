@@ -105,7 +105,7 @@ class MedicineDetailsView extends StatelessWidget {
                       ),
                       for (var category in medicine.categories)
                         Text(
-                          '${category["en_Category_name"]} ',
+                          '${category["en_category_name"]} ',
                           style: const TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,

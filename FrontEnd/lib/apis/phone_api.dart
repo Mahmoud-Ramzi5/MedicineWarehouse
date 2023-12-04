@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:http/http.dart' as http;
 import 'package:dio/dio.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:test1/classes/categories.dart';
+import 'package:http/http.dart' as http;
 import 'package:test1/classes/medicine.dart';
+import 'package:test1/classes/category.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class Api {
   static final registerUri =
@@ -14,7 +14,7 @@ class Api {
   static final fetchMedicineUri =
       Uri.parse('http://10.0.2.2:8000/api/users/medicines');
   static final fetchCategoriesUri =
-      Uri.parse('http://10.0.2.2:8000/api/users/category');
+      Uri.parse('http://10.0.2.2:8000/api/users/categories');
   static final medicineByCategoryUri =
       Uri.parse('http://10.0.2.2:8000/api/users/categoryFilter');
 
@@ -135,7 +135,7 @@ class Api {
     }
   }
 
-  Future<List<Categories>> fetchCategories() async {
+  Future<List<Category>> fetchCategories() async {
     final response = await dio.getUri(
       fetchCategoriesUri,
       options: Options(
@@ -148,11 +148,10 @@ class Api {
       ),
     );
     if (response.statusCode == 200) {
-      List<Categories> categoryList = [];
+      List<Category> categoryList = [];
       for (var category in response.data['message']) {
-        final categorytMap =
-            Categories.fromJson(category as Map<String, dynamic>);
-        categoryList.add(categorytMap);
+        final categoryMap = Category.fromJson(category as Map<String, dynamic>);
+        categoryList.add(categoryMap);
       }
       return categoryList;
     } else {
@@ -161,8 +160,8 @@ class Api {
   }
 
   Future<List<Medicine>> fetchMedicineByCategory(int id) async {
-    final response = await dio.post(
-      'http://10.0.2.2:8000/api/users/categoryFilter',
+    final response = await dio.postUri(
+      medicineByCategoryUri,
       data: ({"id": id}),
       options: Options(
         headers: {
@@ -175,16 +174,12 @@ class Api {
     );
     if (response.statusCode == 200) {
       List<Medicine> medicineList = [];
-      print(response.data);
-      for (var medicine in response.data['meesage']) {
-        print(medicine);
+      for (var medicine in response.data['message']) {
         final medicineMap = Medicine.fromJson(medicine as Map<String, dynamic>);
-        print("yes");
         medicineList.add(medicineMap);
       }
       return medicineList;
     } else {
-      print("yes");
       throw Exception('Failed to load Medicines');
     }
   }

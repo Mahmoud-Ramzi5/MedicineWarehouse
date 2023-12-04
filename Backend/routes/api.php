@@ -33,7 +33,7 @@ Route::prefix('/users')->group(function () {
     Route::controller(MedicinesController::class)->group(function () {
         Route::get('/medicines', 'ShowNotExpired')->name('ShowNotExpired');
         Route::get('/categories', 'Categories')->name('Categories');
-        Route::get('/categoryFilter', 'Selected_Category')->name('Selected_Category');
+        Route::post('/categoryFilter', 'Selected_Category')->name('Selected_Category');
         Route::get('/medicineInfo', 'DisplayMedicineInfo')->name('DisplayMedicineInfo');
 
         Route::post('/search', 'Search_Not_Expired')->name('Search_Not_Expired');
@@ -53,9 +53,8 @@ Route::prefix('/admin')->group(function () {
     Route::controller(MedicinesController::class)->group(function () {
         Route::get('/medicines', 'ShowAll')->name('ShowAll');
         Route::get('/categories', 'Categories')->name('Categories');
-        Route::get('/categoryFilter', 'Selected_Category')->name('Selected_Category');
+        Route::post('/categoryFilter', 'Selected_Category')->name('Selected_Category');
         Route::get('/medicineInfo', 'DisplayMedicineInfo')->name('DisplayMedicineInfo');
-        Route::get('/category', 'category')->name('category');
 
         Route::post('/search', 'Search_All')->name('Search_All');
     });
