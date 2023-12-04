@@ -323,8 +323,8 @@ class _WebMainViewState extends State<WebMainView> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
+                          const Padding(
+                            padding: EdgeInsets.all(8.0),
                             child: Text(
                               'Choose Quantity',
                               style: TextStyle(
@@ -359,8 +359,8 @@ class _WebMainViewState extends State<WebMainView> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
+                            const Padding(
+                              padding: EdgeInsets.all(8.0),
                               child: Text(
                                 'Choose the category',
                                 style: TextStyle(
