@@ -21,6 +21,14 @@ class CartController extends GetxController {
     bool itemExists = false;
     for (var existingItem in items) {
       if (existingItem.medicine.id == item.medicine.id) {
+        // Check if adding the quantity exceeds the available quantity
+        if (existingItem.quantity + item.quantity >
+            item.medicine.quantityAvailable) {
+          // Handle the case where the available quantity is exceeded
+          // You can show an error message, display a notification, or take any other desired action
+          return;
+        }
+
         existingItem.quantity += item.quantity;
         itemExists = true;
         break;
@@ -29,6 +37,13 @@ class CartController extends GetxController {
 
     // If the item doesn't exist, add it to the cart
     if (!itemExists) {
+      // Check if adding the quantity exceeds the available quantity
+      if (item.quantity > item.medicine.quantityAvailable) {
+        // Handle the case where the available quantity is exceeded
+        // You can show an error message, display a notification, or take any other desired action
+        return;
+      }
+
       items.add(item);
     }
   }
