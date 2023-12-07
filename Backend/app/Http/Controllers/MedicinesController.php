@@ -80,7 +80,7 @@ class MedicinesController extends Controller
     }
 
     public function DisplayMedicineInfo(Request $request)
-    {   
+    {
         // Get medicine id
         $id = $request->input('id');
         // Find medicine
