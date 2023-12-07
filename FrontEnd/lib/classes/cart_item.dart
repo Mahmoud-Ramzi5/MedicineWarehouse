@@ -5,16 +5,4 @@ class CartItem {
   int quantity;
 
   CartItem({required this.medicine, required this.quantity});
-
-  void incrementQuantity() {
-    if (quantity < medicine.quantityAvailable) {
-      quantity++;
-    }
-  }
-
-  void decrementQuantity() {
-    if (quantity > 0) {
-      quantity--;
-    }
-  }
 }

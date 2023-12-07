@@ -8,6 +8,7 @@ import 'package:test1/views/phone/select_categories_view.dart';
 import 'package:test1/views/phone/medicine_details_view.dart';
 import 'package:test1/views/phone/register_view.dart';
 import 'package:test1/views/phone/view_category.dart';
+import 'package:test1/views/phone/view_orders.dart';
 import 'package:test1/views/web/web_login_view.dart';
 import 'package:test1/views/web/web_main_view.dart';
 
@@ -21,6 +22,7 @@ void main() {
       mainRoute: (context) => const MainView(),
       cartRoute: (context) => const CartView(),
       selectCategoriesRoute: (context) => const SelectCategoriesView(),
+      viewOrdersRoute: (context) => const ViewOrders(),
     },
     onGenerateRoute: (settings) {
       if (settings.name == medicineDetailsRoute) {
