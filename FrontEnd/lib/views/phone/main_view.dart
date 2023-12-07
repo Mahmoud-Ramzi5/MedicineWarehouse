@@ -1,6 +1,9 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:test1/apis/phone_api.dart';
+import 'package:test1/classes/cart_controller.dart';
+import 'package:test1/classes/cart_item.dart';
 import 'package:test1/classes/medicine.dart';
 import 'package:test1/constants/routes.dart';
 
@@ -13,10 +16,14 @@ class MainView extends StatefulWidget {
 
 class _MainViewState extends State<MainView> {
   late final TextEditingController _search;
+  late CartController cartController;
   String searchQuery = '';
   @override
   void initState() {
     _search = TextEditingController();
+    cartController = Get.put(
+      CartController(),
+    );
     super.initState();
   }
 
@@ -48,7 +55,7 @@ class _MainViewState extends State<MainView> {
           Navigator.of(context).pushNamed(cartRoute);
         },
         child: const Icon(
-          Icons.shopping_cart,
+          Icons.shopping_cart_checkout,
           color: Colors.white,
         ),
       ),
@@ -56,6 +63,7 @@ class _MainViewState extends State<MainView> {
         child: ListView(
           children: [
             Container(
+              margin: const EdgeInsets.all(10),
               height: 120,
               width: 120,
               decoration: const ShapeDecoration(
@@ -85,6 +93,22 @@ class _MainViewState extends State<MainView> {
               ),
               onTap: () {
                 Navigator.of(context).pushNamed(selectCategoriesRoute);
+              },
+            ),
+            ListTile(
+              title: const Text(
+                'My Orders',
+                style: TextStyle(
+                  fontSize: 20,
+                  color: Colors.green,
+                ),
+              ),
+              leading: const Icon(
+                Icons.shopping_cart,
+                color: Colors.green,
+              ),
+              onTap: () {
+                Navigator.of(context).pushNamed(viewOrdersRoute);
               },
             ),
             ListTile(
@@ -170,7 +194,7 @@ class _MainViewState extends State<MainView> {
             final medicines = snapshot.data;
             final filteredMedicines = filterMedicines(medicines!);
             return Padding(
-              padding: const EdgeInsets.all(15.0),
+              padding: const EdgeInsets.all(10),
               child: SingleChildScrollView(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -209,19 +233,16 @@ class _MainViewState extends State<MainView> {
                           child: Row(
                             children: [
                               Container(
-                                  margin: const EdgeInsets.only(
-                                    top: 9,
-                                    bottom: 9,
-                                    left: 9,
-                                  ),
-                                  height: 99,
-                                  width: 108,
-                                  decoration: const ShapeDecoration(
-                                      shape: ContinuousRectangleBorder(),
-                                      color: Colors.green),
-                                  child: filteredMedicines[index].image),
+                                margin: const EdgeInsets.all(10),
+                                height: 100,
+                                width: 100,
+                                decoration: const ShapeDecoration(
+                                    shape: ContinuousRectangleBorder(),
+                                    color: Colors.green),
+                                child: filteredMedicines[index].image,
+                              ),
                               Padding(
-                                padding: const EdgeInsets.all(9.0),
+                                padding: const EdgeInsets.all(10),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
@@ -230,33 +251,28 @@ class _MainViewState extends State<MainView> {
                                         Text(
                                           '${filteredMedicines[index].medicineTranslations["en"]["commercial_name"]}',
                                           style: const TextStyle(
-                                              fontSize: 18,
+                                              fontSize: 20,
                                               fontWeight: FontWeight.bold),
                                         ),
                                         Padding(
-                                          padding: const EdgeInsets.only(
-                                            top: 18,
-                                            bottom: 18,
-                                            left: 9,
-                                            right: 18,
-                                          ),
+                                          padding: const EdgeInsets.all(20),
                                           child: Text(
                                             'Price: ${filteredMedicines[index].price}',
                                             style: const TextStyle(
-                                                fontSize: 18,
+                                                fontSize: 20,
                                                 fontWeight: FontWeight.bold),
                                           ),
                                         ),
                                         Text(
                                           'Quantity: ${filteredMedicines[index].quantityAvailable}',
                                           style: const TextStyle(
-                                              fontSize: 18,
+                                              fontSize: 20,
                                               fontWeight: FontWeight.bold),
                                         ),
                                       ],
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.only(left: 18),
+                                      padding: const EdgeInsets.only(left: 20),
                                       child: Column(
                                         children: [
                                           IconButton(
@@ -269,6 +285,20 @@ class _MainViewState extends State<MainView> {
                                             },
                                             icon: const Icon(
                                               Icons.arrow_forward_ios,
+                                              color: Colors.green,
+                                            ),
+                                          ),
+                                          IconButton(
+                                            onPressed: () {
+                                              CartItem cartItem = CartItem(
+                                                  medicine:
+                                                      filteredMedicines[index],
+                                                  quantity: 1);
+                                              cartController
+                                                  .addToCart(cartItem);
+                                            },
+                                            icon: const Icon(
+                                              Icons.add_shopping_cart_outlined,
                                               color: Colors.green,
                                             ),
                                           ),

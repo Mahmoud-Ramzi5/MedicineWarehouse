@@ -53,6 +53,7 @@ class _RegisterViewState extends State<RegisterView> {
       body: Form(
         key: _formField,
         child: SingleChildScrollView(
+          physics: const PageScrollPhysics(),
           child: Padding(
             padding: const EdgeInsets.all(18.0),
             child: Column(
