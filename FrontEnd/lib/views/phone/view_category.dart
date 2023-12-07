@@ -29,13 +29,20 @@ class _ViewCategotyState extends State<ViewCategoty> {
               shrinkWrap: true,
               itemBuilder: (context, index) {
                 return Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    child: Text(
-                        'Commercial Name: ${medicines?[index].medicineTranslations['en']['commercial_name']}'),
-                  ),
-                );
+                    padding: const EdgeInsets.all(8),
+                    child: Container(
+                      margin: const EdgeInsets.all(5.0),
+                      height: 30,
+                      decoration: const ShapeDecoration(
+                          shape: StadiumBorder(), color: Colors.green),
+                      alignment: Alignment.center,
+                      child: Text(
+                          '${medicines?[index].medicineTranslations['en']['commercial_name']}',
+                          style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold)),
+                    ));
               },
             );
           }

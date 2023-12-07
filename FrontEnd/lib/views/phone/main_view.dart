@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:test1/apis/phone_api.dart';
+import 'package:test1/classes/cart_controller.dart';
 import 'package:test1/classes/medicine.dart';
 import 'package:test1/constants/routes.dart';
 
@@ -13,10 +15,12 @@ class MainView extends StatefulWidget {
 
 class _MainViewState extends State<MainView> {
   late final TextEditingController _search;
+  late CartController cartController;
   String searchQuery = '';
   @override
   void initState() {
     _search = TextEditingController();
+    cartController = Get.put(CartController());
     super.initState();
   }
 
@@ -256,7 +260,7 @@ class _MainViewState extends State<MainView> {
                                       ],
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.only(left: 18),
+                                      padding: const EdgeInsets.only(left: 50),
                                       child: Column(
                                         children: [
                                           IconButton(

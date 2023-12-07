@@ -1,16 +1,27 @@
-import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:test1/classes/cart_controller.dart';
+import 'package:test1/classes/cart_item.dart';
 import 'package:test1/classes/medicine.dart';
-import 'package:test1/controller/medicine_controller.dart';
 
-class MedicineDetailsView extends StatelessWidget {
+class MedicineDetailsView extends StatefulWidget {
   final Medicine medicine;
-  final MedicineController medicineController = Get.put(
-    MedicineController(),
-    permanent: true,
-  );
+  const MedicineDetailsView({super.key, required this.medicine});
 
-  MedicineDetailsView({super.key, required this.medicine});
+  @override
+  State<MedicineDetailsView> createState() => _MedicineDetailsViewState();
+}
+
+class _MedicineDetailsViewState extends State<MedicineDetailsView> {
+  late CartController cartController;
+  late CartItem cartItem;
+
+  @override
+  void initState() {
+    cartController = Get.find<CartController>();
+    cartItem = CartItem(medicine: widget.medicine, quantity: 0);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +38,7 @@ class MedicineDetailsView extends StatelessWidget {
                 height: 243,
                 width: 324,
                 color: Colors.green,
-                child: medicine.image,
+                child: widget.medicine.image,
               ),
               Container(
                 margin: const EdgeInsets.all(10),
@@ -40,7 +51,7 @@ class MedicineDetailsView extends StatelessWidget {
                   ),
                 ),
                 child: Text(
-                  'Commercial Name: ${medicine.medicineTranslations["en"]["commercial_name"]}',
+                  'Commercial Name: ${widget.medicine.medicineTranslations["en"]["commercial_name"]}',
                   style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -58,7 +69,7 @@ class MedicineDetailsView extends StatelessWidget {
                   ),
                 ),
                 child: Text(
-                  'Scientific Name: ${medicine.medicineTranslations["en"]["scientific_name"]}',
+                  'Scientific Name: ${widget.medicine.medicineTranslations["en"]["scientific_name"]}',
                   style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -76,7 +87,7 @@ class MedicineDetailsView extends StatelessWidget {
                   ),
                 ),
                 child: Text(
-                  'Manufacture: ${medicine.medicineTranslations["en"]["manufacture_company"]}',
+                  'Manufacture: ${widget.medicine.medicineTranslations["en"]["manufacture_company"]}',
                   style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -87,31 +98,32 @@ class MedicineDetailsView extends StatelessWidget {
                 child: Container(
                   margin: const EdgeInsets.all(10),
                   alignment: Alignment.center,
-                  height: 30,
                   width: 300,
                   decoration: const ShapeDecoration(
                     shape: RoundedRectangleBorder(
                       side: BorderSide(color: Colors.green, width: 2),
                     ),
                   ),
-                  child: Column(
-                    children: <Widget>[
-                      const Text(
-                        'Categories: ',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      for (var category in medicine.categories)
-                        Text(
-                          '${category["en_category_name"]} ',
-                          style: const TextStyle(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: <Widget>[
+                        const Text(
+                          'Categories: ',
+                          style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                    ],
+                        for (var category in widget.medicine.categories)
+                          Text(
+                            '${category["en_category_name"]} ',
+                            style: const TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -126,7 +138,7 @@ class MedicineDetailsView extends StatelessWidget {
                   ),
                 ),
                 child: Text(
-                  'Quantity: ${medicine.quantityAvailable}',
+                  'Quantity: ${widget.medicine.quantityAvailable}',
                   style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -144,7 +156,7 @@ class MedicineDetailsView extends StatelessWidget {
                   ),
                 ),
                 child: Text(
-                  'Expiry Date: ${medicine.expiryDate}',
+                  'Expiry Date: ${widget.medicine.expiryDate}',
                   style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -162,7 +174,7 @@ class MedicineDetailsView extends StatelessWidget {
                   ),
                 ),
                 child: Text(
-                  'Price: ${medicine.price}',
+                  'Price: ${widget.medicine.price}',
                   style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -180,9 +192,9 @@ class MedicineDetailsView extends StatelessWidget {
                   children: [
                     IconButton(
                       onPressed: () {
-                        if (medicineController.counter > 0) {
-                          medicineController.decrement();
-                        }
+                        setState(() {
+                          cartItem.decrementQuantity();
+                        });
                       },
                       icon: const Icon(
                         Icons.remove,
@@ -200,22 +212,19 @@ class MedicineDetailsView extends StatelessWidget {
                           side: BorderSide(color: Colors.green, width: 2),
                         ),
                       ),
-                      child: GetBuilder<MedicineController>(
-                        builder: (controller) => Text(
-                          '${medicineController.counter}',
-                          style: const TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                          ),
+                      child: Text(
+                        '${cartItem.quantity}',
+                        style: const TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
                     IconButton(
                       onPressed: () {
-                        if (medicineController.counter <
-                            medicine.quantityAvailable) {
-                          medicineController.increment();
-                        }
+                        setState(() {
+                          cartItem.incrementQuantity();
+                        });
                       },
                       icon: const Icon(
                         Icons.add,
@@ -227,7 +236,9 @@ class MedicineDetailsView extends StatelessWidget {
                 ),
               ),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  cartController.addToCart(cartItem);
+                },
                 child: const Icon(
                   Icons.add_shopping_cart_outlined,
                 ),

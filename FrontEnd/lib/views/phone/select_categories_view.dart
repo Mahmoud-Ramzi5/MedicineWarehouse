@@ -35,7 +35,13 @@ class _SelectCategoriesViewState extends State<SelectCategoriesView> {
                         Navigator.of(context).pushNamed(viewCategoriesRoute,
                             arguments: categories[index].id);
                       },
-                      child: Text(categories![index].enCategoryName),
+                      child: Text(
+                        categories![index].enCategoryName,
+                        style: const TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ),
                   );
                 },
