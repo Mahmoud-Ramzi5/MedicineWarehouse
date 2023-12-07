@@ -9,6 +9,7 @@ use App\Models\Medicine;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Order;
+use App\Models\OrderedMedicine;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -112,6 +113,11 @@ class UserController extends Controller
         $order->Medicines()->attach($medicines);
         // Set new values
         foreach ($validated['medicines'] as $index => $value) {
+            $ordered_medicine = OrderedMedicine::create([
+                'order_id' => $order->id,
+                'medicine_id' => $index,
+                'quantity'=> $value
+            ]);
             $medicine = Medicine::find($index);
             $quantity = $medicine->quantity_available;
             $reserved = $medicine->quantity_allocated;

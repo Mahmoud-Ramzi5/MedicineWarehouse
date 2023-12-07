@@ -46,4 +46,10 @@ class User extends Authenticatable
     protected $casts = [
         'password' => 'hashed',
     ];
+
+    // OneToMany Relation
+    public function Orders()
+    {
+        return $this->hasMany(Order::class, "user_id");
+    }
 }

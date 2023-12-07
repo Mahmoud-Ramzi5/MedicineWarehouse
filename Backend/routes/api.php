@@ -49,6 +49,8 @@ Route::prefix('/admin')->group(function () {
 
         Route::post('/new_medicine', 'Add_Medicine');
         Route::delete('/delete_medicine', 'Delete_Medicine');
+
+        Route::post('/update_order', 'Update_Order');
     });
     Route::controller(MedicinesController::class)->group(function () {
         Route::get('/medicines', 'ShowAll')->name('ShowAll');

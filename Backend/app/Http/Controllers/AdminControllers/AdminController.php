@@ -5,7 +5,10 @@ use App\Http\Controllers\Controller;
 
 use App\Http\Requests\MedicineRequest;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use App\Enums\OrderEnum;
 use App\Models\Admin;
+use App\Models\Order;
 use App\Models\Category;
 use App\Models\Medicine;
 use App\Models\MedicineTranslation;
@@ -14,8 +17,10 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
+function DoNothing() {;}
 class AdminController extends Controller
 {
+
     function login(Request $request)
     {
         // Validate Input
@@ -118,11 +123,100 @@ class AdminController extends Controller
         // Delete Medicine
         $id = $request->input('id');
         $medicine = Medicine::find($id);
+        if ($medicine == null) {
+            return response()->json([
+                'message' => 'Invalid Medicine'
+            ], 400);
+        }
         $medicine->delete();
         // Response
         return response()->json([
             'message' => 'Successfully deleted medicine',
         ], 200);
+    }
+
+    public function Update_Order(Request $request) {
+        $message = "";
+        $validated = $request->validate([
+            'id' => 'required',
+            'status' => ['required', Rule::enum(OrderEnum::class)],
+            'is_paid' => 'required'
+        ]);
+        $id = $validated['id'];
+        $status = $validated['status'];
+        $order = Order::find($id);
+        if ($order == null) {
+            return response()->json([
+                'message' => 'Invalid Order'
+            ], 400);
+        }
+
+        if ($order->is_paid == 0 && $validated['is_paid'] == 1) {
+            $order->is_paid = $validated['is_paid'];
+            $order->save();
+            $message = "Updated order pay status & ";
+        }
+        else if ($order->is_paid == $validated['is_paid']) {
+            DoNothing();
+        }
+        else {
+            return response()->json([
+                'message' => 'User already paid for Order',
+            ], 400);
+        }
+
+        if ($order->status == $status) {
+            DoNothing();
+        }
+        else if ($order->status == 'RECEIVED') {
+            return response()->json([
+                'message' => $message . 'Order has already been SENT and RECEIVED',
+            ], 400);
+        }
+        else {
+            if ($order->status == 'PREPARING') {
+                if ($status == 'SENT') {
+                    $medicines = $order->Medicines;
+                    foreach ($medicines as $medicine) {
+                        $ordered_medicine =  $order->OrderedMedicine()->where('medicine_id', $medicine->id)->first();
+                        $total_quantity = $medicine->quantity_total;
+                        $allocated_quantity = $medicine->quantity_allocated;
+                        $medicine->quantity_total = $total_quantity - ($ordered_medicine->quantity);
+                        $medicine->quantity_allocated = $allocated_quantity - ($ordered_medicine->quantity);
+                        $medicine->save();
+                    }
+                    $order->update([
+                        'status' => $status
+                    ]);
+                }
+                else {
+                    return response()->json([
+                        'message' => $message . 'Invalid Order Status',
+                    ], 400);
+                }
+            }
+            else if ($order->status == 'SENT') {
+                if ($status == 'RECEIVED') {
+                    $order->update([
+                        'status' => $status
+                    ]);
+                }
+                else {
+                    return response()->json([
+                        'message' => $message . 'Invalid Order Status',
+                    ], 400);
+                }
+            }
+            else {
+                return response()->json([
+                    'message' => $message . 'Could not update order status; Unkown Error',
+                ], 400);
+            }
+        }
+        return response()->json([
+            'message' => 'Successfully: ' . $message . 'updated order status',
+        ], 200);
+
     }
 
     /*public function Add_Categories(Request $request)
@@ -171,4 +265,6 @@ class AdminController extends Controller
             ]);
         }
     }*/
+
+
 }
