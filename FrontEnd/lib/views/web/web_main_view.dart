@@ -9,6 +9,7 @@ import 'package:test1/apis/phone_api.dart';
 import 'package:test1/apis/web_api.dart';
 import 'package:test1/classes/category.dart' as CC;
 import 'package:test1/customWidgets/text_forn_widget.dart';
+import 'package:test1/views/web/web_main.dart';
 
 class WebMainView extends StatefulWidget {
   const WebMainView({super.key});
@@ -407,30 +408,50 @@ class _WebMainViewState extends State<WebMainView> {
                       ),
                     ),
                   ),
-                  ElevatedButton(
+                 ElevatedButton(
                     onPressed: () {
-                      if (_formField.currentState!.validate() == true) {
-                        WebApi().addMedicine(
-                          _enCommercialName.text,
-                          _arCommercialName.text,
-                          _enScientificName.text,
-                          _arScientificName.text,
-                          _enManufactureCompany.text,
-                          _arManufactureCompany.text,
-                          "${selectedDate.toLocal().toString()}".split(' ')[0],
-                          double.parse(_priceController.text),
-                          quantity,
-                          [1, 18],
-                          webImage,
-                          webImageName,
-                        );
-                      }
+                      if (_formField.currentState!.validate()) {
+    WebApi().addMedicine(
+      _enCommercialName.text,
+      _arCommercialName.text,
+      _enScientificName.text,
+      _arScientificName.text,
+      _enManufactureCompany.text,
+      _arManufactureCompany.text,
+      "${selectedDate.toLocal().toString()}".split(' ')[0],
+      double.parse(_priceController.text),
+      quantity,
+      [1, 18],
+      webImage,
+      webImageName,
+    );
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Medicine Added Successfully'),
+      ),
+    );
+
+    // Navigate back to home
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(
+        builder: (context) => const Web_Main(),
+      ),
+    );
+  } else {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('No Medicine Was Added'),
+      ),
+    );
+  }
                     },
                     child: const Text(
                       'Add Medicine',
                       style: TextStyle(fontWeight: FontWeight.bold),
+                      
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
@@ -440,4 +461,3 @@ class _WebMainViewState extends State<WebMainView> {
     );
   }
 }
-//

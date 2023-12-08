@@ -10,6 +10,7 @@ import 'package:test1/views/phone/register_view.dart';
 import 'package:test1/views/phone/view_category.dart';
 import 'package:test1/views/phone/view_orders.dart';
 import 'package:test1/views/web/web_login_view.dart';
+import 'package:test1/views/web/web_main.dart';
 import 'package:test1/views/web/web_main_view.dart';
 
 void main() {
@@ -42,6 +43,6 @@ void main() {
         );
       }
     },
-    home: const LoginView(),
+    home: const Web_Main(),
   ));
 }

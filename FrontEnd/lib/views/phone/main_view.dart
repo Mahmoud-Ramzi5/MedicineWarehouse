@@ -113,7 +113,7 @@ class _MainViewState extends State<MainView> {
             ),
             ListTile(
               title: const Text(
-                'Log out',
+                'Logout',
                 style: TextStyle(
                   fontSize: 20,
                   color: Colors.green,
@@ -129,7 +129,7 @@ class _MainViewState extends State<MainView> {
                   builder: (context) {
                     return AlertDialog(
                       alignment: Alignment.center,
-                      title: const Text('Log out'),
+                      title: const Text('Logout'),
                       content: const Text('Are you sure you want to logout?'),
                       actions: [
                         TextButton(

@@ -1,9 +1,12 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:dio/dio.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/foundation.dart';
 import 'package:test1/classes/category.dart' as CC;
+import 'package:test1/classes/medicine.dart';
+import 'dart:typed_data'; 
 
 class WebApi {
   static final loginUri = Uri.parse('');
@@ -11,6 +14,8 @@ class WebApi {
       Uri.parse('http://127.0.0.1:8000/api/admin/new_medicine');
   static final fetchCategoriesUri =
       Uri.parse('http://127.0.0.1:8000/api/admin/categories');
+      static final fetchMedicineWebUri =
+      Uri.parse('http://127.0.0.1:8000/api/admin/medicines');
 
   WebApi();
 
@@ -102,6 +107,34 @@ class WebApi {
       throw Exception('Failed to load Medicines');
     }
   }
+
+  Future<List<Medicine>> fetchMedicineWeb() async {
+    const storage = FlutterSecureStorage();
+    var token = await storage.read(key: 'Bearer Token');
+    final response = await dio.getUri(
+      fetchMedicineWebUri,
+      options: Options(
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Accept': "application/json",
+          'connection': 'keep-alive',
+          'Accept-Encoding': 'gzip, deflate, br',
+          'Authorization': 'Bearer $token'
+        },
+      ),
+    );
+    if (response.statusCode == 200) {
+      List<Medicine> medicineList = [];
+      for (var medicine in response.data['data']) {
+        final medicineMap = Medicine.fromJson(medicine as Map<String, dynamic>);
+        medicineList.add(medicineMap);
+      }
+      return medicineList;
+    } else {
+      throw Exception('Failed to load Medicines');
+    }
+  }
+
 
   Future<void> GG(int userId, List<int> medicines) async {
     final formData =

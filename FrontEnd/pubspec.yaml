@@ -31,7 +31,7 @@ dependencies:
   flutter:
     sdk: flutter
   numberpicker: ^2.0.0
-
+  badges: ^2.0.1
 
 
 
