@@ -9,7 +9,8 @@ import 'package:test1/classes/medicine.dart';
 import 'dart:typed_data'; 
 
 class WebApi {
-  static final loginUri = Uri.parse('');
+  static final loginUri = 
+  Uri.parse('http://127.0.0.1:8000/api/admin/login');
   static final addMedicineUri =
       Uri.parse('http://127.0.0.1:8000/api/admin/new_medicine');
   static final fetchCategoriesUri =
@@ -19,10 +20,13 @@ class WebApi {
 
   WebApi();
 
-  Future<bool> login(String username, String password) async {
+  
+  Future<dynamic> login(
+    String userName,
+    String password,
+  ) async {
     var response = await http.post(
       loginUri,
-      encoding: const Utf8Codec(),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Accept': "application/json",
@@ -31,16 +35,16 @@ class WebApi {
       },
       body: jsonEncode(
         {
-          "username": username,
+          "userName": userName,
           "password": password,
         },
       ),
     );
-    if (response.statusCode == 200) {
-      return true;
-    } else {
-      return false;
-    }
+    const storage = FlutterSecureStorage();
+    final body = json.decode(response.body);
+    final token = body['access_token'];
+    await storage.write(key: 'Bearer Token', value: token);
+    return response;
   }
 
   final dio = Dio();

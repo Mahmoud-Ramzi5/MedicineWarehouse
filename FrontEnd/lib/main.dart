@@ -11,7 +11,7 @@ import 'package:test1/views/phone/view_category.dart';
 import 'package:test1/views/phone/view_orders.dart';
 import 'package:test1/views/web/web_login_view.dart';
 import 'package:test1/views/web/web_main.dart';
-import 'package:test1/views/web/web_main_view.dart';
+import 'package:test1/views/web/add_medicine.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -24,6 +24,7 @@ void main() {
       cartRoute: (context) => const CartView(),
       selectCategoriesRoute: (context) => const SelectCategoriesView(),
       viewOrdersRoute: (context) => const ViewOrders(),
+      mainwebRoute:(context) => const Web_Main(),
     },
     onGenerateRoute: (settings) {
       if (settings.name == medicineDetailsRoute) {
@@ -43,6 +44,6 @@ void main() {
         );
       }
     },
-    home: const Web_Main(),
+    home: const WebLoginView(),
   ));
 }

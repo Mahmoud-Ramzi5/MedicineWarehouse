@@ -5,20 +5,19 @@ import 'package:flutter/foundation.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:numberpicker/numberpicker.dart';
 import 'package:dotted_border/dotted_border.dart';
-import 'package:test1/apis/phone_api.dart';
 import 'package:test1/apis/web_api.dart';
 import 'package:test1/classes/category.dart' as CC;
 import 'package:test1/customWidgets/text_forn_widget.dart';
 import 'package:test1/views/web/web_main.dart';
 
-class WebMainView extends StatefulWidget {
-  const WebMainView({super.key});
+class Add_Medicine extends StatefulWidget {
+  const Add_Medicine({super.key});
 
   @override
-  State<WebMainView> createState() => _WebMainViewState();
+  State<Add_Medicine> createState() => _Add_MedicineState();
 }
 
-class _WebMainViewState extends State<WebMainView> {
+class _Add_MedicineState extends State<Add_Medicine> {
   late final _formField = GlobalKey<FormState>();
   Uint8List webImage = Uint8List(8);
   String webImageName = "default.png";
