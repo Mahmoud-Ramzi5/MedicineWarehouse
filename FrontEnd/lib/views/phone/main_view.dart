@@ -81,22 +81,6 @@ class _MainViewState extends State<MainView> {
             ),
             ListTile(
               title: const Text(
-                'Medicine Categories',
-                style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.green,
-                ),
-              ),
-              leading: const Icon(
-                Icons.category,
-                color: Colors.green,
-              ),
-              onTap: () {
-                Navigator.of(context).pushNamed(selectCategoriesRoute);
-              },
-            ),
-            ListTile(
-              title: const Text(
                 'My Orders',
                 style: TextStyle(
                   fontSize: 20,
@@ -113,7 +97,7 @@ class _MainViewState extends State<MainView> {
             ),
             ListTile(
               title: const Text(
-                'Logout',
+                'Log out',
                 style: TextStyle(
                   fontSize: 20,
                   color: Colors.green,
@@ -129,7 +113,7 @@ class _MainViewState extends State<MainView> {
                   builder: (context) {
                     return AlertDialog(
                       alignment: Alignment.center,
-                      title: const Text('Logout'),
+                      title: const Text('Log out'),
                       content: const Text('Are you sure you want to logout?'),
                       actions: [
                         TextButton(
@@ -193,19 +177,18 @@ class _MainViewState extends State<MainView> {
           } else {
             final medicines = snapshot.data;
             final filteredMedicines = filterMedicines(medicines!);
-            return Padding(
-              padding: const EdgeInsets.all(10),
-              child: SingleChildScrollView(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const SizedBox(height: 5),
-                    SearchBar(
+            return SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(5),
+                    child: SearchBar(
                       controller: _search,
                       hintText: 'Search',
                       leading: const Icon(Icons.search),
                       shape: const MaterialStatePropertyAll(
-                        StadiumBorder(),
+                        BeveledRectangleBorder(),
                       ),
                       textStyle: const MaterialStatePropertyAll(
                         TextStyle(
@@ -223,99 +206,145 @@ class _MainViewState extends State<MainView> {
                         });
                       },
                     ),
-                    ListView.builder(
-                      physics: const PageScrollPhysics(),
-                      padding: const EdgeInsets.all(10),
-                      shrinkWrap: true,
-                      itemBuilder: (context, index) {
-                        return Card(
-                          elevation: 5,
-                          child: Row(
-                            children: [
-                              Container(
-                                margin: const EdgeInsets.all(10),
-                                height: 100,
-                                width: 100,
-                                decoration: const ShapeDecoration(
-                                    shape: ContinuousRectangleBorder(),
-                                    color: Colors.green),
-                                child: filteredMedicines[index].image,
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(10),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Column(
-                                      children: [
-                                        Text(
-                                          '${filteredMedicines[index].medicineTranslations["en"]["commercial_name"]}',
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(5),
+                    child: SizedBox(
+                      height: 50,
+                      width: 400,
+                      child: FutureBuilder(
+                        future: Api().fetchCategories(),
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return const Center(
+                                child: CircularProgressIndicator());
+                          } else if (snapshot.hasError) {
+                            return Center(
+                                child: Text('Error: ${snapshot.error}'));
+                          } else {
+                            final categories = snapshot.data;
+                            return ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: categories?.length,
+                              physics: const PageScrollPhysics(),
+                              shrinkWrap: true,
+                              itemBuilder: (context, index) {
+                                return Padding(
+                                  padding: const EdgeInsets.all(8),
+                                  child: ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pushNamed(
+                                          viewCategoriesRoute,
+                                          arguments: categories[index].id);
+                                    },
+                                    child: Text(
+                                      categories![index].enCategoryName,
+                                      style: const TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              },
+                            );
+                          }
+                        },
+                      ),
+                    ),
+                  ),
+                  ListView.builder(
+                    physics: const PageScrollPhysics(),
+                    padding: const EdgeInsets.all(10),
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      return Card(
+                        elevation: 5,
+                        child: Row(
+                          children: [
+                            Container(
+                              margin: const EdgeInsets.all(10),
+                              height: 100,
+                              width: 100,
+                              decoration: const ShapeDecoration(
+                                  shape: ContinuousRectangleBorder(),
+                                  color: Colors.green),
+                              child: filteredMedicines[index].image,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(10),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Column(
+                                    children: [
+                                      Text(
+                                        '${filteredMedicines[index].medicineTranslations["en"]["commercial_name"]}',
+                                        style: const TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(20),
+                                        child: Text(
+                                          'Price: ${filteredMedicines[index].price}',
                                           style: const TextStyle(
                                               fontSize: 20,
                                               fontWeight: FontWeight.bold),
                                         ),
-                                        Padding(
-                                          padding: const EdgeInsets.all(20),
-                                          child: Text(
-                                            'Price: ${filteredMedicines[index].price}',
-                                            style: const TextStyle(
-                                                fontSize: 20,
-                                                fontWeight: FontWeight.bold),
+                                      ),
+                                      Text(
+                                        'Quantity: ${filteredMedicines[index].quantityAvailable}',
+                                        style: const TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ],
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 20),
+                                    child: Column(
+                                      children: [
+                                        IconButton(
+                                          onPressed: () {
+                                            Navigator.of(context).pushNamed(
+                                              medicineDetailsRoute,
+                                              arguments:
+                                                  filteredMedicines[index],
+                                            );
+                                          },
+                                          icon: const Icon(
+                                            Icons.arrow_forward_ios,
+                                            color: Colors.green,
                                           ),
                                         ),
-                                        Text(
-                                          'Quantity: ${filteredMedicines[index].quantityAvailable}',
-                                          style: const TextStyle(
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.bold),
+                                        IconButton(
+                                          onPressed: () {
+                                            CartItem cartItem = CartItem(
+                                                medicine:
+                                                    filteredMedicines[index],
+                                                quantity: 1);
+                                            cartController.addToCart(cartItem);
+                                          },
+                                          icon: const Icon(
+                                            Icons.add_shopping_cart_outlined,
+                                            color: Colors.green,
+                                          ),
                                         ),
                                       ],
                                     ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 20),
-                                      child: Column(
-                                        children: [
-                                          IconButton(
-                                            onPressed: () {
-                                              Navigator.of(context).pushNamed(
-                                                medicineDetailsRoute,
-                                                arguments:
-                                                    filteredMedicines[index],
-                                              );
-                                            },
-                                            icon: const Icon(
-                                              Icons.arrow_forward_ios,
-                                              color: Colors.green,
-                                            ),
-                                          ),
-                                          IconButton(
-                                            onPressed: () {
-                                              CartItem cartItem = CartItem(
-                                                  medicine:
-                                                      filteredMedicines[index],
-                                                  quantity: 1);
-                                              cartController
-                                                  .addToCart(cartItem);
-                                            },
-                                            icon: const Icon(
-                                              Icons.add_shopping_cart_outlined,
-                                              color: Colors.green,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
-                        );
-                      },
-                      itemCount: filteredMedicines.length,
-                    ),
-                  ],
-                ),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                    itemCount: filteredMedicines.length,
+                  ),
+                ],
               ),
             );
           }

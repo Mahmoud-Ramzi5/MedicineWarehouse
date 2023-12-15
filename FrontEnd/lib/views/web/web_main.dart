@@ -38,7 +38,7 @@ class _Web_MainState extends State<Web_Main> {
       } else {
         return medicines
             .where((medicine) => medicine.medicineTranslations["en"]
-                ["commercial_name"]
+                    ["commercial_name"]
                 .toString()
                 .toLowerCase()
                 .contains(searchQuery))
@@ -69,7 +69,7 @@ class _Web_MainState extends State<Web_Main> {
                     ),
                   );
                 },
-                child: const Text('LogOut'),
+                child: const Text('Log Out'),
               ),
             ],
           );
@@ -117,27 +117,27 @@ class _Web_MainState extends State<Web_Main> {
             labelType: NavigationRailLabelType.all,
             destinations: const [
               NavigationRailDestination(
-                icon: Icon(Icons.home),
+                icon: Icon(Icons.home, color: Colors.white),
                 label: Text('Home'),
               ),
               NavigationRailDestination(
-                icon: Icon(Icons.add),
+                icon: Icon(Icons.add, color: Colors.white),
                 label: Text('Add Medicine'),
               ),
               NavigationRailDestination(
-                icon: Icon(Icons.shopping_cart),
+                icon: Icon(Icons.shopping_cart, color: Colors.white),
                 label: Text('Orders'),
               ),
               NavigationRailDestination(
-                icon: Icon(Icons.insert_chart),
+                icon: Icon(Icons.insert_chart, color: Colors.white),
                 label: Text('Reports'),
               ),
               NavigationRailDestination(
-                icon: Icon(Icons.language),
+                icon: Icon(Icons.language, color: Colors.white),
                 label: Text('Language'),
               ),
               NavigationRailDestination(
-                icon: Icon(Icons.logout),
+                icon: Icon(Icons.logout, color: Colors.white),
                 label: Text('Log Out'),
               ),
             ],
@@ -159,21 +159,33 @@ class _Web_MainState extends State<Web_Main> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const SizedBox(height: 5),
                           Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: TextFormField(
-                              controller: _search,
-                              decoration: InputDecoration(
+                            padding: const EdgeInsets.all(5),
+                            child: SizedBox(
+                              width: 1500,
+                              child: SearchBar(
+                                controller: _search,
                                 hintText: 'Search',
-                                prefixIcon: const Icon(Icons.search),
-                                border: const OutlineInputBorder(),
+                                leading: const Icon(Icons.search),
+                                shape: const MaterialStatePropertyAll(
+                                  BeveledRectangleBorder(),
+                                ),
+                                textStyle: const MaterialStatePropertyAll(
+                                  TextStyle(
+                                    fontSize: 20,
+                                  ),
+                                ),
+                                side: const MaterialStatePropertyAll(
+                                  BorderSide(
+                                    color: Colors.green,
+                                  ),
+                                ),
+                                onSubmitted: (value) {
+                                  setState(() {
+                                    searchQuery = value;
+                                  });
+                                },
                               ),
-                              onChanged: (value) {
-                                setState(() {
-                                  searchQuery = value;
-                                });
-                              },
                             ),
                           ),
                           ListView.builder(

@@ -4,7 +4,6 @@ import 'package:test1/constants/routes.dart';
 import 'package:test1/views/phone/cart_view.dart';
 import 'package:test1/views/phone/login_view.dart';
 import 'package:test1/views/phone/main_view.dart';
-import 'package:test1/views/phone/select_categories_view.dart';
 import 'package:test1/views/phone/medicine_details_view.dart';
 import 'package:test1/views/phone/register_view.dart';
 import 'package:test1/views/phone/view_category.dart';
@@ -22,9 +21,8 @@ void main() {
       registerRoute: (context) => const RegisterView(),
       mainRoute: (context) => const MainView(),
       cartRoute: (context) => const CartView(),
-      selectCategoriesRoute: (context) => const SelectCategoriesView(),
       viewOrdersRoute: (context) => const ViewOrders(),
-      mainwebRoute:(context) => const Web_Main(),
+      mainwebRoute: (context) => const Web_Main(),
     },
     onGenerateRoute: (settings) {
       if (settings.name == medicineDetailsRoute) {
