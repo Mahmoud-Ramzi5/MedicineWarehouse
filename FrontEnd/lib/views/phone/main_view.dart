@@ -1,11 +1,7 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:test1/apis/phone_api.dart';
-import 'package:test1/classes/cart_controller.dart';
-import 'package:test1/classes/cart_item.dart';
-import 'package:test1/classes/medicine.dart';
-import 'package:test1/constants/routes.dart';
+import 'package:test1/views/phone/cart_view.dart';
+import 'package:test1/views/phone/home_view.dart';
+import 'package:test1/views/phone/search_view.dart';
 
 class MainView extends StatefulWidget {
   const MainView({super.key});
@@ -15,340 +11,42 @@ class MainView extends StatefulWidget {
 }
 
 class _MainViewState extends State<MainView> {
-  late final TextEditingController _search;
-  late CartController cartController;
-  String searchQuery = '';
-  @override
-  void initState() {
-    _search = TextEditingController();
-    cartController = Get.put(
-      CartController(),
-    );
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _search.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
-    List<Medicine> filterMedicines(List<Medicine> medicines) {
-      if (searchQuery.isEmpty) {
-        return medicines;
-      } else {
-        return medicines
-            .where((medicine) => medicine.medicineTranslations["en"]
-                    ["commercial_name"]
-                .toString()
-                .toLowerCase()
-                .contains(searchQuery))
-            .toList();
-      }
-    }
-
-    return Scaffold(
-      floatingActionButton: ElevatedButton(
-        onPressed: () {
-          Navigator.of(context).pushNamed(cartRoute);
-        },
-        child: const Icon(
-          Icons.shopping_cart_checkout,
-          color: Colors.white,
-        ),
-      ),
-      drawer: Drawer(
-        child: ListView(
-          children: [
-            Container(
-              margin: const EdgeInsets.all(10),
-              height: 120,
-              width: 120,
-              decoration: const ShapeDecoration(
-                shape: CircleBorder(
-                  side: BorderSide(
-                    color: Colors.green,
-                  ),
-                ),
+    return const DefaultTabController(
+      length: 3,
+      initialIndex: 0,
+      child: Scaffold(
+        bottomNavigationBar: TabBar(
+          indicatorSize: TabBarIndicatorSize.tab,
+          indicator: BoxDecoration(color: Colors.green),
+          unselectedLabelColor: Colors.black,
+          labelStyle: TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
+          tabs: <Widget>[
+            Tab(
+              icon: Icon(
+                Icons.home,
               ),
-              child: const Icon(
-                Icons.person,
-                size: 50,
-                color: Colors.green,
-              ),
+              text: 'Home',
             ),
-            ListTile(
-              title: const Text(
-                'My Orders',
-                style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.green,
-                ),
+            Tab(
+              icon: Icon(
+                Icons.search,
               ),
-              leading: const Icon(
-                Icons.shopping_cart,
-                color: Colors.green,
-              ),
-              onTap: () {
-                Navigator.of(context).pushNamed(viewOrdersRoute);
-              },
+              text: 'Search',
             ),
-            ListTile(
-              title: const Text(
-                'Log out',
-                style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.green,
-                ),
+            Tab(
+              icon: Icon(
+                Icons.shopping_cart_checkout,
               ),
-              leading: const Icon(
-                Icons.logout,
-                color: Colors.green,
-              ),
-              onTap: () {
-                showDialog(
-                  context: context,
-                  builder: (context) {
-                    return AlertDialog(
-                      alignment: Alignment.center,
-                      title: const Text('Log out'),
-                      content: const Text('Are you sure you want to logout?'),
-                      actions: [
-                        TextButton(
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                          child: const Text(
-                            'No',
-                            style: TextStyle(
-                              color: Colors.green,
-                            ),
-                          ),
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            Api().logout().then((dynamic response) {
-                              final body = json.decode(response.body);
-                              if (response.statusCode == 200) {
-                                Navigator.of(context).pushNamedAndRemoveUntil(
-                                    loginRoute, (route) => false);
-                              } else {
-                                showDialog(
-                                  context: context,
-                                  builder: (context) {
-                                    return AlertDialog(
-                                      title: Text(body["message"]),
-                                      content: const Icon(
-                                        Icons.cancel_outlined,
-                                        color: Colors.red,
-                                      ),
-                                    );
-                                  },
-                                );
-                              }
-                            });
-                          },
-                          child: const Text(
-                            'Yes',
-                            style: TextStyle(
-                              color: Colors.green,
-                            ),
-                          ),
-                        ),
-                      ],
-                    );
-                  },
-                );
-              },
+              text: 'Cart',
             ),
           ],
         ),
-      ),
-      appBar: AppBar(),
-      body: FutureBuilder(
-        future: Api().fetchMedicine(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}'));
-          } else {
-            final medicines = snapshot.data;
-            final filteredMedicines = filterMedicines(medicines!);
-            return SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(5),
-                    child: SearchBar(
-                      controller: _search,
-                      hintText: 'Search',
-                      leading: const Icon(Icons.search),
-                      shape: const MaterialStatePropertyAll(
-                        BeveledRectangleBorder(),
-                      ),
-                      textStyle: const MaterialStatePropertyAll(
-                        TextStyle(
-                          fontSize: 20,
-                        ),
-                      ),
-                      side: const MaterialStatePropertyAll(
-                        BorderSide(
-                          color: Colors.green,
-                        ),
-                      ),
-                      onSubmitted: (value) {
-                        setState(() {
-                          searchQuery = value;
-                        });
-                      },
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(5),
-                    child: SizedBox(
-                      height: 50,
-                      width: 400,
-                      child: FutureBuilder(
-                        future: Api().fetchCategories(),
-                        builder: (context, snapshot) {
-                          if (snapshot.connectionState ==
-                              ConnectionState.waiting) {
-                            return const Center(
-                                child: CircularProgressIndicator());
-                          } else if (snapshot.hasError) {
-                            return Center(
-                                child: Text('Error: ${snapshot.error}'));
-                          } else {
-                            final categories = snapshot.data;
-                            return ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              itemCount: categories?.length,
-                              physics: const PageScrollPhysics(),
-                              shrinkWrap: true,
-                              itemBuilder: (context, index) {
-                                return Padding(
-                                  padding: const EdgeInsets.all(8),
-                                  child: ElevatedButton(
-                                    onPressed: () {
-                                      Navigator.of(context).pushNamed(
-                                          viewCategoriesRoute,
-                                          arguments: categories[index].id);
-                                    },
-                                    child: Text(
-                                      categories![index].enCategoryName,
-                                      style: const TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ),
-                                );
-                              },
-                            );
-                          }
-                        },
-                      ),
-                    ),
-                  ),
-                  ListView.builder(
-                    physics: const PageScrollPhysics(),
-                    padding: const EdgeInsets.all(10),
-                    shrinkWrap: true,
-                    itemBuilder: (context, index) {
-                      return Card(
-                        elevation: 5,
-                        child: Row(
-                          children: [
-                            Container(
-                              margin: const EdgeInsets.all(10),
-                              height: 100,
-                              width: 100,
-                              decoration: const ShapeDecoration(
-                                  shape: ContinuousRectangleBorder(),
-                                  color: Colors.green),
-                              child: filteredMedicines[index].image,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(10),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Column(
-                                    children: [
-                                      Text(
-                                        '${filteredMedicines[index].medicineTranslations["en"]["commercial_name"]}',
-                                        style: const TextStyle(
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.all(20),
-                                        child: Text(
-                                          'Price: ${filteredMedicines[index].price}',
-                                          style: const TextStyle(
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
-                                      Text(
-                                        'Quantity: ${filteredMedicines[index].quantityAvailable}',
-                                        style: const TextStyle(
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ],
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 20),
-                                    child: Column(
-                                      children: [
-                                        IconButton(
-                                          onPressed: () {
-                                            Navigator.of(context).pushNamed(
-                                              medicineDetailsRoute,
-                                              arguments:
-                                                  filteredMedicines[index],
-                                            );
-                                          },
-                                          icon: const Icon(
-                                            Icons.arrow_forward_ios,
-                                            color: Colors.green,
-                                          ),
-                                        ),
-                                        IconButton(
-                                          onPressed: () {
-                                            CartItem cartItem = CartItem(
-                                                medicine:
-                                                    filteredMedicines[index],
-                                                quantity: 1);
-                                            cartController.addToCart(cartItem);
-                                          },
-                                          icon: const Icon(
-                                            Icons.add_shopping_cart_outlined,
-                                            color: Colors.green,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      );
-                    },
-                    itemCount: filteredMedicines.length,
-                  ),
-                ],
-              ),
-            );
-          }
-        },
+        //appBar: AppBar(),
+        body: TabBarView(
+          children: [HomeView(), SearchView(), CartView()],
+        ),
       ),
     );
   }
