@@ -205,14 +205,15 @@ class _HomeViewState extends State<HomeView> {
                         child: Row(
                           children: [
                             Container(
-                              margin: const EdgeInsets.all(10),
-                              height: 100,
-                              width: 100,
-                              decoration: const ShapeDecoration(
-                                  shape: ContinuousRectangleBorder(),
-                                  color: Colors.green),
-                              child: medicines[index].image,
-                            ),
+                                margin: const EdgeInsets.all(10),
+                                height: 100,
+                                width: 100,
+                                decoration: const ShapeDecoration(
+                                    shape: ContinuousRectangleBorder(),
+                                    color: Colors.green),
+                                child: Image.network(
+                                    'http://10.0.2.2:8000/storage/${medicines[index].imagePath}',
+                                    fit: BoxFit.cover)),
                             Padding(
                               padding: const EdgeInsets.all(10),
                               child: Row(

@@ -30,14 +30,12 @@ class _Add_MedicineState extends State<Add_Medicine> {
   late final TextEditingController _arManufactureCompany;
   late final TextEditingController _priceController;
   late DateTime selectedDate = DateTime(2023, 11, 1);
-  int quantity = 0;
   static const patternEnglish = r'^[a-zA-Z\s]+$';
   final englishRegex = RegExp(patternEnglish);
   static const patternArabic = r'^[\u0600-\u06FF\s]+$';
   final arabicRegex = RegExp(patternArabic);
-  CC.Category dropdownValue =
-      CC.Category(id: 0, enCategoryName: 'Option', arCategoryName: 'خيار');
-  int selectedNumber = 1;
+  int quantity = 1;
+  int categoryId = 1;
 
   @override
   void initState() {
@@ -334,13 +332,13 @@ class _Add_MedicineState extends State<Add_Medicine> {
                             ),
                           ),
                           NumberPicker(
-                            value: selectedNumber,
+                            value: quantity,
                             minValue: 1,
                             maxValue: 100,
                             step: 1,
                             onChanged: (value) {
                               setState(() {
-                                selectedNumber = value;
+                                quantity = value;
                               });
                             },
                           ),
@@ -382,19 +380,17 @@ class _Add_MedicineState extends State<Add_Medicine> {
                                             Text('Error: ${snapshot.error}'));
                                   } else {
                                     final categories = snapshot.data;
-                                    categories!.add(dropdownValue);
                                     return DropdownButtonFormField(
-                                      value: dropdownValue.id,
+                                      value: categoryId,
                                       onChanged: (newValue) {
                                         setState(() {
-                                          dropdownValue =
-                                              newValue as CC.Category;
+                                          categoryId = (newValue as int) + 1;
                                         });
                                       },
-                                      items: categories
+                                      items: categories!
                                           .map((CC.Category category) {
                                         return DropdownMenuItem(
-                                          value: category.id,
+                                          value: category.id - 1,
                                           child: Text(category.enCategoryName),
                                         );
                                       }).toList(),
@@ -407,48 +403,47 @@ class _Add_MedicineState extends State<Add_Medicine> {
                       ),
                     ),
                   ),
-                 ElevatedButton(
+                  ElevatedButton(
                     onPressed: () {
                       if (_formField.currentState!.validate()) {
-    WebApi().addMedicine(
-      _enCommercialName.text,
-      _arCommercialName.text,
-      _enScientificName.text,
-      _arScientificName.text,
-      _enManufactureCompany.text,
-      _arManufactureCompany.text,
-      "${selectedDate.toLocal().toString()}".split(' ')[0],
-      double.parse(_priceController.text),
-      quantity,
-      [1, 18],
-      webImage,
-      webImageName,
-    );
+                        WebApi().addMedicine(
+                          _enCommercialName.text,
+                          _arCommercialName.text,
+                          _enScientificName.text,
+                          _arScientificName.text,
+                          _enManufactureCompany.text,
+                          _arManufactureCompany.text,
+                          "${selectedDate.toLocal().toString()}".split(' ')[0],
+                          double.parse(_priceController.text),
+                          quantity,
+                          [categoryId],
+                          webImage,
+                          webImageName,
+                        );
 
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Medicine Added Successfully'),
-      ),
-    );
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Medicine Added Successfully'),
+                          ),
+                        );
 
-    // Navigate back to home
-    Navigator.of(context).pushReplacement(
-      MaterialPageRoute(
-        builder: (context) => const Web_Main(),
-      ),
-    );
-  } else {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('No Medicine Was Added'),
-      ),
-    );
-  }
+                        // Navigate back to home
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(
+                            builder: (context) => const Web_Main(),
+                          ),
+                        );
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('No Medicine Was Added'),
+                          ),
+                        );
+                      }
                     },
                     child: const Text(
                       'Add Medicine',
                       style: TextStyle(fontWeight: FontWeight.bold),
-                      
                     ),
                   ),
                 ],

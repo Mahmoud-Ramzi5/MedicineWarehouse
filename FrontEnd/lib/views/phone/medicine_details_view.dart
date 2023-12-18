@@ -32,11 +32,12 @@ class _MedicineDetailsViewState extends State<MedicineDetailsView> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
-                height: 243,
-                width: 324,
-                color: Colors.green,
-                child: widget.medicine.image,
-              ),
+                  height: 243,
+                  width: 324,
+                  color: Colors.green,
+                  child: Image.network(
+                      'http://10.0.2.2:8000/storage/${widget.medicine.imagePath}',
+                      fit: BoxFit.cover)),
               Container(
                 margin: const EdgeInsets.all(10),
                 alignment: Alignment.center,

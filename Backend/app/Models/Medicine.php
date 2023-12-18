@@ -47,16 +47,6 @@ class Medicine extends Model
     ];
 
     /**
-     * Interact with the medicine's ExpiryDate.
-     */
-    protected function ExpiryDate(): Attribute
-    {
-        return Attribute::make(
-            set: fn (string $date) => DateTime::createFromFormat('d/m/Y', $date)->format('Y-m-d'),
-        );
-    }
-
-    /**
      * Interact with the medicine's Image.
      * Returns image_path as Image
      */
@@ -64,12 +54,8 @@ class Medicine extends Model
     {
         return Attribute::make(
             get: function ($path) {
-                //$localFileName  = storage_path('app/' . $path);
-                //$type = explode('.', implode(explode('/', $path)))[1];
-                //$fileData = file_get_contents($localFileName);
-                //$ImgFileEncode = 'data:image/'.$type.';base64,'.base64_encode($fileData);
-                $data = base64_encode(Storage::get($path));
-                return $data;
+                $path = explode('/', $path);
+                return $path[1];
             }
         );
     }

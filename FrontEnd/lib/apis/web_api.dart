@@ -6,21 +6,19 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/foundation.dart';
 import 'package:test1/classes/category.dart' as CC;
 import 'package:test1/classes/medicine.dart';
-import 'dart:typed_data'; 
+import 'dart:typed_data';
 
 class WebApi {
-  static final loginUri = 
-  Uri.parse('http://127.0.0.1:8000/api/admin/login');
+  static final loginUri = Uri.parse('http://127.0.0.1:8000/api/admin/login');
   static final addMedicineUri =
       Uri.parse('http://127.0.0.1:8000/api/admin/new_medicine');
   static final fetchCategoriesUri =
       Uri.parse('http://127.0.0.1:8000/api/admin/categories');
-      static final fetchMedicineWebUri =
+  static final fetchMedicineWebUri =
       Uri.parse('http://127.0.0.1:8000/api/admin/medicines');
 
   WebApi();
 
-  
   Future<dynamic> login(
     String userName,
     String password,
@@ -138,7 +136,6 @@ class WebApi {
       throw Exception('Failed to load Medicines');
     }
   }
-
 
   Future<void> GG(int userId, List<int> medicines) async {
     final formData =

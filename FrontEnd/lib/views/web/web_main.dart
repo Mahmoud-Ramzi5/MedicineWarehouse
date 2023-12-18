@@ -198,19 +198,20 @@ class _Web_MainState extends State<Web_Main> {
                                 child: Row(
                                   children: [
                                     Container(
-                                      margin: const EdgeInsets.only(
-                                        top: 9,
-                                        bottom: 9,
-                                        left: 9,
-                                      ),
-                                      height: 99,
-                                      width: 108,
-                                      decoration: const ShapeDecoration(
-                                        shape: ContinuousRectangleBorder(),
-                                        color: Colors.green,
-                                      ),
-                                      child: filteredMedicines[index].image,
-                                    ),
+                                        margin: const EdgeInsets.only(
+                                          top: 9,
+                                          bottom: 9,
+                                          left: 9,
+                                        ),
+                                        height: 99,
+                                        width: 108,
+                                        decoration: const ShapeDecoration(
+                                          shape: ContinuousRectangleBorder(),
+                                          color: Colors.green,
+                                        ),
+                                        child: Image.network(
+                                            'http://127.0.0.1:8000/storage/${filteredMedicines[index].imagePath}',
+                                            fit: BoxFit.cover)),
                                     Padding(
                                       padding: const EdgeInsets.all(9.0),
                                       child: Row(

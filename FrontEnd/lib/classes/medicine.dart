@@ -8,7 +8,7 @@ class Medicine {
   final int price;
   final Map<String, dynamic> medicineTranslations;
   final List<dynamic> categories;
-  final Image image;
+  final String imagePath;
 
   Medicine({
     required this.id,
@@ -17,7 +17,7 @@ class Medicine {
     required this.price,
     required this.medicineTranslations,
     required this.categories,
-    required this.image,
+    required this.imagePath,
   });
   Medicine.fromJson(Map<String, dynamic> json)
       : id = json['id'] as int,
@@ -29,8 +29,5 @@ class Medicine {
             translation["lang"]: translation
         },
         categories = json['categories'],
-        image = Image.memory(
-            base64Decode(
-                json['image_path'].replaceAll('\n', '') /*.split('\n).join*/),
-            fit: BoxFit.cover);
+        imagePath = json['image_path'];
 }

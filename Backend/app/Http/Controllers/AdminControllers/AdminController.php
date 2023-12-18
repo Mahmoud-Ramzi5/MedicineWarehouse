@@ -76,16 +76,6 @@ class AdminController extends Controller
         } else {
             $path = 'public/'.$credentials['image_path'];
         }
-
-        /*if ($credentials['image']) {
-            $path = 'public/'.$credentials['image_path'];
-            $image = base64_decode($credentials['image']);
-            Storage::put($path, $image);
-        }
-        else {
-            $path = 'public/default.png';
-        }*/
-
         // Create Medicine
         $medicine = Medicine::create([
             'expiry_date' => $credentials['expiry_date'],
@@ -209,7 +199,7 @@ class AdminController extends Controller
             }
             else {
                 return response()->json([
-                    'message' => $message . 'Could not update order status; Unkown Error',
+                    'message' => $message . 'Could not update order status; Unknown Error',
                 ], 400);
             }
         }

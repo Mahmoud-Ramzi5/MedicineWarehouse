@@ -67,13 +67,15 @@ class _CartViewState extends State<CartView> {
             child: Row(
               children: [
                 Container(
-                  margin: const EdgeInsets.all(10),
-                  height: 100,
-                  width: 100,
-                  decoration: const ShapeDecoration(
-                      shape: ContinuousRectangleBorder(), color: Colors.green),
-                  child: cartController.items[index].medicine.image,
-                ),
+                    margin: const EdgeInsets.all(10),
+                    height: 100,
+                    width: 100,
+                    decoration: const ShapeDecoration(
+                        shape: ContinuousRectangleBorder(),
+                        color: Colors.green),
+                    child: Image.network(
+                        'http://10.0.2.2:8000/storage/${cartController.items[index].medicine.imagePath}',
+                        fit: BoxFit.cover)),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
