@@ -16,7 +16,7 @@ bootstrap/compiled.php
 app/storage/
 
 # Laravel 5 & Lumen specific
-public/storage
+# public/storage
 public/hot
 
 # Laravel 5 & Lumen specific with changed public path
