@@ -2,7 +2,11 @@
 
 use App\Http\Controllers\MedicinesController;
 use App\Http\Controllers\UserControllers\UserController;
+use App\Http\Controllers\UserControllers\UserMedicinesController;
+use App\Http\Controllers\UserControllers\OrderController as UserOrderController;
 use App\Http\Controllers\AdminControllers\AdminController;
+use App\Http\Controllers\AdminControllers\AdminMedicinesController;
+use App\Http\Controllers\AdminControllers\OrderController as AdminOrderController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -27,16 +31,19 @@ Route::prefix('/users')->group(function () {
         Route::post('/register', 'register')->name('register');
         Route::post('/login', 'login')->name('login');
         Route::middleware('auth:sanctum')->post('/logout', 'logout')->name('logout');
-
-        Route::post('/new_order', 'Add_Order');
     });
-    Route::controller(MedicinesController::class)->group(function () {
-        Route::get('/medicines', 'ShowNotExpired')->name('ShowNotExpired');
+    Route::controller(UserMedicinesController::class)->group(function () {
+        Route::get('/medicines', 'ShowNotExpired')->name('ShowNotExpired_Medicines');
         Route::get('/categories', 'Categories')->name('Categories');
-        Route::post('/categoryFilter', 'Selected_Category')->name('Selected_Category');
-        Route::get('/medicineInfo', 'DisplayMedicineInfo')->name('DisplayMedicineInfo');
+        Route::post('/categoryFilter', 'Selected_Category');
+
+        Route::post('/medicineInfo', 'DisplayMedicineInfo')->name('DisplayMedicineInfo');
 
         Route::post('/search', 'Search_Not_Expired')->name('Search_Not_Expired');
+    });
+    Route::controller(UserOrderController::class)->group(function () {
+        Route::post('/orders', 'ShowOrders')->name('ShowUserOrders');
+        Route::post('/new_order', 'Add_Order')->name('Add_Order');
     });
 });
 
@@ -46,19 +53,21 @@ Route::prefix('/admin')->group(function () {
     Route::controller(AdminController::class)->group(function () {
         Route::post('/login', 'login')->name('AdminLogin');
         Route::middleware('auth:sanctum')->post('/logout', 'logout')->name('AdminLogout');
-
-        Route::post('/new_medicine', 'Add_Medicine');
-        Route::delete('/delete_medicine', 'Delete_Medicine');
-
-        Route::post('/update_order', 'Update_Order');
     });
-    Route::controller(MedicinesController::class)->group(function () {
-        Route::get('/medicines', 'ShowAll')->name('ShowAll');
+    Route::controller(AdminMedicinesController::class)->group(function () {
+        Route::get('/medicines', 'ShowAll')->name('ShowAll_Medicines');
         Route::get('/categories', 'Categories')->name('Categories');
-        Route::post('/categoryFilter', 'Selected_Category')->name('Selected_Category');
-        Route::get('/medicineInfo', 'DisplayMedicineInfo')->name('DisplayMedicineInfo');
+        Route::post('/categoryFilter', 'Selected_Category');
+        Route::post('/new_medicine', 'Add_Medicine')->name('Add_Medicine');
+        Route::delete('/delete_medicine', 'Delete_Medicine')->name('Delete_Medicine');
+
+        Route::post('/medicineInfo', 'DisplayMedicineInfo')->name('DisplayMedicineInfo');
 
         Route::post('/search', 'Search_All')->name('Search_All');
+    });
+    Route::controller(AdminOrderController::class)->group(function () {
+        Route::get('/orders', 'ShowAll')->name('ShowAll_Orders');
+        Route::post('/update_order', 'Update_Order')->name('Update_Order');
     });
 });
 

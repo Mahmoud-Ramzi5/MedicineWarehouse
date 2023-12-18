@@ -37,7 +37,7 @@ class Order extends Model
     }
 
     // OneToMany Relation
-    public function OrderedMedicine()
+    public function OrderedMedicines()
     {
         return $this->hasMany(OrderedMedicine::class, "order_id");
     }
