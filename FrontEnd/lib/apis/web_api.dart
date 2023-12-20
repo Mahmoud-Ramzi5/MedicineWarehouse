@@ -8,6 +8,8 @@ import 'package:test1/classes/category.dart' as CC;
 import 'package:test1/classes/medicine.dart';
 import 'dart:typed_data';
 
+import 'package:test1/views/web/web_orders.dart';
+
 class WebApi {
   static final loginUri = Uri.parse('http://127.0.0.1:8000/api/admin/login');
   static final addMedicineUri =
@@ -16,6 +18,8 @@ class WebApi {
       Uri.parse('http://127.0.0.1:8000/api/admin/categories');
   static final fetchMedicineWebUri =
       Uri.parse('http://127.0.0.1:8000/api/admin/medicines');
+  static final fetchordersUri = 
+      Uri.parse('http://127.0.0.1:8000/api/admin/orders');
 
   WebApi();
 
@@ -134,6 +138,34 @@ class WebApi {
       return medicineList;
     } else {
       throw Exception('Failed to load Medicines');
+    }
+  }
+
+Future<List<web_Orders>> fetchweborders() async {
+    const storage = FlutterSecureStorage();
+    var token = await storage.read(key: 'Bearer Token');
+    final response = await dio.getUri(
+      fetchordersUri,
+      options: Options(
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Accept': "application/json",
+          'connection': 'keep-alive',
+          'Accept-Encoding': 'gzip, deflate, br',
+          'Authorization': 'Bearer $token'
+        },
+      ),
+    );
+    if (response.statusCode == 200) {
+      List<web_Orders> weborderslist = [];
+      for (var weborders in response.data['data']) {
+        final webordersmap = web_Orders.fromJson(weborders as Map<String, dynamic>);
+        weborderslist.add(webordersmap);
+      }
+      print(weborderslist);
+      return weborderslist;
+    } else {
+      throw Exception('Failed to load Orders');
     }
   }
 
