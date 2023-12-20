@@ -39,37 +39,59 @@ class _ViewOrdersState extends State<ViewOrders> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            Padding(
-                              padding: const EdgeInsets.all(10),
-                              child: Text(
-                                'Order number:${orders?[index].id}',
-                                style: const TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.bold),
-                              ),
+                            Row(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(10),
+                                  child: Text(
+                                    'Order number:${orders?[index].id}',
+                                    style: const TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                                const Padding(
+                                  padding: EdgeInsets.all(10),
+                                  child: Text(
+                                    'Total Price:',
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              ],
                             ),
-                            const Padding(
-                              padding: EdgeInsets.all(10),
-                              child: Text(
-                                'Total Price:',
-                                style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(10),
-                              child: Text(
-                                'Billing Status:${orders?[index].isPaid}',
-                                style: const TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(10),
-                              child: Text(
-                                'Status:${orders?[index].status}',
-                                style: const TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.bold),
-                              ),
+                            Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  IconButton(
+                                      onPressed: () {},
+                                      icon: const Icon(
+                                        Icons.arrow_forward_ios,
+                                        color: Colors.green,
+                                      ))
+                                ]),
+                            Row(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(10),
+                                  child: Text(
+                                    'Paid:${orders?[index].isPaid}',
+                                    style: const TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(10),
+                                  child: Text(
+                                    'Status:${orders?[index].status}',
+                                    style: const TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                )
+                              ],
                             )
                           ],
                         ),
