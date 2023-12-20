@@ -66,9 +66,9 @@ class _Add_MedicineState extends State<Add_Medicine> {
       final ImagePicker picker = ImagePicker();
       XFile? image = await picker.pickImage(
           source: ImageSource.gallery,
-          maxHeight: 243,
-          maxWidth: 324,
-          imageQuality: 81);
+          maxHeight: 250,
+          maxWidth: 300,
+          imageQuality: 80);
       if (image != null) {
         webImageName = image.name;
         Uint8List imageBytes = await image.readAsBytes();
@@ -107,17 +107,17 @@ class _Add_MedicineState extends State<Add_Medicine> {
       body: SingleChildScrollView(
         child: Center(
           child: Padding(
-            padding: const EdgeInsets.all(18.0),
+            padding: const EdgeInsets.all(20),
             child: Form(
               key: _formField,
               child: Column(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.all(18.0),
+                    padding: const EdgeInsets.all(20),
                     child: Container(
                       height: 200,
                       width: 200,
-                      margin: const EdgeInsets.all(18),
+                      margin: const EdgeInsets.all(20),
                       child: pickedImage == null
                           ? DottedBorder(
                               stackFit: StackFit.expand,
@@ -130,7 +130,7 @@ class _Add_MedicineState extends State<Add_Medicine> {
                                     size: 50,
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.all(18.0),
+                                    padding: const EdgeInsets.all(20),
                                     child: TextButton(
                                       onPressed: () {
                                         pickImage();
@@ -157,7 +157,7 @@ class _Add_MedicineState extends State<Add_Medicine> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(10),
                     child: CustomTextWidget(
                       controller: _enCommercialName,
                       labelText: 'English Commercial Name',
@@ -176,7 +176,7 @@ class _Add_MedicineState extends State<Add_Medicine> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(10),
                     child: CustomTextWidget(
                       controller: _arCommercialName,
                       labelText: 'Arabic Commercial Name',
@@ -194,7 +194,7 @@ class _Add_MedicineState extends State<Add_Medicine> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(10),
                     child: CustomTextWidget(
                       controller: _enScientificName,
                       labelText: 'English Scientific Name',
@@ -212,7 +212,7 @@ class _Add_MedicineState extends State<Add_Medicine> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(10),
                     child: CustomTextWidget(
                       controller: _arScientificName,
                       labelText: 'Arabic Scientific Name',
@@ -230,7 +230,7 @@ class _Add_MedicineState extends State<Add_Medicine> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(10),
                     child: CustomTextWidget(
                       controller: _enManufactureCompany,
                       labelText: 'English Manufacture Company',
@@ -248,7 +248,7 @@ class _Add_MedicineState extends State<Add_Medicine> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(10),
                     child: CustomTextWidget(
                       controller: _arManufactureCompany,
                       labelText: 'Arabic Manufacture Company',
@@ -266,7 +266,7 @@ class _Add_MedicineState extends State<Add_Medicine> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(10),
                     child: SizedBox(
                       height: 50,
                       child: GestureDetector(
@@ -287,7 +287,7 @@ class _Add_MedicineState extends State<Add_Medicine> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(10),
                     child: CustomTextWidget(
                       controller: _priceController,
                       labelText: 'Price',
@@ -312,21 +312,21 @@ class _Add_MedicineState extends State<Add_Medicine> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(10),
                     child: Container(
                       decoration: BoxDecoration(
                         border: Border.all(color: Colors.grey),
-                        borderRadius: BorderRadius.circular(10.0),
+                        borderRadius: BorderRadius.circular(10),
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const Padding(
-                            padding: EdgeInsets.all(8.0),
+                            padding: EdgeInsets.all(10),
                             child: Text(
                               'Choose Quantity',
                               style: TextStyle(
-                                fontSize: 16,
+                                fontSize: 20,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -348,21 +348,21 @@ class _Add_MedicineState extends State<Add_Medicine> {
                   ),
                   SingleChildScrollView(
                     child: Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(10),
                       child: Container(
                         decoration: BoxDecoration(
                           border: Border.all(color: Colors.grey),
-                          borderRadius: BorderRadius.circular(10.0),
+                          borderRadius: BorderRadius.circular(10),
                         ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             const Padding(
-                              padding: EdgeInsets.all(8.0),
+                              padding: EdgeInsets.all(10),
                               child: Text(
                                 'Choose the category',
                                 style: TextStyle(
-                                  fontSize: 16,
+                                  fontSize: 20,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),

@@ -42,6 +42,6 @@ void main() {
         );
       }
     },
-    home: const LoginView(),
+    home: const Web_Main(),
   ));
 }
