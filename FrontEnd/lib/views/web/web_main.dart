@@ -4,7 +4,7 @@ import 'package:test1/classes/medicine.dart';
 import 'package:test1/constants/routes.dart';
 import 'package:test1/views/web/add_medicine.dart';
 import 'package:test1/views/web/web_login_view.dart';
-import 'package:test1/views/web/web_orders.dart';
+import 'package:test1/views/web/web_order.dart';
 
 class Web_Main extends StatefulWidget {
   const Web_Main({Key? key}) : super(key: key);
@@ -19,7 +19,7 @@ class _WebMainState extends State<Web_Main> {
   late final TextEditingController _search;
   String searchQuery = '';
   bool shouldFetchData = true;
-  late final web_Orders web_orders;
+  late final WebOrder web_orders;
 
   @override
   void initState() {
@@ -335,12 +335,9 @@ class _WebMainState extends State<Web_Main> {
                                           Text(
                                               'Order ID: ${weborders![index].id}'),
                                           Text(
-                                              'Quantity Available: ${weborders[index].quantityAvailable}'),
+                                              'Ordered Medicines: ${weborders[index].orderedMedicines}'),
                                           Text(
-                                              'Price: ${weborders[index].price}'),
-                                          Text(
-                                              'Total Price: ${weborders[index].medicineTranslations}'),
-                                          // Text('Paid: ${weborders[index].totalprice}'),
+                                              'Paid: ${weborders[index].totalPrice}'),
                                           Text(
                                               'Status: ${weborders[index].paid}'),
                                           Text(
