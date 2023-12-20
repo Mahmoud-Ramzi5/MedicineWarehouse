@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Medicine;
 use App\Models\Order;
 use App\Models\OrderedMedicine;
+use Laravel\Sanctum\PersonalAccessToken;
 
 function DoNothing() {;}
 
@@ -14,8 +15,11 @@ class OrderController extends Controller
 {
     public function ShowOrders(Request $request)
     {
+        $hashedToken =$request->bearerToken();
+        $token = PersonalAccessToken::where('token', $hashedToken)->first();
+        $user = $token->tokenable;
         // Get user id
-        $id = $request->input('id');
+        $id = $user->id;
         // User Orders
         $orders = Order::where('user_id', $id)->get();
         if ($orders->isEmpty()) {

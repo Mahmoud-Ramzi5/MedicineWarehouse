@@ -143,7 +143,6 @@ class _HomeViewState extends State<HomeView> {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else {
             final medicines = snapshot.data;
-            // final filteredMedicines = filterMedicines(medicines!);
             return SingleChildScrollView(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,

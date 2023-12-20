@@ -22,23 +22,23 @@ class _CartViewState extends State<CartView> {
     return Scaffold(
       bottomNavigationBar: Container(
         alignment: Alignment.centerLeft,
-        height: 80,
-        color: Colors.green,
-        child: GetBuilder<CartController>(
-          builder: (controller) => Text(
-            'Total Price:${cartController.calculateTotalPrice()}',
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 30,
-              fontWeight: FontWeight.bold,
+        height: 50,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            GetBuilder<CartController>(
+              builder: (controller) => Text(
+                'Total Price:${cartController.calculateTotalPrice()}',
+                style: const TextStyle(
+                  color: Colors.green,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
-          ),
+            ElevatedButton(onPressed: () {}, child: const Text('Confirm Order'))
+          ],
         ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
-      floatingActionButton: ElevatedButton(
-        onPressed: () {},
-        child: const Text('Confirm Order'),
       ),
       appBar: AppBar(
         title: const Text('Your Order'),

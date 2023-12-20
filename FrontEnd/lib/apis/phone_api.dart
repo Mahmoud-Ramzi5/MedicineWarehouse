@@ -17,6 +17,8 @@ class Api {
       Uri.parse('http://10.0.2.2:8000/api/users/categories');
   static final medicineByCategoryUri =
       Uri.parse('http://10.0.2.2:8000/api/users/categoryFilter');
+  static final orderUri = Uri.parse('http://10.0.2.2:8000/api/users/new_order');
+  static final searchUri = Uri.parse('http://10.0.2.2:8000/api/users/search');
 
   Api();
 
@@ -174,7 +176,47 @@ class Api {
     );
     if (response.statusCode == 200) {
       List<Medicine> medicineList = [];
-      for (var medicine in response.data['message']) {
+      for (var medicine in response.data['data']) {
+        final medicineMap = Medicine.fromJson(medicine as Map<String, dynamic>);
+        medicineList.add(medicineMap);
+      }
+      return medicineList;
+    } else {
+      throw Exception('Failed to load Medicines');
+    }
+  }
+
+  Future<dynamic> order() async {
+    final response = await dio.postUri(
+      orderUri,
+      options: Options(
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Accept': "application/json",
+          'connection': 'keep-alive',
+          'Accept-Encoding': 'gzip, deflate, br',
+        },
+      ),
+    );
+    if (response.statusCode == 200) {}
+  }
+
+  Future<List<Medicine>> search(String name) async {
+    final response = await dio.postUri(
+      searchUri,
+      options: Options(
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Accept': "application/json",
+          'connection': 'keep-alive',
+          'Accept-Encoding': 'gzip, deflate, br',
+        },
+      ),
+      data: name,
+    );
+    if (response.statusCode == 200) {
+      List<Medicine> medicineList = [];
+      for (var medicine in response.data['data']) {
         final medicineMap = Medicine.fromJson(medicine as Map<String, dynamic>);
         medicineList.add(medicineMap);
       }
