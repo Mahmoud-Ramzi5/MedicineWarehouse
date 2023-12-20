@@ -15,7 +15,7 @@ class OrderController extends Controller
 {
     public function ShowOrders(Request $request)
     {
-        $hashedToken =$request->bearerToken();
+        $hashedToken = $request->bearerToken();
         $token = PersonalAccessToken::where('token', $hashedToken)->first();
         $user = $token->tokenable;
         // Get user id
@@ -44,9 +44,13 @@ class OrderController extends Controller
     {
         // Validate request
         $validated = $request->validate([
-            'user_id' => 'required',
             'medicines' => 'required'
         ]);
+        $hashedToken = $request->bearerToken();
+        $token = PersonalAccessToken::where('token', $hashedToken)->first();
+        $user = $token->tokenable;
+        // Get user id
+        $user_id = $user->id;
         // Check medicines and quantities
         $medicines = [];
         foreach ($validated['medicines'] as $index => $value) {
@@ -66,7 +70,7 @@ class OrderController extends Controller
         }
         // Create order
         $order = Order::create([
-            'user_id' => $validated['user_id'],
+            'user_id' => $user_id,
             'status' => 'PREPARING',
             'is_paid' => false
         ]);
