@@ -51,22 +51,22 @@ class AdminController extends Controller
         ], 200);
     }
 
-    /*public function Add_Categories(Request $request)
+/*    public function Add_Categories(Request $request)
     {
         $fileContent = file_get_contents(storage_path("Categories.json"));
         $jsonContent = json_decode($fileContent, true);
         foreach($jsonContent as $category)
         {
-            $category = Category::create([
+            $c = Category::create([
                 "en_category_name" => $category["en_category_name"],
                 "ar_category_name" => $category["ar_category_name"],
                 "en_description" => $category["en_description"],
                 "ar_description" => $category["ar_description"]
             ]);
         }
-    }*/
+    }
 
-    /*public function Add_Medicines(Request $request)
+    public function Add_Medicines(Request $request)
     {
         $fileContent = file_get_contents(storage_path("Medicines.json"));
         $jsonContent = json_decode($fileContent, true);

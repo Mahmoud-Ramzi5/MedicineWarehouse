@@ -71,9 +71,14 @@ class Medicine extends Model
         return $this->belongsToMany(Category::class, 'medicine_category', 'medicine_id', 'category_id');
     }
 
-    // ManyToMany Relation
-    public function Orders()
+    // OneToMany Relation
+    public function OrderedMedicines()
     {
-        return $this->belongsToMany(Order::class, 'order_medicine', 'medicine_id', 'order_id');
+        return $this->hasMany(Order::class, 'medicine_id');
+    }
+
+    public function Favorite()
+    {
+        return $this->belongsToMany(Favorite::class, 'favorite_medicine', 'medicine_id', 'favorite_id');
     }
 }

@@ -131,6 +131,9 @@ class UserMedicinesController extends MedicinesController
         }if ($entries!=null){
             return response()->json(["message"=> $entries], 200);
             }
-            else{return response()->json(["message"=> 'sorry item requested not found please check the name correctly'], 400);}
+            else{
+                return response()->json(["message"=> 'sorry item requested not found please check the name correctly'], 400);
+            }
         }
 }
+

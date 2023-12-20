@@ -16,7 +16,7 @@ class OrderController extends Controller
     public function ShowOrders(Request $request)
     {
         $user =  auth('sanctum')->user();
-        if ($user==null) {
+        if ($user == null) {
             return response()->json([
                 'message' => 'Invalid User'
             ], 400);
@@ -27,19 +27,19 @@ class OrderController extends Controller
         $orders = Order::where('user_id', $id)->get();
         if ($orders->isEmpty()) {
             return response()->json([
-                'message' => 'Invalid User'
+                'message' => 'No orders yet'
             ], 400);
         }
         foreach ($orders as $order) {
-            $order->OrderedMedicines;
-            $medicines = $order->Medicines;
-            foreach($medicines as $medicine) {
+            $medicines = $order->OrderedMedicines;
+            foreach($medicines as $orderedMedicine) {
+                $medicine = $orderedMedicine->Medicine;
                 $medicine->MedicineTranslations;
                 $medicine->Categories;
             }
         }
         return response()->json([
-            'data' => $orders
+            'message' => $orders
         ], 200)->header('Content-Type', 'application/json; charset=UTF-8');
     }
 
@@ -59,6 +59,7 @@ class OrderController extends Controller
         $user_id = $user->id;
         // Check medicines and quantities
         $medicines = [];
+        $total_price = 0.0;
         foreach ($validated['medicines'] as $index => $value) {
             array_push($medicines, $index);
             $medicine = Medicine::find($index);
@@ -73,14 +74,15 @@ class OrderController extends Controller
                     'message' => 'Quantity not available'
                 ], 400);
             }
+            $total_price += ($medicine->price) * $value;
         }
         // Create order
         $order = Order::create([
             'user_id' => $user_id,
             'status' => 'PREPARING',
-            'is_paid' => false
+            'is_paid' => false,
+            'total_price' => $total_price
         ]);
-        $order->Medicines()->attach($medicines);
         // Set new values
         foreach ($validated['medicines'] as $index => $value) {
             $ordered_medicine = OrderedMedicine::create([

@@ -15,16 +15,17 @@ class OrderController extends Controller
     public function ShowAll()
     {
         // All Orders
-        $orders = Order::with('User')->with('OrderedMedicines')->get();
+        $orders = Order::with('User')->get();
         foreach ($orders as $order) {
-            $medicines = $order->Medicines;
-            foreach($medicines as $medicine) {
+            $medicines = $order->OrderedMedicines;
+            foreach($medicines as $orderedMedicine) {
+                $medicine = $orderedMedicine->Medicine;
                 $medicine->MedicineTranslations;
                 $medicine->Categories;
             }
         }
         return response()->json([
-            'data' => $orders
+            'message' => $orders
         ], 200)->header('Content-Type', 'application/json; charset=UTF-8');
     }
 

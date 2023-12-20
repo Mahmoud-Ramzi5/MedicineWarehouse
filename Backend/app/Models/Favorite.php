@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class OrderedMedicine extends Model
+class Favorite extends Model
 {
     use HasFactory;
 
@@ -15,9 +15,7 @@ class OrderedMedicine extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'order_id',
-        'medicine_id',
-        'quantity',
+        'user_id',
     ];
 
     /**
@@ -28,18 +26,16 @@ class OrderedMedicine extends Model
     protected $hidden = [
         'created_at',
         'updated_at',
-        'order_id'
     ];
 
-    // OneToMany Relation
-    public function Order()
+    // OneToOne Relation
+    public function User()
     {
-        return $this->belongsTo(Order::class, 'order_id');
+        return $this->belongsTo(User::class, "user_id");
     }
-
-    // OneToMany Relation
-    public function Medicine()
+    // ManyToMany Relation
+    public function Medicines()
     {
-        return $this->belongsTo(Medicine::class, 'medicine_id');
+        return $this->belongsToMany(Medicine::class, 'favorite_medicine', 'favorite_id', 'medicine_id');
     }
 }

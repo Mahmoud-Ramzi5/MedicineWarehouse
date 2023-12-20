@@ -17,7 +17,8 @@ class Order extends Model
     protected $fillable = [
         'user_id',
         'status',
-        'is_paid'
+        'is_paid',
+        'total_price'
     ];
 
     /**
@@ -42,18 +43,13 @@ class Order extends Model
     // OneToMany Relation
     public function User()
     {
-        return $this->belongsTo(User::class, "user_id");
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     // OneToMany Relation
     public function OrderedMedicines()
     {
-        return $this->hasMany(OrderedMedicine::class, "order_id");
-    }
-
-    // ManyToMany Relation
-    public function Medicines()
-    {
-        return $this->belongsToMany(Medicine::class, 'order_medicine', 'order_id', 'medicine_id');
+        return $this->hasMany(OrderedMedicine::class, 'order_id');
     }
 }
+//make the relations between the ordered medicines and the medicines one to many relationship

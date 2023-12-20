@@ -52,4 +52,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Order::class, "user_id");
     }
+
+    // OneToOne Relation
+    public function Favorite()
+    {
+        return $this->hasOne(Favorite::class, "user_id");
+    }
 }

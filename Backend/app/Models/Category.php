@@ -15,10 +15,10 @@ class Category extends Model
      * @var array<int, string>
      */
     protected $guarded = [
-        "en_Category_name",
-        "ar_Category_name",
-        "en_Description",
-        "ar_Description"
+        "en_category_name",
+        "ar_category_name",
+        "en_description",
+        "ar_description"
     ];
 
     /**

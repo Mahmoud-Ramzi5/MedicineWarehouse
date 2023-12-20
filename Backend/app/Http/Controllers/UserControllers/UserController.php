@@ -7,6 +7,7 @@ use App\Http\Requests\UserRequests\LoginRequest;
 use App\Http\Requests\UserRequests\RegisterRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Favorite;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -34,6 +35,7 @@ class UserController extends Controller
             'email' => $credentials['email'],
             'password' => Hash::make($credentials['password']),
         ]);
+        $favorite = Favorite::create(['user_id' => $user->id]);
         // Response
         return response()->json([
             'message' => 'Successfully registered',
