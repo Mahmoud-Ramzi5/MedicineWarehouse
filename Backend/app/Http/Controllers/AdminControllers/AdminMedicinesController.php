@@ -112,16 +112,20 @@ class AdminMedicinesController extends MedicinesController
         $input = $request->input('name');
         $name = Str::upper($input);
         $medicines = Medicine::with('MedicineTranslations')->with('Categories')->get();
+        $entries=[];
         foreach ($medicines as $medicine) {
             $medicinetranslation = $medicine['MedicineTranslations'];
             foreach($medicinetranslation as $m){
                 $commercial_name = $m['commercial_name'];
-                $scientific_name = $m['$scientific_name'];
+                $scientific_name = $m['scientific_name'];
                 if($name == $commercial_name||$name == $scientific_name){
-                    return response()->json(["message"=> $medicine], 200);
+                    array_push($entries,$medicine);
                 }
             }
         }
-        return response()->json(["message"=> 'sorry item requested not found please check the name correctly'], 400);
+        if ($entries!=null){
+        return response()->json(["message"=> $entries], 200);
+        }
+        else{return response()->json(["message"=> 'sorry item requested not found please check the name correctly'], 400);}
     }
 }

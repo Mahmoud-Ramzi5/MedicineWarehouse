@@ -30,6 +30,15 @@ class Order extends Model
         'updated_at',
     ];
 
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'is_paid' => 'boolean',
+    ];
+
     // OneToMany Relation
     public function User()
     {

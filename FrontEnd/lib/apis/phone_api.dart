@@ -2,9 +2,11 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
+import 'package:test1/classes/cart_item.dart';
 import 'package:test1/classes/medicine.dart';
 import 'package:test1/classes/category.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:test1/classes/order.dart';
 
 class Api {
   static final registerUri =
@@ -19,7 +21,8 @@ class Api {
       Uri.parse('http://10.0.2.2:8000/api/users/categoryFilter');
   static final orderUri = Uri.parse('http://10.0.2.2:8000/api/users/new_order');
   static final searchUri = Uri.parse('http://10.0.2.2:8000/api/users/search');
-
+  static final fetchOrderUri =
+      Uri.parse('http://10.0.2.2:8000/api/users/orders');
   Api();
 
   Future<dynamic> register(
@@ -186,7 +189,14 @@ class Api {
     }
   }
 
-  Future<dynamic> order() async {
+  Future<dynamic> order(List<CartItem> list) async {
+    Map<String, dynamic> orderMap = ({});
+    for (var cartItem in list) {
+      orderMap.addEntries(
+          {cartItem.medicine.id.toString(): cartItem.quantity}.entries);
+    }
+    const storage = FlutterSecureStorage();
+    var token = await storage.read(key: 'Bearer Token');
     final response = await dio.postUri(
       orderUri,
       options: Options(
@@ -195,10 +205,12 @@ class Api {
           'Accept': "application/json",
           'connection': 'keep-alive',
           'Accept-Encoding': 'gzip, deflate, br',
+          'Authorization': 'Bearer $token',
         },
       ),
+      data: FormData.fromMap({"medicines": orderMap}),
     );
-    if (response.statusCode == 200) {}
+    return response;
   }
 
   Future<List<Medicine>> search(String name) async {
@@ -212,17 +224,44 @@ class Api {
           'Accept-Encoding': 'gzip, deflate, br',
         },
       ),
-      data: name,
+      data: ({"name": name}),
     );
     if (response.statusCode == 200) {
       List<Medicine> medicineList = [];
-      for (var medicine in response.data['data']) {
+      for (var medicine in response.data['message']) {
         final medicineMap = Medicine.fromJson(medicine as Map<String, dynamic>);
         medicineList.add(medicineMap);
       }
       return medicineList;
     } else {
-      throw Exception('Failed to load Medicines');
+      throw Exception('No Medicines');
+    }
+  }
+
+  Future<List<Order>> fetchOrders() async {
+    const storage = FlutterSecureStorage();
+    var token = await storage.read(key: 'Bearer Token');
+    final response = await dio.getUri(
+      fetchOrderUri,
+      options: Options(
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Accept': "application/json",
+          'connection': 'keep-alive',
+          'Accept-Encoding': 'gzip, deflate, br',
+          'Authorization': 'Bearer $token'
+        },
+      ),
+    );
+    if (response.statusCode == 200) {
+      List<Order> ordersList = [];
+      for (var order in response.data['data']) {
+        final orderMap = Order.fromJson(order as Map<String, dynamic>);
+        ordersList.add(orderMap);
+      }
+      return ordersList;
+    } else {
+      throw Exception('Failed to load Orders');
     }
   }
 }

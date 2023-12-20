@@ -47,7 +47,7 @@ class _SearchViewState extends State<SearchView> {
           ),
           onSubmitted: (value) {
             FutureBuilder(
-              future: Api().search(_search.text),
+              future: Api().search(_search.text.toString()),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Center(child: CircularProgressIndicator());

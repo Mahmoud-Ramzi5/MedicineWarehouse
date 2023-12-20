@@ -103,11 +103,8 @@ class _LoginViewState extends State<LoginView> {
                   onPressed: () {
                     if (_formField.currentState!.validate() == true) {
                       Api()
-                          .login(
-                        int.parse(_phoneNumber.text),
-                        _password.text,
-                        rememberMe,
-                      )
+                          .login(int.parse(_phoneNumber.text), _password.text,
+                              rememberMe)
                           .then(
                         (dynamic response) {
                           final body = json.decode(response.body);

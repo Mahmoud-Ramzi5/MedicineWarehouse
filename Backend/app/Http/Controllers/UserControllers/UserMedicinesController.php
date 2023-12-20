@@ -107,27 +107,30 @@ class UserMedicinesController extends MedicinesController
 
             if ($medicineYear > $dateYear)
             {
-                array_push($valid, $medicine);
+                array_push($valids, $medicine);
             }
             elseif($medicineYear == $dateYear && $medicineMonth > $dateMonth)
             {
-                array_push($valid, $medicine);
+                array_push($valids, $medicine);
             }
             elseif($medicineYear == $dateYear && $medicineMonth == $dateMonth && $medicineDay > $dateDay)
             {
-                array_push($valid, $medicine);
+                array_push($valids, $medicine);
             }
         }
+        $entries=[];
         foreach($valids as $valid){
             $medicinetranslation = $valid['MedicineTranslations'];
             foreach($medicinetranslation as $m){
                 $commercial_name = $m['commercial_name'];
-                $scientific_name = $m['$scientific_name'];
+                $scientific_name = $m['scientific_name'];
                 if($name == $commercial_name||$name == $scientific_name){
-                    return response()->json(["message"=> $medicine], 200);
+                array_push($entries,$valid);
                 }
             }
+        }if ($entries!=null){
+            return response()->json(["message"=> $entries], 200);
+            }
+            else{return response()->json(["message"=> 'sorry item requested not found please check the name correctly'], 400);}
         }
-        return response()->json(["message"=> 'sorry item requested not found it may be out of stock or expired'], 400);
-    }
 }

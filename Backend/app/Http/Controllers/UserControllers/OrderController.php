@@ -15,9 +15,12 @@ class OrderController extends Controller
 {
     public function ShowOrders(Request $request)
     {
-        $hashedToken = $request->bearerToken();
-        $token = PersonalAccessToken::where('token', $hashedToken)->first();
-        $user = $token->tokenable;
+        $user =  auth('sanctum')->user();
+        if ($user==null) {
+            return response()->json([
+                'message' => 'Invalid User'
+            ], 400);
+        }
         // Get user id
         $id = $user->id;
         // User Orders
@@ -46,9 +49,12 @@ class OrderController extends Controller
         $validated = $request->validate([
             'medicines' => 'required'
         ]);
-        $hashedToken = $request->bearerToken();
-        $token = PersonalAccessToken::where('token', $hashedToken)->first();
-        $user = $token->tokenable;
+        $user =  auth('sanctum')->user();
+        if ($user==null) {
+            return response()->json([
+                'message' => 'Invalid User'
+            ], 400);
+        }
         // Get user id
         $user_id = $user->id;
         // Check medicines and quantities

@@ -42,7 +42,7 @@ Route::prefix('/users')->group(function () {
         Route::post('/search', 'Search_Not_Expired')->name('Search_Not_Expired');
     });
     Route::controller(UserOrderController::class)->group(function () {
-        Route::post('/orders', 'ShowOrders')->name('ShowUserOrders');
+        Route::get('/orders', 'ShowOrders')->name('ShowUserOrders');
         Route::post('/new_order', 'Add_Order')->name('Add_Order');
     });
 });

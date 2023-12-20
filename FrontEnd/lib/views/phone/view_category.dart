@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:test1/apis/phone_api.dart';
+import 'package:test1/constants/routes.dart';
 
 class ViewCategoty extends StatefulWidget {
   final int id;
@@ -30,12 +31,13 @@ class _ViewCategotyState extends State<ViewCategoty> {
               itemBuilder: (context, index) {
                 return Padding(
                     padding: const EdgeInsets.all(8),
-                    child: Container(
-                      margin: const EdgeInsets.all(5.0),
-                      height: 30,
-                      decoration: const ShapeDecoration(
-                          shape: StadiumBorder(), color: Colors.green),
-                      alignment: Alignment.center,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.of(context).pushNamed(
+                          medicineDetailsRoute,
+                          arguments: medicines?[index],
+                        );
+                      },
                       child: Text(
                           '${medicines?[index].medicineTranslations['en']['commercial_name']}',
                           style: const TextStyle(

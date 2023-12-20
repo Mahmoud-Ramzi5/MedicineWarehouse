@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:test1/apis/phone_api.dart';
 import 'package:test1/classes/cart_controller.dart';
 
 class CartView extends StatefulWidget {
@@ -36,7 +37,31 @@ class _CartViewState extends State<CartView> {
                 ),
               ),
             ),
-            ElevatedButton(onPressed: () {}, child: const Text('Confirm Order'))
+            ElevatedButton(
+              onPressed: () {
+                Api().order(cartController.items).then((dynamic response) {
+                  if (response.statusCode == 200) {
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          title: Text(response.data['message']),
+                          content: const Icon(
+                            Icons.check_circle_outline,
+                            color: Colors.green,
+                          ),
+                          alignment: Alignment.center,
+                        );
+                      },
+                    );
+                  }
+                });
+                setState(() {
+                  cartController.clearCart();
+                });
+              },
+              child: const Text('Confirm Order'),
+            )
           ],
         ),
       ),
