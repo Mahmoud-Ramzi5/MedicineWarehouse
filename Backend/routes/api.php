@@ -4,6 +4,7 @@ use App\Http\Controllers\MedicinesController;
 use App\Http\Controllers\UserControllers\UserController;
 use App\Http\Controllers\UserControllers\UserMedicinesController;
 use App\Http\Controllers\UserControllers\OrderController as UserOrderController;
+use App\Http\Controllers\UserControllers\FavoriteController;
 use App\Http\Controllers\AdminControllers\AdminController;
 use App\Http\Controllers\AdminControllers\AdminMedicinesController;
 use App\Http\Controllers\AdminControllers\OrderController as AdminOrderController;
@@ -44,6 +45,11 @@ Route::prefix('/users')->group(function () {
     Route::controller(UserOrderController::class)->group(function () {
         Route::get('/orders', 'ShowOrders')->name('ShowUserOrders');
         Route::post('/new_order', 'Add_Order')->name('Add_Order');
+    });
+    Route::controller(FavoriteController::class)->group(function(){
+        Route::get('/favorite', 'DisplayFavorite')->name('DisplayFavorite');
+        Route::post('/addFavorite', 'AddToFavorite')->name('AddToFavorite');
+        Route::post('/removeFavorite', 'DeleteFavorite')->name('DeleteFavorite');
     });
 });
 
