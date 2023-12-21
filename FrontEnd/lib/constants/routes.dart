@@ -6,3 +6,4 @@ const cartRoute = '/cart/';
 const viewCategoriesRoute = '/viewCategory/';
 const viewOrdersRoute = '/viewOrders/';
 const mainwebRoute = '/medicines/';
+const orderDetailsRoute = '/orderDetails/';

@@ -10,13 +10,8 @@ class MedicineDetailsView extends StatefulWidget {
 }
 
 class _MedicineDetailsViewState extends State<MedicineDetailsView> {
-  // late CartController cartController;
-  // late CartItem cartItem;
-
   @override
   void initState() {
-    // cartController = Get.find<CartController>();
-    // cartItem = CartItem(medicine: widget.medicine, quantity: 0);
     super.initState();
   }
 
@@ -32,8 +27,8 @@ class _MedicineDetailsViewState extends State<MedicineDetailsView> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
-                  height: 243,
-                  width: 324,
+                  height: 250,
+                  width: 300,
                   color: Colors.green,
                   child: Image.network(
                       'http://10.0.2.2:8000/storage/${widget.medicine.imagePath}',
@@ -178,68 +173,6 @@ class _MedicineDetailsViewState extends State<MedicineDetailsView> {
                   ),
                 ),
               ),
-              // Container(
-              //   margin: const EdgeInsets.all(10),
-              //   alignment: Alignment.center,
-              //   height: 45,
-              //   width: 300,
-              //   child: Row(
-              //     mainAxisAlignment: MainAxisAlignment.center,
-              //     crossAxisAlignment: CrossAxisAlignment.center,
-              //     children: [
-              //       IconButton(
-              //         onPressed: () {
-              //           setState(() {
-              //             cartItem.decrementQuantity();
-              //           });
-              //         },
-              //         icon: const Icon(
-              //           Icons.remove,
-              //           color: Colors.red,
-              //           size: 25,
-              //         ),
-              //       ),
-              //       Container(
-              //         margin: const EdgeInsets.all(10),
-              //         alignment: Alignment.center,
-              //         height: 50,
-              //         width: 50,
-              //         decoration: const ShapeDecoration(
-              //           shape: RoundedRectangleBorder(
-              //             side: BorderSide(color: Colors.green, width: 2),
-              //           ),
-              //         ),
-              //         child: Text(
-              //           '${cartItem.quantity}',
-              //           style: const TextStyle(
-              //             fontSize: 20,
-              //             fontWeight: FontWeight.bold,
-              //           ),
-              //         ),
-              //       ),
-              //       IconButton(
-              //         onPressed: () {
-              //           setState(() {
-              //             cartItem.incrementQuantity();
-              //           });
-              //         },
-              //         icon: const Icon(
-              //           Icons.add,
-              //           color: Colors.green,
-              //           size: 25,
-              //         ),
-              //       ),
-              //     ],
-              //   ),
-              // ),
-              // ElevatedButton(
-              //   onPressed: () {
-              //     cartController.addToCart(cartItem);
-              //   },
-              //   child: const Icon(
-              //     Icons.add_shopping_cart_outlined,
-              //   ),
-              // ),
             ],
           ),
         ),

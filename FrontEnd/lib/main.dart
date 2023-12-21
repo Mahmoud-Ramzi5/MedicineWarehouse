@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:test1/classes/medicine.dart';
+import 'package:test1/classes/order.dart';
 import 'package:test1/constants/routes.dart';
 import 'package:test1/views/phone/cart_view.dart';
 import 'package:test1/views/phone/login_view.dart';
 import 'package:test1/views/phone/main_view.dart';
 import 'package:test1/views/phone/medicine_details_view.dart';
+import 'package:test1/views/phone/order_details_view.dart';
 import 'package:test1/views/phone/register_view.dart';
 import 'package:test1/views/phone/view_category.dart';
 import 'package:test1/views/phone/view_orders.dart';
@@ -41,7 +43,15 @@ void main() {
           },
         );
       }
+      if (settings.name == orderDetailsRoute) {
+        final Order order = settings.arguments as Order;
+        return MaterialPageRoute(
+          builder: (context) {
+            return OrderDetailsView(order: order);
+          },
+        );
+      }
     },
-    home: const Web_Main(),
+    home: const LoginView(),
   ));
 }
