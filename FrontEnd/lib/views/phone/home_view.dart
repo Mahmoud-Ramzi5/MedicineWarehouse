@@ -65,6 +65,22 @@ class _HomeViewState extends State<HomeView> {
             ),
             ListTile(
               title: const Text(
+                'My Favorites',
+                style: TextStyle(
+                  fontSize: 20,
+                  color: Colors.green,
+                ),
+              ),
+              leading: const Icon(
+                Icons.star_sharp,
+                color: Colors.green,
+              ),
+              onTap: () {
+                Navigator.of(context).pushNamed(favoritesRoute);
+              },
+            ),
+            ListTile(
+              title: const Text(
                 'Log out',
                 style: TextStyle(
                   fontSize: 20,

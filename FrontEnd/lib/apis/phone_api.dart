@@ -23,6 +23,13 @@ class Api {
   static final searchUri = Uri.parse('http://10.0.2.2:8000/api/users/search');
   static final fetchOrderUri =
       Uri.parse('http://10.0.2.2:8000/api/users/orders');
+  static final fetchFavoritesUri =
+      Uri.parse('http://10.0.2.2:8000/api/users/favorite');
+  static final addToFavoritesUri =
+      Uri.parse('http://10.0.2.2:8000/api/users/addFavorite');
+  static final removeFavoritesUri =
+      Uri.parse('http://10.0.2.2:8000/api/users/removeFavorite');
+
   Api();
 
   Future<dynamic> register(
@@ -262,6 +269,77 @@ class Api {
       return ordersList;
     } else {
       throw Exception('Failed to load Orders');
+    }
+  }
+
+  Future<List<Medicine>> fetchFavorites() async {
+    const storage = FlutterSecureStorage();
+    var token = await storage.read(key: 'Bearer Token');
+    final response = await dio.getUri(
+      fetchFavoritesUri,
+      options: Options(
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Accept': "application/json",
+          'connection': 'keep-alive',
+          'Accept-Encoding': 'gzip, deflate, br',
+          'Authorization': 'Bearer $token'
+        },
+      ),
+    );
+    if (response.statusCode == 200) {
+      List<Medicine> medicineList = [];
+      for (var medicine in response.data['message']['medicines']) {
+        final medicineMap = Medicine.fromJson(medicine as Map<String, dynamic>);
+        medicineList.add(medicineMap);
+      }
+      return medicineList;
+    } else {
+      throw Exception('Failed to load Orders');
+    }
+  }
+
+  Future<dynamic> addToFavorites(int id) async {
+    const storage = FlutterSecureStorage();
+    var token = await storage.read(key: 'Bearer Token');
+    final response = await dio.postUri(
+      addToFavoritesUri,
+      options: Options(
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Accept': "application/json",
+          'connection': 'keep-alive',
+          'Accept-Encoding': 'gzip, deflate, br',
+          'Authorization': 'Bearer $token'
+        },
+      ),
+      data: ({"medicine_id": id}),
+    );
+    if (response.statusCode == 200) {
+    } else {
+      throw Exception('No Medicines');
+    }
+  }
+
+  Future<dynamic> removeFavorites(int id) async {
+    const storage = FlutterSecureStorage();
+    var token = await storage.read(key: 'Bearer Token');
+    final response = await dio.postUri(
+      removeFavoritesUri,
+      options: Options(
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Accept': "application/json",
+          'connection': 'keep-alive',
+          'Accept-Encoding': 'gzip, deflate, br',
+          'Authorization': 'Bearer $token'
+        },
+      ),
+      data: ({"medicine_id": id}),
+    );
+    if (response.statusCode == 200) {
+    } else {
+      throw Exception('No Medicines');
     }
   }
 }

@@ -7,3 +7,4 @@ const viewCategoriesRoute = '/viewCategory/';
 const viewOrdersRoute = '/viewOrders/';
 const mainwebRoute = '/medicines/';
 const orderDetailsRoute = '/orderDetails/';
+const favoritesRoute = '/favorites/';

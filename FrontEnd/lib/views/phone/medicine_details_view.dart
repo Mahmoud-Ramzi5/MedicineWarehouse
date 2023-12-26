@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:test1/apis/phone_api.dart';
 import 'package:test1/classes/medicine.dart';
 
 class MedicineDetailsView extends StatefulWidget {
@@ -18,7 +19,16 @@ class _MedicineDetailsViewState extends State<MedicineDetailsView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Full Details')),
+      appBar: AppBar(title: const Text('Full Details'), actions: [
+        IconButton(
+          onPressed: () {
+            Api().addToFavorites(widget.medicine.id);
+          },
+          icon: const Icon(
+            Icons.favorite_border,
+          ),
+        ),
+      ]),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Center(
@@ -27,17 +37,18 @@ class _MedicineDetailsViewState extends State<MedicineDetailsView> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
-                  height: 250,
-                  width: 300,
-                  color: Colors.green,
-                  child: Image.network(
-                      'http://10.0.2.2:8000/storage/${widget.medicine.imagePath}',
-                      fit: BoxFit.cover)),
+                height: 250,
+                width: 300,
+                color: Colors.green,
+                child: Image.network(
+                    'http://10.0.2.2:8000/storage/${widget.medicine.imagePath}',
+                    fit: BoxFit.cover),
+              ),
               Container(
                 margin: const EdgeInsets.all(10),
                 alignment: Alignment.center,
-                height: 30,
-                width: 300,
+                height: 40,
+                width: 350,
                 decoration: const ShapeDecoration(
                   shape: RoundedRectangleBorder(
                     side: BorderSide(color: Colors.green, width: 2),
@@ -55,7 +66,7 @@ class _MedicineDetailsViewState extends State<MedicineDetailsView> {
                 margin: const EdgeInsets.all(10),
                 alignment: Alignment.center,
                 height: 30,
-                width: 300,
+                width: 350,
                 decoration: const ShapeDecoration(
                   shape: RoundedRectangleBorder(
                     side: BorderSide(color: Colors.green, width: 2),
@@ -73,7 +84,7 @@ class _MedicineDetailsViewState extends State<MedicineDetailsView> {
                 margin: const EdgeInsets.all(10),
                 alignment: Alignment.center,
                 height: 30,
-                width: 300,
+                width: 350,
                 decoration: const ShapeDecoration(
                   shape: RoundedRectangleBorder(
                     side: BorderSide(color: Colors.green, width: 2),
@@ -91,7 +102,7 @@ class _MedicineDetailsViewState extends State<MedicineDetailsView> {
                 child: Container(
                   margin: const EdgeInsets.all(10),
                   alignment: Alignment.center,
-                  width: 300,
+                  width: 350,
                   decoration: const ShapeDecoration(
                     shape: RoundedRectangleBorder(
                       side: BorderSide(color: Colors.green, width: 2),
@@ -123,7 +134,7 @@ class _MedicineDetailsViewState extends State<MedicineDetailsView> {
                 margin: const EdgeInsets.all(10),
                 alignment: Alignment.center,
                 height: 30,
-                width: 300,
+                width: 350,
                 decoration: const ShapeDecoration(
                   shape: RoundedRectangleBorder(
                     side: BorderSide(color: Colors.green, width: 2),
@@ -141,7 +152,7 @@ class _MedicineDetailsViewState extends State<MedicineDetailsView> {
                 margin: const EdgeInsets.all(10),
                 alignment: Alignment.center,
                 height: 30,
-                width: 300,
+                width: 350,
                 decoration: const ShapeDecoration(
                   shape: RoundedRectangleBorder(
                     side: BorderSide(color: Colors.green, width: 2),
@@ -159,7 +170,7 @@ class _MedicineDetailsViewState extends State<MedicineDetailsView> {
                 margin: const EdgeInsets.all(10),
                 alignment: Alignment.center,
                 height: 30,
-                width: 300,
+                width: 350,
                 decoration: const ShapeDecoration(
                   shape: RoundedRectangleBorder(
                     side: BorderSide(color: Colors.green, width: 2),

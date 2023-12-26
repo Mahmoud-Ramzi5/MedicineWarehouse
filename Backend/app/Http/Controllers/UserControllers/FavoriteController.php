@@ -20,7 +20,11 @@ class FavoriteController extends Controller
         // Get user id
         $user_id = $user->id;
         $favorite = Favorite::where('user_id', $user_id)->first();
-        $favorite->Medicines;
+        $medicines = $favorite->Medicines;
+        foreach($medicines as $medicine) {
+            $medicine->MedicineTranslations;
+            $medicine->Categories;
+        }
         return response()->json(['message' => $favorite]);
     }
 
