@@ -20,6 +20,8 @@ class WebApi {
       Uri.parse('http://127.0.0.1:8000/api/admin/medicines');
   static final fetchordersUri =
       Uri.parse('http://127.0.0.1:8000/api/admin/orders');
+   static final searchUri = 
+   Uri.parse('http://127.0.0.1:8000/api/admin/search');
 
   WebApi();
 
@@ -168,6 +170,32 @@ class WebApi {
       throw Exception('Failed to load Orders');
     }
   }
+
+Future<List<Medicine>> search(String name) async {
+    final response = await dio.postUri(
+      searchUri,
+      options: Options(
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Accept': "application/json",
+          'connection': 'keep-alive',
+          'Accept-Encoding': 'gzip, deflate, br',
+        },
+      ),
+      data: ({"name": name}),
+    );
+    if (response.statusCode == 200) {
+      List<Medicine> medicineList = [];
+      for (var medicine in response.data['message']) {
+        final medicineMap = Medicine.fromJson(medicine as Map<String, dynamic>);
+        medicineList.add(medicineMap);
+      }
+      return medicineList;
+    } else {
+      throw Exception('No Medicines');
+    }
+  }
+
 
   Future<void> GG(int userId, List<int> medicines) async {
     final formData =

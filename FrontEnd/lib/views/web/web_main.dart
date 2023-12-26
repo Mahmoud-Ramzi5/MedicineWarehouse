@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:test1/apis/web_api.dart';
 import 'package:test1/classes/medicine.dart';
@@ -20,7 +21,8 @@ class _WebMainState extends State<Web_Main> {
   String searchQuery = '';
   bool shouldFetchData = true;
   late final WebOrder web_orders;
-
+int selectedStatus = 1;
+List<Medicine> _medicines = [];
   @override
   void initState() {
     _search = TextEditingController();
@@ -47,6 +49,82 @@ class _WebMainState extends State<Web_Main> {
           .toList();
     }
   }
+
+
+Future<void> _onSearchSubmitted(String value) async {
+    final medicines = await WebApi().search(value);
+    setState(() {
+      _medicines = medicines;
+    });
+  }
+
+
+
+  Widget _buildSearchResults() {
+    return ListView.builder(
+      physics: const PageScrollPhysics(),
+      padding: const EdgeInsets.all(10),
+      shrinkWrap: true,
+      itemBuilder: (context, index) {
+        final medicine = _medicines[index];
+        return Card(
+          elevation: 5,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Container(
+                margin: const EdgeInsets.all(10),
+                height: 100,
+                width: 100,
+                decoration: const BoxDecoration(
+                  shape: BoxShape.rectangle,
+                  color: Colors.green,
+                ),
+                child: Image.network(
+                  'http://10.0.2.2:8000/storage/${medicine.imagePath}',
+                  fit: BoxFit.cover,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      '${medicine.medicineTranslations["en"]["commercial_name"]}',
+                      style: const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    Text(
+                      'Price: ${medicine.price}',
+                      style: const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    Text(
+                      'Quantity: ${medicine.quantityAvailable}',
+                      style: const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+      itemCount: _medicines.length,
+    );
+  }
+
+
 
   void showLogoutDialog(BuildContext context) {
     showDialog(
@@ -136,10 +214,6 @@ class _WebMainState extends State<Web_Main> {
               label: Text('Reports'),
             ),
             NavigationRailDestination(
-              icon: Icon(Icons.language, color: Colors.white),
-              label: Text('Language'),
-            ),
-            NavigationRailDestination(
               icon: Icon(Icons.logout, color: Colors.white),
               label: Text('Log Out'),
             ),
@@ -214,7 +288,7 @@ class _WebMainState extends State<Web_Main> {
                                             color: Colors.green,
                                           ),
                                           child: Image.network(
-                                            'http://127.0.0.1:8000/storage/${filteredMedicines[index].imagePath}',
+                                            'http://127.0.0.1:8000/storage/${medicines[index].imagePath}',
                                             fit: BoxFit.cover,
                                           ),
                                         ),
@@ -227,7 +301,7 @@ class _WebMainState extends State<Web_Main> {
                                               Column(
                                                 children: [
                                                   Text(
-                                                    '${filteredMedicines[index].medicineTranslations["en"]["commercial_name"]}',
+                                                    '${medicines[index].medicineTranslations["en"]["commercial_name"]}',
                                                     style: const TextStyle(
                                                       fontSize: 20,
                                                       fontWeight:
@@ -243,7 +317,7 @@ class _WebMainState extends State<Web_Main> {
                                                       right: 20,
                                                     ),
                                                     child: Text(
-                                                      'Price: ${filteredMedicines[index].price}',
+                                                      'Price: ${medicines[index].price}',
                                                       style: const TextStyle(
                                                         fontSize: 20,
                                                         fontWeight:
@@ -252,7 +326,7 @@ class _WebMainState extends State<Web_Main> {
                                                     ),
                                                   ),
                                                   Text(
-                                                    'Quantity: ${filteredMedicines[index].quantityAvailable}',
+                                                    'Quantity: ${medicines[index].quantityAvailable}',
                                                     style: const TextStyle(
                                                       fontSize: 20,
                                                       fontWeight:
@@ -291,7 +365,7 @@ class _WebMainState extends State<Web_Main> {
                                     ),
                                   );
                                 },
-                                itemCount: filteredMedicines.length,
+                                itemCount: medicines.length,
                               ),
                             ],
                           ),
@@ -300,68 +374,36 @@ class _WebMainState extends State<Web_Main> {
                     }
                   },
                 )
-              : Container(),
-        ),
-        Expanded(
-          child: selectedIndex == 2
-              ? FutureBuilder(
-                  future: WebApi().fetchweborders(),
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const Center(child: CircularProgressIndicator());
-                    } else if (snapshot.hasError) {
-                      return Center(child: Text('Error: ${snapshot.error}'));
-                    } else {
-                      final weborders = snapshot.data;
-                      return Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: SingleChildScrollView(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              ListView.builder(
-                                physics: const PageScrollPhysics(),
-                                padding: const EdgeInsets.all(10),
-                                shrinkWrap: true,
-                                itemBuilder: (context, index) {
-                                  return Card(
-                                    elevation: 5,
-                                    child: ListTile(
-                                      title: const Text('Orders'),
-                                      subtitle: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                              'Order ID: ${weborders![index].id}'),
-                                          Text(
-                                              'Ordered Medicines: ${weborders[index].orderedMedicines}'),
-                                          Text(
-                                              'Paid: ${weborders[index].totalPrice}'),
-                                          Text(
-                                              'Status: ${weborders[index].paid}'),
-                                          Text(
-                                              'Status: ${weborders[index].status}'),
-                                        ],
-                                      ),
-                                      onTap: () {
-                                        // Handle tap on the order card
-                                        // You can navigate to order details or perform other actions
-                                      },
-                                    ),
-                                  );
-                                },
-                                itemCount: weborders?.length,
-                              ),
-                            ],
-                          ),
-                        ),
-                      );
-                    }
+:selectedIndex == 2
+    ? FutureBuilder(
+        future: WebApi().fetchweborders(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else {
+            final weborders = snapshot.data;
+            return Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: SingleChildScrollView(
+                child: ListView.builder(
+                  physics: const PageScrollPhysics(),
+                  padding: const EdgeInsets.all(10),
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) {
+                    return OrderCard(webOrder: weborders![index]);
                   },
-                )
-              : Container(),
-        ),
+                  itemCount: weborders?.length ?? 0,
+                ),
+              ),
+            );
+          }
+        },
+      )
+    : Container(),
+        )
+
       ]),
     );
   }
@@ -371,4 +413,105 @@ class _WebMainState extends State<Web_Main> {
       selectedTitle = title;
     });
   }
+}
+
+
+
+class OrderCard extends StatefulWidget {
+  final WebOrder webOrder;
+
+  const OrderCard({Key? key, required this.webOrder}) : super(key: key);
+
+  @override
+  _OrderCardState createState() => _OrderCardState();
+}
+class _OrderCardState extends State<OrderCard> {
+  int selectedStatus = 1;
+  int paymentStatus=4;
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+  elevation: 5,
+  child: Column(
+    mainAxisAlignment: MainAxisAlignment.start,
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      const Text('Orders'),
+      Text('Order ID: ${widget.webOrder.id}'),
+      Text('Ordered Medicines: ${widget.webOrder.orderedMedicines}'),
+      Text('Price: ${widget.webOrder.totalPrice}'),
+      Row(
+        children: [
+          Radio(
+            value: 1,
+            groupValue: selectedStatus,
+            onChanged: (value) {
+              setState(() {
+       if (selectedStatus != 2 && selectedStatus != 3) {
+                  selectedStatus = value as int;
+                }
+              });
+            },
+          ),
+          const Text('Preparing'),
+          Radio(
+            value: 2,
+            groupValue: selectedStatus,
+            onChanged: (value) {
+              setState(() {
+                if (selectedStatus == 1 ) {
+                  selectedStatus = value as int;
+                }
+              });
+            },
+          ),
+          const Text('Sending'),
+          Radio(
+            value: 3,
+            groupValue: selectedStatus,
+            onChanged: (value) {
+              setState(() {
+                if (selectedStatus == 2) {
+                  selectedStatus = value as int;
+                }
+              });
+            },
+          ),
+          const Text('Sent'),
+        ],
+      ),
+      Row(
+        children: [
+          Radio(
+            value: 4,
+            groupValue: paymentStatus,
+            onChanged: (value) {
+              setState(() {
+                if (selectedStatus != 2 && selectedStatus != 3) {
+                  paymentStatus = value as int;
+                }
+              });
+            },
+          ),
+          const Text('UnPaid'),
+          Radio(
+            value: 5,
+            groupValue: paymentStatus,
+            onChanged: (value) {
+              setState(() {
+                if (paymentStatus==4) {
+                  paymentStatus = value as int;
+                }
+              });
+            },
+          ),
+          const Text('Paid'),
+        ],
+      ),
+    ],
+  ),
+);
+
+ }
 }
