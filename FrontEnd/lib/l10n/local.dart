@@ -56,6 +56,7 @@ class MyLocal implements Translations {
           "50": "الكمية المطلوبة",
           "51": "سعر القطعة الواحدة",
           "52": "الكمية الإجمالية المطلوبة",
+          "53": "اللغة",
         },
         "en": {
           "1": "en",
@@ -110,6 +111,7 @@ class MyLocal implements Translations {
           "50": "Ordered Quantity",
           "51": "Single unit price",
           "52": "Medicines Quantity",
+          "53": "Langauge",
         },
       };
 }

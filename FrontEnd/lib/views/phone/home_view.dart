@@ -5,6 +5,8 @@ import 'package:test1/apis/phone_api.dart';
 import 'package:test1/classes/cart_controller.dart';
 import 'package:test1/classes/cart_item.dart';
 import 'package:test1/constants/routes.dart';
+import 'package:test1/l10n/local_controller.dart';
+import 'package:toggle_switch/toggle_switch.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -15,11 +17,12 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   late CartController cartController;
+  late MyLocalController localController;
+  int initIndex = 0;
   @override
   void initState() {
-    cartController = Get.put(
-      CartController(),
-    );
+    cartController = Get.put(CartController());
+    localController = Get.put(MyLocalController());
     super.initState();
   }
 
@@ -146,6 +149,47 @@ class _HomeViewState extends State<HomeView> {
                   },
                 );
               },
+            ),
+            ListTile(
+              title: Text(
+                "53".tr,
+                style: const TextStyle(
+                  fontSize: 20,
+                  color: Colors.green,
+                ),
+              ),
+              leading: const Icon(
+                Icons.language,
+                color: Colors.green,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(5),
+              child: Row(
+                children: [
+                  ToggleSwitch(
+                    activeBgColor: const [Colors.green],
+                    activeFgColor: Colors.white,
+                    inactiveBgColor: Colors.grey,
+                    inactiveFgColor: Colors.black,
+                    customTextStyles: const [
+                      TextStyle(fontSize: 15, fontWeight: FontWeight.bold)
+                    ],
+                    changeOnTap: true,
+                    initialLabelIndex: initIndex,
+                    totalSwitches: 2,
+                    labels: const ["English", "عربي"],
+                    onToggle: (index) {
+                      initIndex = index!;
+                      if (initIndex == 0) {
+                        localController.changeLang("en");
+                      } else if (initIndex == 1) {
+                        localController.changeLang("ar");
+                      }
+                    },
+                  ),
+                ],
+              ),
             ),
           ],
         ),

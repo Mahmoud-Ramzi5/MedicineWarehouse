@@ -49,6 +49,9 @@ dependencies:
   http_parser: ^4.0.2
   file_picker: ^6.1.1
   get: ^4.6.6
+  toggle_switch: ^2.1.0
+  language_picker: ^0.4.3
+  shared_preferences: ^2.2.2
 
 dev_dependencies:
   flutter_test:
