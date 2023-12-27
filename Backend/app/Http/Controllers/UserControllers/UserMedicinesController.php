@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\Medicine;
 use App\Models\Category;
+use App\Models\MedicineTranslation;
 
 class UserMedicinesController extends MedicinesController
 {
@@ -94,7 +95,17 @@ class UserMedicinesController extends MedicinesController
     {
         $input = $request->input('name');
         $name = Str::upper($input);
-        $medicines = Medicine::with('MedicineTranslations')->with('Categories')->get();
+        $query = MedicineTranslation::where('commercial_name', 'like', "%$input%")
+                                        ->orWhere('scientific_name', 'like', "%$input%")->get();
+        $medicines = [];
+        foreach ($query as $q) {
+            $id = $q->medicine_id;
+            $medicine = Medicine::find($id);
+            $medicine->MedicineTranslations;
+            $medicine->Categories;
+            array_push($medicines, $medicine);
+        }
+
         $valids = [];
         $Date = today();
         $dateYear = $Date->format('Y');
@@ -118,18 +129,8 @@ class UserMedicinesController extends MedicinesController
                 array_push($valids, $medicine);
             }
         }
-        $entries=[];
-        foreach($valids as $valid){
-            $medicinetranslation = $valid['MedicineTranslations'];
-            foreach($medicinetranslation as $m){
-                $commercial_name = $m['commercial_name'];
-                $scientific_name = $m['scientific_name'];
-                if($name == $commercial_name||$name == $scientific_name){
-                array_push($entries,$valid);
-                }
-            }
-        }if ($entries!=null){
-            return response()->json(["message"=> $entries], 200);
+        if ($valids!=null){
+            return response()->json(["message"=> $valids], 200);
             }
             else{
                 return response()->json(["message"=> 'sorry item requested not found please check the name correctly'], 400);

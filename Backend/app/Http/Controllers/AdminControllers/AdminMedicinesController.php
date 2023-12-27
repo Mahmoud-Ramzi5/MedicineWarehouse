@@ -111,21 +111,21 @@ class AdminMedicinesController extends MedicinesController
     {
         $input = $request->input('name');
         $name = Str::upper($input);
-        $medicines = Medicine::with('MedicineTranslations')->with('Categories')->get();
-        $entries=[];
-        foreach ($medicines as $medicine) {
-            $medicinetranslation = $medicine['MedicineTranslations'];
-            foreach($medicinetranslation as $m){
-                $commercial_name = $m['commercial_name'];
-                $scientific_name = $m['scientific_name'];
-                if($name == $commercial_name||$name == $scientific_name){
-                    array_push($entries,$medicine);
-                }
-            }
+        $query = MedicineTranslation::where('commercial_name', 'like', "%$input%")
+                                        ->orWhere('scientific_name', 'like', "%$input%")->get();
+        $medicines = [];
+        foreach ($query as $q) {
+            $id = $q->medicine_id;
+            $medicine = Medicine::find($id);
+            $medicine->MedicineTranslations;
+            $medicine->Categories;
+            array_push($medicines, $medicine);
         }
-        if ($entries!=null){
-        return response()->json(["message"=> $entries], 200);
+        if ($medicines!=null){
+            return response()->json(["message"=> $medicines], 200);
         }
-        else{return response()->json(["message"=> 'sorry item requested not found please check the name correctly'], 400);}
+        else{
+            return response()->json(["message"=> 'sorry item requested not found please check the name correctly'], 400);
+        }
     }
 }
