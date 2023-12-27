@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:test1/classes/medicine.dart';
 import 'package:test1/classes/order.dart';
 import 'package:test1/constants/routes.dart';
+import 'package:test1/l10n/local.dart';
 import 'package:test1/views/phone/cart_view.dart';
 import 'package:test1/views/phone/login_view.dart';
 import 'package:test1/views/phone/main_view.dart';
@@ -16,7 +18,7 @@ import 'package:test1/views/web/web_main.dart';
 import 'package:test1/views/web/add_medicine.dart';
 
 void main() {
-  runApp(MaterialApp(
+  runApp(GetMaterialApp(
     debugShowCheckedModeBanner: false,
     theme: ThemeData(primarySwatch: Colors.green),
     routes: {
@@ -54,6 +56,8 @@ void main() {
         );
       }
     },
-    home: const Web_Main(),
+    locale: Get.deviceLocale,
+    translations: MyLocal(),
+    home: const LoginView(),
   ));
 }

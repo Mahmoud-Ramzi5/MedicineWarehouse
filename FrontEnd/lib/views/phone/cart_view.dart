@@ -29,7 +29,7 @@ class _CartViewState extends State<CartView> {
           children: [
             GetBuilder<CartController>(
               builder: (controller) => Text(
-                'Total Price:${cartController.calculateTotalPrice()}',
+                "${"42".tr}:${cartController.calculateTotalPrice()}",
                 style: const TextStyle(
                   color: Colors.green,
                   fontSize: 20,
@@ -46,7 +46,7 @@ class _CartViewState extends State<CartView> {
                         context: context,
                         builder: (context) {
                           return AlertDialog(
-                            title: Text(response.data['message']),
+                            title: Text("43".tr),
                             content: const Icon(
                               Icons.check_circle_outline,
                               color: Colors.green,
@@ -62,13 +62,13 @@ class _CartViewState extends State<CartView> {
                   });
                 }
               },
-              child: const Text('Confirm Order'),
+              child: Text("44".tr),
             )
           ],
         ),
       ),
       appBar: AppBar(
-        title: const Text('Your Order'),
+        title: Text("44".tr),
         actions: [
           IconButton(
             onPressed: () {
@@ -109,20 +109,20 @@ class _CartViewState extends State<CartView> {
                     Column(
                       children: [
                         Text(
-                          '${cartController.items[index].medicine.medicineTranslations["en"]["commercial_name"]}',
+                          '${cartController.items[index].medicine.medicineTranslations["1".tr]["commercial_name"]}',
                           style: const TextStyle(
                               fontSize: 20, fontWeight: FontWeight.bold),
                         ),
                         Padding(
                           padding: const EdgeInsets.all(20),
                           child: Text(
-                            'Price: ${cartController.items[index].medicine.price}',
+                            "${"41".tr}: ${cartController.items[index].medicine.price}",
                             style: const TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.bold),
                           ),
                         ),
                         Text(
-                          'Quantity: ${cartController.items[index].medicine.quantityAvailable}',
+                          "${"39".tr}: ${cartController.items[index].medicine.quantityAvailable}",
                           style: const TextStyle(
                               fontSize: 20, fontWeight: FontWeight.bold),
                         ),

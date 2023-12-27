@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:test1/apis/phone_api.dart';
 import 'package:test1/constants/routes.dart';
 
@@ -39,7 +40,7 @@ class _ViewCategotyState extends State<ViewCategoty> {
                         );
                       },
                       child: Text(
-                          '${medicines?[index].medicineTranslations['en']['commercial_name']}',
+                          '${medicines?[index].medicineTranslations["1".tr]['commercial_name']}',
                           style: const TextStyle(
                               color: Colors.white,
                               fontSize: 20,

@@ -48,9 +48,9 @@ class _HomeViewState extends State<HomeView> {
               ),
             ),
             ListTile(
-              title: const Text(
-                'My Orders',
-                style: TextStyle(
+              title: Text(
+                "24".tr,
+                style: const TextStyle(
                   fontSize: 20,
                   color: Colors.green,
                 ),
@@ -64,9 +64,9 @@ class _HomeViewState extends State<HomeView> {
               },
             ),
             ListTile(
-              title: const Text(
-                'My Favorites',
-                style: TextStyle(
+              title: Text(
+                "25".tr,
+                style: const TextStyle(
                   fontSize: 20,
                   color: Colors.green,
                 ),
@@ -80,9 +80,9 @@ class _HomeViewState extends State<HomeView> {
               },
             ),
             ListTile(
-              title: const Text(
-                'Log out',
-                style: TextStyle(
+              title: Text(
+                "26".tr,
+                style: const TextStyle(
                   fontSize: 20,
                   color: Colors.green,
                 ),
@@ -97,16 +97,16 @@ class _HomeViewState extends State<HomeView> {
                   builder: (context) {
                     return AlertDialog(
                       alignment: Alignment.center,
-                      title: const Text('Log out'),
-                      content: const Text('Are you sure you want to logout?'),
+                      title: Text("26".tr),
+                      content: Text("27".tr),
                       actions: [
                         TextButton(
                           onPressed: () {
                             Navigator.of(context).pop();
                           },
-                          child: const Text(
-                            'No',
-                            style: TextStyle(
+                          child: Text(
+                            "28".tr,
+                            style: const TextStyle(
                               color: Colors.green,
                             ),
                           ),
@@ -134,9 +134,9 @@ class _HomeViewState extends State<HomeView> {
                               }
                             });
                           },
-                          child: const Text(
-                            'Yes',
-                            style: TextStyle(
+                          child: Text(
+                            "29".tr,
+                            style: const TextStyle(
                               color: Colors.green,
                             ),
                           ),
@@ -195,7 +195,7 @@ class _HomeViewState extends State<HomeView> {
                                           arguments: categories[index].id);
                                     },
                                     child: Text(
-                                      categories![index].enCategoryName,
+                                      categories![index].categoryName,
                                       style: const TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold,
@@ -237,7 +237,7 @@ class _HomeViewState extends State<HomeView> {
                                   Column(
                                     children: [
                                       Text(
-                                        '${medicines[index].medicineTranslations["en"]["commercial_name"]}',
+                                        '${medicines[index].medicineTranslations["1".tr]["commercial_name"]}',
                                         style: const TextStyle(
                                             fontSize: 20,
                                             fontWeight: FontWeight.bold),
@@ -245,14 +245,14 @@ class _HomeViewState extends State<HomeView> {
                                       Padding(
                                         padding: const EdgeInsets.all(20),
                                         child: Text(
-                                          'Price: ${medicines[index].price}',
+                                          "${"41".tr}: ${medicines[index].price}",
                                           style: const TextStyle(
                                               fontSize: 20,
                                               fontWeight: FontWeight.bold),
                                         ),
                                       ),
                                       Text(
-                                        'Quantity: ${medicines[index].quantityAvailable}',
+                                        "${"39".tr}: ${medicines[index].quantityAvailable}",
                                         style: const TextStyle(
                                             fontSize: 20,
                                             fontWeight: FontWeight.bold),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:test1/apis/phone_api.dart';
 import 'package:test1/classes/medicine.dart';
 
@@ -62,7 +63,7 @@ class _SearchViewState extends State<SearchView> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      '${medicine.medicineTranslations["en"]["commercial_name"]}',
+                      '${medicine.medicineTranslations["1".tr]["commercial_name"]}',
                       style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -70,7 +71,7 @@ class _SearchViewState extends State<SearchView> {
                     ),
                     const SizedBox(height: 10),
                     Text(
-                      'Price: ${medicine.price}',
+                      "${"41".tr}: ${medicine.price}",
                       style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -78,7 +79,7 @@ class _SearchViewState extends State<SearchView> {
                     ),
                     const SizedBox(height: 10),
                     Text(
-                      'Quantity: ${medicine.quantityAvailable}',
+                      "${"39".tr}: ${medicine.quantityAvailable}",
                       style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -105,7 +106,7 @@ class _SearchViewState extends State<SearchView> {
             padding: const EdgeInsets.all(5),
             child: SearchBar(
               controller: _search,
-              hintText: 'Search',
+              hintText: "31".tr,
               leading: const Icon(Icons.search),
               shape: const MaterialStatePropertyAll(
                 BeveledRectangleBorder(),

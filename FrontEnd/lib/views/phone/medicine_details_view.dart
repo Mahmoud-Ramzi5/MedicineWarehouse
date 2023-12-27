@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:test1/apis/phone_api.dart';
 import 'package:test1/classes/medicine.dart';
 
@@ -19,7 +20,7 @@ class _MedicineDetailsViewState extends State<MedicineDetailsView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Full Details'), actions: [
+      appBar: AppBar(title: Text("33".tr), actions: [
         IconButton(
           onPressed: () {
             Api().addToFavorites(widget.medicine.id);
@@ -55,7 +56,7 @@ class _MedicineDetailsViewState extends State<MedicineDetailsView> {
                   ),
                 ),
                 child: Text(
-                  'Commercial Name: ${widget.medicine.medicineTranslations["en"]["commercial_name"]}',
+                  "${"34".tr}: ${widget.medicine.medicineTranslations["1".tr]["commercial_name"]}",
                   style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -73,7 +74,7 @@ class _MedicineDetailsViewState extends State<MedicineDetailsView> {
                   ),
                 ),
                 child: Text(
-                  'Scientific Name: ${widget.medicine.medicineTranslations["en"]["scientific_name"]}',
+                  "${"35".tr}: ${widget.medicine.medicineTranslations["1".tr]["scientific_name"]}",
                   style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -91,7 +92,7 @@ class _MedicineDetailsViewState extends State<MedicineDetailsView> {
                   ),
                 ),
                 child: Text(
-                  'Manufacture: ${widget.medicine.medicineTranslations["en"]["manufacture_company"]}',
+                  "${"36".tr}: ${widget.medicine.medicineTranslations["1".tr]["manufacture_company"]}",
                   style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -111,16 +112,16 @@ class _MedicineDetailsViewState extends State<MedicineDetailsView> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
-                      const Text(
-                        'Categories: ',
-                        style: TextStyle(
+                      Text(
+                        "${"37".tr}:",
+                        style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       for (var category in widget.medicine.categories)
                         Text(
-                          '${category["en_category_name"]} ',
+                          '${category["38".tr]} ',
                           style: const TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
@@ -141,7 +142,7 @@ class _MedicineDetailsViewState extends State<MedicineDetailsView> {
                   ),
                 ),
                 child: Text(
-                  'Quantity: ${widget.medicine.quantityAvailable}',
+                  "${"39".tr}: ${widget.medicine.quantityAvailable}",
                   style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -159,7 +160,7 @@ class _MedicineDetailsViewState extends State<MedicineDetailsView> {
                   ),
                 ),
                 child: Text(
-                  'Expiry Date: ${widget.medicine.expiryDate}',
+                  "${"40".tr}: ${widget.medicine.expiryDate}",
                   style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -177,7 +178,7 @@ class _MedicineDetailsViewState extends State<MedicineDetailsView> {
                   ),
                 ),
                 child: Text(
-                  'Price: ${widget.medicine.price}',
+                  "${"41".tr}: ${widget.medicine.price}",
                   style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,

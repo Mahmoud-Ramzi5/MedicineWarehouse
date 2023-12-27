@@ -186,7 +186,7 @@ class Api {
     );
     if (response.statusCode == 200) {
       List<Medicine> medicineList = [];
-      for (var medicine in response.data['data']) {
+      for (var medicine in response.data['message']) {
         final medicineMap = Medicine.fromJson(medicine as Map<String, dynamic>);
         medicineList.add(medicineMap);
       }

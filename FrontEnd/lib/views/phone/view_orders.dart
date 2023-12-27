@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:test1/apis/phone_api.dart';
 import 'package:test1/constants/routes.dart';
 
@@ -14,8 +15,8 @@ class _ViewOrdersState extends State<ViewOrders> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          "My Orders",
+        title: Text(
+          "24".tr,
         ),
       ),
       body: FutureBuilder(
@@ -42,7 +43,7 @@ class _ViewOrdersState extends State<ViewOrders> {
                               Padding(
                                 padding: const EdgeInsets.all(5),
                                 child: Text(
-                                  'Order number: ${orders?[index].id}',
+                                  "${"46".tr}: ${orders?[index].id}",
                                   style: const TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold),
@@ -51,7 +52,7 @@ class _ViewOrdersState extends State<ViewOrders> {
                               Padding(
                                 padding: const EdgeInsets.all(5),
                                 child: Text(
-                                  'Total Price: ${orders?[index].totalPrice}',
+                                  "${"42".tr}: ${orders?[index].totalPrice}",
                                   style: const TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold),
@@ -60,7 +61,7 @@ class _ViewOrdersState extends State<ViewOrders> {
                               Padding(
                                 padding: const EdgeInsets.all(5),
                                 child: Text(
-                                  'Medicines Quantity: ${orders?[index].orderedMedicines.length}',
+                                  "${"52".tr}: ${orders?[index].orderedMedicines.length}",
                                   style: const TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold),

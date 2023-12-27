@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:test1/apis/phone_api.dart';
 import 'package:test1/constants/routes.dart';
 import 'package:test1/customWidgets/text_forn_widget.dart';
@@ -48,7 +49,7 @@ class _RegisterViewState extends State<RegisterView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Register'),
+        title: Text("11".tr),
       ),
       body: Form(
         key: _formField,
@@ -60,18 +61,18 @@ class _RegisterViewState extends State<RegisterView> {
               children: [
                 CustomTextWidget(
                   controller: _phoneNumber,
-                  hintText: 'Phone Number',
+                  hintText: "3".tr,
                   labelText: '+963',
                   icon: const Icon(Icons.phone_android),
                   obsecureText: false,
                   inputType: TextInputType.phone,
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return "Required field";
+                      return "4".tr;
                     } else if (value.characters.length != 9) {
-                      return "Invalid number";
+                      return "5".tr;
                     } else if (!value.startsWith('9')) {
-                      return 'Phone Number must start with 9';
+                      return "6.tr";
                     }
                     return null;
                   },
@@ -81,15 +82,15 @@ class _RegisterViewState extends State<RegisterView> {
                 ),
                 CustomTextWidget(
                   controller: _email,
-                  hintText: 'Email',
-                  labelText: '(Optional)',
+                  hintText: "12".tr,
+                  labelText: "13".tr,
                   icon: const Icon(Icons.email),
                   obsecureText: false,
                   inputType: TextInputType.emailAddress,
                   validator: (value) {
                     if (value!.isNotEmpty) {
                       if (!value.contains('@')) {
-                        return "Invalid Email";
+                        return "14".tr;
                       }
                     }
                     return null;
@@ -100,12 +101,12 @@ class _RegisterViewState extends State<RegisterView> {
                 ),
                 CustomTextWidget(
                   controller: _pharmacyName,
-                  labelText: 'Pharmacy Name',
+                  labelText: "15".tr,
                   icon: const Icon(Icons.local_pharmacy),
                   obsecureText: false,
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return "Required field";
+                      return "4".tr;
                     }
                     return null;
                   },
@@ -115,12 +116,12 @@ class _RegisterViewState extends State<RegisterView> {
                 ),
                 CustomTextWidget(
                   controller: _pharmacyAddress,
-                  labelText: 'Pharmacy address',
+                  labelText: "16".tr,
                   icon: const Icon(Icons.location_on),
                   obsecureText: false,
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return "Required field";
+                      return "4".tr;
                     }
                     return null;
                   },
@@ -130,15 +131,15 @@ class _RegisterViewState extends State<RegisterView> {
                 ),
                 CustomTextWidget(
                   controller: _password,
-                  labelText: 'Password',
+                  labelText: "7".tr,
                   icon: const Icon(Icons.lock),
                   obsecureText: passwordToggle,
                   inputType: TextInputType.visiblePassword,
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return "Required field";
+                      return "4".tr;
                     } else if (value.characters.length < 4) {
-                      return "Password too short";
+                      return "8".tr;
                     }
                     return null;
                   },
@@ -158,17 +159,17 @@ class _RegisterViewState extends State<RegisterView> {
                 ),
                 CustomTextWidget(
                   controller: _confirmPassword,
-                  labelText: 'Confirm Password',
+                  labelText: "17".tr,
                   icon: const Icon(Icons.lock),
                   obsecureText: passwordToggle2,
                   inputType: TextInputType.visiblePassword,
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return "Required field";
+                      return "4".tr;
                     } else if (value.characters.length < 4) {
-                      return "Password too short";
+                      return "8".tr;
                     } else if (value != _password.text) {
-                      return "Password does not match confirm password";
+                      return "18".tr;
                     }
                     return null;
                   },
@@ -212,7 +213,7 @@ class _RegisterViewState extends State<RegisterView> {
                                   },
                                 );
                                 return AlertDialog(
-                                  title: Text(body["message"]),
+                                  title: Text("21".tr),
                                   content: const Icon(
                                     Icons.check_circle_outline,
                                     color: Colors.green,
@@ -226,7 +227,7 @@ class _RegisterViewState extends State<RegisterView> {
                               builder: (context) {
                                 return AlertDialog(
                                   alignment: Alignment.center,
-                                  title: Text(body["message"]),
+                                  title: Text("22".tr),
                                   content: SingleChildScrollView(
                                     child: ListBody(
                                       children: <Widget>[
@@ -255,9 +256,9 @@ class _RegisterViewState extends State<RegisterView> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text(
-                      'Already registered? ',
-                      style: TextStyle(fontSize: 17),
+                    Text(
+                      "23".tr,
+                      style: const TextStyle(fontSize: 17),
                     ),
                     TextButton(
                       onPressed: () {
@@ -265,9 +266,9 @@ class _RegisterViewState extends State<RegisterView> {
                           loginRoute,
                         );
                       },
-                      child: const Text(
-                        'Login',
-                        style: TextStyle(
+                      child: Text(
+                        "2".tr,
+                        style: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                         ),

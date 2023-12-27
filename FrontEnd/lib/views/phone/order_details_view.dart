@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:test1/classes/order.dart';
 
 class OrderDetailsView extends StatefulWidget {
@@ -14,7 +15,7 @@ class _OrderDetailsViewState extends State<OrderDetailsView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Full Order Details '),
+        title: Text("45".tr),
       ),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
@@ -22,7 +23,7 @@ class _OrderDetailsViewState extends State<OrderDetailsView> {
           children: [
             Container(
               alignment: Alignment.center,
-              height: 150,
+              height: 200,
               width: 400,
               decoration: const ShapeDecoration(
                 shape: RoundedRectangleBorder(
@@ -34,7 +35,7 @@ class _OrderDetailsViewState extends State<OrderDetailsView> {
                   Padding(
                     padding: const EdgeInsets.all(5),
                     child: Text(
-                      'Order Number: ${widget.order.id}',
+                      "${"46".tr}: ${widget.order.id}",
                       style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -46,9 +47,9 @@ class _OrderDetailsViewState extends State<OrderDetailsView> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Text(
-                          'Total Price: ',
-                          style: TextStyle(
+                        Text(
+                          "${"42".tr}:",
+                          style: const TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
                           ),
@@ -67,7 +68,7 @@ class _OrderDetailsViewState extends State<OrderDetailsView> {
                   Padding(
                     padding: const EdgeInsets.all(5),
                     child: Text(
-                      'Billing Status: ${widget.order.isPaid}',
+                      "${"47".tr}: ${widget.order.isPaid}",
                       style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -77,7 +78,7 @@ class _OrderDetailsViewState extends State<OrderDetailsView> {
                   Padding(
                     padding: const EdgeInsets.all(5),
                     child: Text(
-                      'Order Status: ${widget.order.status}',
+                      "${"48".tr}: ${widget.order.status}",
                       style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -87,13 +88,13 @@ class _OrderDetailsViewState extends State<OrderDetailsView> {
                 ],
               ),
             ),
-            const Row(
+            Row(
               children: [
                 Padding(
-                  padding: EdgeInsets.all(5),
+                  padding: const EdgeInsets.all(5),
                   child: Text(
-                    'Your Order:',
-                    style: TextStyle(
+                    "${"49".tr}:",
+                    style: const TextStyle(
                       fontSize: 30,
                       fontWeight: FontWeight.bold,
                       color: Colors.green,
@@ -116,7 +117,7 @@ class _OrderDetailsViewState extends State<OrderDetailsView> {
                         Padding(
                           padding: const EdgeInsets.all(5),
                           child: Text(
-                            '${widget.order.orderedMedicines[index].medicine.medicineTranslations["en"]["commercial_name"]}',
+                            '${widget.order.orderedMedicines[index].medicine.medicineTranslations["1".tr]["commercial_name"]}',
                             style: const TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
@@ -126,7 +127,7 @@ class _OrderDetailsViewState extends State<OrderDetailsView> {
                         Padding(
                           padding: const EdgeInsets.all(5),
                           child: Text(
-                            'Ordered Quantity: ${widget.order.orderedMedicines[index].quantity}',
+                            "${"50".tr}: ${widget.order.orderedMedicines[index].quantity}",
                             style: const TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
@@ -137,9 +138,9 @@ class _OrderDetailsViewState extends State<OrderDetailsView> {
                           padding: const EdgeInsets.all(5),
                           child: Row(
                             children: [
-                              const Text(
-                                'Single Unit Price: ',
-                                style: TextStyle(
+                              Text(
+                                "${"51".tr}:",
+                                style: const TextStyle(
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,
                                 ),

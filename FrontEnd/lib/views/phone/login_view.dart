@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:test1/apis/phone_api.dart';
 import 'package:test1/constants/routes.dart';
 import 'package:test1/customWidgets/text_forn_widget.dart';
@@ -36,7 +37,7 @@ class _LoginViewState extends State<LoginView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Login'),
+        title: Text("2".tr),
       ),
       body: Form(
         key: _formField,
@@ -55,18 +56,18 @@ class _LoginViewState extends State<LoginView> {
                 ),
                 CustomTextWidget(
                   controller: _phoneNumber,
-                  labelText: 'Phone Number',
+                  labelText: "3".tr,
                   icon: const Icon(Icons.phone_android),
                   obsecureText: false,
                   hintText: '+963',
                   inputType: TextInputType.phone,
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return "Required field";
+                      return "4".tr;
                     } else if (value.characters.length != 9) {
-                      return "Invalid number";
+                      return "5".tr;
                     } else if (!value.startsWith('9')) {
-                      return 'Phone Number must start with 9';
+                      return "6".tr;
                     }
                     return null;
                   },
@@ -74,14 +75,14 @@ class _LoginViewState extends State<LoginView> {
                 const SizedBox(height: 10),
                 CustomTextWidget(
                   controller: _password,
-                  labelText: 'Password',
+                  labelText: "7".tr,
                   icon: const Icon(Icons.lock),
                   obsecureText: passwordToggle,
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return "Required field";
+                      return "4".tr;
                     } else if (value.characters.length < 4) {
-                      return "Password too short";
+                      return "8".tr;
                     }
                     return null;
                   },
@@ -117,7 +118,7 @@ class _LoginViewState extends State<LoginView> {
                                       mainRoute, (route) => false);
                                 });
                                 return AlertDialog(
-                                  title: Text(body["message"]),
+                                  title: Text("19".tr),
                                   content: const Icon(
                                     Icons.check_circle_outline,
                                     color: Colors.green,
@@ -131,7 +132,7 @@ class _LoginViewState extends State<LoginView> {
                               builder: (context) {
                                 return AlertDialog(
                                   alignment: Alignment.center,
-                                  title: Text(body["message"]),
+                                  title: Text("20".tr),
                                   content: SingleChildScrollView(
                                     child: ListBody(
                                       children: <Widget>[
@@ -158,9 +159,9 @@ class _LoginViewState extends State<LoginView> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text(
-                      "Remember me",
-                      style: TextStyle(
+                    Text(
+                      "9".tr,
+                      style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
@@ -180,9 +181,9 @@ class _LoginViewState extends State<LoginView> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text(
-                      'Not Registered ?',
-                      style: TextStyle(
+                    Text(
+                      "10".tr,
+                      style: const TextStyle(
                         fontSize: 17,
                       ),
                     ),
@@ -192,9 +193,9 @@ class _LoginViewState extends State<LoginView> {
                           registerRoute,
                         );
                       },
-                      child: const Text(
-                        'Register',
-                        style: TextStyle(
+                      child: Text(
+                        "11".tr,
+                        style: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                         ),

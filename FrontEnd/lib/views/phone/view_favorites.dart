@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:test1/apis/phone_api.dart';
 import 'package:test1/constants/routes.dart';
 
@@ -13,7 +14,7 @@ class _ViewFavoritesState extends State<ViewFavorites> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('My Favorites')),
+      appBar: AppBar(title: Text("25".tr)),
       body: FutureBuilder(
         future: Api().fetchFavorites(),
         builder: (context, snapshot) {
@@ -39,7 +40,7 @@ class _ViewFavoritesState extends State<ViewFavorites> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              favorites?[index].medicineTranslations["en"]
+                              favorites?[index].medicineTranslations["1".tr]
                                   ["commercial_name"],
                               style: const TextStyle(
                                   fontSize: 20, fontWeight: FontWeight.bold),
