@@ -24,15 +24,16 @@ class AdminMedicinesController extends MedicinesController
 
     public function Selected_Category(Request $request)
     {
-        // find the selected category
+        // Get Category's Id
         $id = $request->input('id');
+        // Find the selected category
         $category = Category::find($id);
         if ($category == null) {
             return response()->json([
                 'message' => 'Invalid Category'
             ], 400);
         }
-        //find the medicines with the selected category
+        // Find the medicines with the selected category
         $medicines = $category->Medicines;
         foreach($medicines as $medicine) {
             $medicine->MedicineTranslations;
@@ -109,8 +110,9 @@ class AdminMedicinesController extends MedicinesController
 
     function Search_All(Request $request)
     {
+        // Search Input
         $input = $request->input('name');
-        $name = Str::upper($input);
+        // Fetch medicines from database
         $query = MedicineTranslation::where('commercial_name', 'like', "%$input%")
                                         ->orWhere('scientific_name', 'like', "%$input%")->get();
         $medicines = [];
@@ -121,11 +123,16 @@ class AdminMedicinesController extends MedicinesController
             $medicine->Categories;
             array_push($medicines, $medicine);
         }
-        if ($medicines!=null){
-            return response()->json(["message"=> $medicines], 200);
+        // Search Response
+        if ($medicines != null){
+            return response()->json([
+                "message"=> $medicines
+            ], 200);
         }
         else{
-            return response()->json(["message"=> 'sorry item requested not found please check the name correctly'], 400);
+            return response()->json([
+                "message"=> "Sorry item requested not found please check the name correctly"
+            ], 400);
         }
     }
 }

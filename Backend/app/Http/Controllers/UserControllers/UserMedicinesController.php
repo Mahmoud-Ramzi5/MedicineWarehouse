@@ -13,128 +13,72 @@ class UserMedicinesController extends MedicinesController
 {
     public function ShowNotExpired(Request $request)
     {
-        // Fetch medicines from database
-        $medicines = Medicine::with('MedicineTranslations')->with('Categories')->get();
-        $valid = [];
+        // Get Today's Date
         $Date = today();
-        $dateYear = $Date->format('Y');
-        $dateMonth = $Date->format('m');
-        $dateDay = $Date->format('d');
-        // Fetch (Only Not Expired) medicines
-        foreach ($medicines as $medicine) {
-            $medicineYear = $medicine->expiry_date->format('Y');
-            $medicineMonth = $medicine->expiry_date->format('m');
-            $medicineDay = $medicine->expiry_date->format('d');
-
-            if ($medicineYear > $dateYear)
-            {
-                array_push($valid, $medicine);
-            }
-            elseif($medicineYear == $dateYear && $medicineMonth > $dateMonth)
-            {
-                array_push($valid, $medicine);
-            }
-            elseif($medicineYear == $dateYear && $medicineMonth == $dateMonth && $medicineDay > $dateDay)
-            {
-                array_push($valid, $medicine);
-            }
-        }
+        // Fetch medicines from database
+        $medicines = Medicine::whereDate('expiry_date', '>=', "$Date")->with('MedicineTranslations')->with('Categories')->get();
         // Not Expired Medicines
         return response()->json([
-            'data' => $valid
+            'data' => $medicines
         ], 200)->header('Content-Type', 'application/json; charset=UTF-8');
     }
 
     public function Selected_Category(Request $request)
     {
-        // find the selected category
+        // Get Category's Id
         $id = $request->input('id');
+        // Find the selected category
         $category = Category::find($id);
         if ($category == null) {
             return response()->json([
                 'message' => 'Invalid Category'
             ], 400);
         }
+        // Get Today's Date
+        $Date = today();
         // Find the medicines with the selected category
-        $medicines = $category->Medicines;
+        $medicines = $category->Medicines()->whereDate('expiry_date', '>=', "$Date")->get();
         foreach($medicines as $medicine) {
             $medicine->MedicineTranslations;
             $medicine->Categories;
         }
-        $valid = [];
-        $Date = today();
-        $dateYear = $Date->format('Y');
-        $dateMonth = $Date->format('m');
-        $dateDay = $Date->format('d');
-        // Fetch (Only Not Expired) medicines
-        foreach ($medicines as $medicine) {
-            $medicineYear = $medicine->expiry_date->format('Y');
-            $medicineMonth = $medicine->expiry_date->format('m');
-            $medicineDay = $medicine->expiry_date->format('d');
-
-            if ($medicineYear > $dateYear)
-            {
-                array_push($valid, $medicine);
-            }
-            elseif($medicineYear == $dateYear && $medicineMonth > $dateMonth)
-            {
-                array_push($valid, $medicine);
-            }
-            elseif($medicineYear == $dateYear && $medicineMonth == $dateMonth && $medicineDay > $dateDay)
-            {
-                array_push($valid, $medicine);
-            }
-        }
         // Not Expired Medicines
         return response()->json([
-            'data' => $valid
+            'message' => $medicines
         ], 200)->header('Content-Type', 'application/json; charset=UTF-8');
     }
 
     function Search_Not_Expired(Request $request)
     {
+        // Get Today's Date
+        $Date = today();
+        // Search Input
         $input = $request->input('name');
-        $name = Str::upper($input);
+        // Fetch medicines from database
         $query = MedicineTranslation::where('commercial_name', 'like', "%$input%")
                                         ->orWhere('scientific_name', 'like', "%$input%")->get();
         $medicines = [];
         foreach ($query as $q) {
             $id = $q->medicine_id;
-            $medicine = Medicine::find($id);
-            $medicine->MedicineTranslations;
-            $medicine->Categories;
-            array_push($medicines, $medicine);
+            $medicine = Medicine::where([['id', '=', $id], ['expiry_date', '>=', "$Date"]])->first();
+            if ($medicine != null) {
+                $medicine->MedicineTranslations;
+                $medicine->Categories;
+                array_push($medicines, $medicine);
+            }
         }
 
-        $valids = [];
-        $Date = today();
-        $dateYear = $Date->format('Y');
-        $dateMonth = $Date->format('m');
-        $dateDay = $Date->format('d');
-        foreach ($medicines as $medicine) {
-            $medicineYear = $medicine->expiry_date->format('Y');
-            $medicineMonth = $medicine->expiry_date->format('m');
-            $medicineDay = $medicine->expiry_date->format('d');
-
-            if ($medicineYear > $dateYear)
-            {
-                array_push($valids, $medicine);
-            }
-            elseif($medicineYear == $dateYear && $medicineMonth > $dateMonth)
-            {
-                array_push($valids, $medicine);
-            }
-            elseif($medicineYear == $dateYear && $medicineMonth == $dateMonth && $medicineDay > $dateDay)
-            {
-                array_push($valids, $medicine);
-            }
+        // Search Response
+        if ($medicines != null) {
+            return response()->json([
+                "message" => $medicines
+            ], 200);
         }
-        if ($valids!=null){
-            return response()->json(["message"=> $valids], 200);
-            }
-            else{
-                return response()->json(["message"=> 'sorry item requested not found please check the name correctly'], 400);
-            }
+        else {
+            return response()->json([
+                "message" => "Sorry item requested not found please check the name correctly"
+            ], 400);
         }
+    }
 }
 
