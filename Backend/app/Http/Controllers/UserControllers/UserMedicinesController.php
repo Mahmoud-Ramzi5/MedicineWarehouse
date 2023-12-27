@@ -7,16 +7,33 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\Medicine;
 use App\Models\Category;
+use App\Models\Favorite;
 use App\Models\MedicineTranslation;
 
 class UserMedicinesController extends MedicinesController
 {
     public function ShowNotExpired(Request $request)
     {
+        $user = auth('sanctum')->user();
+        if ($user==null) {
+            return response()->json([
+                'message' => 'Invalid User'
+            ], 400);
+        }
+        // Get user Favorite
+        $favorite = Favorite::where('user_id', $user->id)->first();
         // Get Today's Date
         $Date = today();
         // Fetch medicines from database
         $medicines = Medicine::whereDate('expiry_date', '>=', "$Date")->with('MedicineTranslations')->with('Categories')->get();
+        foreach ($medicines as $medicine) {
+            if ($favorite->Medicines()->where('medicine_id', '=', $medicine->id)->exists()) {
+                $medicine['is_favorite'] = true;
+            }
+            else {
+                $medicine['is_favorite'] = false;
+            }
+        }
         // Not Expired Medicines
         return response()->json([
             'data' => $medicines
