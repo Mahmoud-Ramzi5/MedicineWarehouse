@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:test1/apis/phone_api.dart';
 import 'package:test1/classes/medicine.dart';
 
 class MedicineDetailsView extends StatefulWidget {
@@ -20,16 +19,7 @@ class _MedicineDetailsViewState extends State<MedicineDetailsView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("33".tr), actions: [
-        IconButton(
-          onPressed: () {
-            Api().addToFavorites(widget.medicine.id);
-          },
-          icon: const Icon(
-            Icons.favorite_border,
-          ),
-        ),
-      ]),
+      appBar: AppBar(title: Text("33".tr)),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Center(

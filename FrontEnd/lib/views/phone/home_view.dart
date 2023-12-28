@@ -331,6 +331,29 @@ class _HomeViewState extends State<HomeView> {
                                             color: Colors.green,
                                           ),
                                         ),
+                                        IconButton(
+                                          onPressed: () {
+                                            setState(() {
+                                              if (medicines[index].isFavorite) {
+                                                Api().removeFavorites(
+                                                    medicines[index].id);
+                                              } else if (!medicines[index]
+                                                  .isFavorite) {
+                                                Api().addToFavorites(
+                                                    medicines[index].id);
+                                              }
+                                            });
+                                          },
+                                          icon: medicines[index].isFavorite
+                                              ? const Icon(
+                                                  Icons.favorite,
+                                                  color: Colors.green,
+                                                )
+                                              : const Icon(
+                                                  Icons.favorite_border,
+                                                  color: Colors.green,
+                                                ),
+                                        ),
                                       ],
                                     ),
                                   ),

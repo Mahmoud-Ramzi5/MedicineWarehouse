@@ -24,6 +24,12 @@ class FavoriteController extends Controller
         foreach($medicines as $medicine) {
             $medicine->MedicineTranslations;
             $medicine->Categories;
+            if ($favorite->Medicines()->where('medicine_id', '=', $medicine->id)->exists()) {
+                $medicine['is_favorite'] = true;
+            }
+            else {
+                $medicine['is_favorite'] = false;
+            }
         }
         return response()->json(['message' => $favorite]);
     }

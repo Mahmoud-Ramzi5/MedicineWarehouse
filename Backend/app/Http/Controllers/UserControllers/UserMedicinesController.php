@@ -42,6 +42,14 @@ class UserMedicinesController extends MedicinesController
 
     public function Selected_Category(Request $request)
     {
+        $user = auth('sanctum')->user();
+        if ($user==null) {
+            return response()->json([
+                'message' => 'Invalid User'
+            ], 400);
+        }
+        // Get user Favorite
+        $favorite = Favorite::where('user_id', $user->id)->first();
         // Get Category's Id
         $id = $request->input('id');
         // Find the selected category
@@ -58,6 +66,12 @@ class UserMedicinesController extends MedicinesController
         foreach($medicines as $medicine) {
             $medicine->MedicineTranslations;
             $medicine->Categories;
+            if ($favorite->Medicines()->where('medicine_id', '=', $medicine->id)->exists()) {
+                $medicine['is_favorite'] = true;
+            }
+            else {
+                $medicine['is_favorite'] = false;
+            }
         }
         // Not Expired Medicines
         return response()->json([
@@ -67,6 +81,14 @@ class UserMedicinesController extends MedicinesController
 
     function Search_Not_Expired(Request $request)
     {
+        $user = auth('sanctum')->user();
+        if ($user==null) {
+            return response()->json([
+                'message' => 'Invalid User'
+            ], 400);
+        }
+        // Get user Favorite
+        $favorite = Favorite::where('user_id', $user->id)->first();
         // Get Today's Date
         $Date = today();
         // Search Input
@@ -81,10 +103,15 @@ class UserMedicinesController extends MedicinesController
             if ($medicine != null) {
                 $medicine->MedicineTranslations;
                 $medicine->Categories;
+                if ($favorite->Medicines()->where('medicine_id', '=', $medicine->id)->exists()) {
+                    $medicine['is_favorite'] = true;
+                }
+                else {
+                    $medicine['is_favorite'] = false;
+                }
                 array_push($medicines, $medicine);
             }
         }
-
         // Search Response
         if ($medicines != null) {
             return response()->json([
