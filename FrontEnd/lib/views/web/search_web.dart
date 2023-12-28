@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:test1/apis/web_api.dart';
 import 'package:test1/classes/medicine.dart';
-import 'package:test1/constants/routes.dart';
 
 class Search_webView extends StatefulWidget {
   const Search_webView({super.key});
@@ -40,70 +39,107 @@ class _SearchViewState extends State<Search_webView> {
       padding: const EdgeInsets.all(10),
       shrinkWrap: true,
       itemBuilder: (context, index) {
-        final medicine = _medicines[index];
         return Card(
           elevation: 5,
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Container(
-                margin: const EdgeInsets.all(10),
-                height: 100,
-                width: 100,
-                decoration: const BoxDecoration(
-                  shape: BoxShape.rectangle,
-                  color: Colors.green,
-                ),
-                child: Image.network(
-                  'http://10.0.2.2:8000/storage/${medicine.imagePath}',
-                  fit: BoxFit.cover,
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      '${medicine.medicineTranslations["1".tr]["commercial_name"]}',
-                      style: const TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(height: 10),
-                    Text(
-                      "${"41".tr}: ${medicine.price}",
-                      style: const TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(height: 10),
-                    Text(
-                      "${"39".tr}: ${medicine.quantityAvailable}",
-                      style: const TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Column(
+                  margin: const EdgeInsets.all(10),
+                  height: 100,
+                  width: 100,
+                  decoration: const ShapeDecoration(
+                      shape: ContinuousRectangleBorder(), color: Colors.green),
+                  child: Image.network(
+                      'http://127.0.0.1:8000/storage/${_medicines[index].imagePath}',
+                      fit: BoxFit.cover)),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  IconButton(
-                    onPressed: () {
-                      Navigator.of(context).pushNamed(
-                        medicineDetailsRoute,
-                        arguments: _medicines[index],
-                      );
-                    },
-                    icon: const Icon(
-                      Icons.arrow_forward_ios,
-                      color: Colors.green,
+                  Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: Text(
+                          '${"34".tr}: ${_medicines[index].medicineTranslations["1".tr]["commercial_name"]}',
+                          style: const TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: Text(
+                          "${"41".tr}: ${_medicines[index].price}",
+                          style: const TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: Text(
+                          "${"39".tr}: ${_medicines[index].quantityAvailable}",
+                          style: const TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Column(
+                      children: [
+                        Text(
+                          "${"35".tr}: ${_medicines[index].medicineTranslations["en"]["scientific_name"]}",
+                          style: const TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: Text(
+                            "${"36".tr}: ${_medicines[index].medicineTranslations["en"]["manufacture_company"]}",
+                            style: const TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: Text(
+                            "${"40".tr}: ${_medicines[index].expiryDate}",
+                            style: const TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
+                  Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: Text(
+                            "${"37".tr}:",
+                            style: const TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        for (var category in _medicines[index].categories)
+                          Padding(
+                            padding: const EdgeInsets.all(10),
+                            child: Text(
+                              '${category["38".tr]} ',
+                              style: const TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                      ],
+                    ),
+                  )
                 ],
               ),
             ],

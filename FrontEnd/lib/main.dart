@@ -34,46 +34,47 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     MyLocalController controller = Get.put(MyLocalController());
     return GetMaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(primarySwatch: Colors.green),
-        routes: {
-          loginRoute: (context) => const LoginView(),
-          registerRoute: (context) => const RegisterView(),
-          mainRoute: (context) => const MainView(),
-          cartRoute: (context) => const CartView(),
-          viewOrdersRoute: (context) => const ViewOrders(),
-          mainwebRoute: (context) => const Web_Main(),
-          favoritesRoute: (context) => const ViewFavorites(),
-          searchwebRoute: (context) => const Search_webView(),
-        },
-        onGenerateRoute: (settings) {
-          if (settings.name == medicineDetailsRoute) {
-            final Medicine medicine = settings.arguments as Medicine;
-            return MaterialPageRoute(
-              builder: (context) {
-                return MedicineDetailsView(medicine: medicine);
-              },
-            );
-          }
-          if (settings.name == viewCategoriesRoute) {
-            final int id = settings.arguments as int;
-            return MaterialPageRoute(
-              builder: (context) {
-                return ViewCategoty(id: id);
-              },
-            );
-          }
-          if (settings.name == orderDetailsRoute) {
-            final Order order = settings.arguments as Order;
-            return MaterialPageRoute(
-              builder: (context) {
-                return OrderDetailsView(order: order);
-              },
-            );
-          }
-        },
-        locale: Get.deviceLocale,
-        translations: MyLocal(),
-        home: const LoginView());
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(primarySwatch: Colors.green),
+      routes: {
+        loginRoute: (context) => const LoginView(),
+        registerRoute: (context) => const RegisterView(),
+        mainRoute: (context) => const MainView(),
+        cartRoute: (context) => const CartView(),
+        viewOrdersRoute: (context) => const ViewOrders(),
+        mainwebRoute: (context) => const Web_Main(),
+        favoritesRoute: (context) => const ViewFavorites(),
+        searchwebRoute: (context) => const Search_webView(),
+      },
+      onGenerateRoute: (settings) {
+        if (settings.name == medicineDetailsRoute) {
+          final Medicine medicine = settings.arguments as Medicine;
+          return MaterialPageRoute(
+            builder: (context) {
+              return MedicineDetailsView(medicine: medicine);
+            },
+          );
+        }
+        if (settings.name == viewCategoriesRoute) {
+          final int id = settings.arguments as int;
+          return MaterialPageRoute(
+            builder: (context) {
+              return ViewCategoty(id: id);
+            },
+          );
+        }
+        if (settings.name == orderDetailsRoute) {
+          final Order order = settings.arguments as Order;
+          return MaterialPageRoute(
+            builder: (context) {
+              return OrderDetailsView(order: order);
+            },
+          );
+        }
+      },
+      locale: Get.deviceLocale,
+      translations: MyLocal(),
+      home: const Web_Main(),
+    );
   }
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:test1/apis/web_api.dart';
-import 'package:test1/constants/routes.dart';
 import 'package:test1/views/web/add_medicine.dart';
 import 'package:test1/views/web/search_web.dart';
 import 'package:test1/views/web/web_login_view.dart';
@@ -172,18 +171,59 @@ class _WebMainState extends State<Web_Main> {
                                                       ContinuousRectangleBorder(),
                                                   color: Colors.green),
                                               child: Image.network(
-                                                  'http://10.0.2.2:8000/storage/${medicines[index].imagePath}',
+                                                  'http://127.0.0.1:8000/storage/${medicines[index].imagePath}',
                                                   fit: BoxFit.cover)),
-                                          Padding(
-                                            padding: const EdgeInsets.all(10),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Column(
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceAround,
+                                            children: [
+                                              Column(
+                                                children: [
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            10),
+                                                    child: Text(
+                                                      '${"34".tr}: ${medicines[index].medicineTranslations["1".tr]["commercial_name"]}',
+                                                      style: const TextStyle(
+                                                          fontSize: 20,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            10),
+                                                    child: Text(
+                                                      "${"41".tr}: ${medicines[index].price}",
+                                                      style: const TextStyle(
+                                                          fontSize: 20,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            10),
+                                                    child: Text(
+                                                      "${"39".tr}: ${medicines[index].quantityAvailable}",
+                                                      style: const TextStyle(
+                                                          fontSize: 20,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(10),
+                                                child: Column(
                                                   children: [
                                                     Text(
-                                                      '${medicines[index].medicineTranslations["1".tr]["commercial_name"]}',
+                                                      "${"35".tr}: ${medicines[index].medicineTranslations["en"]["scientific_name"]}",
                                                       style: const TextStyle(
                                                           fontSize: 20,
                                                           fontWeight:
@@ -192,9 +232,9 @@ class _WebMainState extends State<Web_Main> {
                                                     Padding(
                                                       padding:
                                                           const EdgeInsets.all(
-                                                              20),
+                                                              10),
                                                       child: Text(
-                                                        "${"41".tr}: ${medicines[index].price}",
+                                                        "${"36".tr}: ${medicines[index].medicineTranslations["en"]["manufacture_company"]}",
                                                         style: const TextStyle(
                                                             fontSize: 20,
                                                             fontWeight:
@@ -202,42 +242,63 @@ class _WebMainState extends State<Web_Main> {
                                                                     .bold),
                                                       ),
                                                     ),
-                                                    Text(
-                                                      "${"39".tr}: ${medicines[index].quantityAvailable}",
-                                                      style: const TextStyle(
-                                                          fontSize: 20,
-                                                          fontWeight:
-                                                              FontWeight.bold),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              10),
+                                                      child: Text(
+                                                        "${"40".tr}: ${medicines[index].expiryDate}",
+                                                        style: const TextStyle(
+                                                            fontSize: 20,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                      ),
                                                     ),
                                                   ],
                                                 ),
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 20),
-                                                  child: Column(
-                                                    children: [
-                                                      IconButton(
-                                                        onPressed: () {
-                                                          Navigator.of(context)
-                                                              .pushNamed(
-                                                            medicineDetailsRoute,
-                                                            arguments:
-                                                                medicines[
-                                                                    index],
-                                                          );
-                                                        },
-                                                        icon: const Icon(
-                                                          Icons
-                                                              .arrow_forward_ios,
-                                                          color: Colors.green,
+                                              ),
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(10),
+                                                child: Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  children: [
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              10),
+                                                      child: Text(
+                                                        "${"37".tr}:",
+                                                        style: const TextStyle(
+                                                          fontSize: 20,
+                                                          fontWeight:
+                                                              FontWeight.bold,
                                                         ),
                                                       ),
-                                                    ],
-                                                  ),
+                                                    ),
+                                                    for (var category
+                                                        in medicines[index]
+                                                            .categories)
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(10),
+                                                        child: Text(
+                                                          '${category["38".tr]} ',
+                                                          style:
+                                                              const TextStyle(
+                                                            fontSize: 20,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                  ],
                                                 ),
-                                              ],
-                                            ),
+                                              )
+                                            ],
                                           ),
                                         ],
                                       ),
