@@ -23,6 +23,7 @@ class OrderController extends Controller
                 $medicine = $orderedMedicine->Medicine;
                 $medicine->MedicineTranslations;
                 $medicine->Categories;
+                $medicine['is_favorite'] = false;
             }
         }
         return response()->json([

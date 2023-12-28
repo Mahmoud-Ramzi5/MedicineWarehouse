@@ -28,6 +28,6 @@ class Medicine {
             translation["lang"]: translation
         },
         categories = json['categories'],
-        imagePath = json['image_path'],
+        imagePath = json['image_path'] as String,
         isFavorite = json['is_favorite'] as bool;
 }

@@ -17,6 +17,9 @@ class AdminMedicinesController extends MedicinesController
     {
         // All Medicines
         $medicines = Medicine::with('MedicineTranslations')->with('Categories')->get();
+        foreach($medicines as $medicine) {
+            $medicine['is_favorite'] = false;
+        }
         return response()->json([
             'data' => $medicines
         ], 200)->header('Content-Type', 'application/json; charset=UTF-8');
@@ -38,6 +41,7 @@ class AdminMedicinesController extends MedicinesController
         foreach($medicines as $medicine) {
             $medicine->MedicineTranslations;
             $medicine->Categories;
+            $medicine['is_favorite'] = false;
         }
         // Response
         return response()->json([
@@ -121,6 +125,7 @@ class AdminMedicinesController extends MedicinesController
             $medicine = Medicine::find($id);
             $medicine->MedicineTranslations;
             $medicine->Categories;
+            $medicine['is_favorite'] = false;
             array_push($medicines, $medicine);
         }
         // Search Response

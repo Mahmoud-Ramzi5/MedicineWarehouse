@@ -8,3 +8,4 @@ const viewOrdersRoute = '/viewOrders/';
 const mainwebRoute = '/medicines/';
 const orderDetailsRoute = '/orderDetails/';
 const favoritesRoute = '/favorites/';
+const searchwebRoute = '/searchweb/';
