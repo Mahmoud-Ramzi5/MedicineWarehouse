@@ -22,6 +22,8 @@ class WebApi {
       Uri.parse('http://127.0.0.1:8000/api/admin/orders');
    static final searchUri = 
    Uri.parse('http://127.0.0.1:8000/api/admin/search');
+   static final updateorderUri = 
+   Uri.parse('http://127.0.0.1:8000/api/admin/update_order');
 
   WebApi();
 
@@ -51,7 +53,7 @@ class WebApi {
     return response;
   }
 
-  final dio = Dio();
+  static final dio = Dio();
 
   Future<dynamic> addMedicine(
       String enCommercialName,
@@ -90,6 +92,37 @@ class WebApi {
         }));
     return response;
   }
+
+
+   Future<dynamic>orderstauts(int id,String status,bool is_paid)
+  async{
+    final response = await dio.postUri(
+      updateorderUri,
+      options: Options(
+         headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Accept': "application/json",
+          'connection': 'keep-alive',
+          'Accept-Encoding': 'gzip, deflate, br',
+        },
+      ),
+      data: ({"id": id,
+      "status":status,
+      "is_paid": 1}),
+    );
+    if(response.statusCode==200)
+    {
+      print(response.data["message"]);
+    }
+    else{
+      print(response.data["message"]);
+      //throw Exception("Error");
+    }
+
+  }
+
+  
+
 
   Future<List<CC.Category>> fetchCategories() async {
     final response = await dio.getUri(

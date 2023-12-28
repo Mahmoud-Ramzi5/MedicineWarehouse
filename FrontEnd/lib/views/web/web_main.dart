@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:test1/apis/web_api.dart';
 import 'package:test1/classes/medicine.dart';
 import 'package:test1/constants/routes.dart';
@@ -59,7 +60,6 @@ Future<void> _onSearchSubmitted(String value) async {
   }
 
 
-
   Widget _buildSearchResults() {
     return ListView.builder(
       physics: const PageScrollPhysics(),
@@ -81,7 +81,7 @@ Future<void> _onSearchSubmitted(String value) async {
                   color: Colors.green,
                 ),
                 child: Image.network(
-                  'http://10.0.2.2:8000/storage/${medicine.imagePath}',
+                  'http://127.0.0.1:8000/storage/${medicine.imagePath}',
                   fit: BoxFit.cover,
                 ),
               ),
@@ -91,7 +91,7 @@ Future<void> _onSearchSubmitted(String value) async {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      '${medicine.medicineTranslations["en"]["commercial_name"]}',
+                      '${medicine.medicineTranslations["1".tr]["commercial_name"]}',
                       style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -99,7 +99,7 @@ Future<void> _onSearchSubmitted(String value) async {
                     ),
                     const SizedBox(height: 10),
                     Text(
-                      'Price: ${medicine.price}',
+                      "${"41".tr}: ${medicine.price}",
                       style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -107,7 +107,7 @@ Future<void> _onSearchSubmitted(String value) async {
                     ),
                     const SizedBox(height: 10),
                     Text(
-                      'Quantity: ${medicine.quantityAvailable}',
+                      "${"39".tr}: ${medicine.quantityAvailable}",
                       style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -123,7 +123,6 @@ Future<void> _onSearchSubmitted(String value) async {
       itemCount: _medicines.length,
     );
   }
-
 
 
   void showLogoutDialog(BuildContext context) {
@@ -169,7 +168,8 @@ Future<void> _onSearchSubmitted(String value) async {
           onDestinationSelected: (int index) {
             setState(() {
               selectedIndex = index;
-            });
+            }
+            );
             switch (index) {
               case 0:
                 updateTitle('Home');
@@ -220,192 +220,177 @@ Future<void> _onSearchSubmitted(String value) async {
           ],
         ),
         Expanded(
-          child: selectedIndex == 0
-              ? FutureBuilder(
-                  future: shouldFetchData ? WebApi().fetchMedicineWeb() : null,
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const Center(child: CircularProgressIndicator());
-                    } else if (snapshot.hasError) {
-                      return Center(child: Text('Error: ${snapshot.error}'));
-                    } else {
-                      final medicines = snapshot.data;
-                      final filteredMedicines = filterMedicines(medicines!);
-                      return Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: SingleChildScrollView(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(5),
-                                child: SizedBox(
-                                  width: 1500,
-                                  child: SearchBar(
-                                    controller: _search,
-                                    hintText: 'Search',
-                                    leading: const Icon(Icons.search),
-                                    shape: const MaterialStatePropertyAll(
-                                      BeveledRectangleBorder(),
-                                    ),
-                                    textStyle: const MaterialStatePropertyAll(
-                                      TextStyle(
-                                        fontSize: 20,
-                                      ),
-                                    ),
-                                    side: const MaterialStatePropertyAll(
-                                      BorderSide(
-                                        color: Colors.green,
-                                      ),
-                                    ),
-                                    onSubmitted: (value) {
-                                      setState(() {
-                                        searchQuery = value;
-                                      });
-                                    },
+  child: SingleChildScrollView(
+    child: Column(
+      children: [
+        if (selectedIndex == 0)
+          FutureBuilder(
+            future: WebApi().fetchMedicineWeb(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(child: CircularProgressIndicator());
+              } else if (snapshot.hasError) {
+                return Center(child: Text('Error: ${snapshot.error}'));
+              } else {
+                final medicines = snapshot.data;
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(5),
+                      child: SizedBox(
+                        height: 50,
+                        width: 400,
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(5),
+                              child: SearchBar(
+                                controller: _search,
+                                hintText: "31".tr,
+                                leading: const Icon(Icons.search),
+                                shape: const MaterialStatePropertyAll(
+                                  BeveledRectangleBorder(),
+                                ),
+                                textStyle: const MaterialStatePropertyAll(
+                                  TextStyle(
+                                    fontSize: 20,
                                   ),
                                 ),
+                                side: const MaterialStatePropertyAll(
+                                  BorderSide(
+                                    color: Colors.green,
+                                  ),
+                                ),
+                                onSubmitted: _onSearchSubmitted,
                               ),
-                              ListView.builder(
-                                physics: const PageScrollPhysics(),
-                                padding: const EdgeInsets.all(10),
-                                shrinkWrap: true,
-                                itemBuilder: (context, index) {
-                                  return Card(
-                                    elevation: 5,
-                                    child: Row(
-                                      children: [
-                                        Container(
-                                          margin: const EdgeInsets.only(
-                                            top: 10,
-                                            bottom: 10,
-                                            left: 10,
-                                          ),
-                                          height: 100,
-                                          width: 100,
-                                          decoration: const ShapeDecoration(
-                                            shape: ContinuousRectangleBorder(),
-                                            color: Colors.green,
-                                          ),
-                                          child: Image.network(
-                                            'http://127.0.0.1:8000/storage/${medicines[index].imagePath}',
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.all(10),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Column(
-                                                children: [
-                                                  Text(
-                                                    '${medicines[index].medicineTranslations["en"]["commercial_name"]}',
-                                                    style: const TextStyle(
-                                                      fontSize: 20,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                    ),
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                      top: 20,
-                                                      bottom: 20,
-                                                      left: 10,
-                                                      right: 20,
-                                                    ),
-                                                    child: Text(
-                                                      'Price: ${medicines[index].price}',
-                                                      style: const TextStyle(
-                                                        fontSize: 20,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Text(
-                                                    'Quantity: ${medicines[index].quantityAvailable}',
-                                                    style: const TextStyle(
-                                                      fontSize: 20,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 20),
-                                                child: Column(
-                                                  children: [
-                                                    IconButton(
-                                                      onPressed: () {
-                                                        Navigator.of(context)
-                                                            .pushNamed(
-                                                          medicineDetailsRoute,
-                                                          arguments:
-                                                              filteredMedicines[
-                                                                  index],
-                                                        );
-                                                      },
-                                                      icon: const Icon(
-                                                        Icons.arrow_forward_ios,
-                                                        color: Colors.green,
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  );
-                                },
-                                itemCount: medicines.length,
-                              ),
-                            ],
-                          ),
+                            ),
+                            _buildSearchResults(), // Assuming _buildSearchResults returns a widget
+                          ],
                         ),
-                      );
-                    }
-                  },
-                )
-:selectedIndex == 2
-    ? FutureBuilder(
-        future: WebApi().fetchweborders(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}'));
-          } else {
-            final weborders = snapshot.data;
-            return Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: SingleChildScrollView(
-                child: ListView.builder(
-                  physics: const PageScrollPhysics(),
-                  padding: const EdgeInsets.all(10),
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) {
-                    return OrderCard(webOrder: weborders![index]);
-                  },
-                  itemCount: weborders?.length ?? 0,
-                ),
-              ),
-            );
-          }
-        },
-      )
-    : Container(),
-        )
+                      ),
+                    ),
+                    Flexible(
+                      child: ListView.builder(
+                        physics: const PageScrollPhysics(),
+                        padding: const EdgeInsets.all(10),
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) {
+                          return Card(
+                            elevation: 5,
+                            child: Row(
+                              children: [
+                                Container(
+                                  margin: const EdgeInsets.all(10),
+                                  height: 100,
+                                  width: 100,
+                                  decoration: const ShapeDecoration(
+                                      shape: ContinuousRectangleBorder(),
+                                      color: Colors.green),
+                                  child: Image.network(
+                                    'http://10.0.2.2:8000/storage/${medicines?[index].imagePath}',
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(10),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Column(
+                                        children: [
+                                          Text(
+                                            '${medicines?[index].medicineTranslations["1".tr]["commercial_name"]}',
+                                            style: const TextStyle(
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.all(20),
+                                            child: Text(
+                                              "${"41".tr}: ${medicines?[index].price}",
+                                              style: const TextStyle(
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                          Text(
+                                            "${"39".tr}: ${medicines?[index].quantityAvailable}",
+                                            style: const TextStyle(
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ],
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(left: 20),
+                                        child: Column(
+                                          children: [
+                                            IconButton(
+                                              onPressed: () {
+                                                Navigator.of(context).pushNamed(
+                                                  medicineDetailsRoute,
+                                                  arguments: medicines?[index],
+                                                );
+                                              },
+                                              icon: const Icon(
+                                                Icons.arrow_forward_ios,
+                                                color: Colors.green,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                        itemCount: medicines?.length ?? 0,
+                      ),
+                    ),
+                  ],
+                );
+              }
+            },
+          )
+         else if (selectedIndex == 2)
+          FutureBuilder(
+            future: WebApi().fetchweborders(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(child: CircularProgressIndicator());
+              } else if (snapshot.hasError) {
+                return Center(child: Text('Error: ${snapshot.error}'));
+              } else {
+                final weborders = snapshot.data;
+                return Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: SingleChildScrollView(
+                    child: ListView.builder(
+                      physics: const PageScrollPhysics(),
+                      padding: const EdgeInsets.all(10),
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) {
+                        return OrderCard(webOrder: weborders![index]);
+                      },
+                      itemCount: weborders?.length ?? 0,
+                    ),
+                  ),
+                );
+              }
+            },
+          )
+        else
+          Container(),
+      ],
+    ),
+  ),
+)]
 
-      ]),
-    );
+      ));
   }
 
   void updateTitle(String title) {
@@ -429,6 +414,7 @@ class _OrderCardState extends State<OrderCard> {
   int selectedStatus = 1;
   int paymentStatus=4;
 
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -441,77 +427,84 @@ class _OrderCardState extends State<OrderCard> {
       Text('Order ID: ${widget.webOrder.id}'),
       Text('Ordered Medicines: ${widget.webOrder.orderedMedicines}'),
       Text('Price: ${widget.webOrder.totalPrice}'),
+      Text('status:${widget.webOrder.status}'),
       Row(
+        //if(widget.webOrder.status == "SENT")
         children: [
-          Radio(
-            value: 1,
-            groupValue: selectedStatus,
-            onChanged: (value) {
-              setState(() {
-       if (selectedStatus != 2 && selectedStatus != 3) {
-                  selectedStatus = value as int;
-                }
-              });
-            },
-          ),
-          const Text('Preparing'),
-          Radio(
-            value: 2,
-            groupValue: selectedStatus,
-            onChanged: (value) {
-              setState(() {
-                if (selectedStatus == 1 ) {
-                  selectedStatus = value as int;
-                }
-              });
-            },
-          ),
-          const Text('Sending'),
-          Radio(
-            value: 3,
-            groupValue: selectedStatus,
-            onChanged: (value) {
-              setState(() {
-                if (selectedStatus == 2) {
-                  selectedStatus = value as int;
-                }
-              });
-            },
-          ),
-          const Text('Sent'),
-        ],
-      ),
-      Row(
-        children: [
-          Radio(
-            value: 4,
-            groupValue: paymentStatus,
-            onChanged: (value) {
-              setState(() {
-                if (selectedStatus != 2 && selectedStatus != 3) {
-                  paymentStatus = value as int;
-                }
-              });
-            },
-          ),
-          const Text('UnPaid'),
-          Radio(
-            value: 5,
-            groupValue: paymentStatus,
-            onChanged: (value) {
-              setState(() {
-                if (paymentStatus==4) {
-                  paymentStatus = value as int;
-                }
-              });
-            },
-          ),
-          const Text('Paid'),
-        ],
-      ),
+          Row(
+  children: [
+  //  if(widget.webOrder.status == "PREPARING"){
+    Checkbox(
+      value: selectedStatus == 1,
+      onChanged: (isChecked) {
+        setState(() {
+          if (selectedStatus != 2 && selectedStatus != 3 && isChecked!) {
+            selectedStatus = 1;
+            WebApi().orderstauts(widget.webOrder.id, "PREPARING", widget.webOrder.paid);
+          }
+        });
+      },
+    ),
+    const Text('Preparing'),
+    Checkbox(
+      value: selectedStatus == 2,
+      onChanged: (isChecked) {
+        setState(() {
+          if (selectedStatus == 1 && isChecked!) {
+            selectedStatus = 2;
+            WebApi().orderstauts(widget.webOrder.id, "SENT", widget.webOrder.paid);
+          }
+        });
+      },
+    ),
+    const Text('Sent'),
+    Checkbox(
+      value: selectedStatus == 3,
+      onChanged: (isChecked) {
+        setState(() {
+          if (selectedStatus == 2 && isChecked!) {
+            selectedStatus = 3;
+            WebApi().orderstauts(widget.webOrder.id, "RECEIVED", widget.webOrder.paid);
+          }
+        });
+      },
+    ),
+    const Text('Received'),
+  ],
+),
+Row(
+  children: [
+    Checkbox(
+      value: paymentStatus == 4,
+      onChanged: (isChecked) {
+        setState(() {
+          if (selectedStatus != 2 && selectedStatus != 3 && isChecked!) {
+            paymentStatus = 4;
+          }
+        });
+      },
+    ),
+    const Text('UnPaid'),
+    Checkbox(
+      value: paymentStatus == 5,
+      onChanged: (isChecked) {
+        setState(() {
+          if (paymentStatus == 4 && isChecked!) {
+            paymentStatus = 5;
+          }
+        });
+      },
+    ),
+    const Text('Paid'),
+  ],
+),
+
     ],
   ),
+    ])
 );
+
+
 
  }
 }

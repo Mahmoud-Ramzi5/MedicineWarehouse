@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use App\Models\Medicine;
 use App\Enums\OrderEnum;
 use App\Models\Order;
 
@@ -45,7 +46,7 @@ class OrderController extends Controller
                 'message' => 'Invalid Order'
             ], 400);
         }
-
+        
         if ($order->is_paid == 0 && $validated['is_paid'] == 1) {
             $order->is_paid = $validated['is_paid'];
             $order->save();
@@ -71,9 +72,9 @@ class OrderController extends Controller
         else {
             if ($order->status == 'PREPARING') {
                 if ($status == 'SENT') {
-                    $medicines = $order->Medicines;
-                    foreach ($medicines as $medicine) {
-                        $ordered_medicine =  $order->OrderedMedicine()->where('medicine_id', $medicine->id)->first();
+                    $OrderedMedicines = $order->OrderedMedicines;
+                    foreach ($OrderedMedicines as $ordered_medicine) {
+                        $medicine = Medicine::find($ordered_medicine->medicine_id);
                         $total_quantity = $medicine->quantity_total;
                         $allocated_quantity = $medicine->quantity_allocated;
                         $medicine->quantity_total = $total_quantity - ($ordered_medicine->quantity);

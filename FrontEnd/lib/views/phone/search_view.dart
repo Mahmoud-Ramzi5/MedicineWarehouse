@@ -13,6 +13,7 @@ class SearchView extends StatefulWidget {
 class _SearchViewState extends State<SearchView> {
   late final TextEditingController _search;
   List<Medicine> _medicines = [];
+  
   @override
   void initState() {
     _search = TextEditingController();
