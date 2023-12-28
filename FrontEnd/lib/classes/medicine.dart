@@ -6,6 +6,7 @@ class Medicine {
   final Map<String, dynamic> medicineTranslations;
   final List<dynamic> categories;
   final String imagePath;
+  final bool isFavorite;
 
   Medicine({
     required this.id,
@@ -15,6 +16,7 @@ class Medicine {
     required this.medicineTranslations,
     required this.categories,
     required this.imagePath,
+    required this.isFavorite,
   });
   Medicine.fromJson(Map<String, dynamic> json)
       : id = json['id'] as int,
@@ -26,5 +28,6 @@ class Medicine {
             translation["lang"]: translation
         },
         categories = json['categories'],
-        imagePath = json['image_path'];
+        imagePath = json['image_path'],
+        isFavorite = json['is_favorite'] as bool;
 }

@@ -148,6 +148,8 @@ class Api {
   }
 
   Future<List<Category>> fetchCategories() async {
+    const storage = FlutterSecureStorage();
+    var token = await storage.read(key: 'Bearer Token');
     final response = await dio.getUri(
       fetchCategoriesUri,
       options: Options(
@@ -156,6 +158,7 @@ class Api {
           'Accept': "application/json",
           'connection': 'keep-alive',
           'Accept-Encoding': 'gzip, deflate, br',
+          'Authorization': 'Bearer $token'
         },
       ),
     );
@@ -172,6 +175,8 @@ class Api {
   }
 
   Future<List<Medicine>> fetchMedicineByCategory(int id) async {
+    const storage = FlutterSecureStorage();
+    var token = await storage.read(key: 'Bearer Token');
     final response = await dio.postUri(
       medicineByCategoryUri,
       data: ({"id": id}),
@@ -181,6 +186,7 @@ class Api {
           'Accept': "application/json",
           'connection': 'keep-alive',
           'Accept-Encoding': 'gzip, deflate, br',
+          'Authorization': 'Bearer $token'
         },
       ),
     );
@@ -221,6 +227,8 @@ class Api {
   }
 
   Future<List<Medicine>> search(String name) async {
+    const storage = FlutterSecureStorage();
+    var token = await storage.read(key: 'Bearer Token');
     final response = await dio.postUri(
       searchUri,
       options: Options(
@@ -229,6 +237,7 @@ class Api {
           'Accept': "application/json",
           'connection': 'keep-alive',
           'Accept-Encoding': 'gzip, deflate, br',
+          'Authorization': 'Bearer $token'
         },
       ),
       data: ({"name": name}),

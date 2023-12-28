@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Medicine;
 use App\Models\Order;
 use App\Models\OrderedMedicine;
+use App\Models\Favorite;
 use Laravel\Sanctum\PersonalAccessToken;
 
 function DoNothing() {;}
@@ -21,10 +22,10 @@ class OrderController extends Controller
                 'message' => 'Invalid User'
             ], 400);
         }
-        // Get user id
-        $id = $user->id;
+        // Get user Favorite
+        $favorite = Favorite::where('user_id', $user->id)->first();
         // User Orders
-        $orders = Order::where('user_id', $id)->get();
+        $orders = Order::where('user_id', $user->id)->get();
         if ($orders->isEmpty()) {
             return response()->json([
                 'message' => 'No orders yet'
@@ -36,6 +37,12 @@ class OrderController extends Controller
                 $medicine = $orderedMedicine->Medicine;
                 $medicine->MedicineTranslations;
                 $medicine->Categories;
+                if ($favorite->Medicines()->where('medicine_id', '=', $medicine->id)->exists()) {
+                    $medicine['is_favorite'] = true;
+                }
+                else {
+                    $medicine['is_favorite'] = false;
+                }
             }
         }
         return response()->json([

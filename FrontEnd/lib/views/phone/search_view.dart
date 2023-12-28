@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:test1/apis/phone_api.dart';
 import 'package:test1/classes/medicine.dart';
+import 'package:test1/constants/routes.dart';
 
 class SearchView extends StatefulWidget {
   const SearchView({super.key});
@@ -87,6 +88,22 @@ class _SearchViewState extends State<SearchView> {
                     ),
                   ],
                 ),
+              ),
+              Column(
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      Navigator.of(context).pushNamed(
+                        medicineDetailsRoute,
+                        arguments: _medicines[index],
+                      );
+                    },
+                    icon: const Icon(
+                      Icons.arrow_forward_ios,
+                      color: Colors.green,
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
