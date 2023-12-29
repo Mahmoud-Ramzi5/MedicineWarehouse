@@ -53,7 +53,7 @@ class _WebMainState extends State<Web_Main> {
                   ),
                 );
               },
-              child: const Text('Log Out'),
+              child: const Text('Log out'),
             ),
           ],
         );
@@ -108,27 +108,63 @@ class _WebMainState extends State<Web_Main> {
             destinations: const [
               NavigationRailDestination(
                 icon: Icon(Icons.home, color: Colors.white),
-                label: Text('Home'),
+                label: Text(
+                  'Home',
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
               NavigationRailDestination(
                 icon: Icon(Icons.search, color: Colors.white),
-                label: Text('Search'),
+                label: Text(
+                  'Search',
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
               NavigationRailDestination(
                 icon: Icon(Icons.add, color: Colors.white),
-                label: Text('Add Medicine'),
+                label: Text(
+                  'Add Medicine',
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
               NavigationRailDestination(
                 icon: Icon(Icons.shopping_cart, color: Colors.white),
-                label: Text('Orders'),
+                label: Text(
+                  'Orders',
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
               NavigationRailDestination(
                 icon: Icon(Icons.insert_chart, color: Colors.white),
-                label: Text('Reports'),
+                label: Text(
+                  'Reports',
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
               NavigationRailDestination(
                 icon: Icon(Icons.logout, color: Colors.white),
-                label: Text('LogOut'),
+                label: Text(
+                  'Log out',
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
             ],
           ),
@@ -158,83 +194,36 @@ class _WebMainState extends State<Web_Main> {
                                   padding: const EdgeInsets.all(10),
                                   shrinkWrap: true,
                                   itemBuilder: (context, index) {
-                                    return Card(
-                                      elevation: 5,
-                                      child: Row(
-                                        children: [
-                                          Container(
-                                              margin: const EdgeInsets.all(10),
-                                              height: 100,
-                                              width: 100,
-                                              decoration: const ShapeDecoration(
-                                                  shape:
-                                                      ContinuousRectangleBorder(),
-                                                  color: Colors.green),
-                                              child: Image.network(
-                                                  'http://127.0.0.1:8000/storage/${medicines[index].imagePath}',
-                                                  fit: BoxFit.cover)),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceAround,
-                                            children: [
-                                              Column(
-                                                children: [
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            10),
-                                                    child: Text(
-                                                      '${"34".tr}: ${medicines[index].medicineTranslations["1".tr]["commercial_name"]}',
-                                                      style: const TextStyle(
-                                                          fontSize: 20,
-                                                          fontWeight:
-                                                              FontWeight.bold),
-                                                    ),
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            10),
-                                                    child: Text(
-                                                      "${"41".tr}: ${medicines[index].price}",
-                                                      style: const TextStyle(
-                                                          fontSize: 20,
-                                                          fontWeight:
-                                                              FontWeight.bold),
-                                                    ),
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            10),
-                                                    child: Text(
-                                                      "${"39".tr}: ${medicines[index].quantityAvailable}",
-                                                      style: const TextStyle(
-                                                          fontSize: 20,
-                                                          fontWeight:
-                                                              FontWeight.bold),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                              Padding(
-                                                padding:
+                                    return Padding(
+                                      padding: const EdgeInsets.all(10),
+                                      child: Card(
+                                        elevation: 5,
+                                        child: Row(
+                                          children: [
+                                            Container(
+                                                margin:
                                                     const EdgeInsets.all(10),
-                                                child: Column(
+                                                height: 100,
+                                                width: 100,
+                                                decoration: const ShapeDecoration(
+                                                    shape:
+                                                        ContinuousRectangleBorder(),
+                                                    color: Colors.green),
+                                                child: Image.network(
+                                                    'http://127.0.0.1:8000/storage/${medicines[index].imagePath}',
+                                                    fit: BoxFit.cover)),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceAround,
+                                              children: [
+                                                Column(
                                                   children: [
-                                                    Text(
-                                                      "${"35".tr}: ${medicines[index].medicineTranslations["en"]["scientific_name"]}",
-                                                      style: const TextStyle(
-                                                          fontSize: 20,
-                                                          fontWeight:
-                                                              FontWeight.bold),
-                                                    ),
                                                     Padding(
                                                       padding:
                                                           const EdgeInsets.all(
                                                               10),
                                                       child: Text(
-                                                        "${"36".tr}: ${medicines[index].medicineTranslations["en"]["manufacture_company"]}",
+                                                        '${"34".tr}: ${medicines[index].medicineTranslations["1".tr]["commercial_name"]}',
                                                         style: const TextStyle(
                                                             fontSize: 20,
                                                             fontWeight:
@@ -247,7 +236,20 @@ class _WebMainState extends State<Web_Main> {
                                                           const EdgeInsets.all(
                                                               10),
                                                       child: Text(
-                                                        "${"40".tr}: ${medicines[index].expiryDate}",
+                                                        "${"41".tr}: ${medicines[index].price}",
+                                                        style: const TextStyle(
+                                                            fontSize: 20,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                      ),
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              10),
+                                                      child: Text(
+                                                        "${"39".tr}: ${medicines[index].quantityAvailable}",
                                                         style: const TextStyle(
                                                             fontSize: 20,
                                                             fontWeight:
@@ -257,36 +259,61 @@ class _WebMainState extends State<Web_Main> {
                                                     ),
                                                   ],
                                                 ),
-                                              ),
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.all(10),
-                                                child: Column(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.start,
-                                                  children: [
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              10),
-                                                      child: Text(
-                                                        "${"37".tr}:",
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(10),
+                                                  child: Column(
+                                                    children: [
+                                                      Text(
+                                                        "${"35".tr}: ${medicines[index].medicineTranslations["en"]["scientific_name"]}",
                                                         style: const TextStyle(
-                                                          fontSize: 20,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                        ),
+                                                            fontSize: 20,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
                                                       ),
-                                                    ),
-                                                    for (var category
-                                                        in medicines[index]
-                                                            .categories)
                                                       Padding(
                                                         padding:
                                                             const EdgeInsets
                                                                 .all(10),
                                                         child: Text(
-                                                          '${category["38".tr]} ',
+                                                          "${"36".tr}: ${medicines[index].medicineTranslations["en"]["manufacture_company"]}",
+                                                          style: const TextStyle(
+                                                              fontSize: 20,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
+                                                        ),
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(10),
+                                                        child: Text(
+                                                          "${"40".tr}: ${medicines[index].expiryDate}",
+                                                          style: const TextStyle(
+                                                              fontSize: 20,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(10),
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    children: [
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(10),
+                                                        child: Text(
+                                                          "${"37".tr}:",
                                                           style:
                                                               const TextStyle(
                                                             fontSize: 20,
@@ -295,12 +322,31 @@ class _WebMainState extends State<Web_Main> {
                                                           ),
                                                         ),
                                                       ),
-                                                  ],
-                                                ),
-                                              )
-                                            ],
-                                          ),
-                                        ],
+                                                      for (var category
+                                                          in medicines[index]
+                                                              .categories)
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(10),
+                                                          child: Text(
+                                                            '${category["38".tr]} ',
+                                                            style:
+                                                                const TextStyle(
+                                                              fontSize: 20,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                    ],
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     );
                                   },
@@ -366,113 +412,207 @@ class OrderCard extends StatefulWidget {
   const OrderCard({Key? key, required this.webOrder}) : super(key: key);
 
   @override
-  _OrderCardState createState() => _OrderCardState();
+  OrderCardState createState() => OrderCardState();
 }
 
-class _OrderCardState extends State<OrderCard> {
-  int selectedStatus = 1;
-  int paymentStatus = 4;
-
+class OrderCardState extends State<OrderCard> {
   @override
   Widget build(BuildContext context) {
     return Card(
       elevation: 5,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: Row(
         children: [
-          const Text('Orders'),
-          Text('Order ID: ${widget.webOrder.id}'),
-          Text('Ordered Medicines: ${widget.webOrder.orderedMedicines}'),
-          Text('Price: ${widget.webOrder.totalPrice}'),
-          Text('status:${widget.webOrder.status}'),
-          Row(
-            //if(widget.webOrder.status == "SENT")
-            children: [
-              Row(
-                children: [
-                  //  if(widget.webOrder.status == "PREPARING"){
-                  Checkbox(
-                    value: selectedStatus == 1,
-                    onChanged: (isChecked) {
-                      setState(
-                        () {
-                          if (selectedStatus != 2 &&
-                              selectedStatus != 3 &&
-                              isChecked!) {
-                            selectedStatus = 1;
-                            WebApi().orderstauts(widget.webOrder.id,
-                                "PREPARING", widget.webOrder.paid);
+          Padding(
+            padding: const EdgeInsets.all(10),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Text(
+                      'Order ID: ${widget.webOrder.id}',
+                      style: const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(5),
+                      child: Text(
+                        'User ID: ${widget.webOrder.userId}',
+                        style: const TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    const Text(
+                      'Status: ',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const Text(
+                      'PREPARING',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Checkbox(
+                      value: "PREPARING" == widget.webOrder.status,
+                      onChanged: (isChecked) {},
+                    ),
+                    const Text(
+                      'SENT',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Checkbox(
+                      value: "SENT" == widget.webOrder.status,
+                      onChanged: (value) {
+                        setState(() {
+                          if (widget.webOrder.status == "PREPARING") {
+                            WebApi().orderstauts(
+                              widget.webOrder.id,
+                              "SENT",
+                              widget.webOrder.paid,
+                            );
                           }
-                        },
-                      );
-                    },
-                  ),
-                  const Text('PREPARING'),
-                  Checkbox(
-                    value: selectedStatus == 2,
-                    onChanged: (isChecked) {
-                      setState(
-                        () {
-                          if (selectedStatus == 1 && isChecked!) {
-                            selectedStatus = 2;
-                            WebApi().orderstauts(widget.webOrder.id, "SENT",
-                                widget.webOrder.paid);
+                        });
+                      },
+                    ),
+                    const Text(
+                      'RECEIVED',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Checkbox(
+                      value: "RECEIVED" == widget.webOrder.status,
+                      onChanged: (value) {
+                        setState(() {
+                          if (widget.webOrder.status == "SENT") {
+                            WebApi().orderstauts(
+                              widget.webOrder.id,
+                              "RECEIVED",
+                              widget.webOrder.paid,
+                            );
                           }
-                        },
-                      );
-                    },
-                  ),
-                  const Text('SENT'),
-                  Checkbox(
-                    value: selectedStatus == 3,
-                    onChanged: (isChecked) {
-                      setState(
-                        () {
-                          if (selectedStatus == 2 && isChecked!) {
-                            selectedStatus = 3;
-                            WebApi().orderstauts(widget.webOrder.id, "RECEIVED",
-                                widget.webOrder.paid);
+                        });
+                      },
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    const Text(
+                      'Billing Status: ',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const Text(
+                      'Paid',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Checkbox(
+                      value: widget.webOrder.paid,
+                      onChanged: (value) {
+                        setState(() {
+                          if (!widget.webOrder.paid) {
+                            WebApi().orderstauts(
+                              widget.webOrder.id,
+                              widget.webOrder.status,
+                              true,
+                            );
                           }
-                        },
-                      );
-                    },
-                  ),
-                  const Text('RECEIVED'),
-                ],
-              ),
-              Row(
-                children: [
-                  Checkbox(
-                    value: paymentStatus == 4,
-                    onChanged: (isChecked) {
-                      setState(
-                        () {
-                          if (selectedStatus != 2 &&
-                              selectedStatus != 3 &&
-                              isChecked!) {
-                            paymentStatus = 4;
-                          }
-                        },
-                      );
-                    },
-                  ),
-                  const Text('UnPaid'),
-                  Checkbox(
-                    value: paymentStatus == 5,
-                    onChanged: (isChecked) {
-                      setState(() {
-                        if (paymentStatus == 4 && isChecked!) {
-                          paymentStatus = 5;
-                        }
-                      });
-                    },
-                  ),
-                  const Text('Paid'),
-                ],
-              ),
-            ],
+                        });
+                      },
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
+          Padding(
+            padding: const EdgeInsets.all(10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Row(
+                  children: [
+                    Text(
+                      'Ordered Medicines:',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    SizedBox(
+                      width: 500,
+                      child: ListView.builder(
+                        physics: const PageScrollPhysics(),
+                        scrollDirection: Axis.vertical,
+                        itemBuilder: (context, index) {
+                          return Row(
+                            children: [
+                              Text(
+                                '${widget.webOrder.orderedMedicines[index].medicine.medicineTranslations["en"]["commercial_name"]}',
+                                style: const TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(5),
+                                child: Text(
+                                  'Quantity: ${widget.webOrder.orderedMedicines[index].quantity}',
+                                  style: const TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(5),
+                                child: Text(
+                                  'Single unit price: ${widget.webOrder.orderedMedicines[index].medicine.price}',
+                                  style: const TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          );
+                        },
+                        itemCount: widget.webOrder.orderedMedicines.length,
+                        shrinkWrap: true,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          )
         ],
       ),
     );
