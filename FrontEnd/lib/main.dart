@@ -15,10 +15,11 @@ import 'package:test1/views/phone/register_view.dart';
 import 'package:test1/views/phone/view_category.dart';
 import 'package:test1/views/phone/view_favorites.dart';
 import 'package:test1/views/phone/view_orders.dart';
-import 'package:test1/views/web/search_web.dart';
+import 'package:test1/views/web/web_search_view.dart';
 import 'package:test1/views/web/web_login_view.dart';
 import 'package:test1/views/web/web_main.dart';
-import 'package:test1/views/web/add_medicine.dart';
+import 'package:test1/views/web/web_add_medicine_view.dart';
+import 'package:test1/views/web/web_main_view.dart';
 
 SharedPreferences? prefs;
 void main() async {
@@ -44,7 +45,8 @@ class MyApp extends StatelessWidget {
         viewOrdersRoute: (context) => const ViewOrders(),
         mainwebRoute: (context) => const Web_Main(),
         favoritesRoute: (context) => const ViewFavorites(),
-        searchwebRoute: (context) => const Search_webView(),
+        searchwebRoute: (context) => const WebSearchView(),
+        webMainViewRoute: (context) => const WebMainView(),
       },
       onGenerateRoute: (settings) {
         if (settings.name == medicineDetailsRoute) {
@@ -74,7 +76,7 @@ class MyApp extends StatelessWidget {
       },
       locale: Get.deviceLocale,
       translations: MyLocal(),
-      home: const Web_Main(),
+      home: const WebLoginView(),
     );
   }
 }

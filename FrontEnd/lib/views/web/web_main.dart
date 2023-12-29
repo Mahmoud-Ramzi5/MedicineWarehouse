@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:test1/apis/web_api.dart';
-import 'package:test1/views/web/add_medicine.dart';
-import 'package:test1/views/web/search_web.dart';
+import 'package:test1/views/web/web_add_medicine_view.dart';
+import 'package:test1/views/web/web_search_view.dart';
 import 'package:test1/views/web/web_login_view.dart';
-import 'package:test1/views/web/web_order.dart';
+import 'package:test1/classes/web_order.dart';
 
 class Web_Main extends StatefulWidget {
   const Web_Main({Key? key}) : super(key: key);
@@ -82,14 +82,14 @@ class _WebMainState extends State<Web_Main> {
                 case 1:
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => const Search_webView(),
+                      builder: (context) => const WebSearchView(),
                     ),
                   );
                   break;
                 case 2:
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => const Add_Medicine(),
+                      builder: (context) => const AddMedicineView(),
                     ),
                   );
                   break;

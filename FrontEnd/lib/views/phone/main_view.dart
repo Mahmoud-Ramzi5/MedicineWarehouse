@@ -45,7 +45,6 @@ class _MainViewState extends State<MainView> {
             ),
           ],
         ),
-        //appBar: AppBar(),
         body: const TabBarView(
           children: [HomeView(), SearchView(), CartView()],
         ),

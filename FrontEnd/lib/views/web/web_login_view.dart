@@ -6,7 +6,7 @@ import 'package:test1/constants/routes.dart';
 import 'package:test1/customWidgets/text_forn_widget.dart';
 
 class WebLoginView extends StatefulWidget {
-  const WebLoginView({Key? key});
+  const WebLoginView({super.key});
 
   @override
   State<WebLoginView> createState() => _WebLoginViewState();
@@ -136,8 +136,10 @@ class _WebLoginViewState extends State<WebLoginView> {
                                       builder: (context) {
                                         Future.delayed(
                                             const Duration(seconds: 1), () {
-                                         Navigator.of(context).pushNamedAndRemoveUntil(
-                                      mainwebRoute, (route) => false);
+                                          Navigator.of(context)
+                                              .pushNamedAndRemoveUntil(
+                                                  webMainViewRoute,
+                                                  (route) => false);
                                         });
                                         return AlertDialog(
                                           title: Text(body["message"]),

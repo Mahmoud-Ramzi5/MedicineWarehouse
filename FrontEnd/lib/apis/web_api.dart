@@ -7,8 +7,7 @@ import 'package:flutter/foundation.dart';
 import 'package:test1/classes/category.dart' as CC;
 import 'package:test1/classes/medicine.dart';
 import 'dart:typed_data';
-
-import 'package:test1/views/web/web_order.dart';
+import 'package:test1/classes/web_order.dart';
 
 class WebApi {
   static final loginUri = Uri.parse('http://127.0.0.1:8000/api/admin/login');

@@ -1,4 +1,4 @@
-import 'package:test1/views/web/ordered_medicine.dart';
+import 'package:test1/classes/ordered_medicine.dart';
 
 class Order {
   final int id;

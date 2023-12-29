@@ -3,14 +3,14 @@ import 'package:get/get.dart';
 import 'package:test1/apis/web_api.dart';
 import 'package:test1/classes/medicine.dart';
 
-class Search_webView extends StatefulWidget {
-  const Search_webView({super.key});
+class WebSearchView extends StatefulWidget {
+  const WebSearchView({super.key});
 
   @override
-  State<Search_webView> createState() => _SearchViewState();
+  State<WebSearchView> createState() => _WebSearchViewState();
 }
 
-class _SearchViewState extends State<Search_webView> {
+class _WebSearchViewState extends State<WebSearchView> {
   late final TextEditingController _search;
   List<Medicine> _medicines = [];
 
@@ -157,7 +157,6 @@ class _SearchViewState extends State<Search_webView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
       body: Column(
         children: [
           Padding(

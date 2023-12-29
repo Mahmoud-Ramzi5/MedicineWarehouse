@@ -9,3 +9,4 @@ const mainwebRoute = '/medicines/';
 const orderDetailsRoute = '/orderDetails/';
 const favoritesRoute = '/favorites/';
 const searchwebRoute = '/searchweb/';
+const webMainViewRoute = '/webMainView/';
