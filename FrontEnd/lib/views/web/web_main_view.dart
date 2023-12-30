@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:test1/views/web/web_add_medicine_view.dart';
 import 'package:test1/views/web/web_home_view.dart';
-import 'package:test1/views/web/web_login_view.dart';
+import 'package:test1/views/web/web_logout_view.dart';
 import 'package:test1/views/web/web_orders_view.dart';
 import 'package:test1/views/web/web_reports_view.dart';
 import 'package:test1/views/web/web_search_view.dart';
@@ -14,92 +14,106 @@ class WebMainView extends StatefulWidget {
 }
 
 class _WebMainViewState extends State<WebMainView> {
-  Widget showLogoutDialog(BuildContext context) {
-    return AlertDialog(
-      title: const Text('Log Out'),
-      content: const Text('Are you sure you want to log out?'),
-      actions: [
-        TextButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          child: const Text('Cancel'),
-        ),
-        TextButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-            Navigator.of(context).pushReplacement(
-              MaterialPageRoute(
-                builder: (context) => const WebLoginView(),
-              ),
-            );
-          },
-          child: const Text('Log out'),
-        ),
-      ],
-    );
+  int index = 0;
+
+  dynamic buildPages() {
+    switch (index) {
+      case 0:
+        return const WebHomeView();
+      case 1:
+        return const WebSearchView();
+      case 2:
+        return const AddMedicineView();
+      case 3:
+        return const WebOrdersView();
+      case 4:
+        return const WebReportsView();
+      case 5:
+        return const WebLogoutView();
+      default:
+        return const WebHomeView();
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 6,
-      initialIndex: 0,
-      child: Scaffold(
-        appBar: const TabBar(
-          indicatorSize: TabBarIndicatorSize.tab,
-          indicator: BoxDecoration(color: Colors.green),
-          unselectedLabelColor: Colors.black,
-          labelStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-          tabs: <Widget>[
-            Tab(
-              icon: Icon(
-                Icons.home,
+    return Scaffold(
+      body: Row(
+        children: [
+          NavigationRail(
+            backgroundColor: Colors.green,
+            selectedLabelTextStyle: const TextStyle(color: Colors.white),
+            unselectedLabelTextStyle: const TextStyle(color: Colors.black),
+            selectedIndex: index,
+            onDestinationSelected: (index) => setState(() {
+              this.index = index;
+            }),
+            labelType: NavigationRailLabelType.all,
+            destinations: const [
+              NavigationRailDestination(
+                icon: Icon(Icons.home, color: Colors.white),
+                label: Text(
+                  'Home',
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
-              text: "Home",
-            ),
-            Tab(
-              icon: Icon(
-                Icons.search,
+              NavigationRailDestination(
+                icon: Icon(Icons.search, color: Colors.white),
+                label: Text(
+                  'Search',
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
-              text: "Search",
-            ),
-            Tab(
-              icon: Icon(
-                Icons.add,
+              NavigationRailDestination(
+                icon: Icon(Icons.add, color: Colors.white),
+                label: Text(
+                  'Add Medicine',
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
-              text: "Add Medicine",
-            ),
-            Tab(
-              icon: Icon(
-                Icons.shopping_cart,
+              NavigationRailDestination(
+                icon: Icon(Icons.shopping_cart, color: Colors.white),
+                label: Text(
+                  'Orders',
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
-              text: "Orders",
-            ),
-            Tab(
-              icon: Icon(
-                Icons.insert_chart,
+              NavigationRailDestination(
+                icon: Icon(Icons.insert_chart, color: Colors.white),
+                label: Text(
+                  'Reports',
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
-              text: "Reports",
-            ),
-            Tab(
-              icon: Icon(
-                Icons.logout,
+              NavigationRailDestination(
+                icon: Icon(Icons.logout, color: Colors.white),
+                label: Text(
+                  'Logout',
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
-              text: "Logout",
-            ),
-          ],
-        ),
-        body: TabBarView(
-          children: [
-            const WebHomeView(),
-            const WebSearchView(),
-            const AddMedicineView(),
-            const WebOrdersView(),
-            const WebReportsView(),
-            showLogoutDialog(context),
-          ],
-        ),
+            ],
+          ),
+          Expanded(child: buildPages()),
+        ],
       ),
     );
   }

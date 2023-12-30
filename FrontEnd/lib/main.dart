@@ -43,9 +43,7 @@ class MyApp extends StatelessWidget {
         mainRoute: (context) => const MainView(),
         cartRoute: (context) => const CartView(),
         viewOrdersRoute: (context) => const ViewOrders(),
-        mainwebRoute: (context) => const Web_Main(),
         favoritesRoute: (context) => const ViewFavorites(),
-        searchwebRoute: (context) => const WebSearchView(),
         webMainViewRoute: (context) => const WebMainView(),
       },
       onGenerateRoute: (settings) {
@@ -76,7 +74,7 @@ class MyApp extends StatelessWidget {
       },
       locale: Get.deviceLocale,
       translations: MyLocal(),
-      home: const WebLoginView(),
+      home: const WebMainView(),
     );
   }
 }
