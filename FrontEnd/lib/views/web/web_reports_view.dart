@@ -14,13 +14,13 @@ class _WebReportsViewState extends State<WebReportsView> {
 
   Future<void> _selectDate(BuildContext context, bool isFirstDate) async {
     DateTime now = DateTime.now();
-    DateTime tenYearsForward = now.add(Duration(days: 365 * 10));
+    DateTime tenYearsBackward = now.subtract(Duration(days: 365 * 10));
 
     DateTime? picked = await showDatePicker(
       context: context,
       initialDate: isFirstDate ? firstDate : lastDate,
-      firstDate: now,
-      lastDate: tenYearsForward,
+      firstDate: tenYearsBackward,
+      lastDate: now,
     );
 
     if (picked != null) {
@@ -82,9 +82,10 @@ class _WebReportsViewState extends State<WebReportsView> {
             width: double.infinity,
             alignment: Alignment.center,
             child: ElevatedButton(
-              onPressed:(){
-                WebApi().fetchReports("${firstDate.toLocal().toString()}".split(' ')[0],
-                "${lastDate.toLocal().toString()}".split(' ')[0]);
+              onPressed: () {
+                WebApi().fetchReports(
+                    "${firstDate.toLocal().toString()}".split(' ')[0],
+                    "${lastDate.toLocal().toString()}".split(' ')[0]);
               },
               child: const Text('Check Report'),
             ),

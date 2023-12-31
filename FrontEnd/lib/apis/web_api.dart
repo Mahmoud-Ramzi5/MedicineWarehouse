@@ -20,11 +20,10 @@ class WebApi {
       Uri.parse('http://127.0.0.1:8000/api/admin/medicines');
   static final fetchordersUri =
       Uri.parse('http://127.0.0.1:8000/api/admin/orders');
-  static final searchUri = 
-  Uri.parse('http://127.0.0.1:8000/api/admin/search');
+  static final searchUri = Uri.parse('http://127.0.0.1:8000/api/admin/search');
   static final updateorderUri =
       Uri.parse('http://127.0.0.1:8000/api/admin/update_order');
-      static final reportsuri=
+  static final reportsuri =
       Uri.parse('http://127.0.0.1:8000/api/admin/reports');
 
   WebApi();
@@ -219,9 +218,8 @@ class WebApi {
     }
   }
 
-Future fetchReports(String firstDate,String lastDate)
-async{
-     final response = await dio.postUri(
+  Future<Reports> fetchReports(String firstDate, String lastDate) async {
+    final response = await dio.postUri(
       reportsuri,
       options: Options(
         headers: {
@@ -231,16 +229,13 @@ async{
           'Accept-Encoding': 'gzip, deflate, br',
         },
       ),
-      data: ({"start_date":firstDate,"end_date":lastDate}),
+      data: ({"start_date": firstDate, "end_date": lastDate}),
     );
     if (response.statusCode == 200) {
-      print(response.data);
-      Reports report=Reports.fromJson(response.data["message"]);
-      print(report);
+      Reports report = Reports.fromJson(response.data["message"]);
+      return report;
     } else {
       throw Exception("Error");
     }
   }
 }
-
-

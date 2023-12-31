@@ -81,23 +81,23 @@ class _AddMedicineViewState extends State<AddMedicineView> {
     }
   }
 
-Future<void> _selectDate(BuildContext context) async {
-  DateTime now = DateTime.now();
-  DateTime tenYearsForward = now.add(Duration(days: 365 * 10));
+  Future<void> _selectDate(BuildContext context) async {
+    DateTime now = DateTime.now();
+    DateTime tenYearsForward = now.add(Duration(days: 365 * 10));
 
-  DateTime? picked = await showDatePicker(
-    context: context,
-    initialDate: selectedDate,
-    firstDate: now,
-    lastDate: tenYearsForward,
-  );
+    DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: selectedDate,
+      firstDate: now,
+      lastDate: tenYearsForward,
+    );
 
-  if (picked != null && picked != selectedDate) {
-    setState(() {
-      selectedDate = picked;
-    });
+    if (picked != null && picked != selectedDate) {
+      setState(() {
+        selectedDate = picked;
+      });
+    }
   }
-}
 
   @override
   Widget build(BuildContext context) {
@@ -381,13 +381,13 @@ Future<void> _selectDate(BuildContext context) async {
                                       value: categoryId,
                                       onChanged: (newValue) {
                                         setState(() {
-                                          categoryId = (newValue as int) + 1;
+                                          categoryId = (newValue as int);
                                         });
                                       },
                                       items: categories!
                                           .map((CC.Category category) {
                                         return DropdownMenuItem(
-                                          value: category.id - 1,
+                                          value: category.id,
                                           child: Text(category.enCategoryName),
                                         );
                                       }).toList(),

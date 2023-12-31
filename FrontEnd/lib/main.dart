@@ -15,9 +15,6 @@ import 'package:test1/views/phone/register_view.dart';
 import 'package:test1/views/phone/view_category.dart';
 import 'package:test1/views/phone/view_favorites.dart';
 import 'package:test1/views/phone/view_orders.dart';
-import 'package:test1/views/web/web_search_view.dart';
-import 'package:test1/views/web/web_login_view.dart';
-import 'package:test1/views/web/web_add_medicine_view.dart';
 import 'package:test1/views/web/web_main_view.dart';
 
 SharedPreferences? prefs;

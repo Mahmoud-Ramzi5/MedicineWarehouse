@@ -73,6 +73,9 @@ class ReportController extends Controller
                                         ->whereDate('expiry_date', '<=', $validated['end_date'])->get();
 
         if (!$expired_medicines->isEmpty()) {
+            foreach ($expired_medicines as $medicine) {
+                $medicine['is_favorite'] = false;
+            }
             $message['expired_medicines'] = $expired_medicines;
         }
         // Response
