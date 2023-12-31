@@ -83,7 +83,7 @@ class _AddMedicineViewState extends State<AddMedicineView> {
 
   Future<void> _selectDate(BuildContext context) async {
     DateTime now = DateTime.now();
-    DateTime tenYearsForward = now.add(Duration(days: 365 * 10));
+    DateTime tenYearsForward = now.add(const Duration(days: 365 * 10));
 
     DateTime? picked = await showDatePicker(
       context: context,
