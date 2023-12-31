@@ -26,6 +26,12 @@ class ReportController extends Controller
         $orders = Order::with('User')->whereDate('created_at', '>=', $validated['start_date'])
                                         ->whereDate('created_at', '<=', $validated['end_date'])->get();
 
+        foreach ($orders as $order) {
+            $order_count += 1;
+            $income += $order->total_price;
+            $medicines = $order->OrderedMedicines;
+        }
+
         // Response
         return response()->json([
             'message' => [
