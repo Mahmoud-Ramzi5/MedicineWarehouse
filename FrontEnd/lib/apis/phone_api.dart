@@ -19,8 +19,10 @@ class Api {
       Uri.parse('http://10.0.2.2:8000/api/users/categories');
   static final medicineByCategoryUri =
       Uri.parse('http://10.0.2.2:8000/api/users/categoryFilter');
-  static final orderUri = Uri.parse('http://10.0.2.2:8000/api/users/new_order');
-  static final searchUri = Uri.parse('http://10.0.2.2:8000/api/users/search');
+  static final orderUri = 
+  Uri.parse('http://10.0.2.2:8000/api/users/new_order');
+  static final searchUri = 
+  Uri.parse('http://10.0.2.2:8000/api/users/search');
   static final fetchOrderUri =
       Uri.parse('http://10.0.2.2:8000/api/users/orders');
   static final fetchFavoritesUri =

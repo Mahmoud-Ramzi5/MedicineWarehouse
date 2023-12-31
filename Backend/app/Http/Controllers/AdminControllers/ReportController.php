@@ -59,6 +59,7 @@ class ReportController extends Controller
             $medicine = Medicine::find($Med['id']);
             $medicine->MedicineTranslations;
             $medicine->Categories;
+            $medicine['is_favorite'] = false;
 
             $message['income'] = $income;
             $message['order_count'] = $order_count;

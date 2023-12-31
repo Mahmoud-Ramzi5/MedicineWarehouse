@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/foundation.dart';
 import 'package:test1/classes/category.dart' as CC;
 import 'package:test1/classes/medicine.dart';
+import 'package:test1/classes/reports.dart';
 import 'dart:typed_data';
 import 'package:test1/classes/web_order.dart';
 
@@ -19,9 +20,12 @@ class WebApi {
       Uri.parse('http://127.0.0.1:8000/api/admin/medicines');
   static final fetchordersUri =
       Uri.parse('http://127.0.0.1:8000/api/admin/orders');
-  static final searchUri = Uri.parse('http://127.0.0.1:8000/api/admin/search');
+  static final searchUri = 
+  Uri.parse('http://127.0.0.1:8000/api/admin/search');
   static final updateorderUri =
       Uri.parse('http://127.0.0.1:8000/api/admin/update_order');
+      static final reportsuri=
+      Uri.parse('http://127.0.0.1:8000/api/admin/reports');
 
   WebApi();
 
@@ -215,17 +219,28 @@ class WebApi {
     }
   }
 
-  Future<void> GG(int userId, List<int> medicines) async {
-    final formData =
-        FormData.fromMap({"user_id": userId, "medicines": medicines});
-    var response = await dio.postUri(Uri.parse('http://127.0.0.1:8000/api/GG'),
-        data: formData,
-        options: Options(headers: {
-          'Content-Type': 'multipart/form-data',
+Future fetchReports(String firstDate,String lastDate)
+async{
+     final response = await dio.postUri(
+      reportsuri,
+      options: Options(
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
           'Accept': "application/json",
           'connection': 'keep-alive',
           'Accept-Encoding': 'gzip, deflate, br',
-        }));
-    print(response.data);
+        },
+      ),
+      data: ({"start_date":firstDate,"end_date":lastDate}),
+    );
+    if (response.statusCode == 200) {
+      print(response.data);
+      Reports report=Reports.fromJson(response.data["message"]);
+      print(report);
+    } else {
+      throw Exception("Error");
+    }
   }
 }
+
+

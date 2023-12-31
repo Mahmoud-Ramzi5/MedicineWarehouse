@@ -8,7 +8,6 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:test1/apis/web_api.dart';
 import 'package:test1/classes/category.dart' as CC;
 import 'package:test1/customWidgets/text_forn_widget.dart';
-import 'package:test1/views/web/web_main.dart';
 
 class AddMedicineView extends StatefulWidget {
   const AddMedicineView({super.key});
@@ -419,16 +418,8 @@ Future<void> _selectDate(BuildContext context) async {
                           webImageName,
                         );
                         ScaffoldMessenger.of(context).showSnackBar(
-                //          if(){
                           const SnackBar(
                             content: Text('Medicine Added Successfully'),
-                          ),
-                        );
-
-                        // Navigate back to home
-                        Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(
-                            builder: (context) => const Web_Main(),
                           ),
                         );
                       } else {
