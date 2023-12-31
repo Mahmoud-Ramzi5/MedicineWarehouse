@@ -8,6 +8,7 @@ use App\Http\Controllers\UserControllers\FavoriteController;
 use App\Http\Controllers\AdminControllers\AdminController;
 use App\Http\Controllers\AdminControllers\AdminMedicinesController;
 use App\Http\Controllers\AdminControllers\OrderController as AdminOrderController;
+use App\Http\Controllers\AdminControllers\ReportController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -75,6 +76,7 @@ Route::prefix('/admin')->group(function () {
         Route::get('/orders', 'ShowAll')->name('ShowAll_Orders');
         Route::post('/update_order', 'Update_Order')->name('Update_Order');
     });
+    Route::post('/reports', [ReportController::class, 'Show'])->name('Show_Reports');
 });
 
 // Test Route
