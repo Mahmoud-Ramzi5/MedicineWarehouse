@@ -95,21 +95,36 @@ class AdminMedicinesController extends MedicinesController
         ], 200);
     }
 
-    public function Delete_Medicine(Request $request)
+    public function Update_Medicine(Request $request)
     {
-        // Delete Medicine
-        $id = $request->input('id');
-        $medicine = Medicine::find($id);
+        // Update Medicine
+        $validated = $request->validate([
+            'id' => 'required',
+            'quantity' => 'required|min:0',
+            'expiry_date' => 'required'
+        ]);
+        $medicine = Medicine::find($validated['id']);
         if ($medicine == null) {
             return response()->json([
                 'message' => 'Invalid Medicine'
             ], 400);
         }
-        $medicine->delete();
-        // Response
-        return response()->json([
-            'message' => 'Successfully deleted medicine',
-        ], 200);
+        if ($validated['expiry_date'] < today()->format('Y-m-d')) {
+            // Response
+            return response()->json([
+                'message' => 'Could not update medicine',
+            ], 400);
+        }
+        else {
+            $medicine->quantity_available = $validated['quantity'];
+            $medicine->quantity_total = $validated['quantity'];
+            $medicine->expiry_date = $validated['expiry_date'];
+            $medicine->save();
+            // Response
+            return response()->json([
+                'message' => 'Successfully Updated medicine',
+            ], 200);
+        }
     }
 
     function Search_All(Request $request)

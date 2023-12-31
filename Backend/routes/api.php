@@ -66,7 +66,7 @@ Route::prefix('/admin')->group(function () {
         Route::get('/categories', 'Categories')->name('Categories');
         Route::post('/categoryFilter', 'Selected_Category');
         Route::post('/new_medicine', 'Add_Medicine')->name('Add_Medicine');
-        Route::delete('/delete_medicine', 'Delete_Medicine')->name('Delete_Medicine');
+        Route::post('/update_medicine', 'Update_Medicine')->name('Update_Medicine');
 
         Route::post('/medicineInfo', 'DisplayMedicineInfo')->name('DisplayMedicineInfo');
 
