@@ -25,7 +25,10 @@ class UserMedicinesController extends MedicinesController
         // Get Today's Date
         $Date = today();
         // Fetch medicines from database
-        $medicines = Medicine::whereDate('expiry_date', '>=', "$Date")->with('MedicineTranslations')->with('Categories')->get();
+        $medicines = Medicine::whereDate('expiry_date', '>=', "$Date")
+                                ->where('quantity_available', '>', 0)
+                                ->with('MedicineTranslations')
+                                ->with('Categories')->get();
         foreach ($medicines as $medicine) {
             if ($favorite->Medicines()->where('medicine_id', '=', $medicine->id)->exists()) {
                 $medicine['is_favorite'] = true;
@@ -99,7 +102,9 @@ class UserMedicinesController extends MedicinesController
         $medicines = [];
         foreach ($query as $q) {
             $id = $q->medicine_id;
-            $medicine = Medicine::where([['id', '=', $id], ['expiry_date', '>=', "$Date"]])->first();
+            $medicine = Medicine::where([['id', '=', $id],
+                                        ['expiry_date', '>=', "$Date"],
+                                        ['quantity_available', '>', 0]])->first();
             if ($medicine != null) {
                 $medicine->MedicineTranslations;
                 $medicine->Categories;
@@ -120,7 +125,7 @@ class UserMedicinesController extends MedicinesController
         }
         else {
             return response()->json([
-                "message" => "Sorry item requested not found please check the name correctly"
+                "message" => "No Medicines Found"
             ], 400);
         }
     }
