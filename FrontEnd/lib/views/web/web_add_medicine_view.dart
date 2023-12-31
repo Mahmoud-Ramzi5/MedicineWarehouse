@@ -29,7 +29,7 @@ class _AddMedicineViewState extends State<AddMedicineView> {
   late final TextEditingController _enManufactureCompany;
   late final TextEditingController _arManufactureCompany;
   late final TextEditingController _priceController;
-  late DateTime selectedDate = DateTime(2023, 11, 1);
+  late DateTime selectedDate = DateTime.now();
   static const patternEnglish = r'^[a-zA-Z\s]+$';
   final englishRegex = RegExp(patternEnglish);
   static const patternArabic = r'^[\u0600-\u06FF\s]+$';
@@ -82,20 +82,23 @@ class _AddMedicineViewState extends State<AddMedicineView> {
     }
   }
 
-  Future<void> _selectDate(BuildContext context) async {
-    DateTime? picked = await showDatePicker(
-      context: context,
-      initialDate: selectedDate,
-      firstDate: DateTime(2023),
-      lastDate: DateTime(2027),
-    );
+Future<void> _selectDate(BuildContext context) async {
+  DateTime now = DateTime.now();
+  DateTime tenYearsForward = now.add(Duration(days: 365 * 10));
 
-    if (picked != null && picked != selectedDate) {
-      setState(() {
-        selectedDate = picked;
-      });
-    }
+  DateTime? picked = await showDatePicker(
+    context: context,
+    initialDate: selectedDate,
+    firstDate: now,
+    lastDate: tenYearsForward,
+  );
+
+  if (picked != null && picked != selectedDate) {
+    setState(() {
+      selectedDate = picked;
+    });
   }
+}
 
   @override
   Widget build(BuildContext context) {
@@ -291,7 +294,6 @@ class _AddMedicineViewState extends State<AddMedicineView> {
                       obsecureText: false,
                       inputType: TextInputType.number,
                       validator: (value) {
-                        // Custom validation to allow only non-negative integers
                         if (value == null || value.isEmpty) {
                           return 'Please enter a valid number';
                         }
@@ -416,8 +418,8 @@ class _AddMedicineViewState extends State<AddMedicineView> {
                           webImage,
                           webImageName,
                         );
-
                         ScaffoldMessenger.of(context).showSnackBar(
+                //          if(){
                           const SnackBar(
                             content: Text('Medicine Added Successfully'),
                           ),
