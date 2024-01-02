@@ -23,7 +23,7 @@ class UserMedicinesController extends MedicinesController
         // Get user Favorite
         $favorite = Favorite::where('user_id', $user->id)->first();
         // Get Today's Date
-        $Date = today();
+        $Date = today()->format('Y-m-d');
         // Fetch medicines from database
         $medicines = Medicine::whereDate('expiry_date', '>=', "$Date")
                                 ->where('quantity_available', '>', 0)
@@ -63,7 +63,7 @@ class UserMedicinesController extends MedicinesController
             ], 400);
         }
         // Get Today's Date
-        $Date = today();
+        $Date = today()->format('Y-m-d');
         // Find the medicines with the selected category
         $medicines = $category->Medicines()->whereDate('expiry_date', '>=', "$Date")->get();
         foreach($medicines as $medicine) {
@@ -93,7 +93,7 @@ class UserMedicinesController extends MedicinesController
         // Get user Favorite
         $favorite = Favorite::where('user_id', $user->id)->first();
         // Get Today's Date
-        $Date = today();
+        $Date = today()->format('Y-m-d');
         // Search Input
         $input = $request->input('name');
         // Fetch medicines from database
