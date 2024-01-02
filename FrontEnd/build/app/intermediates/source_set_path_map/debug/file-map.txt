@@ -1,0 +1,29 @@
+com.example.test1.app-jetified-lifecycle-viewmodel-savedstate-2.6.1-0 C:\Users\HP\.gradle\caches\transforms-3\0d71402e87d63dfcdd1e8a19179a5833\transformed\jetified-lifecycle-viewmodel-savedstate-2.6.1\res
+com.example.test1.app-jetified-window-1.0.0-beta04-1 C:\Users\HP\.gradle\caches\transforms-3\25cee5f028ac2a6b79fd6278ff5b59e2\transformed\jetified-window-1.0.0-beta04\res
+com.example.test1.app-jetified-security-crypto-1.1.0-alpha06-2 C:\Users\HP\.gradle\caches\transforms-3\2dd5e7ab9230030ff78143f5215ea597\transformed\jetified-security-crypto-1.1.0-alpha06\res
+com.example.test1.app-lifecycle-livedata-2.6.1-3 C:\Users\HP\.gradle\caches\transforms-3\4a950aaebf1aaad1fe6a2fdd6201e69a\transformed\lifecycle-livedata-2.6.1\res
+com.example.test1.app-jetified-profileinstaller-1.3.0-4 C:\Users\HP\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\res
+com.example.test1.app-jetified-core-ktx-1.10.1-5 C:\Users\HP\.gradle\caches\transforms-3\719af8deb3ed6174d87dbb6013e12a44\transformed\jetified-core-ktx-1.10.1\res
+com.example.test1.app-jetified-savedstate-1.2.1-6 C:\Users\HP\.gradle\caches\transforms-3\8d45f58db1b5efd11956cf5f8829d6d3\transformed\jetified-savedstate-1.2.1\res
+com.example.test1.app-jetified-annotation-experimental-1.3.0-7 C:\Users\HP\.gradle\caches\transforms-3\937d6edc8055f6701a18eeac1a67afe6\transformed\jetified-annotation-experimental-1.3.0\res
+com.example.test1.app-jetified-activity-1.7.2-8 C:\Users\HP\.gradle\caches\transforms-3\a82db410cebe27c9879106e746eca4ec\transformed\jetified-activity-1.7.2\res
+com.example.test1.app-jetified-window-java-1.0.0-beta04-9 C:\Users\HP\.gradle\caches\transforms-3\ae81e06d24c799147c26814497a2a305\transformed\jetified-window-java-1.0.0-beta04\res
+com.example.test1.app-core-1.10.1-10 C:\Users\HP\.gradle\caches\transforms-3\c4988ff80110f75080a936fc6f044848\transformed\core-1.10.1\res
+com.example.test1.app-jetified-startup-runtime-1.1.1-11 C:\Users\HP\.gradle\caches\transforms-3\d2a7f03e118140f639e8945afb58cddb\transformed\jetified-startup-runtime-1.1.1\res
+com.example.test1.app-lifecycle-viewmodel-2.6.1-12 C:\Users\HP\.gradle\caches\transforms-3\d5cb841d085c8da3ed38e468f997390f\transformed\lifecycle-viewmodel-2.6.1\res
+com.example.test1.app-core-runtime-2.2.0-13 C:\Users\HP\.gradle\caches\transforms-3\db3ce0e4102f75753fdc0e9c2753a822\transformed\core-runtime-2.2.0\res
+com.example.test1.app-lifecycle-runtime-2.6.1-14 C:\Users\HP\.gradle\caches\transforms-3\e97fce397db1acf9b6f475dedfc7d654\transformed\lifecycle-runtime-2.6.1\res
+com.example.test1.app-lifecycle-livedata-core-2.6.1-15 C:\Users\HP\.gradle\caches\transforms-3\eed11806d4af25229ebcb855da7e9479\transformed\lifecycle-livedata-core-2.6.1\res
+com.example.test1.app-debug-16 D:\U Projects\MedicineWarehouse\FrontEnd\android\app\src\debug\res
+com.example.test1.app-main-17 D:\U Projects\MedicineWarehouse\FrontEnd\android\app\src\main\res
+com.example.test1.app-pngs-18 D:\U Projects\MedicineWarehouse\FrontEnd\build\app\generated\res\pngs\debug
+com.example.test1.app-resValues-19 D:\U Projects\MedicineWarehouse\FrontEnd\build\app\generated\res\resValues\debug
+com.example.test1.app-rs-20 D:\U Projects\MedicineWarehouse\FrontEnd\build\app\generated\res\rs\debug
+com.example.test1.app-mergeDebugResources-21 D:\U Projects\MedicineWarehouse\FrontEnd\build\app\intermediates\incremental\debug\mergeDebugResources\merged.dir
+com.example.test1.app-mergeDebugResources-22 D:\U Projects\MedicineWarehouse\FrontEnd\build\app\intermediates\incremental\debug\mergeDebugResources\stripped.dir
+com.example.test1.app-merged_res-23 D:\U Projects\MedicineWarehouse\FrontEnd\build\app\intermediates\merged_res\debug
+com.example.test1.app-packaged_res-24 D:\U Projects\MedicineWarehouse\FrontEnd\build\file_picker\intermediates\packaged_res\debug
+com.example.test1.app-packaged_res-25 D:\U Projects\MedicineWarehouse\FrontEnd\build\flutter_plugin_android_lifecycle\intermediates\packaged_res\debug
+com.example.test1.app-packaged_res-26 D:\U Projects\MedicineWarehouse\FrontEnd\build\flutter_secure_storage\intermediates\packaged_res\debug
+com.example.test1.app-packaged_res-27 D:\U Projects\MedicineWarehouse\FrontEnd\build\image_picker_android\intermediates\packaged_res\debug
+com.example.test1.app-packaged_res-28 D:\U Projects\MedicineWarehouse\FrontEnd\build\path_provider_android\intermediates\packaged_res\debug
