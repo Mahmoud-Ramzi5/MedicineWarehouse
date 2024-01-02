@@ -130,6 +130,17 @@ class _WebOrdersViewState extends State<WebOrdersView> {
                                 ),
                                 Row(
                                   children: [
+                                    Text(
+                                      'Total order price: ${weborders?[index].totalPrice}',
+                                      style: const TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
                                     const Text(
                                       'Billing Status: ',
                                       style: TextStyle(
@@ -179,55 +190,46 @@ class _WebOrdersViewState extends State<WebOrdersView> {
                                     ),
                                   ],
                                 ),
-                                Row(
-                                  children: [
-                                    SizedBox(
-                                      width: 500,
-                                      child: ListView.builder(
-                                        physics: const PageScrollPhysics(),
-                                        scrollDirection: Axis.vertical,
-                                        itemBuilder: (context, index) {
-                                          return Row(
-                                            children: [
-                                              Text(
-                                                '${weborders?[index].orderedMedicines[index].medicine.medicineTranslations["en"]["commercial_name"]}',
-                                                style: const TextStyle(
-                                                  fontSize: 20,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.all(5),
-                                                child: Text(
-                                                  'Quantity: ${weborders?[index].orderedMedicines[index].quantity}',
-                                                  style: const TextStyle(
-                                                    fontSize: 20,
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
-                                                ),
-                                              ),
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.all(5),
-                                                child: Text(
-                                                  'Single unit price: ${weborders?[index].orderedMedicines[index].medicine.price}',
-                                                  style: const TextStyle(
-                                                    fontSize: 20,
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          );
-                                        },
-                                        itemCount: weborders?[index]
-                                            .orderedMedicines
-                                            .length,
-                                        shrinkWrap: true,
-                                      ),
+                                SizedBox(
+                                  width: 500,
+                                  child: ListView.builder(
+                                    itemBuilder: (context, index2) => Row(
+                                      children: [
+                                        Text(
+                                          '${weborders?[index].orderedMedicines[index2].medicine.medicineTranslations["en"]["commercial_name"]}',
+                                          style: const TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(5),
+                                          child: Text(
+                                            'Quantity: ${weborders?[index].orderedMedicines[index2].quantity}',
+                                            style: const TextStyle(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(5),
+                                          child: Text(
+                                            'Single unit price: ${weborders?[index].orderedMedicines[index2].medicine.price},',
+                                            style: const TextStyle(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                  ],
+                                    itemCount: weborders?[index]
+                                        .orderedMedicines
+                                        .length,
+                                    physics: const PageScrollPhysics(),
+                                    shrinkWrap: true,
+                                  ),
                                 ),
                               ],
                             ),
