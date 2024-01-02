@@ -6,7 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:numberpicker/numberpicker.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:test1/apis/web_api.dart';
-import 'package:test1/classes/category.dart' as CC;
+import 'package:test1/classes/category.dart' as c;
 import 'package:test1/customWidgets/text_forn_widget.dart';
 
 class AddMedicineView extends StatefulWidget {
@@ -385,7 +385,7 @@ class _AddMedicineViewState extends State<AddMedicineView> {
                                         });
                                       },
                                       items: categories!
-                                          .map((CC.Category category) {
+                                          .map((c.Category category) {
                                         return DropdownMenuItem(
                                           value: category.id,
                                           child: Text(category.enCategoryName),

@@ -68,7 +68,7 @@ class MyApp extends StatelessWidget {
           );
         }
       },
-      locale: Get.deviceLocale,
+      locale: controller.initalLang,
       translations: MyLocal(),
       home: const WebMainView(),
     );

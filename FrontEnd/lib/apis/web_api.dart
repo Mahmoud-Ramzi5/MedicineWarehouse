@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/foundation.dart';
-import 'package:test1/classes/category.dart' as CC;
+import 'package:test1/classes/category.dart' as c;
 import 'package:test1/classes/medicine.dart';
 import 'package:test1/classes/reports.dart';
 import 'dart:typed_data';
@@ -113,7 +113,7 @@ class WebApi {
     }
   }
 
-  Future<List<CC.Category>> fetchCategories() async {
+  Future<List<c.Category>> fetchCategories() async {
     final response = await dio.getUri(
       fetchCategoriesUri,
       options: Options(
@@ -126,10 +126,10 @@ class WebApi {
       ),
     );
     if (response.statusCode == 200) {
-      List<CC.Category> categoryList = [];
+      List<c.Category> categoryList = [];
       for (var category in response.data['message']) {
         final categoryMap =
-            CC.Category.fromJson(category as Map<String, dynamic>);
+            c.Category.fromJson(category as Map<String, dynamic>);
         categoryList.add(categoryMap);
       }
       return categoryList;
