@@ -134,14 +134,19 @@ class AdminMedicinesController extends MedicinesController
         // Fetch medicines from database
         $query = MedicineTranslation::where('commercial_name', 'like', "%$input%")
                                         ->orWhere('scientific_name', 'like', "%$input%")->get();
-        $medicines = [];
+        $medicines = collect();
         foreach ($query as $q) {
             $id = $q->medicine_id;
             $medicine = Medicine::find($id);
+            if ($medicine != null) {
+                if ($medicines->contains('id', $medicine->id)) {
+                    continue;
+                }
+            }
             $medicine->MedicineTranslations;
             $medicine->Categories;
             $medicine['is_favorite'] = false;
-            array_push($medicines, $medicine);
+            $medicines->add($medicine);
         }
         // Search Response
         if ($medicines != null){

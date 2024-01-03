@@ -99,13 +99,16 @@ class UserMedicinesController extends MedicinesController
         // Fetch medicines from database
         $query = MedicineTranslation::where('commercial_name', 'like', "%$input%")
                                         ->orWhere('scientific_name', 'like', "%$input%")->get();
-        $medicines = [];
+        $medicines = collect();
         foreach ($query as $q) {
             $id = $q->medicine_id;
             $medicine = Medicine::where([['id', '=', $id],
                                         ['expiry_date', '>=', "$Date"],
                                         ['quantity_available', '>', 0]])->first();
             if ($medicine != null) {
+                if ($medicines->contains('id', $medicine->id)) {
+                    continue;
+                }
                 $medicine->MedicineTranslations;
                 $medicine->Categories;
                 if ($favorite->Medicines()->where('medicine_id', '=', $medicine->id)->exists()) {
@@ -114,7 +117,7 @@ class UserMedicinesController extends MedicinesController
                 else {
                     $medicine['is_favorite'] = false;
                 }
-                array_push($medicines, $medicine);
+                $medicines->add($medicine);
             }
         }
         // Search Response
